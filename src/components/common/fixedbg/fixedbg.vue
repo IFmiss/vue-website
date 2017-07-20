@@ -1,5 +1,5 @@
 <template>
-  <div class="fixedbg" :style="{background : 'url(' + imagepath + ')', backgroundSize:imagesize, backgroundPosition:imageposition}">
+  <div class="fixedbg" :style="{backgroundImage : 'url(' + imagepath + ')', backgroundSize:imagesize, backgroundPosition:imageposition}">
     <div class="mask-fixedbg" :style="{background:maskcolor,opacity:maskopacity}"></div>
   </div>
 </template>
@@ -35,9 +35,7 @@ export default {
     left:0
     right:0
     bottom:0
-    background:url('/static/bg.jpg')
-    background-position:center center
-    background-size:cover
+    background-color:#000
     .mask-fixedbg
       position:fixed
       z-index:-1

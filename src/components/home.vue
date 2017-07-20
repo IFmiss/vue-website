@@ -1,15 +1,23 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div class="maincontent">
+    <fixed-bg v-if="imageInfo && imageSetting" :imagepath="'http://www.bing.com' + imageInfo.url" :maskcolor="imageSetting.bgcolor" :maskopacity="imageSetting.opactity"></fixed-bg>
   </div>
 </template>
 
 <script>
+import store from '../store'
+import fixedbg from './common/fixedbg/fixedbg.vue'
 export default {
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  computed: {
+    imageInfo () {
+      return store.getters.getFixedImageInfo
+    },
+    imageSetting () {
+      return store.getters.getFixedBgInfo
     }
+  },
+  components: {
+    'fixed-bg': fixedbg
   }
 }
 </script>

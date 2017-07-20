@@ -2,7 +2,8 @@ import axios from 'axios'
 
 // request拦截器
 axios.interceptors.request.use(config => {
-  // loading 
+  // loading
+  console.log('loadding')
   return config
 }, error => {
   // Do something with request error
@@ -24,6 +25,7 @@ function checkStatus (response) {
     return response
     // 如果不需要除了data之外的数据，可以直接 return response.data
   }
+  console.log('closeloading')
   // 异常状态下，把错误信息返回去
   return {
     status: -404,
@@ -37,8 +39,9 @@ function checkCode (res) {
     alert(res.msg)
   }
   if (res.data && (!res.data.success)) {
-    alert(res.data.error_msg)
+    // alert(res.data.error_msg)
   }
+  console.log('closeloading')
   return res
 }
 
@@ -48,12 +51,8 @@ export default {
       method: 'post',
       baseURL: process.env.BASE_API,
       url,
-      data: qs.stringify(data),
-      timeout: 10000,
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-      }
+      data: JSON.stringify(data),
+      timeout: 10000
     }).then(
       (response) => {
         return checkStatus(response)
@@ -70,10 +69,7 @@ export default {
       baseURL: process.env.BASE_API,
       url,
       params, // get 请求时带的参数
-      timeout: 10000,
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
-      }
+      timeout: 10000
     }).then(
       (response) => {
         return checkStatus(response)
@@ -85,5 +81,3 @@ export default {
     )
   }
 }
-
-export default service;

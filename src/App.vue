@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <fixed-bg imagepath="http://www.daiwei.org/global/image/img1.jpg" maskcolor="#336699" maskopacity="0.42"></fixed-bg>
-    <!-- <keep-alive>
-      <router-view></router-view>
-    </keep-alive> -->
-    <!-- <main-content></main-content> -->
+    <home></home>
   </div>
 </template>
 <script>
-import axios from 'axios'
-import fixedbg from './components/common/fixedbg/fixedbg.vue'
+// import axios from 'axios'
+import store from './store'
+import fecth from './utils/fecth.js'
+import home from './components/home.vue'
 
 export default {
   name: 'app',
   components: {
-    'fixed-bg': fixedbg
+    home
+  },
+  methods: {
+    fetchData () {
+      // bing 的壁纸图片
+      const getbingApi = 'http://www.daiwei.org/server.php?inAjax=1&do=getImageByBingJson'
+      fecth.get(getbingApi).then((res) => {
+        const imageInfo = {}
+        imageInfo.url = res.data.url
+        imageInfo.title = res.data.title
+        imageInfo.disc = res.data.disc
+        store.dispatch({
+          type: 'set_FixedImageInfo',
+          data: imageInfo
+        })
+      }, (err) => {
+        alert(err)
+      })
+    }
   },
   created () {
-    const getbingApi = 'http://www.daiwei.org/server.php?inAjax=1&do=getImageByBingJson'
-    axios.get(getbingApi).then((res) => {
-      alert(JSON.stringify(res))
-    }, (err) => {
-      alert(err)
-    })
+    this.fetchData()
   }
 }
 </script>
