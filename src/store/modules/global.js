@@ -1,8 +1,9 @@
 const globalStore = {
 	state: {
 		globalInfo: {
+			// 路由的背景色 全屏状态下
 			contentInfo: {
-				opacity: '0.2',
+				opacity: '0.0',
 				bgcolor: 'rgb(0, 0, 0)'
 			}
 		},

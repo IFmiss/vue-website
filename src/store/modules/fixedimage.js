@@ -2,7 +2,7 @@ const fixedimage = {
 	state: {
 		fixedImageInfo: {},
 		fixedBgInfo: {
-			opacity: '0.3',
+			opacity: '0.4',
 			bgcolor: 'rgb(51, 102, 153)'
 		}
 	},

@@ -1,5 +1,5 @@
 <template>
-  <section class="header">
+  <section class="div_content">
     <ul class="ul-header border-1px">
       <router-link tag="a" to="/home">
         <li>首页</li>
@@ -17,17 +17,27 @@
         <li>关于</li>
       </router-link>
     </ul>
-    <p class="border-1px"></p>
+    <transition name="fade">
+      <keep-alive>
+        <router-view class="li_list"></router-view>
+      </keep-alive>
+    </transition>
   </section>
 </template>
 <script>
+import store from './../../../store'
 export default {
+  computed: {
+    getGlobalStyle () {
+      return store.getters.getGlobalInfo
+    }
+  }
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../../../common/stylus/border-1px/index.styl'
 @import '../../../common/stylus/global.styl'
-  .header
+  .div_content
     position:fixed
     top:0
     left:0
@@ -35,7 +45,13 @@ export default {
     height:40px
     line-height:40px
     .ul-header
-      height:100%
+      position:fixed
+      top:0
+      left:0
+      right:0
+      height:40px
+      line-height:40px
+      z-index:111
       margin:0
       font-size:0
       a
@@ -52,5 +68,11 @@ export default {
           li
             color:$text_color_active
             border-bottom:1px solid $border_color
-          
+    .li_list
+      transform:translate3d(0,0,0)
+      &.fade-enter-to,&.fade-leave-to
+        transition: all 0.8s
+      &.fade-enter,&.fade-leave-to
+        opacity:0
+        transform:translate3d(0,50px,0)
 </style>
