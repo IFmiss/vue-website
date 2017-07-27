@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <div id="app" @resize="isApp">
+    <v-header></v-header>  
     <home></home>
   </div>
 </template>
@@ -8,11 +9,13 @@
 import store from './store'
 import fecth from './utils/fecth.js'
 import home from './components/home.vue'
+import header from './components/common/header/header.vue'
 
 export default {
   name: 'app',
   components: {
-    home
+    home,
+    'v-header': header
   },
   methods: {
     fetchData () {
@@ -30,15 +33,36 @@ export default {
       }, (err) => {
         alert(err)
       })
+    },
+    isApp () {
+      let isTrue = false
+      if (document.body.clientWidth < 768) {
+        isTrue = false
+      } else {
+        isTrue = true
+      }
+      store.commit({
+        type: 'setIsHigher768',
+        data: isTrue
+      })
+      console.log(isTrue)
     }
   },
   created () {
     this.fetchData()
+    this.isApp()
+  },
+  mounted () {
+    // 挂载 onresize事件
+    window.onresize = () => {
+      this.isApp()
+    }
   }
 }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+@import 'common/stylus/border-1px/index.styl'
 body,html
   margin:0
   padding:0

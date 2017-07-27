@@ -1,6 +1,8 @@
 <template>
   <div class="maincontent">
-    <fixed-bg v-if="imageInfo && imageSetting" :imagepath="'http://www.bing.com' + imageInfo.url" :maskcolor="imageSetting.bgcolor" :maskopacity="imageSetting.opactity"></fixed-bg>
+    <fixed-bg v-if="imageInfo && imageSetting" :imagepath="'http://www.bing.com' + imageInfo.url" :maskcolor="imageSetting.bgcolor" :maskopacity="imageSetting.opacity"></fixed-bg>
+    <div v-if="getGlobalStyle.contentInfo" class="content" ref="homecontent" :style="{background: getGlobalStyle.contentInfo.bgcolor,opacity: getGlobalStyle.contentInfo.opacity}">
+    </div>
   </div>
 </template>
 
@@ -14,31 +16,29 @@ export default {
     },
     imageSetting () {
       return store.getters.getFixedBgInfo
+    },
+    getGlobalStyle () {
+      return store.getters.getGlobalInfo
     }
+  },
+  methods: {
+  },
+  mounted () {
   },
   components: {
     'fixed-bg': fixedbg
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+<style lang="stylus" rel="stylesheet/stylus">
+  .maincontent
+    position:relative
+    .content
+      position:fixed
+      top:120px
+      left:50%;
+      bottom:40px
+      width:1200px
+      border-radius:12px
+      transform:translate3d(-50%,0,0)
 </style>

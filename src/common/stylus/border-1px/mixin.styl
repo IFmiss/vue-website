@@ -1,0 +1,29 @@
+border-1px($color, $position)
+  position: relative
+  if $position == 'top'
+    &:after
+      display: block
+      position: absolute
+      left: 0
+      top: 0
+      width: 100%
+      border-top: 1px solid $color
+      content: ' '
+  else if $position == 'bottom'
+    &:after
+      display: block
+      position: absolute
+      left: 0
+      bottom: 0
+      width: 100%
+      border-bottom: 1px solid $color
+      content: ' '
+  
+border-none()
+  &:after
+    display: none
+
+bg-image($url)
+  background-image: url($url + "@2x.png")
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+    background-image: url($url + "@3x.png")
