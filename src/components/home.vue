@@ -61,7 +61,7 @@ export default {
       justify-content:center
       flex-direction: column
       .home_content
-        padding: 0 0 50px 0
+        padding: 0 20px 50px 20px
         position:relative
         .title
           font-size:22px
