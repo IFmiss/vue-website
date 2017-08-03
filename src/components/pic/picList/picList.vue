@@ -8,7 +8,7 @@
 			<p class="disc">今天是个好日子今天是个好日子啊今天是个好日子啊今天是个好日子啊今天是个好日子啊今天是个好日子啊今天是个好日子啊今天是个好日子啊今天是个好日子啊今天是个好日子啊啊</p>
 		    <!-- <v-line bg="#000" linewidth="100%" lineheight="5px"></v-line> -->
 			<div class="div_image">
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)" @click="openImg($event)"></div>
+				<div class="image" style="background:url(https://avatars0.githubusercontent.com/u/17402583?v=4&s=460)" @click="openImg($event)"></div>
 				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
 				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
 				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
@@ -43,20 +43,62 @@
 				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
 			</div>
 		</div>
-		<div class="image_detail" v-show="showImageDetail" :style="{backgroundImage:imageBg,backgroundSize:'cover'}">
-			<div class="bg_info" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:globalInfo.contentInfo.opacity}"></div>
-			<div class="colse_image_detail" @click.stop="closeImg"></div>
-		</div>
+		<transition name="fade-scale">
+			<div class="image_detail" v-show="showImageDetail">
+				<swiper :options="swiperOption"  ref="mySwiper">  
+		            <!-- 这部分放你要渲染的那些内容 -->  
+		            <swiper-slide>
+						<!-- <div class="bg_image_info" :style="{backgroundImage:imageBg,backgroundSize:'cover'}"></div> -->
+						<img class="image_info" :src="imageBg" alt="">
+		            </swiper-slide>  
+		            <swiper-slide>
+		            	<img class="image_info" :src="imageBg" alt="">
+						<!-- <div class="bg_image_info" :style="{backgroundImage:imageBg,backgroundSize:'cover'}"></div> -->
+		            </swiper-slide>  
+		            <!-- 这是轮播的小圆点 -->  
+		            <div class="swiper-pagination" slot="pagination"></div>  
+		        </swiper>
+		        <div class="colse_image_detail" @click.stop="closeImg">
+		        	<div class="bg_colse_image_detail" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:globalInfo.contentInfo.opacity}"></div>
+		        </div>
+		        <div class="bg_info" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:'0.3'}"></div>
+			</div>
+		</transition>
 	</div>
 </template>
 <script>
   import store from './../../../store'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
   export default {
   	data () {
   		return {
   			showImageDetail: false,
   			overflowType: 'initial',
-  			imageBg: ''
+  			imageBg: '',
+  			swiperOption: {
+				// 是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
+				autoplay: 3000,
+				grabCursor: true,
+				setWrapperSize: true,
+				autoHeight: true,
+				pagination: '.swiper-pagination',
+				paginationClickable: true,
+				mousewheelControl: true,
+				autoplayDisableOnInteraction: false,
+				observeParents: true,
+				loop: true,
+				// lazyLoading: true,
+				// lazyLoadingOnTransitionStart: true,
+				onSlideChangeEnd: swiper => {
+					// 这个位置放swiper的回调方法
+					this.page = swiper.realIndex + 1
+					this.index = swiper.realIndex
+				},
+				onClick: swiper => {
+					// const index = swiper.activeIndex
+					// alert(swiper.slides[index].getAttribute('songlist'))
+				}
+			}
   		}
   	},
   	watch: {
@@ -71,21 +113,28 @@
   	computed: {
   		globalInfo () {
   			return store.getters.getGlobalInfo
-  		}
+  		},
+  		swiper () {
+			return this.$refs.mySwiper.swiper
+		}
   	},
   	methods: {
   		openImg (e) {
   			this.showImageDetail = true
   			const computedStyle = window.getComputedStyle(e.target)
   			const imageBg = computedStyle.backgroundImage
-  			this.imageBg = imageBg
+			this.imageBg = imageBg.substring(5, imageBg.length - 2)
   		},
   		closeImg () {
   			this.showImageDetail = false
   		}
   	},
   	mounted () {
-  	}
+  	},
+  	components: {
+        swiper,
+        swiperSlide
+    }
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
@@ -147,6 +196,25 @@
 			left:0
 			bottom:0
 			right:0
+			transform-origin:center center
+			transform:scale(1)
+			&.fade-scale-enter-active,&.fade-scale-leave-active
+				transition: all 0.5s 
+			&.fade-scale-enter,&.fade-scale-leave-to
+				opacity:0
+				transform:scale(0)
+			.swiper-container
+				height:100%
+				.swiper-wrapper
+					.swiper-slide
+						width:100%
+						height: 100%
+						overflow:hidden
+				.swiper-pagination
+				.swiper-pagination-bullet
+					margin:0 4px
+					&.swiper-pagination-bullet-active
+						background:$active_color!important
 			.bg_info
 				position:absolute
 				top:0
@@ -156,10 +224,22 @@
 				z-index:-1
 			.colse_image_detail
 				position:absolute
-				background:red
-				width:50px
-				height:50px
+				width:100px
+				height:100px
 				top:0
 				right:0
+				z-index:2
 				cursor:pointer
+				.bg_colse_image_detail
+					width:100%
+					height:100%
+					z-index:-1
+			.bg_image_info
+				display:block
+				width:100%
+				height:100%
+			.image_info
+				height:100%
+				display:block
+				margin:0 auto
 </style>
