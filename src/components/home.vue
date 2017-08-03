@@ -5,7 +5,7 @@
           <h1 class="title" key="title">{{imageInfo.title}}</h1>
           <p class="disc" key="disc">{{imageInfo.disc}}</p>
         </div>
-        <span class="tips">每日一图由 bing 提供</span>
+        <span class="tips">{{isShowBingImage}}</span>
       </div>
       <div class="pic_bg" v-if="picBg" :style="{backgroundColor:picBg.contentInfo.bgcolor, opacity : picBg.contentInfo.opacity}"></div>
     </div>
@@ -20,6 +20,9 @@ export default {
     }
   },
   computed: {
+    isShowBingImage () {
+      return store.getters.getShowBingImage ? '每日一图由 bing 提供' : '每日一图由 未曾遗忘的青春 提供'
+    },
     imageInfo () {
       return store.getters.getFixedImageInfo
     },

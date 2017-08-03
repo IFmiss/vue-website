@@ -7,11 +7,13 @@ const globalStore = {
 				bgcolor: 'rgb(0, 0, 0)'
 			}
 		},
-		isHigher768: false
+		isHigher768: false,
+		showBingImage: false
 	},
 	getters: {
 		getGlobalInfo: state => state.globalInfo,
-		getIsHigher768: state => state.getIsHigher768
+		getIsHigher768: state => state.isHigher768,
+		getShowBingImage: state => state.showBingImage
 	},
 	mutations: {
 		setGlobalInfo (state, obj) {
@@ -19,6 +21,9 @@ const globalStore = {
 		},
 		setIsHigher768 (state, obj) {
 			state.isHigher768 = obj.data
+		},
+		setShowBingImage  (state, obj) {
+			state.showBingImage = obj.data
 		}
 	},
 	actions: {

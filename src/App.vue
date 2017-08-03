@@ -1,7 +1,7 @@
 <template>
   <div id="app" @resize="isApp">
     <div class="maincontent">
-      <fixed-bg v-if="imageInfo && imageSetting" :imagepath="'http://www.bing.com' + imageInfo.url" :maskcolor="imageSetting.bgcolor" :maskopacity="imageSetting.opacity"></fixed-bg>
+      <fixed-bg v-if="imageInfo && imageSetting" :imagepath="imagePrevPath +'' + imageInfo.url" :maskcolor="imageSetting.bgcolor" :maskopacity="imageSetting.opacity"></fixed-bg>
     </div>
     <v-content></v-content>
   </div>
@@ -25,20 +25,20 @@ export default {
   },
   methods: {
     fetchData () {
-      // bing 的壁纸图片
-      const getbingApi = 'http://www.daiwei.org/server.php?inAjax=1&do=getImageByBingJson'
-      fecth.get(getbingApi).then((res) => {
-        const imageInfo = {}
-        imageInfo.url = res.data.url
-        imageInfo.title = res.data.title
-        imageInfo.disc = res.data.disc
-        store.dispatch({
-          type: 'set_FixedImageInfo',
-          data: imageInfo
+      const isShowBingImage = store.getters.getShowBingImage
+      const getbingApi = isShowBingImage ? 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageByBingJson' : 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
+        fecth.get(getbingApi).then((res) => {
+          const imageInfo = {}
+          imageInfo.url = res.data.url
+          imageInfo.title = res.data.title
+          imageInfo.disc = res.data.disc
+          store.dispatch({
+            type: 'set_FixedImageInfo',
+            data: imageInfo
+          })
+        }, (err) => {
+          alert(err)
         })
-      }, (err) => {
-        alert(err)
-      })
     },
     isApp () {
       let isTrue = false
@@ -54,11 +54,14 @@ export default {
       console.log(isTrue)
     }
   },
-  created () {
-    this.fetchData()
-    this.isApp()
-  },
+  // created () {
+  //   this.fetchData()
+  //   this.isApp()
+  // },
   computed: {
+    imagePrevPath () {
+      return store.getters.getShowBingImage ? 'http://www.bing.com' : ''
+    },
     getGlobalStyle () {
       return store.getters.getGlobalInfo
     },
@@ -70,6 +73,7 @@ export default {
     }
   },
   mounted () {
+    this.fetchData()
     // 挂载 onresize事件
     window.onresize = () => {
       this.isApp()
