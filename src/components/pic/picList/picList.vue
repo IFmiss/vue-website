@@ -52,14 +52,16 @@
 						<img class="image_info" :src="imageBg" alt="">
 		            </swiper-slide>  
 		            <swiper-slide>
-		            	<img class="image_info" :src="imageBg" alt="">
+		            	<img class="image_info" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg" alt="">
 						<!-- <div class="bg_image_info" :style="{backgroundImage:imageBg,backgroundSize:'cover'}"></div> -->
 		            </swiper-slide>  
 		            <!-- 这是轮播的小圆点 -->  
 		            <div class="swiper-pagination" slot="pagination"></div>  
 		        </swiper>
 		        <div class="colse_image_detail" @click.stop="closeImg">
-		        	<div class="bg_colse_image_detail" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:globalInfo.contentInfo.opacity}"></div>
+		        	<i class="icon-close"></i>
+		        	<div class="bg_colse_image_detail" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:globalInfo.contentInfo.opacity}">
+		        	</div>
 		        </div>
 		        <div class="bg_info" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:'0.3'}"></div>
 			</div>
@@ -224,12 +226,18 @@
 				z-index:-1
 			.colse_image_detail
 				position:absolute
-				width:100px
-				height:100px
+				width:80px
+				height:80px
+				line-height:80px
+				text-align:center
 				top:0
 				right:0
 				z-index:2
 				cursor:pointer
+				i
+					font-size:46px
+					color:$text_color
+					vertical-align: middle
 				.bg_colse_image_detail
 					width:100%
 					height:100%

@@ -8,7 +8,7 @@ const globalStore = {
 			}
 		},
 		isHigher768: false,
-		showBingImage: false
+		showBingImage: true
 	},
 	getters: {
 		getGlobalInfo: state => state.globalInfo,

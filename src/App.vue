@@ -84,6 +84,7 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus">
 @import 'common/stylus/border-1px/index.styl'
+@import 'common/font-icon/style.css'
   body,html
     margin:0
     padding:0

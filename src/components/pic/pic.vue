@@ -10,6 +10,7 @@
   import store from './../../store'
   import line from './../common/line/line.vue'
   import picList from './picList/picList.vue'
+  import fecth from './../../utils/fecth.js'
   export default {
     computed: {
       picBg () {
@@ -17,12 +18,21 @@
       }
     },
     methods: {
+      fetchData () {
+        const getImageConditions = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageCondition'
+        fecth.get(getImageConditions).then((res) => {
+          alert(JSON.stringify(res))
+        }, (err) => {
+          alert(err)
+        })
+      }
     },
     components: {
       'v-line': line,
       picList
     },
     mounted () {
+      this.fetchData()
     }
   }
 </script>
