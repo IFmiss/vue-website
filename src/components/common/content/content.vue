@@ -16,6 +16,9 @@
       <router-link tag="a" to="/about">
         <li>关于</li>
       </router-link>
+      <router-link tag="a" to="/setting" class="a-icon">
+        <li class="li-icon"><i class="icon-setting"></i></li>
+      </router-link>
     </ul>
     <transition name="fade">
       <keep-alive>
@@ -54,6 +57,7 @@ export default {
       z-index:111
       margin:0
       font-size:0
+      padding:0 20px
       a
         list-style:none
         display:inline-block
@@ -68,6 +72,16 @@ export default {
           li
             color:$text_color_active
             border-bottom:1px solid $border_color
+        &.a-icon
+          position:absolute
+          right:10px
+          top:0
+          li
+            // border-bottom:none
+            i
+              font-size:18px
+              vertical-align: middle
+              
     .li_list
       transform:translate3d(0,0,0)
       &.fade-enter-to,&.fade-leave-to

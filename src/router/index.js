@@ -5,6 +5,7 @@ import Pic from '../components/pic/pic.vue'
 import Music from '../components/music/music.vue'
 import Blog from '../components/blog/blog.vue'
 import About from '../components/about/about.vue'
+import Setting from '../components/setting/setting.vue'
 
 Vue.use(Router)
 
@@ -37,6 +38,10 @@ export default new Router({
       // 关于
       path: '/about',
       component: About
+    },
+    {
+      path: '/setting',
+      component: Setting
     }
   ]
 })
