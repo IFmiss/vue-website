@@ -106,5 +106,6 @@
       margin:0 auto
       overflow-y:scroll
       box-sizing:border-box
+      -webkit-overflow-scrolling: touch
       padding:15px;    
 </style>

@@ -8,7 +8,7 @@ const globalStore = {
 			}
 		},
 		isHigher768: false,
-		showBingImage: true
+		showBingImage: false
 	},
 	getters: {
 		getGlobalInfo: state => state.globalInfo,
@@ -29,6 +29,9 @@ const globalStore = {
 	actions: {
 		set_GlobalInfo ({commit}, obj) {
 			commit('setGlobalInfo', obj)
+		},
+		set_ShowBingImage ({commit}, obj) {
+			commit('setShowBingImage', obj)
 		}
 	}
 }

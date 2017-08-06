@@ -16,6 +16,11 @@ import content from './components/common/content/content.vue'
 import pic from './components/pic/pic.vue'
 
 export default {
+  data () {
+    return {
+      isgetimagebybing: store.getters.getShowBingImage
+    }
+  },
   name: 'app',
   components: {
     home,
@@ -54,10 +59,11 @@ export default {
       console.log(isTrue)
     }
   },
-  // created () {
-  //   this.fetchData()
-  //   this.isApp()
-  // },
+  watch: {
+    getIsBingBg (nowval, oldval) {
+      this.fetchData()
+    }
+  },
   computed: {
     imagePrevPath () {
       return store.getters.getShowBingImage ? 'http://www.bing.com' : ''
@@ -70,6 +76,9 @@ export default {
     },
     imageSetting () {
       return store.getters.getFixedBgInfo
+    },
+    getIsBingBg () {
+      return store.getters.getShowBingImage
     }
   },
   mounted () {
