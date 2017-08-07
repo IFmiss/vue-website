@@ -10,12 +10,15 @@
       <router-link tag="a" to="/music">
         <li>音乐</li>
       </router-link>
-      <router-link tag="a" to="/blog">
-        <li>博客</li>
-      </router-link>
       <router-link tag="a" to="/about">
         <li>关于</li>
       </router-link>
+<!--       <a href="http://www.daiwei.org/blog">
+        <li>博客</li>
+      </a> -->
+      <a href="http://www.daiwei.org">
+        <li>回归旧版</li>
+      </a>
       <router-link tag="a" to="/setting" class="a-icon">
         <li class="li-icon"><i class="icon-setting"></i></li>
       </router-link>

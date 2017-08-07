@@ -66,7 +66,7 @@
 			top:100px
 			bottom:50px
 			left:50%
-			max-width:1200px
+			max-width:1240px
 			width:100%
 			transform:translate(-50%,0)
 			margin:0 auto
