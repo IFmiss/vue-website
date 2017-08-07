@@ -71,6 +71,9 @@
 <script>
   import store from './../../../store'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  // var $ = require('jquery')
+  // require('jquery-mousewheel')($)
+  // require('malihu-custom-scrollbar-plugin')($)
   export default {
   	data () {
   		return {
@@ -132,6 +135,11 @@
   		}
   	},
   	mounted () {
+  	// 	setTimeout(function () {
+  	// 		$('.picList_content').mCustomScrollbar({
+			// 	// theme: 'minimal-dark'
+			// })
+  	// 	}, 1000)
   	},
   	components: {
         swiper,
@@ -142,8 +150,8 @@
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../../../common/stylus/global.styl'
 	.picList_content
-		width:100%
-		height:100%
+		// width:100%
+		// height:100%
 		.picList
 			padding:5px
 			box-sizing:border-box

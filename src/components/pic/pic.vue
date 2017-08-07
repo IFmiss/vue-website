@@ -11,6 +11,7 @@
   import line from './../common/line/line.vue'
   import picList from './picList/picList.vue'
   import fecth from './../../utils/fecth.js'
+
   export default {
     computed: {
       picBg () {
@@ -33,46 +34,31 @@
     },
     mounted () {
       this.fetchData()
+      // $('.picList_content').mCustomScrollbar({
+      //    theme: 'minimal-dark'
+      // })
     }
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   @import '../../common/stylus/global.styl'
-    ::-webkit-scrollbar
-      background:rgba(55,55,55,0.1)
-      width:4px
-      border-radius:2px
-      margin-left:12px
-    ::-webkit-scrollbar-button    
-      display:none
-    ::-webkit-scrollbar-track  
-      border-radius:2px
-      background:rgba(55,55,55,0.1)
-    ::-webkit-scrollbar-track-piece 
-      border-radius:2px
-      background:rgba(55,55,55,0.1)
-    ::-webkit-scrollbar-thumb  
-      cursor:pointer
-      border-radius:2px
-      background:rgba(222,222,222,0.1)
-      
-    ::-moz-scrollbar
-      background:rgba(55,55,55,0.1)
-      width:15px
-      border-radius:2px
-      margin-left:12px
-    ::-moz-scrollbar-button    
-      display:none
-    ::-moz-scrollbar-track  
-      border-radius:2px
-      background:rgba(55,55,55,0.1)
-    ::-moz-scrollbar-track-piece 
-      border-radius:2px
-      background:rgba(55,55,55,0.1)
-    ::-moz-scrollbar-thumb  
-      cursor:pointer
-      border-radius:2px
-      background:rgba(222,222,222,0.1)
+    // ::-webkit-scrollbar
+    //   background:rgba(55,55,55,0.1)
+    //   width:4px
+    //   border-radius:2px
+    //   margin-left:12px
+    // ::-webkit-scrollbar-button    
+    //   display:none
+    // ::-webkit-scrollbar-track  
+    //   border-radius:2px
+    //   background:rgba(55,55,55,0.1)
+    // ::-webkit-scrollbar-track-piece 
+    //   border-radius:2px
+    //   background:rgba(55,55,55,0.1)
+    // ::-webkit-scrollbar-thumb  
+    //   cursor:pointer
+    //   border-radius:2px
+    //   background:rgba(222,222,222,0.1)
     // ::-webkit-scrollbar-button      
     // ::-webkit-scrollbar-track       
     // ::-webkit-scrollbar-track-piece 
@@ -107,5 +93,5 @@
       overflow-y:scroll
       box-sizing:border-box
       -webkit-overflow-scrolling: touch
-      padding:15px;    
+      padding:15px;
 </style>

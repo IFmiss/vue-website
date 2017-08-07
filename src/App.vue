@@ -14,6 +14,7 @@ import home from './components/home.vue'
 import fixedbg from './components/common/fixedbg/fixedbg.vue'
 import content from './components/common/content/content.vue'
 import pic from './components/pic/pic.vue'
+// import $ from 'jquery'
 
 export default {
   data () {
