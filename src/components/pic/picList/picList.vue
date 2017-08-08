@@ -8,28 +8,28 @@
 			<p class="disc">{{dataInfo.disc}}</p>
 		    <!-- <v-line bg="#000" linewidth="100%" lineheight="5px"></v-line> -->
 			<div class="div_image" v-if="dataInfo.detail">
-				<div v-for="(data, index) in dataInfo.detail" :data-index="dataIndex" :key="data.id" class="image" :style="{backgroundImage : 'url(' + data.url + ')', backgroundSize:'cover', backgroundPosition:'center center'}" @click="openImg($event, dataInfo.detail)"></div>
+				<div v-for="(data, index) in dataInfo.detail" :data-index="dataIndex" :key="data.id" class="image" :style="{backgroundImage : 'url(' + data.url + ')', backgroundSize:'cover', backgroundPosition:'center center'}" @click="openImg($event, dataInfo.detail, index)"></div>
 				
 			</div>
+			<transition name="fade-scale">
+				<div class="image_detail" v-show="showImageDetail">
+					<swiper :options="swiperOption"  ref="mySwiper" :not-next-tick="notNextTick" v-if="currentPicLists.length">  
+			            <!-- 这部分放你要渲染的那些内容 -->  
+			            <swiper-slide v-for="(item, index) in currentPicLists" :key="item.id">
+							<img class="image_info" :src="item.url" alt="">
+			            </swiper-slide>
+			            <!-- 这是轮播的小圆点 -->  
+			            <div class="swiper-pagination" slot="pagination"></div>  
+			        </swiper>
+			        <div class="colse_image_detail" @click.stop="closeImg">
+			        	<i class="icon-close"></i>
+			        	<div class="bg_colse_image_detail" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:globalInfo.contentInfo.opacity}">
+			        	</div>
+			        </div>
+			        <div class="bg_info" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:'0.3'}"></div>
+				</div>
+			</transition>
 		</div>
-		<transition name="fade-scale">
-			<div class="image_detail" v-show="showImageDetail">
-				<swiper :options="swiperOption"  ref="mySwiper" v-if="currentPicLists.length">  
-		            <!-- 这部分放你要渲染的那些内容 -->  
-		            <swiper-slide v-for="(item, index) in currentPicLists" :key="item.id">
-						<img class="image_info" :src="item.url" alt="">
-		            </swiper-slide>
-		            <!-- 这是轮播的小圆点 -->  
-		            <div class="swiper-pagination" slot="pagination"></div>  
-		        </swiper>
-		        <div class="colse_image_detail" @click.stop="closeImg">
-		        	<i class="icon-close"></i>
-		        	<div class="bg_colse_image_detail" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:globalInfo.contentInfo.opacity}">
-		        	</div>
-		        </div>
-		        <div class="bg_info" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:'0.3'}"></div>
-			</div>
-		</transition>
 	</div>
 </template>
 <script>
@@ -45,6 +45,7 @@
   			overflowType: 'initial',
   			imageBg: '',
   			currentPicLists: {},
+  			notNextTick: true,
   			swiperOption: {
 				// 是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
 				autoplay: 3000,
@@ -118,7 +119,8 @@
 		}
   	},
   	methods: {
-  		openImg (e, data) {
+  		openImg (e, data, index) {
+  			// this.swiper.slideTo(index, 0, false)
   			this.currentPicLists = data
   			this.showImageDetail = true
   			const computedStyle = window.getComputedStyle(e.target)
