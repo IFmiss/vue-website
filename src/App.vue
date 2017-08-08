@@ -34,7 +34,7 @@ export default {
       const isShowBingImage = store.getters.getShowBingImage
       const getbingApi = isShowBingImage ? 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageByBingJson' : 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
         fecth.get(getbingApi).then((res) => {
-          const imageInfo = {}
+          let imageInfo = {}
           imageInfo.url = res.data.url
           imageInfo.title = res.data.title
           imageInfo.disc = res.data.disc

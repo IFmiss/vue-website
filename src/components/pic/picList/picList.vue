@@ -1,60 +1,24 @@
 <template>
 	<div class="picList_content" ref="picListContent" :style="{overflowY:overflowType}">
 		<div class="picList">
-			<h3 class="title">08-03</h3>
+			<h3 class="title">{{getNewDate}}</h3>
 			<div class="detail">
-				<span>2分钟前</span> <span>上海</span>
+				<span>{{getTimeLength}}</span> <span>{{dataInfo.place}}</span>
 			</div>
-			<p class="disc">今天是个好日子今天是个好日子啊今天是个好日子啊今天是个好日子啊今天是个好日子啊今天是个好日子啊今天是个好日子啊今天是个好日子啊今天是个好日子啊今天是个好日子啊啊</p>
+			<p class="disc">{{dataInfo.disc}}</p>
 		    <!-- <v-line bg="#000" linewidth="100%" lineheight="5px"></v-line> -->
-			<div class="div_image">
-				<div class="image" style="background:url(https://avatars0.githubusercontent.com/u/17402583?v=4&s=460)" @click="openImg($event)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-			</div>
-			<div class="div_image">
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-			</div>
-			<div class="div_image">
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-			</div>
-			<div class="div_image">
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-			</div>
-			<div class="div_image">
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
-				<div class="image" style="background:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg)"></div>
+			<div class="div_image" v-if="dataInfo.detail">
+				<div v-for="(data, index) in dataInfo.detail" :data-index="dataIndex" :key="data.id" class="image" :style="{backgroundImage : 'url(' + data.url + ')', backgroundSize:'cover', backgroundPosition:'center center'}" @click="openImg($event, dataInfo.detail)"></div>
+				
 			</div>
 		</div>
 		<transition name="fade-scale">
 			<div class="image_detail" v-show="showImageDetail">
-				<swiper :options="swiperOption"  ref="mySwiper">  
+				<swiper :options="swiperOption"  ref="mySwiper" v-if="currentPicLists.length">  
 		            <!-- 这部分放你要渲染的那些内容 -->  
-		            <swiper-slide>
-						<!-- <div class="bg_image_info" :style="{backgroundImage:imageBg,backgroundSize:'cover'}"></div> -->
-						<img class="image_info" :src="imageBg" alt="">
-		            </swiper-slide>  
-		            <swiper-slide>
-		            	<img class="image_info" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4007804111,2303444572&fm=26&gp=0.jpg" alt="">
-						<!-- <div class="bg_image_info" :style="{backgroundImage:imageBg,backgroundSize:'cover'}"></div> -->
-		            </swiper-slide>  
+		            <swiper-slide v-for="(item, index) in currentPicLists" :key="item.id">
+						<img class="image_info" :src="item.url" alt="">
+		            </swiper-slide>
 		            <!-- 这是轮播的小圆点 -->  
 		            <div class="swiper-pagination" slot="pagination"></div>  
 		        </swiper>
@@ -80,6 +44,7 @@
   			showImageDetail: false,
   			overflowType: 'initial',
   			imageBg: '',
+  			currentPicLists: {},
   			swiperOption: {
 				// 是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
 				autoplay: 3000,
@@ -91,7 +56,7 @@
 				mousewheelControl: true,
 				autoplayDisableOnInteraction: false,
 				observeParents: true,
-				loop: true,
+				loop: false,
 				// lazyLoading: true,
 				// lazyLoadingOnTransitionStart: true,
 				onSlideChangeEnd: swiper => {
@@ -105,6 +70,10 @@
 				}
 			}
   		}
+  	},
+  	props: {
+  		dataIndex: 0,
+  		dataInfo: {}
   	},
   	watch: {
   		showImageDetail (val, oldVal) {
@@ -121,10 +90,36 @@
   		},
   		swiper () {
 			return this.$refs.mySwiper.swiper
+		},
+		getNewDate () {
+			return this.dataInfo.datetime.substr(5, 5)
+		},
+		getTimeLength () {
+			const parseDate = Date.parse(new Date(this.dataInfo.datetime)) / 1000
+			const currentDate = Date.parse(new Date()) / 1000
+			if (currentDate - parseDate > 60 * 60 * 24 * 365) {
+				return `${Math.floor((currentDate - parseDate) / (60 * 60 * 24 * 365))} 年前`
+			}
+			if (currentDate - parseDate > 60 * 60 * 24 * 30) {
+				return `${Math.floor((currentDate - parseDate) / (60 * 60 * 24 * 30))} 个月前`
+			}
+			if (currentDate - parseDate > 60 * 60 * 24) {
+				return `${Math.floor((currentDate - parseDate) / (60 * 60 * 24))} 天前`
+			}
+			if (currentDate - parseDate > 60 * 60) {
+				return `${Math.floor((currentDate - parseDate) / (60 * 60))} 小时前`
+			}
+			if (currentDate - parseDate > 60) {
+				return `${Math.floor((currentDate - parseDate) / 60)} 分钟前`
+			}
+			if (currentDate - parseDate > 1) {
+				return `${Math.floor(currentDate - parseDate)} 秒前`
+			}
 		}
   	},
   	methods: {
-  		openImg (e) {
+  		openImg (e, data) {
+  			this.currentPicLists = data
   			this.showImageDetail = true
   			const computedStyle = window.getComputedStyle(e.target)
   			const imageBg = computedStyle.backgroundImage

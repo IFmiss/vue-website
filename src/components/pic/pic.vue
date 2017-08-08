@@ -1,8 +1,8 @@
 <template>
-  <div class="div_pic">
+  <div class="div_pic" v-if="picinfo.length">
     <div class="pic_bg" v-if="picBg" :style="{backgroundColor:picBg.contentInfo.bgcolor, opacity : picBg.contentInfo.opacity}"></div>
     <div class="pic_content">
-      <picList></picList>
+      <picList v-for="(item, index) in picinfo" :key="item.id" :data-index="index" :data-info="item"></picList>
     </div>
   </div>
 </template>
@@ -13,6 +13,11 @@
   import fecth from './../../utils/fecth.js'
 
   export default {
+    data () {
+      return {
+        picinfo: {}
+      }
+    },
     computed: {
       picBg () {
         return store.getters.getGlobalInfo
@@ -22,7 +27,8 @@
       fetchData () {
         const getImageConditions = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageCondition'
         fecth.get(getImageConditions).then((res) => {
-          alert(JSON.stringify(res))
+          // alert(JSON.stringify(res))
+          this.picinfo = res.data
         }, (err) => {
           alert(err)
         })
@@ -94,4 +100,5 @@
       box-sizing:border-box
       -webkit-overflow-scrolling: touch
       padding:15px;
+      box-sizing:border-box
 </style>

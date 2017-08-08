@@ -14,9 +14,9 @@
 <script>
   export default {
   	data () {
-  		return {
-  			hasActive: document.getElementsByClassName('li_about').querySelector('.router-link-active')
-  		}
+  		// return {
+  		// 	hasActive:
+  		// }
   	}
   }
 </script>
