@@ -4,7 +4,6 @@
   </div>
 </template>
 <script>
-  import store from './../../store'
   export default {
   	data () {
   		return {
@@ -54,7 +53,7 @@
   	computed: {
   		rangeStyleInfo () {
   			let styleInfo = {}
-  			if (store.getters.getGlobalInfo.showBingImage) {
+  			if (this.switchOpt.isactive) {
   				styleInfo.backgroundColor = this.switchOpt.rangeactivebg
   				styleInfo.transform = `translate(100%,0)`
   			} else {

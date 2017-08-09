@@ -19,7 +19,7 @@
   	data () {
   		return {
   			options: {
-				isactive: store.getters.getGlobalInfo.showBingImage,
+				isactive: false,
 				rangebg: '#aaa',
 				rangeactivebg: '#9EC0C7',
 				contentbg: '#fff',
@@ -35,6 +35,14 @@
 					data: info.active
 				})
 			}
+		},
+		getIsActive () {
+			const getAllStorage = JSON.parse(localStorage.getItem('globalInfo'))
+			if (!(getAllStorage === null || '')) {
+				this.options.isactive = getAllStorage.showBingImage
+			} else {
+				this.options.isactive = store.getters.getGlobalInfo.showBingImage
+			}
 		}
 	},
 	computed: {
@@ -47,6 +55,9 @@
 	},
   	components: {
   		'v-switch': Switch
+  	},
+  	mounted () {
+  		this.getIsActive()
   	}
   }
 </script>
