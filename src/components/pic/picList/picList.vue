@@ -16,7 +16,7 @@
 </template>
 <script>
   import store from './../../../store'
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  // import { swiper, swiperSlide } from 'vue-awesome-swiper'
   // var $ = require('jquery')
   // require('jquery-mousewheel')($)
   // require('malihu-custom-scrollbar-plugin')($)
@@ -79,11 +79,7 @@
 			// 	// theme: 'minimal-dark'
 			// })
   	// 	}, 1000)
-  	},
-  	components: {
-        swiper,
-        swiperSlide
-    }
+  	}
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
