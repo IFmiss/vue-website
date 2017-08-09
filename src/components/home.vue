@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     isShowBingImage () {
-      return store.getters.getShowBingImage ? '每日一图由 bing 提供' : '每日一图由 未曾遗忘的青春 提供'
+      return store.getters.getGlobalInfo.showBingImage ? '每日一图由 bing 提供' : '每日一图由 未曾遗忘的青春 提供'
     },
     imageInfo () {
       return store.getters.getFixedImageInfo

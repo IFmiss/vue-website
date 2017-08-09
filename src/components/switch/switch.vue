@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+  import store from './../../store'
   export default {
   	data () {
   		return {
@@ -47,14 +48,13 @@
   				this.$refs.switch_range.style.backgroundColor = this.switchOpt.rangebg
   				this.$refs.switch_range.style.transform = `translate(0,0)`
   			}
-  			// alert(callback.active)
   			this.$emit('selectBgType', callback)
   		}
   	},
   	computed: {
   		rangeStyleInfo () {
   			let styleInfo = {}
-  			if (this.switchOpt.isactive) {
+  			if (store.getters.getGlobalInfo.showBingImage) {
   				styleInfo.backgroundColor = this.switchOpt.rangeactivebg
   				styleInfo.transform = `translate(100%,0)`
   			} else {
@@ -64,6 +64,9 @@
   			return styleInfo
   		}
   	}
+    // mounted () {
+    //   alert(this.switchOpt.isactive)
+    // }
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">

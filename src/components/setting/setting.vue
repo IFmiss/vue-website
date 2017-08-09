@@ -19,9 +19,9 @@
   	data () {
   		return {
   			options: {
-				isactive: store.getters.getShowBingImage,
+				isactive: store.getters.getGlobalInfo.showBingImage,
 				rangebg: '#aaa',
-				rangeactivebg: 'red',
+				rangeactivebg: '#9EC0C7',
 				contentbg: '#fff',
 				ref: 'bg'
 			}
@@ -39,10 +39,10 @@
 	},
 	computed: {
 		getImageInfo () {
-			return store.getters.getShowBingImage
+			return store.getters.getGlobalInfo.showBingImage
 		},
 		getImageInfoTitle () {
-			return store.getters.getShowBingImage ? 'bing壁纸' : '自定义壁纸'
+			return store.getters.getGlobalInfo.showBingImage ? 'bing壁纸' : '自定义壁纸'
 		}
 	},
   	components: {

@@ -5,25 +5,23 @@ const globalStore = {
 			contentInfo: {
 				opacity: '0.0',
 				bgcolor: 'rgb(0, 0, 0)'
-			}
-		},
-		isHigher768: false,
-		showBingImage: true
+			},
+			isHigher768: false,
+			showBingImage: true
+		}
 	},
 	getters: {
-		getGlobalInfo: state => state.globalInfo,
-		getIsHigher768: state => state.isHigher768,
-		getShowBingImage: state => state.showBingImage
+		getGlobalInfo: state => state.globalInfo
 	},
 	mutations: {
 		setGlobalInfo (state, obj) {
 			state.globalInfo = obj.data
 		},
 		setIsHigher768 (state, obj) {
-			state.isHigher768 = obj.data
+			state.globalInfo.isHigher768 = obj.data
 		},
 		setShowBingImage  (state, obj) {
-			state.showBingImage = obj.data
+			state.globalInfo.showBingImage = obj.data
 		}
 	},
 	actions: {

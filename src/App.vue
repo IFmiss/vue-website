@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     fetchData () {
-      const isShowBingImage = store.getters.getShowBingImage
+      const isShowBingImage = store.getters.getGlobalInfo.showBingImage
       const getbingApi = isShowBingImage ? 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageByBingJson' : 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
         fecth.get(getbingApi).then((res) => {
           let imageInfo = {}
@@ -58,16 +58,32 @@ export default {
         data: isTrue
       })
       console.log(isTrue)
+    },
+    shouldLoadingBg () {
+      if (window.localStorage) {
+        const getAllStorage = JSON.parse(localStorage.getItem('globalInfo'))
+        if (!(getAllStorage === null || '')) {
+          store.dispatch({
+            type: 'set_GlobalInfo',
+            data: getAllStorage
+          })
+        } else {
+          return false
+        }
+      } else {
+        return false
+      }
     }
   },
   watch: {
     getIsBingBg (nowval, oldval) {
       this.fetchData()
+      localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
     }
   },
   computed: {
     imagePrevPath () {
-      return store.getters.getShowBingImage ? 'http://www.bing.com' : ''
+      return store.getters.getGlobalInfo.showBingImage ? 'http://www.bing.com' : ''
     },
     getGlobalStyle () {
       return store.getters.getGlobalInfo
@@ -79,15 +95,19 @@ export default {
       return store.getters.getFixedBgInfo
     },
     getIsBingBg () {
-      return store.getters.getShowBingImage
+      return store.getters.getGlobalInfo.showBingImage
     }
   },
   mounted () {
-    this.fetchData()
-    // 挂载 onresize事件
-    window.onresize = () => {
-      this.isApp()
-    }
+    // this.$nextTick(() => {
+      this.shouldLoadingBg()
+      this.fetchData()
+      // 挂载 onresize事件
+      window.onresize = () => {
+        this.isApp()
+      }
+      localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
+    // })
   }
 }
 </script>
