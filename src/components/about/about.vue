@@ -1,9 +1,9 @@
 <template>
   <div class="about">
   	<div class="about_bg" v-if="globalInfo.contentInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div>
-    <div class="about-content">
+    <div class="about-content" :style="{'overflow-y': isShowPanel ? 'auto' : 'hidden'}">
     	<transition name="silde-left">
-	    	<div class="dw-boot-container" v-show="showPanel">
+	    	<div class="dw-boot-container" v-show="isShowPanel">
 	    		<router-link tag="a" to="/about/works">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
 		        		<i class="icon-music"></i>
@@ -28,32 +28,40 @@
 		        		<span>作品信息</span>
 		        	</li>
 		        </router-link>
-		        <router-view class="li_about"></router-view>
 	    	</div>
     	</transition>
+    	<transition name="silde-left">
+			<router-view class="li_about" v-show="!isShowPanel"></router-view>
+		</transition>
     </div>
   </div>
 </template>
 <script>
   import store from './../../store'
   export default {
-  	data () {
-  		return {
-  			showPanel: true
-  		}
-  	},
   	methods: {
   		getRoutePath () {
   			// return this.$route.path
 			// if (this.$route.path.indexOf('/about'))
 			if (this.$route.path.indexOf('/about') === 0 && this.$route.path.length > 6) {
-				this.showPanel = false
+				store.commit({
+					type: 'setAboutChildrenRouter',
+					data: false
+				})
+			} else {
+				store.commit({
+					type: 'setAboutChildrenRouter',
+					data: true
+				})
 			}
 		}
   	},
   	computed: {
 		globalInfo () {
 			return store.getters.getGlobalInfo
+		},
+		isShowPanel () {
+			return store.getters.getAboutChildrenRouter
 		}
 	},
 	watch: {
@@ -148,6 +156,9 @@
 					right:0
 					width:100%
 					height:100%
-					// background:rgba(0,0,0,0.6)
-				
+					&.silde-left-enter-to,&.silde-left-leave-to
+						transition: all 0.5s
+					&.silde-left-enter,&.silde-left-leave-to
+						opacity:0
+						transform: translate3d(50%, 0, 0)
 </style>
