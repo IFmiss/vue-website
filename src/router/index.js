@@ -51,5 +51,10 @@ export default new Router({
       path: '/setting',
       component: Setting
     }
+    // 作品列表
+    // {
+    //   path: '/works',
+    //   component: Works
+    // }
   ]
 })

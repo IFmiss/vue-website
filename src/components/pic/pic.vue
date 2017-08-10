@@ -1,5 +1,5 @@
 <template>
-  <div class="div_pic" v-if="picinfo.length">
+  <div class="pic" v-if="picinfo.length">
     <div class="pic_bg" v-if="globalInfo.contentInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div>
     <div class="pic_content">
       <picList @showswiper = "showSwiper" v-for="(item, index) in picinfo" :key="item.id" :data-index="index" :data-info="item"></picList>
@@ -148,7 +148,7 @@
     // ::-webkit-scrollbar-thumb       
     // ::-webkit-scrollbar-corner      
     // ::-webkit-resizer               
-  .div_pic
+  .pic
     position:fixed
     top:0
     left:0;

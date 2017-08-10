@@ -1,6 +1,6 @@
 <template>
-  <div class="works">
-  	<div class="works_content"></div>
+  <div class="workslist">
+  	
   </div>
 </template>
 <script>
@@ -9,14 +9,6 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   @import '../../common/stylus/global.styl'
-	.works
-	  	position:fixed
-	    top:0
-	    left:0
-	    bottom:0
-	    width:100%
-	    right:0
-	    border-radius:12px
-		.works_content
-			position:fixed
+	.workslist
+	  	position:relative
 </style>
