@@ -2,33 +2,35 @@
   <div class="about">
   	<div class="about_bg" v-if="globalInfo.contentInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div>
     <div class="about-content">
-    	<div class="dw-boot-container" v-show="showPanel">
-    		<router-link tag="a" to="/about/works">
-	        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-	        		<i class="icon-music"></i>
-	        		<span>作品信息</span>
-	        	</li>
-	        </router-link>
-        	<router-link tag="a" to="/about/works">
-	        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-	        		<i class="icon-music"></i>
-	        		<span>作品信息</span>
-	        	</li>
-	        </router-link>
-	        <router-link tag="a" to="/about/works">
-	        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-	        		<i class="icon-music"></i>
-	        		<span>作品信息</span>
-	        	</li>
-	        </router-link>
-	        <router-link tag="a" to="/about/works">
-	        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-	        		<i class="icon-music"></i>
-	        		<span>作品信息</span>
-	        	</li>
-	        </router-link>
-	        <router-view class="li_about"></router-view>
-    	</div>
+    	<transition name="silde-left">
+	    	<div class="dw-boot-container" v-show="showPanel">
+	    		<router-link tag="a" to="/about/works">
+		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
+		        		<i class="icon-music"></i>
+		        		<span>作品信息</span>
+		        	</li>
+		        </router-link>
+	        	<router-link tag="a" to="/about/works">
+		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
+		        		<i class="icon-music"></i>
+		        		<span>作品信息</span>
+		        	</li>
+		        </router-link>
+		        <router-link tag="a" to="/about/works">
+		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
+		        		<i class="icon-music"></i>
+		        		<span>作品信息</span>
+		        	</li>
+		        </router-link>
+		        <router-link tag="a" to="/about/works">
+		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
+		        		<i class="icon-music"></i>
+		        		<span>作品信息</span>
+		        	</li>
+		        </router-link>
+		        <router-view class="li_about"></router-view>
+	    	</div>
+    	</transition>
     </div>
   </div>
 </template>
@@ -87,7 +89,7 @@
 				left:50%
 				max-width:1240px
 				width:100%
-				transform:translate(-50%,0)
+				transform:translate3d(-50%,0,0)
 				margin:0 auto
 				overflow-y:scroll
 				box-sizing:border-box
@@ -95,7 +97,13 @@
 				padding:15px
 				display:flex
 				flex-direction:row
+				opacity:1
 				div
+					&.silde-left-enter-to,&.silde-left-leave-to
+						transition: all 0.5s
+					&.silde-left-enter,&.silde-left-leave-to
+						opacity:0
+						transform:translate3d(-100%,0,0)
 					a
 						flex(4)
 						text-decoration:none
