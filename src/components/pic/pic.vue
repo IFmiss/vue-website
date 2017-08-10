@@ -2,11 +2,11 @@
   <div class="pic" v-if="picinfo.length">
     <div class="pic_bg" v-if="globalInfo.contentInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div>
     <div class="pic_content">
-      <picList @showswiper = "showSwiper" v-for="(item, index) in picinfo" :key="item.id" :data-index="index" :data-info="item"></picList>
+      <picList @showswiper= "showSwiper" v-for="(item, index) in picinfo" :key="item.id" :data-index="index" :data-info="item"></picList>
     </div>
     <transition name="fade-scale">
       <div class="image_detail" v-show="showImageDetail">
-        <swiper :options="swiperOption"  ref="mySwiper" :not-next-tick="notNextTick" v-if="picListInfo.length && globalInfo.contentInfo">  
+        <swiper :options="swiperOption" ref="mySwiper" v-if="picListInfo.length && globalInfo.contentInfo">  
                 <!-- 这部分放你要渲染的那些内容 -->  
                 <swiper-slide v-for="(item, index) in picListInfo" :key="item.id">
                   <!-- <div class="swiper-lazy-preloader"></div> -->
@@ -30,6 +30,7 @@
   import line from './../common/line/line.vue'
   import picList from './picList/picList.vue'
   import fecth from './../../utils/fecth.js'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
   export default {
     data () {
@@ -39,8 +40,8 @@
         overflowType: 'initial',
         imageBg: '',
         currentPicLists: {},
-        notNextTick: true,
         swiperOption: {
+          notNextTick: false,
           // 是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
           autoplay: 3000,
           grabCursor: true,
@@ -89,9 +90,14 @@
         })
       },
       showSwiper (index) {
-        this.swiperOption.initialSlide = index
-        // console.log(this.swiperOption.initialSlide)
-        this.showImageDetail = true
+        // this.showImageDetail = true
+        alert(this.swiper)
+        // if (this.swiper !== undefined) {
+        //   this.swiper.activeIndex = index
+        //   return
+        // } else {
+        //   return
+        // }
       },
       hideSwiper () {
         this.showImageDetail = false
@@ -105,19 +111,26 @@
           this.overflowType = `initial`
         }
       }
+      // swiper (newval, oldval) {
+      //   alert(newval)
+      // }
       // picListInfo (val, oldval) {
       //   alert(JSON.stringify(val))
       // }
     },
     components: {
       'v-line': line,
-      picList
+      picList,
+      swiper,
+      swiperSlide
     },
     mounted () {
       this.fetchData()
       // $('.picList_content').mCustomScrollbar({
       //    theme: 'minimal-dark'
       // })''
+      // this.$nextTick(() => { console.log(this.$refs) })
+      // alert(this.$refs.abc)
       // alert(store.getters.getGlobalInfo)
       // this.swiper.slideTo(3, 1000, false)
     }
