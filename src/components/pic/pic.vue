@@ -235,6 +235,14 @@
             width:100%
             height: 100%
             overflow:hidden
+            display:flex
+            align-items:center
+            img
+              width:auto
+              height:auto
+              max-width:100%
+              max-height:100%
+              background:#000
         .swiper-pagination
         .swiper-pagination-bullet
           margin:0 4px
