@@ -31,8 +31,12 @@ export default {
   },
   methods: {
     fetchData () {
+      // 获取壁纸信息
       const isShowBingImage = store.getters.getGlobalInfo.showBingImage
-      const getbingApi = isShowBingImage ? 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageByBingJson' : 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
+      let getbingApi = isShowBingImage ? 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageByBingJson' : 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
+      const hasFixedImageBg = localStorage.getItem('fixedImageBg')
+
+      if (isShowBingImage) {
         fecth.get(getbingApi).then((res) => {
           let imageInfo = {}
           imageInfo.url = res.data.url
@@ -45,6 +49,31 @@ export default {
         }, (err) => {
           alert(err)
         })
+      } else {
+        if ((hasFixedImageBg === null || '')) {
+           fecth.get(getbingApi).then((res) => {
+            let imageInfo = {}
+            imageInfo.url = res.data.url
+            imageInfo.title = res.data.title
+            imageInfo.disc = res.data.disc
+            store.dispatch({
+              type: 'set_FixedImageInfo',
+              data: imageInfo
+            })
+          }, (err) => {
+            alert(err)
+          })
+        } else {
+          // 背景图片地址设置本地存储
+          const getFixedImageBg = JSON.parse(localStorage.getItem('fixedImageBg'))
+          if (!(getFixedImageBg === null || '')) {
+            store.dispatch({
+              type: 'set_FixedImageInfo',
+              data: getFixedImageBg
+            })
+          }
+        }
+      }
     },
     isApp () {
       let isTrue = false
@@ -61,15 +90,23 @@ export default {
     },
     shouldLoadingBg () {
       if (window.localStorage) {
+        // 全局设置
         const getAllStorage = JSON.parse(localStorage.getItem('globalInfo'))
         if (!(getAllStorage === null || '')) {
           store.dispatch({
             type: 'set_GlobalInfo',
             data: getAllStorage
           })
-        } else {
-          return false
         }
+        // 背景图片地址设置本地存储
+        const getFixedImageBg = JSON.parse(localStorage.getItem('fixedImageBg'))
+        if (!(getFixedImageBg === null || '')) {
+          store.dispatch({
+            type: 'set_FixedImageInfo',
+            data: getFixedImageBg
+          })
+        }
+        return true
       } else {
         return false
       }

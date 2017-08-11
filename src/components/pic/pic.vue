@@ -6,19 +6,22 @@
     </div>
     <transition name="fade-scale">
       <div class="image_detail" v-show="showImageDetail">
-        <swiper :options="swiperOption" ref="mySwiper" v-if="picListInfo.length && globalInfo.contentInfo">  
+        <swiper :options="swiperOption" ref="mySwiper" v-if="picListInfo.detail && globalInfo.contentInfo">  
                 <!-- 这部分放你要渲染的那些内容 -->  
-                <swiper-slide v-for="(item, index) in picListInfo" :key="item.id">
+                <swiper-slide v-for="(item, index) in picListInfo.detail" :key="item.id">
                   <!-- <div class="swiper-lazy-preloader"></div> -->
-                  <img class="image_info" :src="item.url" alt="">
+                  <img class="image_info" :id="'detail_' + index" :src="item.url" alt="未曾遗忘的青春" :data-disc="picListInfo.disc" :data-title="picListInfo.place">
                 </swiper-slide>
                 <!-- 这是轮播的小圆点 -->  
                 <div class="swiper-pagination" slot="pagination"></div>  
             </swiper>
             <div class="colse_image_detail" @click.stop="hideSwiper">
-              <i class="icon-close"></i>
-              <div class="bg_colse_image_detail" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:globalInfo.contentInfo.opacity}">
+              <div class="bg_colse_image_detail">
+                <i class="icon-close"></i>
               </div>
+            </div>
+            <div class="set_Bg" @click="setBg">
+              设置为壁纸
             </div>
             <div class="bg_info" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:'0.3'}"></div>
       </div>
@@ -43,7 +46,7 @@
         swiperOption: {
           notNextTick: false,
           // 是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
-          autoplay: 3000,
+          autoplay: 30000,
           grabCursor: true,
           setWrapperSize: true,
           autoHeight: true,
@@ -77,6 +80,9 @@
       },
       picListInfo () {
         return store.getters.getPicList
+      },
+      getFixedImageInfo () {
+        return store.getters.getGlobalInfo.showBingImage
       }
     },
     methods: {
@@ -98,6 +104,23 @@
         } else {
           return
         }
+      },
+      setBg () {
+        if (this.getFixedImageInfo) {
+          alert('需要在设置页面将背景图设置自定义才可以使用状态图片作为背景哦！')
+          return
+        }
+        const el = document.getElementById('detail_' + this.swiper.activeIndex)
+        const data = {
+          url: el.getAttribute('src'),
+          disc: el.getAttribute('data-disc'),
+          title: el.getAttribute('data-title')
+        }
+        store.dispatch({
+          type: 'set_FixedImageInfo',
+          data: data
+        })
+        localStorage.setItem('fixedImageBg', JSON.stringify(store.getters.getFixedImageInfo))
       },
       hideSwiper () {
         this.showImageDetail = false
@@ -242,6 +265,18 @@
           width:100%
           height:100%
           z-index:-1
+      .set_Bg
+        color:$text_color
+        position:absolute
+        z-index:1
+        bottom:10px
+        right:10px
+        font-size:12px
+        padding:5px 10px
+        background:rgba(0,0,0,0.1)
+        cursor:pointer
+        &:hover
+          background:rgba(0,0,0,0.4)
       .bg_image_info
         display:block
         width:100%

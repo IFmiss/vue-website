@@ -65,7 +65,7 @@
 			// this.imageBg = imageBg.substring(5, imageBg.length - 2)
 			store.dispatch({
 				type: 'set_PicList',
-				data: this.dataInfo.detail
+				data: this.dataInfo
 			})
 			this.$emit('showswiper', index)
   		},
