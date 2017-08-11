@@ -3,7 +3,7 @@ const globalStore = {
 		globalInfo: {
 			// 路由的背景色 全屏状态下
 			contentInfo: {
-				opacity: '0.6',
+				opacity: '0.3',
 				bgcolor: 'rgb(0, 0, 0)'
 			},
 			isHigher768: false,
@@ -20,8 +20,14 @@ const globalStore = {
 		setIsHigher768 (state, obj) {
 			state.globalInfo.isHigher768 = obj.data
 		},
-		setShowBingImage  (state, obj) {
+		setShowBingImage (state, obj) {
 			state.globalInfo.showBingImage = obj.data
+		},
+		setGlobalBgColor (state, obj) {
+			state.globalInfo.contentInfo.bgcolor = obj.data
+		},
+		setGlobaBglColorOpacity  (state, obj) {
+			state.globalInfo.contentInfo.opacity = obj.data
 		}
 	},
 	actions: {
@@ -30,6 +36,12 @@ const globalStore = {
 		},
 		set_ShowBingImage ({commit}, obj) {
 			commit('setShowBingImage', obj)
+		},
+		set_GlobaBglColor ({commit}, obj) {
+			commit('setGlobalBgColor', obj)
+		},
+		set_GlobaBglColorOpacity ({commit}, obj) {
+			commit('setGlobaBglColorOpacity', obj)
 		}
 	}
 }

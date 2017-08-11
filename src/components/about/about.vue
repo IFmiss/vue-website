@@ -108,13 +108,11 @@
 				opacity:1
 				div
 					&.silde-left-enter-to,&.silde-left-leave-to
-						transition: all 0.5s
+						transition: all 0.3s
 					&.silde-left-enter,&.silde-left-leave-to
 						opacity:0
-						transform:translate3d(-100%,0,0)
+						transform:translate3d(-80%,0,0)
 					a
-						flex(4)
-						text-decoration:none
 						color:$text_color
 						li
 							list-style:none	

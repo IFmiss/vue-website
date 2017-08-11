@@ -90,14 +90,14 @@
         })
       },
       showSwiper (index) {
-        // this.showImageDetail = true
-        alert(this.swiper)
-        // if (this.swiper !== undefined) {
-        //   this.swiper.activeIndex = index
-        //   return
-        // } else {
-        //   return
-        // }
+        this.showImageDetail = true
+        // alert(this.swiper)
+        if (this.swiper !== undefined) {
+          this.swiper.activeIndex = index
+          return
+        } else {
+          return
+        }
       },
       hideSwiper () {
         this.showImageDetail = false
