@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-  	<div class="about_bg" v-if="globalInfo.contentInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div>
+  	<!-- <div class="about_bg" v-if="globalInfo.contentInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div> -->
     <div class="about-content" :style="{'overflow-y': isShowPanel ? 'auto' : 'hidden'}">
     	<transition name="silde-left">
 	    	<div class="dw-boot-container" v-show="isShowPanel">
@@ -10,10 +10,10 @@
 		        		<span>作品信息</span>
 		        	</li>
 		        </router-link>
-	        	<router-link tag="a" to="/about/works">
+	        	<router-link tag="a" to="/about/joke">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
 		        		<i class="icon-music"></i>
-		        		<span>作品信息</span>
+		        		<span>每日一笑</span>
 		        	</li>
 		        </router-link>
 		        <router-link tag="a" to="/about/works">

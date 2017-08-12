@@ -36,6 +36,7 @@ export default {
     right:0
     bottom:0
     background-color:#000
+    // transition:all 0.3s
     .mask-fixedbg
       position:fixed
       z-index:-1

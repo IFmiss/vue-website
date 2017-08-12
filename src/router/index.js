@@ -7,6 +7,7 @@ import Blog from '../components/blog/blog.vue'
 import About from '../components/about/about.vue'
 import Setting from '../components/setting/setting.vue'
 import Works from '../components/works/works.vue'
+import Joke from '../components/joke/joke.vue'
 
 Vue.use(Router)
 
@@ -44,6 +45,10 @@ export default new Router({
         {
           path: '/about/works',
           component: Works
+        },
+        {
+          path: '/about/joke',
+          component: Joke
         }
       ]
     },

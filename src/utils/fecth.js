@@ -1,7 +1,8 @@
 import axios from 'axios'
-
+import qs from 'qs'
 // request拦截器
-axios.interceptors.request.use(config => {
+axios.interceptors.request.use(
+  config => {
   // loading
   console.log('loadding')
   return config
@@ -51,7 +52,7 @@ export default {
       method: 'post',
       baseURL: process.env.BASE_API,
       url,
-      data: JSON.stringify(data),
+      data: qs.stringify(data),
       timeout: 10000
     }).then(
       (response) => {

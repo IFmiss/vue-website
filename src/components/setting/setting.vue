@@ -1,6 +1,6 @@
 <template>
   <div class="setting">
-  	<div class="set_bg" v-if="getGlobalInfo.contentInfo" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor, opacity : getGlobalInfo.contentInfo.opacity}"></div>
+  	<!-- <div class="set_bg" v-if="getGlobalInfo.contentInfo" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor, opacity : getGlobalInfo.contentInfo.opacity}"></div> -->
   	<div class="setting-warpper">
   		<h3 class="title">设置</h3>
   		<div class="set_bg set_list border-1px">

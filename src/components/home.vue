@@ -7,7 +7,7 @@
         </div>
         <span class="tips">{{isShowBingImage}}</span>
       </div>
-      <div class="pic_bg" v-if="picBg" :style="{backgroundColor:picBg.contentInfo.bgcolor, opacity : picBg.contentInfo.opacity}"></div>
+      <!-- <div class="pic_bg" v-if="picBg" :style="{backgroundColor:picBg.contentInfo.bgcolor, opacity : picBg.contentInfo.opacity}"></div> -->
     </div>
 </template>
 

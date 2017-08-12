@@ -46,6 +46,7 @@
 	  		height:46px
 	  		line-height:46px
 	  		font-size:14px
+	  		cursor:default
 		.link_info
 			flex:(0 0 80px)
 			font-size:12px
