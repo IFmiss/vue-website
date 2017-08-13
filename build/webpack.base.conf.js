@@ -9,6 +9,8 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
+    // app: ['babel-polyfill', './src/main.js']
+    'babel-polyfill': 'babel-polyfill',
     app: './src/main.js'
   },
   output: {
