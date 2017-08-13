@@ -8,10 +8,12 @@ const globalStore = {
 			},
 			isHigher768: false,
 			showBingImage: true
-		}
+		},
+		place: {}
 	},
 	getters: {
-		getGlobalInfo: state => state.globalInfo
+		getGlobalInfo: state => state.globalInfo,
+		getPlace: state => state.place
 	},
 	mutations: {
 		setGlobalInfo (state, obj) {
@@ -26,8 +28,11 @@ const globalStore = {
 		setGlobalBgColor (state, obj) {
 			state.globalInfo.contentInfo.bgcolor = obj.data
 		},
-		setGlobaBglColorOpacity  (state, obj) {
+		setGlobaBglColorOpacity (state, obj) {
 			state.globalInfo.contentInfo.opacity = obj.data
+		},
+		setPlace (state, obj) {
+			state.place = obj.data
 		}
 	},
 	actions: {
@@ -42,6 +47,9 @@ const globalStore = {
 		},
 		set_GlobaBglColorOpacity ({commit}, obj) {
 			commit('setGlobaBglColorOpacity', obj)
+		},
+		set_Place ({commit}, obj) {
+			commit('setPlace', obj)
 		}
 	}
 }

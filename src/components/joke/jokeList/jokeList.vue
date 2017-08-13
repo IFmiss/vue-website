@@ -18,7 +18,11 @@
     position:relative
     font-size:16px
     color:#fff
-    padding:30px 0
+    padding:30px 20px
+    cursor:default
+    transition:all 0.3s
+    &:hover
+      background:rgba(0,0,0,0.3)
     &.border-1px
       border-1px($border_bottom_color_deep, bottom)
 </style>

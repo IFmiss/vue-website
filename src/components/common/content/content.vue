@@ -1,27 +1,29 @@
 <template>
   <section class="div_content">
     <ul class="ul-header border-1px">
-      <router-link tag="a" to="/home">
-        <li>首页</li>
-      </router-link>
-      <router-link tag="a" to="/pic">
-        <li>图片</li>
-      </router-link>
-      <router-link tag="a" to="/music">
-        <li>音乐</li>
-      </router-link>
-      <router-link tag="a" to="/about">
-        <li>关于</li>
-      </router-link>
-<!--       <a href="http://www.daiwei.org/blog">
-        <li>博客</li>
-      </a> -->
-      <a href="http://www.daiwei.org">
-        <li>回归旧版</li>
-      </a>
-      <router-link tag="a" to="/setting" class="a-icon">
-        <li class="li-icon"><i class="icon-setting"></i></li>
-      </router-link>
+      <div class="left-menu" v-show="getGlobalInfo.isHigher768">
+        <router-link tag="a" to="/home">
+          <li>首页</li>
+          </router-link>
+          <router-link tag="a" to="/pic">
+            <li>图片</li>
+          </router-link>
+          <router-link tag="a" to="/music">
+            <li>音乐</li>
+          </router-link>
+          <router-link tag="a" to="/about">
+            <li>关于</li>
+          </router-link>
+          <a href="http://www.daiwei.org">
+            <li>回归旧版</li>
+          </a>
+        </div>
+      <div class="right-menu">
+        <span class="place" :data-place="getPlace.region">{{getPlace.city}}</span>
+        <router-link tag="a" to="/setting" class="a-icon">
+          <li class="li-icon"><i class="icon-setting"></i></li>
+        </router-link>
+      </div>
     </ul>
     <transition name="fade">
       <keep-alive>
@@ -34,8 +36,12 @@
 import store from './../../../store'
 export default {
   computed: {
-    getGlobalStyle () {
+    getGlobalInfo () {
       return store.getters.getGlobalInfo
+    },
+    getPlace () {
+      // alert(JSON.stringify(store.getters.getPlace))
+      return store.getters.getPlace
     }
   }
 }
@@ -75,16 +81,30 @@ export default {
           li
             color:$text_color_active
             border-bottom:1px solid $border_color
-        &.a-icon
-          position:absolute
-          right:10px
-          top:0
+      .right-menu
+        position:absolute
+        right:10px
+        height:40px
+        top:0
+        font-size:0
+        .place
+          display:inline-block
+          font-size: 14px
+          height:100%
+          vertical-align: middle
+          color:$text_color
+          vertical-align:top
+          cursor:pointer
+        a
           li
             // border-bottom:none
+            display:flex
+            height:40px
+            align-items:center
             i
               font-size:18px
               vertical-align: middle
-              
+            
     .li_list
       transform:translate3d(0,0,0)
       &.fade-enter-to,&.fade-leave-to

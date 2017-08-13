@@ -75,6 +75,16 @@ export default {
         }
       }
     },
+    getPlace () {
+        fecth.get('http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getAdress').then((res) => {
+          store.dispatch({
+            type: 'set_Place',
+            data: res.data.data
+          })
+        }, (err) => {
+          alert(err)
+        })
+    },
     isApp () {
       let isTrue = false
       if (document.body.clientWidth < 768) {
@@ -138,6 +148,7 @@ export default {
   mounted () {
     // this.$nextTick(() => {
       this.shouldLoadingBg()
+      this.getPlace()
       this.fetchData()
       // 挂载 onresize事件
       window.onresize = () => {
