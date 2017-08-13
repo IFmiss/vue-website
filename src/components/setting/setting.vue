@@ -3,25 +3,28 @@
   	<!-- <div class="set_bg" v-if="getGlobalInfo.contentInfo" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor, opacity : getGlobalInfo.contentInfo.opacity}"></div> -->
   	<div class="setting-warpper">
   		<h3 class="title">设置</h3>
-  		<div class="set_bg set_list border-1px">
+  		<div class="set_list border-1px">
   			<span class="name">背景图片</span>
 			<div class="switch_bg switch-right">
   				<div class="title">{{getImageInfoTitle}}</div>
 				<v-switch :options="options" @selectBgType="selectBgType"></v-switch>
 			</div>
   		</div>
-  		<div class="set_bg set_list border-1px">
+  		<div class="set_list border-1px">
   			<span class="name">背景色</span>
 			<div class="switch_bg switch-right">
   				<div class="colorArea" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor}" @click="setBgColorPicker"></div>
 			</div>
   		</div>
-  		<div class="set_bg set_list border-1px">
+  		<div class="set_list border-1px">
   			<span class="name">透明度</span>
 			<div class="switch_bg switch-right">
   				<div class="title" v-show="!showOpacityInput" @click="showInputOpacity">{{getGlobalInfo.contentInfo.opacity}}</div>
   				<input class="inputText" ref="inputBgOpacity" type="text" v-show="showOpacityInput" @keyup.enter="onEnter($event)" placeholder="0-1,回车确认" :value="getGlobalInfo.contentInfo.opacity" @blur="closeInputOpacity">
 			</div>
+  		</div>
+  		<div class="set_list">
+  			<span class="name center" @click="clearSettingInfo">重置所有设置</span>
   		</div>
   	</div>
   	<div class="selectBg" v-show="showSetBgColorPicker">
@@ -90,6 +93,14 @@
 			} else {
 				alert('抱歉,输入框内是0-1 的整数或者小数点后两位的小数,请输入正确的格式')
 			}
+		},
+		// 清除默认设置
+		clearSettingInfo () {
+			if (window.localStorage) {
+				localStorage.removeItem('globalInfo')
+				localStorage.removeItem('fixedImageBg')
+				window.location.reload()
+			}
 		}
 	},
 	computed: {
@@ -152,13 +163,19 @@
 				padding:10px 0
 				color:$text_color
 				font-size:0
-			.border-1px
-				border-1px($border_bottom_color_deep, bottom)
+				&.border-1px
+					border-1px($border_bottom_color_deep, bottom)
 				.name
 					display:inline-block
 					font-size:16px
 					vertical-align:middle
 					width: calc(100% - 150px)
+					&.center
+						font-size:14px
+						text-align:center
+						width:100%
+						display:block
+						cursor:pointer
 				.switch-right
 					display:inline-block
 					vertical-align:middle

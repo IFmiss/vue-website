@@ -147,8 +147,13 @@ export default {
   },
   mounted () {
     // this.$nextTick(() => {
+      // 是否在线加载壁纸
       this.shouldLoadingBg()
+      // 获取用户地址
       this.getPlace()
+      // 是否小于768
+      this.isApp()
+      // 加载数据
       this.fetchData()
       // 挂载 onresize事件
       window.onresize = () => {

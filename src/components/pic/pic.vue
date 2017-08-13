@@ -23,7 +23,7 @@
             <div class="set_Bg" @click="setBg">
               设置为壁纸
             </div>
-            <div class="bg_info" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:'0.3'}"></div>
+            <div class="bg_info" :style="{backgroundColor:globalInfo.contentInfo.bgcolor,opacity:globalInfo.contentInfo.opacity}"></div>
       </div>
     </transition>
   </div>
