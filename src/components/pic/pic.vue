@@ -76,7 +76,7 @@
         return store.getters.getGlobalInfo
       },
       swiper () {
-        return this.$refs.mySwiper.swiper
+        return this.$refs.mySwiper.swiper ? this.$refs.mySwiper.swiper : ''
       },
       picListInfo () {
         return store.getters.getPicList
@@ -96,14 +96,20 @@
         })
       },
       showSwiper (index) {
-        this.showImageDetail = true
-        // alert(this.swiper)
-        if (this.swiper !== undefined) {
-          this.swiper.activeIndex = index
-          return
-        } else {
-          return
-        }
+        this.$nextTick(() => {
+          if (this.$refs.mySwiper === undefined) {
+            return
+          }
+          this.$refs.mySwiper.swiper.activeIndex = index
+          this.showImageDetail = true
+          // alert(this.swiper)
+          if (this.swiper !== undefined) {
+            this.swiper.activeIndex = index
+            return
+          } else {
+            return
+          }
+        })
       },
       setBg () {
         if (this.getFixedImageInfo) {
