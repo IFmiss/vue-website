@@ -2,6 +2,7 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+var webpack = require('webpack')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -72,8 +73,14 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },
-      { test: /jquery-mousewheel/, loader: "imports?define=>false&this=>window" },
-      { test: /malihu-custom-scrollbar-plugin/, loader: "imports?define=>false&this=>window" }
+      { test: /jquery-mousewheel/, loader: 'imports?define=>false&this=>window' },
+      { test: /malihu-custom-scrollbar-plugin/, loader: 'imports?define=>false&this=>window' }
     ]
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery'
+    })
+ ]
 }

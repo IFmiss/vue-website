@@ -34,6 +34,9 @@
   import picList from './picList/picList.vue'
   import fecth from './../../utils/fecth.js'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import $ from 'jquery'
+  // require('jquery-mousewheel')
+  // require('malihu-custom-scrollbar-plugin')
 
   export default {
     data () {
@@ -96,13 +99,12 @@
         })
       },
       showSwiper (index) {
-        this.showImageDetail = true
-        // alert(this.swiper)
-        if (this.swiper !== undefined) {
+        try {
+          this.showImageDetail = true
+          // alert(this.swiper)
           this.swiper.activeIndex = index
-          return
-        } else {
-          return
+        } catch (e) {
+          // alert(1)
         }
       },
       setBg () {
@@ -149,9 +151,9 @@
     },
     mounted () {
       this.fetchData()
-      // $('.picList_content').mCustomScrollbar({
-      //    theme: 'minimal-dark'
-      // })''
+      $('.picList_content').mCustomScrollbar({
+         theme: 'minimal-dark'
+      })
       // this.$nextTick(() => { console.log(this.$refs) })
       // alert(this.$refs.abc)
       // alert(store.getters.getGlobalInfo)
@@ -230,7 +232,11 @@
         transform:translate3d(-50%,0,0) scale(0)
       .swiper-container
         height:100%
+        overflow:hidden
         .swiper-wrapper
+          height:100%
+          display:flex
+          align-items:center
           .swiper-slide
             width:100%
             height: 100%
