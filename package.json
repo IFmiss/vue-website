@@ -11,8 +11,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
-    "jquery-mousewheel": "^3.1.13",
-    "malihu-custom-scrollbar-plugin": "^3.1.5",
+    "babel-polyfill": "^6.23.0",
     "vue": "^2.3.3",
     "vue-awesome-swiper": "^2.5.4",
     "vue-router": "^2.6.0"

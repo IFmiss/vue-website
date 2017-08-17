@@ -75,18 +75,24 @@ export default {
 @import '../../../common/stylus/global.styl'
   .colorpicker
     position:relative
-    width:720px
-    height:260px
+    width:80%
+    max-width:720px
+    height:auto
     margin: 0 auto
+    font-size:0
+    overflow:auto
     .colorlist
-      display:flex
-      justify-content:center
-      width:720px
-      height:20px
+      // display:flex
+      // justify-content:center
+      display:inline-block
+      width:100%
+      height:auto
       margin: 0 auto
+      line-height:10px
       .color-detail
         width:20px
         height:20px
+        display:inline-block
         border-radius:50%
         box-sizing:border-box
         cursor:pointer
