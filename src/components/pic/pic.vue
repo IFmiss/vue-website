@@ -34,7 +34,7 @@
   import picList from './picList/picList.vue'
   import fecth from './../../utils/fecth.js'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import $ from 'jquery'
+  // import $ from 'jquery'
   // require('jquery-mousewheel')
   // require('malihu-custom-scrollbar-plugin')
 
@@ -58,6 +58,7 @@
           mousewheelControl: true,
           autoplayDisableOnInteraction: false,
           observeParents: true,
+          observer: true, // 修改swiper自己或子元素时，自动初始化swiper
           loop: false,
           initialSlide: 1,
           // lazyLoading: true,
@@ -79,7 +80,7 @@
         return store.getters.getGlobalInfo
       },
       swiper () {
-        return this.$refs.mySwiper.swiper ? this.$refs.mySwiper.swiper : ''
+        return this.$refs.mySwiper.swiper
       },
       picListInfo () {
         return store.getters.getPicList
@@ -99,20 +100,13 @@
         })
       },
       showSwiper (index) {
-        this.$nextTick(() => {
-          if (this.$refs.mySwiper === undefined) {
-            return
-          }
-          this.$refs.mySwiper.swiper.activeIndex = index
+        try {
           this.showImageDetail = true
           // alert(this.swiper)
-          if (this.swiper !== undefined) {
-            this.swiper.activeIndex = index
-            return
-          } else {
-            return
-          }
-        })
+          this.swiper.activeIndex = index
+        } catch (e) {
+          // alert(1)
+        }
       },
       setBg () {
         if (this.getFixedImageInfo) {
@@ -158,9 +152,9 @@
     },
     mounted () {
       this.fetchData()
-      $('.picList_content').mCustomScrollbar({
-         theme: 'minimal-dark'
-      })
+      // $('.picList_content').mCustomScrollbar({
+      //    theme: 'minimal-dark'
+      // })
       // this.$nextTick(() => { console.log(this.$refs) })
       // alert(this.$refs.abc)
       // alert(store.getters.getGlobalInfo)
