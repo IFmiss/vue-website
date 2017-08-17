@@ -99,13 +99,20 @@
         })
       },
       showSwiper (index) {
-        try {
+        this.$nextTick(() => {
+          if (this.$refs.mySwiper === undefined) {
+            return
+          }
+          this.$refs.mySwiper.swiper.activeIndex = index
           this.showImageDetail = true
           // alert(this.swiper)
-          this.swiper.activeIndex = index
-        } catch (e) {
-          // alert(1)
-        }
+          if (this.swiper !== undefined) {
+            this.swiper.activeIndex = index
+            return
+          } else {
+            return
+          }
+        })
       },
       setBg () {
         if (this.getFixedImageInfo) {
