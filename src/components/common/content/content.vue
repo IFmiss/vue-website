@@ -223,8 +223,9 @@ export default {
                 // border-bottom:1px solid $border_color
     .li_list
       transform:translate3d(0,0,0)
-      &.slide-left-enter-to,&.slide-left-leave-to
+      &.fade-enter-to,&.fade-leave-to
         transition: all 0.8s
-      &.slide-left-enter,&.slide-left-leave-to
-        transform:translate3d(0,-280px,0)
+      &.fade-enter,&.fade-leave-to
+        opacity:0
+        transform:translate3d(0,50px,0)
 </style>
