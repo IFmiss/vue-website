@@ -1,7 +1,7 @@
 <template>
   <div class="setting">
   	<!-- <div class="set_bg" v-if="getGlobalInfo.contentInfo" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor, opacity : getGlobalInfo.contentInfo.opacity}"></div> -->
-  	<div class="setting-warpper">
+  	<div class="setting-warpper g-content">
   		<h3 class="title">设置</h3>
   		<div class="set_list border-1px">
   			<span class="name">背景图片</span>
@@ -125,6 +125,7 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../../common/stylus/global.styl'
+@import '../../common/stylus/style.styl'
 @import '../../common/stylus/border-1px/index.styl'
 	.setting
 		position:fixed
@@ -143,9 +144,9 @@
 			right:0
 			z-index:-1
 		.setting-warpper
-			position:fixed
-			top:100px
-			bottom:50px
+			// position:fixed
+			// top:100px
+			// bottom:50px
 			left:50%
 			max-width:1240px
 			width:100%

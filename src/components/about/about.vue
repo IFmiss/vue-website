@@ -1,7 +1,7 @@
 <template>
   <div class="about">
   	<!-- <div class="about_bg" v-if="globalInfo.contentInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div> -->
-    <div class="about-content" :style="{'overflow-y': isShowPanel ? 'auto' : 'hidden'}">
+    <div class="about-content g-content" :style="{'overflow-y': isShowPanel ? 'auto' : 'hidden'}">
     	<transition name="silde-left">
 	    	<div class="dw-boot-container" v-show="isShowPanel">
 	    		<router-link tag="a" to="/about/works">
@@ -75,6 +75,7 @@
 <style lang="stylus" rel="stylesheet/stylus">
 	@import '../../common/response.css'
 	@import '../../common/stylus/global.styl'
+	@import '../../common/stylus/style.styl'
 		.about
 			position:fixed
 			top:0
@@ -91,18 +92,6 @@
 				right:0
 				z-index:-1
 			.about-content
-				position:fixed
-				top:100px
-				bottom:50px
-				left:50%
-				max-width:1240px
-				width:100%
-				transform:translate3d(-50%,0,0)
-				margin:0 auto
-				overflow-y:scroll
-				box-sizing:border-box
-				-webkit-overflow-scrolling: touch
-				padding:15px
 				display:flex
 				flex-direction:row
 				opacity:1

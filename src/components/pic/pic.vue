@@ -1,7 +1,7 @@
 <template>
   <div class="pic" v-if="picinfo.length">
     <!-- <div class="pic_bg" v-if="globalInfo.contentInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div> -->
-    <div class="pic_content">
+    <div class="pic_content g-content">
       <picList @showswiper= "showSwiper" v-for="(item, index) in picinfo" :key="item.id" :data-index="index" :data-info="item"></picList>
     </div>
     <transition name="fade-scale">
@@ -164,6 +164,7 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   @import '../../common/stylus/global.styl'
+  @import '../../common/stylus/style.styl'
     // ::-webkit-scrollbar
     //   background:rgba(55,55,55,0.1)
     //   width:4px
@@ -205,9 +206,9 @@
       z-index:-1
     .pic_content
       position:fixed
-      top:100px
-      bottom:50px
-      left:50%
+      // top:100px
+      // bottom:50px
+      // left:50%
       max-width:1240px
       width:100%
       transform:translate3d(-50%,0,0)

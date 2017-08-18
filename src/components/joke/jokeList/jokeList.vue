@@ -18,9 +18,10 @@
     position:relative
     font-size:16px
     color:#fff
-    padding:30px 20px
+    padding:20px 10px
     cursor:default
     transition:all 0.3s
+    line-height: 1.8;
     &:hover
       background:rgba(0,0,0,0.3)
     &.border-1px

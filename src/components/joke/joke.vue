@@ -44,7 +44,7 @@ export default {
 	.div_back
 		position:absolute
 		top:0
-		left:0
+		left:20px
 		width:40px
 		height:40px
 		color:$text_color
@@ -63,7 +63,7 @@ export default {
 		float: right;
 	.joke_content
 		position:fixed
-		top:40px
+		top:50px
 		bottom:0
 		left:50%
 		max-width:1240px
