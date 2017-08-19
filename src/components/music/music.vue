@@ -2,6 +2,7 @@
   <div class="music">
   	<div class="music_bg"></div>
   	<div class="music_content">
+  		<video :src="getCurrentMusic.url" ref="myVideo"></video>
   		<div class="music_body">
   			<div class="left_list">
   				<div class="select_button">
@@ -18,165 +19,15 @@
 		  				<span class="music_duration">时长</span>
 		  			</div>
 		  			<div class="music_list_content">
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
+		  				<div class="music_list border-1px" v-if="musiclist" v-for="(list, index) in musiclist" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, $event, getMusicType(list.dt))">
+		  					<span class="music_index">{{index + 1}}</span>
 		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
+		  						<span class="span_name">{{list.name}}</span>
 		  						<div class="hover_menu"></div>
 		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
-		  				</div>
-		  				<div class="music_list border-1px">
-		  					<span class="music_index">1</span>
-		  					<div class="music_name">
-		  						<span class="span_name">歌曲</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span>
+			  				<span class="music_singer" v-if="list.ar">{{list.ar[0].name}}</span>
+			  				<span class="music_zhuanji" v-if="list.al">{{list.al.name}}</span>
+			  				<span class="music_duration">{{getMusicType(list.dt)}}</span>
 		  				</div>
 		  			</div>
 		  		</div>
@@ -191,25 +42,65 @@
 </template>
 <script>
   import fecth from './../../utils/fecth.js'
+  import store from '../../store'
   // import axios from 'axios'
   // import qs from 'qs'
   export default {
+  	data () {
+  		return {
+  			musicInfo: {}
+  		}
+  	},
   	methods: {
   		searchMusic () {
-  			const apiUrl = 'http://www.daiwei.org/vue/server/music.php?inAjax=1&do=searchMusic'
-  			const data = {
-  				word: '周杰伦',
-  				limit: 10
-  			}
-  			fecth.post(apiUrl, data, {
+  			const apiUrl = 'http://www.daiwei.org/vue/server/music.php?inAjax=1&do=search&count=20&pages=1&name=%E5%91%A8%E6%9D%B0%E4%BC%A6'
+  			fecth.get(apiUrl, {
   				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
 				}
   			}).then((res) => {
-  				console.log(JSON.stringify(res))
+  				// console.log(JSON.stringify(res.data.result.songs))
+  				this.musicInfo = res.data.result.songs
   			}, (err) => {
   				console.log(err)
   			})
+  		},
+  		clickPlayList (id, e, duration) {
+  			const pic = e.target.getAttribute('data-pic')
+  			const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${id}`
+  			fecth.get(apiUrl).then((res) => {
+  				const currentMusic = {
+					url: res.data.data[0].url,
+					duration: duration,
+					picurl: pic
+  				}
+  				store.commit({
+					type: 'setCurrentAudio',
+					data: currentMusic
+				})
+				this.$nextTick(() => {
+					this.$refs.myVideo.load()
+					this.$refs.myVideo.play()
+				})
+  				// console.log(JSON.stringify(res.data.result.songs))
+  				// this.musicInfo = res.data.result.songs
+  			}, (err) => {
+  				console.log(err)
+  			})
+  		},
+  		// 音乐时长格式
+  		getMusicType (time) {
+  			const minT = Math.floor(time / 1000 / 60) >= 10 ? Math.floor(time / 1000 / 60) : '0' + Math.floor(time / 1000 / 60)
+  			const minS = Math.floor(time / 1000 % 60) >= 10 ? Math.floor(time / 1000 % 60) : '0' + Math.floor(time / 1000 % 60)
+  			return minT + ':' + minS
+  		}
+  	},
+  	computed: {
+  		musiclist () {
+  			return this.musicInfo
+  		},
+  		getCurrentMusic () {
+  			return store.getters.getCurrentAudio
   		}
   	},
   	mounted () {
@@ -275,13 +166,14 @@
 						align-items:center
 						.todo_btn
 							width:auto
-							height:34px
-							line-height:34px
+							height:32px
+							line-height:32px
 							color:$text_before_color
 							border:1px solid $border_bottom_color_deep
 							border-radius:2px
-							padding:0 20px
+							padding:0 15px
 							margin:10px
+							font-size:14px
 							cursor:pointer
 							&:hover,&.active
 								color:$text_color
@@ -304,6 +196,7 @@
 								white-space:nowrap
 								&.music_name
 									width:calc(50% - 50px)
+									font-size:14px
 								&.music_singer
 									width:20%
 									padding:0 5px
@@ -472,5 +365,6 @@
 								display:none
 						.music_list_content
 							height:100%!important
-				
+	video
+		display:none	
 </style>
