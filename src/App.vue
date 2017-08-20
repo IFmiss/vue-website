@@ -5,7 +5,7 @@
       <fixed-bg v-if="imageInfo && imageSetting" :imagepath="imagePrevPath +'' + imageInfo.url" :maskcolor="getGlobalStyle.contentInfo.bgcolor" :maskopacity="getGlobalStyle.contentInfo.opacity"></fixed-bg>
     </div>
     <v-content></v-content>
-    <video :src="getCurrentMusic.url" ref="myVideo"></video>
+    <audio :src="getCurrentMusic.url" ref="myAudio"></audio>
   </div>
 </template>
 <script>
@@ -128,7 +128,7 @@ export default {
     setAudioRef () {
       store.commit({
         type: 'setAudioEle',
-        data: this.$refs.myVideo
+        data: this.$refs.myAudio
       })
     }
   },
@@ -186,6 +186,8 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
 @import 'common/stylus/border-1px/index.styl'
 @import 'common/font-icon/style.css'
+  audio
+    display:none
   body,html
     margin:0
     padding:0
