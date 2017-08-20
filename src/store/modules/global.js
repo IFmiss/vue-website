@@ -9,11 +9,13 @@ const globalStore = {
 			isHigher768: false,
 			showBingImage: true
 		},
-		place: {}
+		place: {},
+		showloading: true
 	},
 	getters: {
 		getGlobalInfo: state => state.globalInfo,
-		getPlace: state => state.place
+		getPlace: state => state.place,
+		getShowLoading: state => state.showloading
 	},
 	mutations: {
 		setGlobalInfo (state, obj) {
@@ -33,6 +35,9 @@ const globalStore = {
 		},
 		setPlace (state, obj) {
 			state.place = obj.data
+		},
+		setShowLoading (state, obj) {
+			state.showloading = obj.data
 		}
 	},
 	actions: {
@@ -50,6 +55,9 @@ const globalStore = {
 		},
 		set_Place ({commit}, obj) {
 			commit('setPlace', obj)
+		},
+		set_ShowLoading ({commit}, obj) {
+			commit('setShowLoading', obj)
 		}
 	}
 }

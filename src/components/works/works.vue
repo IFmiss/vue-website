@@ -2,7 +2,6 @@
   <div class="works">
   	<div class="div_back" @click="back"><i class="icon-back"></i></div>
   	<div class="works_content">
-  		<loader></loader>
   		<!-- <workList title="jQuery 实用的loading插件" linkdemo="http://www.jq22.com/yanshi14633" linkproject="https://github.com/IFmiss/loading"></workList>
   		<workList title="jQuery 无缝滚动插件 jqueryslider" linkdemo="http://www.jq22.com/yanshi14632" linkproject="https://github.com/IFmiss/jquery-slider"></workList>
   		<workList title="jQuery 选择弹窗菜单插件centermenu" linkdemo="http://www.jq22.com/yanshi14420" linkproject="https://github.com/IFmiss/centermenu"></workList>
@@ -20,7 +19,6 @@
 <script>
 // import store from '../../store'
 import workList from './workList/workList.vue'
-import loader from '../common/loader/loader.vue'
 export default {
 	data () {
 		return {
@@ -94,8 +92,7 @@ export default {
 		}
 	},
 	components: {
-		'workList': workList,
-		'loader': loader
+		'workList': workList
 	}
 }
 </script>

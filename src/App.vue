@@ -1,9 +1,11 @@
 <template>
   <div id="app" @resize="isApp">
+    <loader :isshow="getShowLoading" loaderbackground="rgba(0,0,0,0.3)"></loader>
     <div class="maincontent">
       <fixed-bg v-if="imageInfo && imageSetting" :imagepath="imagePrevPath +'' + imageInfo.url" :maskcolor="getGlobalStyle.contentInfo.bgcolor" :maskopacity="getGlobalStyle.contentInfo.opacity"></fixed-bg>
     </div>
     <v-content></v-content>
+    <video :src="getCurrentMusic.url" ref="myVideo"></video>
   </div>
 </template>
 <script>
@@ -14,6 +16,7 @@ import home from './components/home.vue'
 import fixedbg from './components/common/fixedbg/fixedbg.vue'
 import content from './components/common/content/content.vue'
 import pic from './components/pic/pic.vue'
+import loader from './components/common/loader/loader.vue'
 // import $ from 'jquery'
 
 export default {
@@ -27,7 +30,8 @@ export default {
     home,
     'v-content': content,
     'fixed-bg': fixedbg,
-    pic
+    pic,
+    loader
   },
   methods: {
     fetchData () {
@@ -120,6 +124,12 @@ export default {
       } else {
         return false
       }
+    },
+    setAudioRef () {
+      store.commit({
+        type: 'setAudioEle',
+        data: this.$refs.myVideo
+      })
     }
   },
   watch: {
@@ -143,6 +153,12 @@ export default {
     },
     getIsBingBg () {
       return store.getters.getGlobalInfo.showBingImage
+    },
+    getShowLoading () {
+      return store.getters.getShowLoading
+    },
+    getCurrentMusic () {
+      return store.getters.getCurrentAudio
     }
   },
   mounted () {
@@ -160,6 +176,8 @@ export default {
         this.isApp()
       }
       localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
+      // 设置audio 的refs
+      this.setAudioRef()
     // })
   }
 }

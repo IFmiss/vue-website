@@ -2,7 +2,6 @@
   <div class="music">
   	<div class="music_bg"></div>
   	<div class="music_content">
-  		<video :src="getCurrentMusic.url" ref="myVideo"></video>
   		<div class="music_body">
   			<div class="left_list">
   				<div class="select_button">
@@ -19,8 +18,11 @@
 		  				<span class="music_duration">时长</span>
 		  			</div>
 		  			<div class="music_list_content">
-		  				<div class="music_list border-1px" v-if="musiclist" v-for="(list, index) in musiclist" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, $event, getMusicType(list.dt))">
-		  					<span class="music_index">{{index + 1}}</span>
+		  				<div class="music_list border-1px" v-if="musiclist" v-for="(list, index) in musiclist" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.al.picUrl, getMusicType(list.dt),index)">
+		  					<span class="music_index">
+		  						<span v-show="currentMusic.index !== index">{{index + 1}}</span>
+		  						<img v-show="currentMusic.index === index" src="static/wave.gif" alt="未曾遗忘的青春">
+		  					</span>
 		  					<div class="music_name">
 		  						<span class="span_name">{{list.name}}</span>
 		  						<div class="hover_menu"></div>
@@ -33,7 +35,19 @@
 		  		</div>
   			</div>
   			<div class="right_info">
-  				
+  				<div class="bg-info">
+  					<img class="music-bg" :src="currentMusic.picurl">
+  				</div>
+  				<div class="lrc-content">
+  					<p class="lrc-item">童话镇</p>
+  					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
+					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
+					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
+					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
+					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
+  					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
+  					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
+  				</div>
   			</div>
   		</div>
   		<div class="music_ctrl"></div>
@@ -43,12 +57,14 @@
 <script>
   import fecth from './../../utils/fecth.js'
   import store from '../../store'
+  import musicApi from './music.js'
   // import axios from 'axios'
   // import qs from 'qs'
   export default {
   	data () {
   		return {
-  			musicInfo: {}
+  			musicInfo: {},
+  			currentMusic: {}
   		}
   	},
   	methods: {
@@ -65,22 +81,26 @@
   				console.log(err)
   			})
   		},
-  		clickPlayList (id, e, duration) {
-  			const pic = e.target.getAttribute('data-pic')
+  		// 点击播放音乐
+  		clickPlayList (id, pic, duration, index) {
   			const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${id}`
   			fecth.get(apiUrl).then((res) => {
-  				const currentMusic = {
+  				this.currentMusic = {
 					url: res.data.data[0].url,
 					duration: duration,
-					picurl: pic
+					picurl: pic,
+					index: index
   				}
   				store.commit({
 					type: 'setCurrentAudio',
-					data: currentMusic
+					data: this.currentMusic
 				})
+
+				this.getMusicLrc(id)
+
 				this.$nextTick(() => {
-					this.$refs.myVideo.load()
-					this.$refs.myVideo.play()
+					this.AudiEle().load()
+					this.AudiEle().play()
 				})
   				// console.log(JSON.stringify(res.data.result.songs))
   				// this.musicInfo = res.data.result.songs
@@ -88,11 +108,51 @@
   				console.log(err)
   			})
   		},
+
+  		// 获取歌词
+  		getMusicLrc (id) {
+  			const apiLyric = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=lyric&id=${id}`
+  			fecth.get(apiLyric).then((res) => {
+  				this.currentMusic.lyric = musicApi.parseLrc(res.data.lrc.lyric)
+  				// alert(JSON.stringify(this.currentMusic.lyric))
+  				store.commit({
+					type: 'setCurrentAudio',
+					data: this.currentMusic
+				})
+				// this.$nextTick(() => {
+				// 	this.AudiEle().load()
+				// 	this.AudiEle().play()
+				// })
+  				// console.log(JSON.stringify(res.data.result.songs))
+  				// this.musicInfo = res.data.result.songs
+  			}, (err) => {
+  				console.log(err)
+  			})
+  		},
+
   		// 音乐时长格式
   		getMusicType (time) {
   			const minT = Math.floor(time / 1000 / 60) >= 10 ? Math.floor(time / 1000 / 60) : '0' + Math.floor(time / 1000 / 60)
   			const minS = Math.floor(time / 1000 % 60) >= 10 ? Math.floor(time / 1000 % 60) : '0' + Math.floor(time / 1000 % 60)
   			return minT + ':' + minS
+  		},
+  		// 初始化音乐播放器
+		initMusic () {
+			const id = 3778678  // 云音乐热歌榜
+			const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=playlist&id=${id}`
+			fecth.get(apiUrl, {
+  				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				}
+  			}).then((res) => {
+  				// console.log(JSON.stringify(res.data.result.songs))
+  				this.musicInfo = res.data.playlist.tracks
+  			}, (err) => {
+  				console.log(err)
+  			})
+  		},
+  		AudiEle () {
+  			return store.getters.getAudioEle
   		}
   	},
   	computed: {
@@ -104,7 +164,8 @@
   		}
   	},
   	mounted () {
-  		this.searchMusic()
+  		// this.searchMusic()
+  		this.initMusic()
   	}
   }
 </script>
@@ -176,8 +237,8 @@
 							font-size:14px
 							cursor:pointer
 							&:hover,&.active
-								color:$text_color
-								border:1px solid $text_color								
+								color:$text_before_color
+								border:1px solid $text_before_color								
 					.list_content
 						height:calc(100% - 60px)
 						padding:10px
@@ -190,7 +251,7 @@
 							span
 								display:inline-block
 								font-size:14px
-								color:$text_color
+								color:$text_before_color
 								text-overflow:ellipsis
 								overflow:hidden
 								white-space:nowrap
@@ -219,7 +280,7 @@
 								font-size:14px
 								height:50px
 								line-height:50px
-								color:$text_color
+								color:$text_before_color
 								text-overflow:ellipsis
 								overflow:hidden
 								white-space:nowrap
@@ -258,8 +319,45 @@
 					width:310px
 					max-width:100%
 					height:100%
-					background:#6ED367
+					// background:#6ED367
 					vertical-align:top
+					position:relative
+					.bg-info
+						position: relative
+						display: block
+						width: 186px
+						height: 186px					
+						margin: 0 auto
+						&::after
+							content:''
+							background:url('./../../../static/cd_block.png') 0 0 no-repeat
+							position:absolute
+							top:0
+							left:0
+							right: -20px;
+							bottom:0
+						.music-bg
+							vertical-align: middle;
+							width: 186px;
+							height: 186px;
+							border:none
+					.lrc-content
+						position:absolute
+						top:200px
+						left:0
+						right:0
+						bottom:15px
+						overflow:hidden
+						.lrc-item
+							width:100%
+							height:auto
+							line-height:26px
+							text-align:center
+							margin:0
+							color:$text_before_color
+							font-size:14px
+							&.active
+								color:#A7EEBE
 			.music_ctrl
 				width:100%;
 				height:80px

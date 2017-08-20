@@ -1,10 +1,15 @@
 import axios from 'axios'
 import qs from 'qs'
+import store from './../store'
 // request拦截器
 axios.interceptors.request.use(
   config => {
   // loading
   console.log('loadding')
+   store.dispatch({
+    type: 'set_ShowLoading',
+    data: true
+  })
   return config
 }, error => {
   // Do something with request error
@@ -26,7 +31,11 @@ function checkStatus (response) {
     return response
     // 如果不需要除了data之外的数据，可以直接 return response.data
   }
-  console.log('closeloading')
+  console.log('loadding')
+   store.dispatch({
+    type: 'set_ShowLoading',
+    data: false
+  })
   // 异常状态下，把错误信息返回去
   return {
     status: -404,
@@ -42,7 +51,11 @@ function checkCode (res) {
   if (res.data && (!res.data.success)) {
     // alert(res.data.error_msg)
   }
-  console.log('closeloading')
+  console.log('loadding')
+   store.dispatch({
+    type: 'set_ShowLoading',
+    data: false
+  })
   return res
 }
 

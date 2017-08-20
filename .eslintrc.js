@@ -1,6 +1,7 @@
 // http://eslint.org/docs/user-guide/configuring
 
 module.exports = {
+  "extends":"eslint:recommended",
   root: true,
   parser: 'babel-eslint',
   parserOptions: {
@@ -24,6 +25,8 @@ module.exports = {
     'no-tabs': 0,
     'generator-star-spacing': 0,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    "no-compare-neg-zero":"off",
+    "no-useless-escape":"off"
   }
 }
