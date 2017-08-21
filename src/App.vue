@@ -162,6 +162,8 @@ export default {
     }
   },
   mounted () {
+      // 设置audio 的refs
+      this.setAudioRef()
     // this.$nextTick(() => {
       // 是否在线加载壁纸
       this.shouldLoadingBg()
@@ -176,8 +178,6 @@ export default {
         this.isApp()
       }
       localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
-      // 设置audio 的refs
-      this.setAudioRef()
     // })
   }
 }

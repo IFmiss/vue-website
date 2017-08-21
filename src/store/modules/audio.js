@@ -21,7 +21,11 @@ const audio = {
 	},
 	actions: {
 		set_CurrentAudio ({commit}, obj) {
+			// alert(JSON.stringify(obj.data))
 			commit('setCurrentAudio', obj)
+		},
+		set_AudioEle ({commit}, obj) {
+			commit('setAudioEle', obj)
 		}
 	}
 }

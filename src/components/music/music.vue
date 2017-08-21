@@ -18,7 +18,7 @@
 		  				<span class="music_duration">时长</span>
 		  			</div>
 		  			<div class="music_list_content">
-		  				<div class="music_list border-1px" v-if="musiclist" v-for="(list, index) in musiclist" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.al.picUrl, getMusicType(list.dt),index)">
+		  				<div class="music_list border-1px" v-if="musiclist" v-for="(list, index) in musiclist" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.al.picUrl, getMusicDurationType(list.dt),index)">
 		  					<span class="music_index">
 		  						<span v-show="currentMusic.index !== index">{{index + 1}}</span>
 		  						<img v-show="currentMusic.index === index" src="static/wave.gif" alt="未曾遗忘的青春">
@@ -29,7 +29,7 @@
 		  					</div>
 			  				<span class="music_singer" v-if="list.ar">{{list.ar[0].name}}</span>
 			  				<span class="music_zhuanji" v-if="list.al">{{list.al.name}}</span>
-			  				<span class="music_duration">{{getMusicType(list.dt)}}</span>
+			  				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
 		  				</div>
 		  			</div>
 		  		</div>
@@ -39,14 +39,7 @@
   					<img class="music-bg" :src="currentMusic.picurl">
   				</div>
   				<div class="lrc-content">
-  					<p class="lrc-item">童话镇</p>
-  					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
-					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
-					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
-					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
-					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
-  					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
-  					<p class="lrc-item">aaaaaaaaaaaaaaaaaa</p>
+  					<p class="lrc-item" v-if="getCurrentMusic.lyric" v-for="(item, index) in getCurrentMusic.lyric">{{item}}</p>
   				</div>
   			</div>
   		</div>
@@ -55,7 +48,7 @@
   </div>
 </template>
 <script>
-  import fecth from './../../utils/fecth.js'
+  // import fecth from './../../utils/fecth.js'
   import store from '../../store'
   import musicApi from './music.js'
   // import axios from 'axios'
@@ -69,87 +62,31 @@
   	},
   	methods: {
   		searchMusic () {
-  			const apiUrl = 'http://www.daiwei.org/vue/server/music.php?inAjax=1&do=search&count=20&pages=1&name=%E5%91%A8%E6%9D%B0%E4%BC%A6'
-  			fecth.get(apiUrl, {
-  				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				}
-  			}).then((res) => {
-  				// console.log(JSON.stringify(res.data.result.songs))
-  				this.musicInfo = res.data.result.songs
-  			}, (err) => {
-  				console.log(err)
-  			})
+  			musicApi.searchMusic('周杰伦', 1, this)
   		},
   		// 点击播放音乐
   		clickPlayList (id, pic, duration, index) {
-  			const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${id}`
-  			fecth.get(apiUrl).then((res) => {
-  				this.currentMusic = {
-					url: res.data.data[0].url,
-					duration: duration,
-					picurl: pic,
-					index: index
-  				}
-  				store.commit({
-					type: 'setCurrentAudio',
-					data: this.currentMusic
-				})
-
-				this.getMusicLrc(id)
-
-				this.$nextTick(() => {
-					this.AudiEle().load()
-					this.AudiEle().play()
-				})
-  				// console.log(JSON.stringify(res.data.result.songs))
-  				// this.musicInfo = res.data.result.songs
-  			}, (err) => {
-  				console.log(err)
-  			})
+  			const data = {
+  				id: id,
+  				pic: pic,
+  				duration: duration,
+  				index: index
+  			}
+  			musicApi.clickIndex(data, this)
   		},
 
   		// 获取歌词
   		getMusicLrc (id) {
-  			const apiLyric = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=lyric&id=${id}`
-  			fecth.get(apiLyric).then((res) => {
-  				this.currentMusic.lyric = musicApi.parseLrc(res.data.lrc.lyric)
-  				// alert(JSON.stringify(this.currentMusic.lyric))
-  				store.commit({
-					type: 'setCurrentAudio',
-					data: this.currentMusic
-				})
-				// this.$nextTick(() => {
-				// 	this.AudiEle().load()
-				// 	this.AudiEle().play()
-				// })
-  				// console.log(JSON.stringify(res.data.result.songs))
-  				// this.musicInfo = res.data.result.songs
-  			}, (err) => {
-  				console.log(err)
-  			})
+  			musicApi.getMusicLrc(id, this)
   		},
 
   		// 音乐时长格式
-  		getMusicType (time) {
-  			const minT = Math.floor(time / 1000 / 60) >= 10 ? Math.floor(time / 1000 / 60) : '0' + Math.floor(time / 1000 / 60)
-  			const minS = Math.floor(time / 1000 % 60) >= 10 ? Math.floor(time / 1000 % 60) : '0' + Math.floor(time / 1000 % 60)
-  			return minT + ':' + minS
+  		getMusicDurationType (time) {
+  			return musicApi.getMusicDurantionType(time, this)
   		},
   		// 初始化音乐播放器
 		initMusic () {
-			const id = 3778678  // 云音乐热歌榜
-			const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=playlist&id=${id}`
-			fecth.get(apiUrl, {
-  				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				}
-  			}).then((res) => {
-  				// console.log(JSON.stringify(res.data.result.songs))
-  				this.musicInfo = res.data.playlist.tracks
-  			}, (err) => {
-  				console.log(err)
-  			})
+			musicApi.getMusicSheet(3778678, this)
   		},
   		AudiEle () {
   			return store.getters.getAudioEle
@@ -160,7 +97,16 @@
   			return this.musicInfo
   		},
   		getCurrentMusic () {
+  			// console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' + JSON.stringify(store.getters.getCurrentAudio))
   			return store.getters.getCurrentAudio
+  		},
+  		getMusicLrcLists () {
+  			return store.getters.getCurrentAudio.lyric
+  		}
+  	},
+  	watch: {
+  		getMusicLrcLists (newval, oldval) {
+  			alert(newval)
   		}
   	},
   	mounted () {
