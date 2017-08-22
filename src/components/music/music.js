@@ -1,7 +1,7 @@
 import store from '../../store'
 import fecth from './../../utils/fecth.js'
+// import $ from 'jquery'
 const musicApi = {
-    eleAudio: store.getters.getAudioEle,
     lastLyric: 0,
     lyric: {},    // 解析的歌詞
     parseLrc (lrc) {
@@ -58,11 +58,13 @@ const musicApi = {
             this.lastLyric = -1
 
             that.currentMusic = {
+                id: data.id,
                 url: data.url,
                 duration: data.duration,
                 picurl: data.picurl,
                 index: data.index,
-                lyric: parseLrc
+                lyric: parseLrc,
+                lrcContent: data.lrcContent
             }
             store.commit({
                 type: 'setCurrentAudio',
@@ -72,7 +74,7 @@ const musicApi = {
                 store.getters.getAudioEle.load()
                 store.getters.getAudioEle.play()
             })
-            this.refreshLyric(45, that, data)
+            this.refreshLyric(45, that)
         }, (err) => {
             console.log(err)
         })
@@ -85,7 +87,7 @@ const musicApi = {
     },
 
     // 刷新進度的歌詞
-    refreshLyric (time, that, data) {
+    refreshLyric (time, that) {
         if (this.lyric === '') return false
         time = parseInt(time)  // 时间取整
         var i = 0
@@ -93,14 +95,13 @@ const musicApi = {
             if (k >= time) break
             i = k      // 记录上一句的
         }
-        alert(time)
-        this.scrollLyric(i, that, data)
+        this.scrollLyric(i, that)
     },
 
     // 滚动歌词到指定句
     // 参数：当前播放时间（单位：秒）
-    scrollLyric (time, that, data) {
-        // alert(data)
+    scrollLyric (time, that) {
+        // aler)
         if (this.lyric === '') return false
 
         time = parseInt(time)  // 时间取整
@@ -121,11 +122,13 @@ const musicApi = {
         that.currentMusicLrcIndex = i
         // alert(data.lrcContent)
         // alert(data.lrcContent.childNodes[0].offsetHeight)
-        alert(i)
+        // alert(i)
         // var scroll = (data.lrcContent.childtNode().offsetHeight * i)
-        alert(data.lrcContent.childNodes[0].offsetHeight)
-        // var scroll = (that.$refs.lrcContent.children().style.height * i) - ($(".lyric").height() / 2)
-        // lyricArea.stop().animate({scrollTop: scroll}, 1000)  // 平滑滚动到当前歌词位置(更改这个数值可以改变歌词滚动速度，单位：毫秒)
+        // console.log(document.getElementsByClassName('lrc-item')[0].offsetHeight)
+        var scroll = (document.getElementsByClassName('lrc-item')[0].offsetHeight * i) - that.currentMusic.lrcContent.offsetHeight / 2
+        // $('.lrc-wrapper').stop().animate({scrollTop: scroll}, 1000)  // 平滑滚动到当前歌词位置(更改这个数值可以改变歌词滚动速度，单位：毫秒)
+        // console.log(scroll)
+        this.scrollAnimate(that.currentMusic.lrcContent, scroll)
     },
 
     // 点击播放歌曲
@@ -161,6 +164,27 @@ const musicApi = {
         }, (err) => {
             console.log(err)
         })
+    },
+
+    // 音乐播放的一些事件集合
+    musicEvent (that) {
+        let musicEle = document.getElementsByTagName('audio')[0]
+        // alert(store.getters.getAudioEle)
+        musicEle.ontimeupdate = function () {
+            const currentT = Math.floor(musicEle.currentTime)
+            musicApi.scrollLyric(currentT, that)
+            // console.log(1)
+        }
+        // alert(musicEle.getAttribute('src'))
+    },
+
+    scrollAnimate (ele, position) {
+        var t = setInterval(function () {
+            ele.scrollTop = ele.scrollTop + 2
+            if (ele.scrollTop >= position) {
+                clearInterval(t)
+            }
+        }, 1)
     }
 }
 

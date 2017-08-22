@@ -41,7 +41,7 @@
   				<div class="lrc-content" ref="lrcContent">
   					<div class="lrc-wrapper" ref="lrcWrapper">
   						<p class="lrc-item" v-if="!getMusicLrcLists" >纯音乐,请欣赏</p>
-  						<p class="lrc-item" v-if="getMusicLrcLists" v-for="(item, index) in getMusicLrcLists" :class="getCurrentMusicLrcIndex === index ? 'active' : ''">{{item}}</p>
+  						<p class="lrc-item" v-if="getMusicLrcLists" v-for="(item, key, index) in getMusicLrcLists" :class="getCurrentMusicLrcIndex === index + 1 ? `active` : ``">{{item}}</p>
   					</div>
   				</div>
   			</div>
@@ -61,7 +61,7 @@
   		return {
   			musicInfo: {},
   			currentMusic: {},
-  			currentMusicLrcIndex: 12
+  			currentMusicLrcIndex: 0
   		}
   	},
   	methods: {
@@ -119,6 +119,7 @@
   	mounted () {
   		this.searchMusic()
   		// this.initMusic()
+  		musicApi.musicEvent(this)
   	}
   }
 </script>
