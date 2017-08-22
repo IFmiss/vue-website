@@ -15,7 +15,7 @@
 		  				<span class="music_name">歌曲</span>
 		  				<span class="music_singer">歌手</span>
 		  				<span class="music_zhuanji">专辑</span>
-		  				<span class="music_duration">时长</span>
+		  				<span class="music_duration">时长</span> 
 		  			</div>
 		  			<div class="music_list_content">
 		  				<div class="music_list border-1px" v-if="musiclist" v-for="(list, index) in musiclist" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.al.picUrl, getMusicDurationType(list.dt),index)">
@@ -38,8 +38,11 @@
   				<div class="bg-info">
   					<img class="music-bg" :src="currentMusic.picurl">
   				</div>
-  				<div class="lrc-content">
-  					<p class="lrc-item" v-if="getCurrentMusic.lyric" v-for="(item, index) in getCurrentMusic.lyric">{{item}}</p>
+  				<div class="lrc-content" ref="lrcContent">
+  					<div class="lrc-wrapper" ref="lrcWrapper">
+  						<p class="lrc-item" v-if="!getMusicLrcLists" >纯音乐,请欣赏</p>
+  						<p class="lrc-item" v-if="getMusicLrcLists" v-for="(item, index) in getMusicLrcLists" :class="getCurrentMusicLrcIndex === index ? 'active' : ''">{{item}}</p>
+  					</div>
   				</div>
   			</div>
   		</div>
@@ -57,7 +60,8 @@
   	data () {
   		return {
   			musicInfo: {},
-  			currentMusic: {}
+  			currentMusic: {},
+  			currentMusicLrcIndex: 12
   		}
   	},
   	methods: {
@@ -70,7 +74,8 @@
   				id: id,
   				pic: pic,
   				duration: duration,
-  				index: index
+  				index: index,
+  				lrcContent: this.$refs.lrcContent
   			}
   			musicApi.clickIndex(data, this)
   		},
@@ -97,21 +102,23 @@
   			return this.musicInfo
   		},
   		getCurrentMusic () {
-  			// console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' + JSON.stringify(store.getters.getCurrentAudio))
   			return store.getters.getCurrentAudio
   		},
   		getMusicLrcLists () {
   			return store.getters.getCurrentAudio.lyric
+  		},
+  		getCurrentMusicLrcIndex () {
+			return this.currentMusicLrcIndex
   		}
   	},
-  	watch: {
-  		getMusicLrcLists (newval, oldval) {
-  			alert(newval)
-  		}
-  	},
+  	// watch: {
+  	// 	currentMusic (newval, oldval) {
+  	// 		alert(newval.lyric)
+  	// 	}
+  	// },
   	mounted () {
-  		// this.searchMusic()
-  		this.initMusic()
+  		this.searchMusic()
+  		// this.initMusic()
   	}
   }
 </script>
@@ -274,19 +281,24 @@
 						width: 186px
 						height: 186px					
 						margin: 0 auto
+						// display: flex;
+						// align-items: center;
 						&::after
 							content:''
 							background:url('./../../../static/cd_block.png') 0 0 no-repeat
 							position:absolute
 							top:0
 							left:0
-							right: -20px;
+							right: -20px
 							bottom:0
 						.music-bg
 							vertical-align: middle;
-							width: 186px;
-							height: 186px;
+							width: 176px
+							height: 176px
 							border:none
+							position:absolute
+							top:5px
+							left:5px
 					.lrc-content
 						position:absolute
 						top:200px
@@ -294,6 +306,8 @@
 						right:0
 						bottom:15px
 						overflow:hidden
+						padding:20px 0
+						box-sizing:border-box
 						.lrc-item
 							width:100%
 							height:auto
@@ -301,7 +315,7 @@
 							text-align:center
 							margin:0
 							color:$text_before_color
-							font-size:14px
+							font-size:12px
 							&.active
 								color:#A7EEBE
 			.music_ctrl

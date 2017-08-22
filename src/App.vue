@@ -5,7 +5,7 @@
       <fixed-bg v-if="imageInfo && imageSetting" :imagepath="imagePrevPath +'' + imageInfo.url" :maskcolor="getGlobalStyle.contentInfo.bgcolor" :maskopacity="getGlobalStyle.contentInfo.opacity"></fixed-bg>
     </div>
     <v-content></v-content>
-    <audio :src="getCurrentMusic.url" ref="myAudio"></audio>
+    <audio :src="getCurrentMusic.url" ref="myAudio" loop=""></audio>
   </div>
 </template>
 <script>
