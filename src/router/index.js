@@ -8,6 +8,7 @@ import About from '../components/about/about.vue'
 import Setting from '../components/setting/setting.vue'
 import Works from '../components/works/works.vue'
 import Joke from '../components/joke/joke.vue'
+import MusicSearch from '../components/music/search/search.vue'
 
 Vue.use(Router)
 
@@ -30,7 +31,17 @@ export default new Router({
     {
       // 音乐
       path: '/music',
-      component: Music
+      component: Music,
+      children: [
+        {
+          path: '/music/search',
+          component: MusicSearch
+        }
+        // {
+        //   path: '/about/joke',
+        //   component: Joke
+        // }
+      ]
     },
     {
       // 博客

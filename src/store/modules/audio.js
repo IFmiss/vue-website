@@ -5,11 +5,15 @@ const audio = {
 			duration: '',
 			picurl: ''
 		},
-		audioEle: ''
+		audioEle: '',
+		musicList: {},
+		musicSearchList: {}
 	},
 	getters: {
 		getCurrentAudio: state => state.currentAudio,
-		getAudioEle: state => state.audioEle
+		getAudioEle: state => state.audioEle,
+		getMusicList: state => state.musicList,
+		getMusicSearchList: state => state.musicSearchList
 	},
 	mutations: {
 		setCurrentAudio (state, obj) {
@@ -17,6 +21,12 @@ const audio = {
 		},
 		setAudioEle (state, obj) {
 			state.audioEle = obj.data
+		},
+		setMusicList (state, obj) {
+			state.musicList = obj.data
+		},
+		setMusicSearchList (state, obj) {
+			state.musicSearchList = obj.data
 		}
 	},
 	actions: {
@@ -26,6 +36,12 @@ const audio = {
 		},
 		set_AudioEle ({commit}, obj) {
 			commit('setAudioEle', obj)
+		},
+		set_MusicList ({commit}, obj) {
+			commit('setMusicList', obj)
+		},
+		set_MusicSearchList ({commit}, obj) {
+			commit('setMusicSearchList', obj)
 		}
 	}
 }

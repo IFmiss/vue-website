@@ -34,7 +34,11 @@ const musicApi = {
             }
         }).then((res) => {
             // console.log(JSON.stringify(res.data.result.songs))
-            that.musicInfo = res.data.playlist.tracks
+            // that.musicInfo = res.data.playlist.tracks
+            store.dispatch({
+                type: 'set_MusicList',
+                data: res.data.playlist.tracks
+            })
         }, (err) => {
             console.log(err)
         })
@@ -56,13 +60,12 @@ const musicApi = {
 
             // 初始化最後一個lrc
             this.lastLyric = -1
-
             that.currentMusic = {
                 id: data.id,
                 url: data.url,
                 duration: data.duration,
                 picurl: data.picurl,
-                index: data.index,
+                index: data.musicndex,
                 lyric: parseLrc,
                 lrcContent: data.lrcContent
             }
@@ -159,7 +162,11 @@ const musicApi = {
             }
         }).then((res) => {
             // console.log(JSON.stringify(res.data.result.songs))
-            that.musicInfo = res.data.result.songs
+            // that.musicInfo = res.data.result.songs
+            store.dispatch({
+                type: 'set_MusicSearchList',
+                data: res.data.result.songs
+            })
         }, (err) => {
             console.log(err)
         })

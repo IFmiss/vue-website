@@ -4,39 +4,46 @@
   	<div class="music_content">
   		<div class="music_body">
   			<div class="left_list">
-  				<div class="select_button">
-		  			<span class="todo_btn playing_btn">正在播放</span>
-		  			<span class="todo_btn sheet_btn">歌单列表</span>
-		  			<span class="todo_btn search_btn">搜索列表</span>
-		  		</div>
-		  		<div class="list_content">
-		  			<div class="music_list_title border-1px">
-		  				<span class="music_index"></span>
-		  				<span class="music_name">歌曲</span>
-		  				<span class="music_singer">歌手</span>
-		  				<span class="music_zhuanji">专辑</span>
-		  				<span class="music_duration">时长</span> 
-		  			</div>
-		  			<div class="music_list_content">
-		  				<div class="music_list border-1px" v-if="musiclist" v-for="(list, index) in musiclist" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.al.picUrl, getMusicDurationType(list.dt),index)">
-		  					<span class="music_index">
-		  						<span v-show="currentMusic.index !== index">{{index + 1}}</span>
-		  						<img v-show="currentMusic.index === index" src="static/wave.gif" alt="未曾遗忘的青春">
-		  					</span>
-		  					<div class="music_name">
-		  						<span class="span_name">{{list.name}}</span>
-		  						<div class="hover_menu"></div>
-		  					</div>
-			  				<span class="music_singer" v-if="list.ar">{{list.ar[0].name}}</span>
-			  				<span class="music_zhuanji" v-if="list.al">{{list.al.name}}</span>
-			  				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
-		  				</div>
-		  			</div>
-		  		</div>
+  				<div class="music_home">
+  					<div class="select_button">
+			  			<span class="todo_btn playing_btn">正在播放</span>
+			  			<span class="todo_btn sheet_btn">歌单列表</span>
+			  			<router-link tag="span" to="/music/search" class="todo_btn search_btn">
+				        	搜索列表
+				        </router-link>
+			  		</div>
+			  		<div class="list_content">
+			  			<div class="music_list_title border-1px">
+			  				<span class="music_index"></span>
+			  				<span class="music_name">歌曲</span>
+			  				<span class="music_singer">歌手</span>
+			  				<span class="music_zhuanji">专辑</span>
+			  				<span class="music_duration">时长</span> 
+			  			</div>
+			  			<div class="music_list_content">
+			  				<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.al.picUrl, getMusicDurationType(list.dt),index)">
+			  					<span class="music_index">
+			  						<span v-show="getCurrentMusic.index !== index">{{index + 1}}</span>
+			  						<img v-show="getCurrentMusic.index === index" src="static/wave.gif" alt="未曾遗忘的青春">
+			  					</span>
+			  					<div class="music_name">
+			  						<span class="span_name">{{list.name}}</span>
+			  						<div class="hover_menu"></div>
+			  					</div>
+				  				<span class="music_singer" v-if="list.ar">{{list.ar[0].name}}</span>
+				  				<span class="music_zhuanji" v-if="list.al">{{list.al.name}}</span>
+				  				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
+			  				</div>
+			  			</div>
+			  		</div>
+  				</div>
   			</div>
+  			<transition name="silde-top">
+				<router-view class="music_wrapper"></router-view>
+			</transition>
   			<div class="right_info">
   				<div class="bg-info">
-  					<img class="music-bg" :src="currentMusic.picurl">
+  					<img class="music-bg" :src="getCurrentMusic.picurl ? getCurrentMusic.picurl : './static/18627925998890855.jpg'">
   				</div>
   				<div class="lrc-content" ref="lrcContent">
   					<div class="lrc-wrapper" ref="lrcWrapper">
@@ -59,14 +66,14 @@
   export default {
   	data () {
   		return {
-  			musicInfo: {},
+  			// musicInfo: {},
   			currentMusic: {},
   			currentMusicLrcIndex: 0
   		}
   	},
   	methods: {
   		searchMusic () {
-  			musicApi.searchMusic('周杰伦', 1, this)
+  			musicApi.searchMusic('徐梦圆', 1, this, 0)
   		},
   		// 点击播放音乐
   		clickPlayList (id, pic, duration, index) {
@@ -98,8 +105,8 @@
   		}
   	},
   	computed: {
-  		musiclist () {
-  			return this.musicInfo
+  		musicList () {
+  			return store.getters.getMusicList
   		},
   		getCurrentMusic () {
   			return store.getters.getCurrentAudio
@@ -117,8 +124,8 @@
   	// 	}
   	// },
   	mounted () {
-  		this.searchMusic()
-  		// this.initMusic()
+  		// this.searchMusic()
+  		this.initMusic()
   		musicApi.musicEvent(this)
   	}
   }
@@ -166,107 +173,111 @@
 				// background:red
 				// font-size:0
 				display:flex
-				position: relative;
+				position: relative
 				.left_list
-					// display:inline-block
-					flex: 1 1 auto
 					width:100%
 					height:100%
-					// background:#A99E9E
-					vertical-align:top
-					.select_button
+					position: relative
+					.music_home
+						// display:inline-block
+						flex: 1 1 auto
 						width:100%
-						height:60px
-						display:flex
-						align-items:center
-						.todo_btn
-							width:auto
-							height:32px
-							line-height:32px
-							color:$text_before_color
-							border:1px solid $border_bottom_color_deep
-							border-radius:2px
-							padding:0 15px
-							margin:10px
-							font-size:14px
-							cursor:pointer
-							&:hover,&.active
+						height:100%
+						// background:#A99E9E
+						vertical-align:top
+						.select_button
+							width:100%
+							height:60px
+							display:flex
+							align-items:center
+							.todo_btn
+								width:auto
+								height:32px
+								line-height:32px
 								color:$text_before_color
-								border:1px solid $text_before_color								
-					.list_content
-						height:calc(100% - 60px)
-						padding:10px
-						box-sizing:border-box
-						.music_list_title,.music_list
-							height:50px
-							line-height:50px
-							// background:red
-							font-size:0
-							span
-								display:inline-block
+								border:1px solid $border_bottom_color_deep
+								border-radius:2px
+								padding:0 15px
+								margin:10px
 								font-size:14px
-								color:$text_before_color
-								text-overflow:ellipsis
-								overflow:hidden
-								white-space:nowrap
-								&.music_name
-									width:calc(50% - 50px)
-									font-size:14px
-								&.music_singer
-									width:20%
-									padding:0 5px
-									box-sizing:border-box
-								&.music_zhuanji
-									width:20%
-									padding:0 5px
-									box-sizing:border-box
-								&.music_duration
-									width:10%
-									padding:0 5px
-									box-sizing:border-box
-								&.music_index
-									width:50px
-									height:100%
-									text-align: center;
-							.music_name
-								width:calc(50% - 50px)
-								display:inline-block
-								font-size:14px
+								cursor:pointer
+								&:hover,&.active
+									color:$text_before_color
+									border:1px solid $text_before_color								
+						.list_content
+							height:calc(100% - 60px)
+							padding:10px
+							box-sizing:border-box
+							.music_list_title,.music_list
 								height:50px
 								line-height:50px
-								color:$text_before_color
-								text-overflow:ellipsis
-								overflow:hidden
-								white-space:nowrap
+								// background:red
 								font-size:0
-								position:relative
-								.span_name
+								span
 									display:inline-block
-									width: 100% 
-									height:100%
-									// background:red
 									font-size:14px
-								.hover_menu
-									position:absolute
-									width:140px
-									height:100%
-									right:0
-									top:0
-									background:red
-									display:none
-							&.border-1px
-								border-1px($border_bottom_color,bottom)
-						.music_list_content
-							height:calc(100% - 50px)
-							position:relative
-							overflow:auto
-							.music_list
+									color:$text_before_color
+									text-overflow:ellipsis
+									overflow:hidden
+									white-space:nowrap
+									&.music_name
+										width:calc(50% - 50px)
+										font-size:14px
+									&.music_singer
+										width:20%
+										padding:0 5px
+										box-sizing:border-box
+									&.music_zhuanji
+										width:20%
+										padding:0 5px
+										box-sizing:border-box
+									&.music_duration
+										width:10%
+										padding:0 5px
+										box-sizing:border-box
+									&.music_index
+										width:50px
+										height:100%
+										text-align: center;
+								.music_name
+									width:calc(50% - 50px)
+									display:inline-block
+									font-size:14px
+									height:50px
+									line-height:50px
+									color:$text_before_color
+									text-overflow:ellipsis
+									overflow:hidden
+									white-space:nowrap
+									font-size:0
+									position:relative
+									.span_name
+										display:inline-block
+										width: 100% 
+										height:100%
+										// background:red
+										font-size:14px
+									.hover_menu
+										position:absolute
+										width:140px
+										height:100%
+										right:0
+										top:0
+										// background:red
+										display:none
+								&.border-1px
+									border-1px($border_bottom_color,bottom)
+							.music_list_content
+								height:calc(100% - 50px)
 								position:relative
-								&:hover
-									background:$list_hover
-									.music_name
-										.hover_menu
-											display:block
+								overflow:auto
+								.music_list
+									position:relative
+									&:hover
+										background:$list_hover
+										.music_name
+											.hover_menu
+												display:block
 				.right_info
 					// display:inline-block
 					flex: 0 0 310px
@@ -322,7 +333,7 @@
 			.music_ctrl
 				width:100%;
 				height:80px
-				background:blue
+				background:rgba(0,0,0,0.3)
 		@media screen and (max-width: 1440px) 
 			.music_content
 				top:40px
