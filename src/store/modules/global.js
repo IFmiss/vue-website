@@ -10,12 +10,14 @@ const globalStore = {
 			showBingImage: true
 		},
 		place: {},
+		weather: {},
 		showloading: true
 	},
 	getters: {
 		getGlobalInfo: state => state.globalInfo,
 		getPlace: state => state.place,
-		getShowLoading: state => state.showloading
+		getShowLoading: state => state.showloading,
+		getWeatherInfo: state => state.weather
 	},
 	mutations: {
 		setGlobalInfo (state, obj) {
@@ -38,6 +40,9 @@ const globalStore = {
 		},
 		setShowLoading (state, obj) {
 			state.showloading = obj.data
+		},
+		setWeather (state, obj) {
+			state.weather = obj.data
 		}
 	},
 	actions: {
@@ -58,6 +63,9 @@ const globalStore = {
 		},
 		set_ShowLoading ({commit}, obj) {
 			commit('setShowLoading', obj)
+		},
+		set_Weather ({commit}, obj) {
+			commit('setWeather', obj)
 		}
 	}
 }

@@ -60,7 +60,7 @@
           observeParents: true,
           observer: true, // 修改swiper自己或子元素时，自动初始化swiper
           loop: false,
-          initialSlide: 1,
+          initialSlide: 0,
           // lazyLoading: true,
           // lazyLoadingOnTransitionStart: true,
           onSlideChangeEnd: swiper => {
@@ -100,13 +100,16 @@
         })
       },
       showSwiper (index) {
+        this.showImageDetail = true
         try {
-          this.showImageDetail = true
           // alert(this.swiper)
           this.swiper.activeIndex = index
         } catch (e) {
           // alert(1)
         }
+        // this.$nextTick(() => {
+        //   this.swiper.activeIndex = index
+        // })
       },
       setBg () {
         if (this.getFixedImageInfo) {

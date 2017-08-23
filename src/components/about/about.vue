@@ -2,7 +2,7 @@
   <div class="about">
   	<!-- <div class="about_bg" v-if="globalInfo.contentInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div> -->
     <div class="about-content g-content" :style="{'overflow-y': isShowPanel ? 'auto' : 'hidden'}">
-    	<transition name="silde-left">
+    	<transition name="silde-top">
 	    	<div class="dw-boot-container" v-show="isShowPanel">
 	    		<router-link tag="a" to="/about/works">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
@@ -30,7 +30,7 @@
 		        </router-link>
 	    	</div>
     	</transition>
-    	<transition name="silde-left">
+    	<transition name="silde-top">
 			<router-view class="li_about" v-show="!isShowPanel"></router-view>
 		</transition>
     </div>
@@ -96,11 +96,11 @@
 				flex-direction:row
 				opacity:1
 				div
-					&.silde-left-enter-to,&.silde-left-leave-to
+					&.silde-top-enter-to,&.silde-top-leave-to
 						transition: all 0.3s
-					&.silde-left-enter,&.silde-left-leave-to
+					&.silde-top-enter,&.silde-top-leave-to
 						opacity:0
-						transform:translate3d(-80%,0,0)
+						transform:translate3d(0,-80%,0)
 					a
 						color:$text_color
 						li
@@ -143,9 +143,9 @@
 					right:0
 					width:100%
 					height:100%
-					&.silde-left-enter-to,&.silde-left-leave-to
+					&.silde-top-enter-to,&.silde-top-leave-to
 						transition: all 0.5s
-					&.silde-left-enter,&.silde-left-leave-to
+					&.silde-top-enter,&.silde-top-leave-to
 						opacity:0
-						transform: translate3d(50%, 0, 0)
+						transform: translate3d(0, 50%, 0)
 </style>

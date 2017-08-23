@@ -74,7 +74,6 @@ const musicApi = {
                 store.getters.getAudioEle.load()
                 store.getters.getAudioEle.play()
             })
-            this.refreshLyric(45, that)
         }, (err) => {
             console.log(err)
         })
