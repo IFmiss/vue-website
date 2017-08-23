@@ -42,6 +42,8 @@
     data () {
       return {
         picinfo: {},
+        // 获取数据的索引
+        getPicDataIndex: 0,
         showImageDetail: false,
         overflowType: 'initial',
         imageBg: '',
@@ -92,9 +94,12 @@
     methods: {
       fetchData () {
         const getImageConditions = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageCondition'
-        fecth.get(getImageConditions).then((res) => {
+        fecth.post(getImageConditions, {index: this.getPicDataIndex, count: 5}).then((res) => {
           // alert(JSON.stringify(res))
           this.picinfo = res.data
+          if (res.data === 0) {
+            this.getPicDataIndex ++
+          }
         }, (err) => {
           alert(err)
         })
