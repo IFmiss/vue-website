@@ -98,7 +98,7 @@
   		},
   		// 初始化音乐播放器
 		initMusic () {
-			musicApi.getMusicSheet(3778678, this)
+			musicApi.getMusicSheet(124995419, this)
   		},
   		AudiEle () {
   			return store.getters.getAudioEle
