@@ -36,6 +36,10 @@ const musicApi = {
             // console.log(JSON.stringify(res.data.result.songs))
             // that.musicInfo = res.data.playlist.tracks
             store.dispatch({
+                type: 'set_MusicSheetList',
+                data: res.data.playlist.tracks
+            })
+            store.dispatch({
                 type: 'set_MusicList',
                 data: res.data.playlist.tracks
             })
@@ -165,6 +169,10 @@ const musicApi = {
             // that.musicInfo = res.data.result.songs
             store.dispatch({
                 type: 'set_MusicSearchList',
+                data: res.data.result.songs
+            })
+            store.dispatch({
+                type: 'set_MusicList',
                 data: res.data.result.songs
             })
         }, (err) => {

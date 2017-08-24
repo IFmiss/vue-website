@@ -30,7 +30,7 @@
 			  						<span class="span_name">{{list.name}}</span>
 			  						<div class="hover_menu"></div>
 			  					</div>
-				  				<span class="music_singer" v-if="list.ar">{{list.ar[0].name}}</span>
+				  				<span class="music_singer" v-if="list.ar" @click.stop="searchMusic($event)">{{list.ar[0].name}}</span>
 				  				<span class="music_zhuanji" v-if="list.al">{{list.al.name}}</span>
 				  				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
 			  				</div>
@@ -72,8 +72,8 @@
   		}
   	},
   	methods: {
-  		searchMusic () {
-  			musicApi.searchMusic('徐梦圆', 1, this, 0)
+  		searchMusic (e) {
+  			musicApi.searchMusic(e.target.innerHTML, 1, this)
   		},
   		// 点击播放音乐
   		clickPlayList (id, pic, duration, index) {
@@ -220,6 +220,7 @@
 									text-overflow:ellipsis
 									overflow:hidden
 									white-space:nowrap
+									vertical-align:middle
 									&.music_name
 										width:calc(50% - 50px)
 										font-size:14px
@@ -251,6 +252,7 @@
 									white-space:nowrap
 									font-size:0
 									position:relative
+									vertical-align: middle;
 									.span_name
 										display:inline-block
 										width: 100% 
@@ -273,11 +275,11 @@
 								overflow:auto
 								.music_list
 									position:relative
-									&:hover
-										background:$list_hover
-										.music_name
-											.hover_menu
-												display:block
+									// &:hover
+									// 	background:$list_hover
+									.music_name
+										.hover_menu
+											display:block
 				.right_info
 					// display:inline-block
 					flex: 0 0 310px
@@ -362,9 +364,11 @@
 								.music_name
 									width:calc(60% - 50px)
 								.music_zhuanji
-									display:none
+									display:none!important
 								.music_singer
 									width:30%!important
+								.music_duration
+									width:20%!important
 							.music_list_title
 								span
 									&.music_name
@@ -373,7 +377,9 @@
 									&.music_zhuanji
 										display:none
 									&.music_singer
-										width:30%									
+										width:30%!important
+									&.music_duration
+										width:20%!important								
 		@media screen and (max-width: 922px)
 			.music_content
 				.music_body
@@ -426,9 +432,10 @@
 						.list_content
 							.music_list
 								.music_duration
-									display:none
+									// display:none!important
+									width:20%!important
 								.music_singer
-									display:none
+									width:30%!important
 								.music_name
 									width:calc(100% - 50px)				
 							.music_list_title

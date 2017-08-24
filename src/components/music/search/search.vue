@@ -1,48 +1,57 @@
 <template>
-  <div class="search" v-show="showSearch">
-    <div class="search_content">
-      <input class="search_input" ref="searchVal" type="text" @keyup.enter="searchMusic">
-      <div class="search-btn" @click="searchMusic">搜索</div>
-    </div>
-    <div class="list_content">
-      <div class="music_list_title border-1px">
-        <span class="music_index"></span>
-        <span class="music_name">歌曲</span>
-        <span class="music_singer">歌手</span>
-        <span class="music_zhuanji">专辑</span>
-        <span class="music_duration">时长</span> 
-      </div>
-      <div class="music_list_content">
-        <div class="music_list border-1px" v-if="getMusicSearchList" v-for="(list, index) in getMusicSearchList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.al.picUrl, getMusicDurationType(list.dt),index)">
-          <span class="music_index">
-            <span>{{index + 1}}</span>
-            <!-- <span v-show="getCurrentMusic.index !== index">{{index + 1}}</span> -->
-            <!-- <img v-show="getCurrentMusic.index === index" src="static/wave.gif" alt="未曾遗忘的青春"> -->
-          </span>
-          <div class="music_name">
-            <span class="span_name">{{list.name}}</span>
-            <div class="hover_menu"></div>
-          </div>
-          <span class="music_singer" v-if="list.ar">{{list.ar[0].name}}</span>
-          <span class="music_zhuanji" v-if="list.al">{{list.al.name}}</span>
-          <span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
+    <div class="search" @click="back">
+      <transition name="fade">
+        <div class="bg_search" v-show="showSearch"></div>
+      </transition>
+      <transition name="silde-top">
+        <div class="search_content" v-show="showSearch">
+          <input class="search_input" @click.stop ref="searchVal" type="text" @keyup.enter="searchMusic">
+          <div class="search-btn" @click.stop="searchMusic">搜索</div>
         </div>
-      </div>
+      </transition>
+      <transition name="silde-bottom">
+        <div class="search_select" v-show="showSearch">
+          <div class="select_type">
+            <p class="select_title">热门歌曲</p>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">爱的故事(上)</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">Fly Away</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">Autumn (Original Mix) </span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">Far Away</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">七里香</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">China-X</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">我以为我可以</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">再见了单纯</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">Endless</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">Think Again</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">PneumaticTokyo</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">采茶纪</span>
+          </div>
+          <div class="select_type">
+            <p class="select_title">热门歌手</p>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">周杰伦</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">徐梦圆</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">Alan Walker</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">张国荣</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">Kozoro</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">Taylor Swift</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">郑国锋</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">双笙</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">Owl City</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">陈奕迅</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">许嵩</span>
+            <span class="select_span" @click.stop="clickSearchMusic($event)">王若琳</span>
+          </div>
+        </div>
+      </transition>
     </div>
-  </div>
 </template>
 <script>
   import musicApi from './../music.js'
-  import store from './../../../store'
+  // import store from './../../../store'
   export default {
     data () {
       return {
-        showSearch: true
-      }
-    },
-    computed: {
-      getMusicSearchList () {
-        return store.getters.getMusicSearchList
+        showSearch: false
       }
     },
     methods: {
@@ -53,24 +62,19 @@
           alert('请输入你想搜的歌曲或歌手信息')
         } else {
           musicApi.searchMusic(val, 1, this)
-          // this.$router.go(-1)
+          this.$router.go(-1)
         }
       },
-      // 音乐时长格式
-      getMusicDurationType (time) {
-        return musicApi.getMusicDurantionType(time, this)
+      back () {
+        this.$router.go(-1)
       },
-      // 点击播放音乐
-      clickPlayList (id, pic, duration, index) {
-        const data = {
-          id: id,
-          pic: pic,
-          duration: duration,
-          index: index,
-          lrcContent: this.$refs.lrcContent
-        }
-        musicApi.clickIndex(data, this)
+      clickSearchMusic (e) {
+        musicApi.searchMusic(e.target.innerHTML, 1, this)
+        this.$router.go(-1)
       }
+    },
+    mounted () {
+      this.showSearch = true
     }
   }
 </script>
@@ -79,8 +83,7 @@
 @import '../../../common/stylus/global.styl'
 @import '../../../common/stylus/style.styl'
 .search
-  background:#333
-  position:absolute
+  position:fixed
   left:0
   right:0
   bottom:0
@@ -88,11 +91,29 @@
   padding:20px
   box-sizing:border-box
   z-index:11
+  .bg_search
+    background:rgba(0,0,0,0.8)
+    position:absolute
+    left:0
+    right:0
+    bottom:0
+    top:0
+    opacity:1
+    &.fade-enter-to,&.fade-leave-to
+      transition: all 0.3s
+    &.fade-enter,&.fade-leave-to
+      opacity:0
   .search_content
     width:500px
     max-width:100%
     margin:0 auto
     position:relative
+    margin-top:30px
+    &.silde-top-enter-to,&.silde-top-leave-to
+      transition: all 0.3s
+    &.silde-top-enter,&.silde-top-leave-to
+      opacity:0
+      transform:translate3d(0,-50px,0)
     .search_input
       display:block
       width:100%
@@ -116,78 +137,45 @@
       border-left:1px solid $text_before_color
       text-align:center
       cursor:pointer
-  .list_content
-    height:calc(100% - 60px)
-    padding:10px
-    box-sizing:border-box
-    .music_list_title,.music_list
-      height:50px
-      line-height:50px
-      // background:red
-      font-size:0
-      span
-        display:inline-block
-        font-size:14px
-        color:$text_before_color
-        text-overflow:ellipsis
-        overflow:hidden
-        white-space:nowrap
-        &.music_name
-          width:calc(50% - 50px)
-          font-size:14px
-        &.music_singer
-          width:20%
-          padding:0 5px
-          box-sizing:border-box
-        &.music_zhuanji
-          width:20%
-          padding:0 5px
-          box-sizing:border-box
-        &.music_duration
-          width:10%
-          padding:0 5px
-          box-sizing:border-box
-        &.music_index
-          width:50px
-          height:100%
-          text-align: center;
-      .music_name
-        width:calc(50% - 50px)
-        display:inline-block
-        font-size:14px
+  .search_select
+    width:500px
+    max-width:100%
+    margin:0 auto
+    position:relative
+    margin-top:50px
+    font-size:0
+    &.silde-bottom-enter-to,&.silde-bottom-leave-to
+      transition: all 0.8s 0.2s
+    &.silde-bottom-enter,&.silde-bottom-leave-to
+      opacity:0
+      transform:translate3d(0,50px,0)
+    .select_type
+      width:100%
+      height:auto
+      margin-bottom:20px
+      .select_title
+        width:100%
         height:50px
         line-height:50px
+        margin:0
+        font-size:18px
+        color:$text_color
+        text-indent:5px
+        border-bottom:1px solid $border_bottom_color
+        margin-bottom:10px
+      .select_span
+        display:inline-block
+        width:auto
+        padding:2px 10px
+        height:20px
+        line-height:20px
+        border-radius:2px
+        cursor:pointer
+        margin:15px 8px
+        font-size:14px
         color:$text_before_color
-        text-overflow:ellipsis
-        overflow:hidden
-        white-space:nowrap
-        font-size:0
-        position:relative
-        .span_name
-          display:inline-block
-          width: 100% 
-          height:100%
-          // background:red
-          font-size:14px
-        .hover_menu
-          position:absolute
-          width:140px
-          height:100%
-          right:0
-          top:0
-          // background:red
-          display:none
-      &.border-1px
-        border-1px($border_bottom_color,bottom)
-    .music_list_content
-      height:calc(100% - 50px)
-      position:relative
-      overflow:auto
-      .music_list
-        position:relative
+        border:1px solid $text_before_color
         &:hover
-          background:$list_hover
-          .music_name
-            .hover_menu
-              display:block
+          color:$text_color
+          border:1px solid $text_color
 </style>

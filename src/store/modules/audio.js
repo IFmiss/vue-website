@@ -6,14 +6,22 @@ const audio = {
 			picurl: ''
 		},
 		audioEle: '',
+		// 音乐显示列表  其他列表都要把内容赋值给他 才能可以显示内容
 		musicList: {},
-		musicSearchList: {}
+		// 搜索列表
+		musicSearchList: {},
+		// 歌单列表
+		musicSheetList: {},
+		// 播放列表
+		musicPlayList: {}
 	},
 	getters: {
 		getCurrentAudio: state => state.currentAudio,
 		getAudioEle: state => state.audioEle,
 		getMusicList: state => state.musicList,
-		getMusicSearchList: state => state.musicSearchList
+		getMusicSearchList: state => state.musicSearchList,
+		getMusicSheetList: state => state.musicSheetList,
+		getMusicPlayList: state => state.musicPlayList
 	},
 	mutations: {
 		setCurrentAudio (state, obj) {
@@ -27,6 +35,12 @@ const audio = {
 		},
 		setMusicSearchList (state, obj) {
 			state.musicSearchList = obj.data
+		},
+		setMusicSheetList (state, obj) {
+			state.musicSheetList = obj.data
+		},
+		setMusicPlayList (state, obj) {
+			state.musicPlayList = obj.data
 		}
 	},
 	actions: {
@@ -42,6 +56,12 @@ const audio = {
 		},
 		set_MusicSearchList ({commit}, obj) {
 			commit('setMusicSearchList', obj)
+		},
+		set_MusicSheetList ({commit}, obj) {
+			commit('setMusicSheetList', obj)
+		},
+		set_MusicPlayList ({commit}, obj) {
+			commit('setMusicPlayList', obj)
 		}
 	}
 }
