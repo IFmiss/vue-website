@@ -5,7 +5,7 @@
       </transition>
       <transition name="silde-top">
         <div class="search_content" v-show="showSearch">
-          <input class="search_input" @click.stop ref="searchVal" type="text" @keyup.enter="searchMusic">
+          <input class="search_input" @click.stop ref="searchVal" type="text" @keyup.enter="searchMusic" @keyup.esc="back">
           <div class="search-btn" @click.stop="searchMusic">搜索</div>
         </div>
       </transition>
@@ -75,6 +75,9 @@
     },
     mounted () {
       this.showSearch = true
+      this.$nextTick(() => {
+        this.$refs.searchVal.focus()
+      })
     }
   }
 </script>
