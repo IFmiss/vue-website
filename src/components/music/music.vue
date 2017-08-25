@@ -313,6 +313,7 @@
 							position:absolute
 							top:5px
 							left:5px
+							border-radius: 4px
 					.lrc-content
 						position:absolute
 						top:200px

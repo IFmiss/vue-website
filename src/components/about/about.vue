@@ -103,6 +103,7 @@
 						transform:translate3d(0,-80%,0)
 					a
 						color:$text_color
+						text-decoration: none
 						li
 							list-style:none	
 							display:flex
