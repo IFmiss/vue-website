@@ -25,7 +25,7 @@ const musicApi = {
         return lrcObj
     },
     // 获取对应的表单歌曲
-    getMusicSheet (id, that) {
+    getMusicSheet (id) {
         // const id = 3778678  // 云音乐热歌榜
         const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=playlist&id=${id}`
         fecth.get(apiUrl, {
@@ -42,6 +42,28 @@ const musicApi = {
             store.dispatch({
                 type: 'set_MusicList',
                 data: res.data.playlist.tracks
+            })
+        }, (err) => {
+            console.log(err)
+        })
+    },
+
+    // 获取专辑信息
+    getMusicAlbum (id) {
+        const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=album&id=${id}`
+        fecth.get(apiUrl, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((res) => {
+            // that.musicInfo = res.data.playlist.tracks
+            store.dispatch({
+                type: 'set_MusicSheetList',
+                data: res.data.songs
+            })
+            store.dispatch({
+                type: 'set_MusicList',
+                data: res.data.songs
             })
         }, (err) => {
             console.log(err)

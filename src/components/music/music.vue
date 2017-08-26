@@ -30,8 +30,8 @@
 			  						<span class="span_name">{{list.name}}</span>
 			  						<div class="hover_menu"></div>
 			  					</div>
-				  				<span class="music_singer" v-if="list.ar" @click.stop="searchMusic($event)">{{list.ar[0].name}}</span>
-				  				<span class="music_zhuanji" v-if="list.al">{{list.al.name}}</span>
+				  				<span class="music_singer" v-if="list.ar"><span @click.stop="searchMusic($event)">{{list.ar[0].name}}</span></span>
+				  				<span class="music_zhuanji" v-if="list.al"><span @click.stop="getAlbum(list.al.id)">{{list.al.name}}</span></span>
 				  				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
 			  				</div>
 			  			</div>
@@ -109,6 +109,10 @@
   				lrcContent: this.$refs.lrcContent
   			}
   			musicApi.clickIndex(data, this)
+  		},
+  		// 专辑信息
+  		getAlbum (id) {
+  			musicApi.getMusicAlbum(id, this)
   		},
 
   		// 获取歌词
@@ -264,6 +268,10 @@
 										width:50px
 										height:100%
 										text-align: center;
+									span
+										cursor:pointer
+										&:hover
+											text-decoration:underline
 								.music_name
 									width:calc(50% - 50px)
 									display:inline-block
