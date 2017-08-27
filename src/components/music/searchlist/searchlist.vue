@@ -1,6 +1,6 @@
 <template>
-  <div class="music_sheet">
-  	<div class="list_content_info">
+  <div class="music_searchlist">
+  	<div class="list_content">
 		<div class="music_list_title border-1px">
 			<span class="music_index"></span>
 			<span class="music_name">歌曲</span>
@@ -16,9 +16,7 @@
 				</span>
 				<div class="music_name">
 					<span class="span_name">{{list.name}}</span>
-					<div class="hover_menu">
-						<i class="icon-add" @click.stop="collectMusic(list.id, list.name, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt))"></i>
-					</div>
+					<div class="hover_menu"></div>
 				</div>
 				<span class="music_singer" v-if="list.ar">
 					<span @click.stop="searchMusic($event)">{{list.ar[0].name}}</span>
@@ -76,7 +74,7 @@
   	},
   	methods: {
   		searchMusic (e) {
-  			this.$router.push({name: 'searchlist', params: { w: e.target.innerHTML }})
+  			musicApi.searchMusic(e.target.innerHTML, 1, this)
   		},
   		getAlbum (id) {
   			this.$router.push({name: 'albumlist', params: { id: id }})
@@ -104,26 +102,10 @@
   		},
   		// 初始化音乐播放器
 		initMusic () {
-			// alert(this.$router.sheetid)
-			// const id = this.$router.sheetId
-			// alert(JSON.stringify(this.params))
-			musicApi.getMusicSheet(this.params.id, this)
+			musicApi.searchMusic(this.params.w, 1, this)
   		},
   		AudiEle () {
   			return store.getters.getAudioEle
-		},
-		// list.id, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt)
-  		collectMusic (...items) {
-  			const musiccollect = {
-  				id: items[0],
-  				name: items[1],
-  				pic: items[2],
-  				singer: items[3],
-  				albumid: items[4],
-  				albumname: items[5],
-  				dt: items[6]
-  			}
-  			musicApi.collectMusic(musiccollect)
   		}
   	},
   	computed: {
@@ -154,13 +136,20 @@
 			this.initMusic()
 			musicApi.musicEvent(this)
 		})
+  		// this.searchMusic()
+  // 		this.$router.push({
+		// 	path: '/music',
+		// 	query: {
+		// 		sheetid: '124995419'
+		// 	}
+		// })
   	}
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 	@import '../../../common/stylus/global.styl'
 	@import '../../../common/stylus/border-1px/index.styl'
-	.list_content_info
+	.list_content
 		height:calc(100% - 60px)
 		padding:10px
 		box-sizing:border-box
@@ -226,6 +215,7 @@
 					height:100%
 					right:0
 					top:0
+					// background:red
 					display:none
 			&.border-1px
 				border-1px($border_bottom_color,bottom)
@@ -235,8 +225,8 @@
 			overflow:auto
 			.music_list
 				position:relative
-				&:hover
-					background:$list_hover
+				// &:hover
+				// 	background:$list_hover
 				.music_name
 					.hover_menu
 						display:block

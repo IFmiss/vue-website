@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './../store'
 import Home from '@/components/home'
 import Pic from '../components/pic/pic.vue'
 import Music from '../components/music/music.vue'
@@ -9,6 +10,10 @@ import Setting from '../components/setting/setting.vue'
 import Works from '../components/works/works.vue'
 import Joke from '../components/joke/joke.vue'
 import MusicSearch from '../components/music/search/search.vue'
+import MusicSheet from '../components/music/sheet/sheet.vue'
+import MusicSearchList from '../components/music/searchlist/searchlist.vue'
+import MusicAlbumList from '../components/music/albumlist/albumlist.vue'
+import MusicCollection from '../components/music/collection/collection.vue'
 
 Vue.use(Router)
 
@@ -34,8 +39,46 @@ export default new Router({
       component: Music,
       children: [
         {
+          path: '/',
+          redirect: store.getters.getMusicRouter,
+          components: {
+            listinfo: MusicSheet
+          }
+        },
+        {
           path: '/music/search',
-          component: MusicSearch
+          components: {
+            fullscreen: MusicSearch
+          }
+        },
+        {
+          path: '/music/albumlist/:id',
+          name: 'albumlist',
+          components: {
+            listinfo: MusicAlbumList
+          }
+        },
+        // 收藏的列表
+        {
+          path: '/music/collection',
+          name: 'collection',
+          components: {
+            listinfo: MusicCollection
+          }
+        },
+        {
+          path: '/music/sheet/:id',
+          name: 'musicindex',
+          components: {
+            listinfo: MusicSheet
+          }
+        },
+        {
+          path: '/music/searchlist/:w',
+          name: 'searchlist',
+          components: {
+            listinfo: MusicSearchList
+          }
         }
         // {
         //   path: '/about/joke',

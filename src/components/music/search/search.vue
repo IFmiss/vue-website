@@ -46,7 +46,7 @@
     </div>
 </template>
 <script>
-  import musicApi from './../music.js'
+  // import musicApi from './../music.js'
   // import store from './../../../store'
   export default {
     data () {
@@ -61,16 +61,15 @@
         if (val === '') {
           alert('请输入你想搜的歌曲或歌手信息')
         } else {
-          musicApi.searchMusic(val, 1, this)
-          this.$router.go(-1)
+          this.$router.push({name: 'searchlist', params: { w: val }})
         }
       },
       back () {
         this.$router.go(-1)
       },
       clickSearchMusic (e) {
-        musicApi.searchMusic(e.target.innerHTML, 1, this)
-        this.$router.go(-1)
+        // musicApi.searchMusic(e.target.innerHTML, 1, this)
+        this.$router.push({name: 'searchlist', params: { w: e.target.innerHTML }})
       }
     },
     mounted () {

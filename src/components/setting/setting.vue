@@ -42,7 +42,7 @@
   			options: {
 				isactive: false,
 				rangebg: '#aaa',
-				rangeactivebg: '#9EC0C7',
+				rangeactivebg: '#F2301A',
 				contentbg: '#fff',
 				ref: 'bg'
 			},

@@ -50,6 +50,11 @@
   			this.$emit('selectBgType', callback)
   		}
   	},
+    // watch: {
+    //   switchOpt (newval, oldval) {
+    //     alert(JSON.stringify(newval))
+    //   }
+    // },
   	computed: {
   		rangeStyleInfo () {
   			let styleInfo = {}

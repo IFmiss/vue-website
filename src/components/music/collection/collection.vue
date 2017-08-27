@@ -1,5 +1,5 @@
 <template>
-  <div class="music_sheet">
+  <div class="music_collection">
   	<div class="list_content_info">
 		<div class="music_list_title border-1px">
 			<span class="music_index"></span>
@@ -9,24 +9,22 @@
 			<span class="music_duration">时长</span>
 		</div>
 		<div class="music_list_content">
-			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.al.picUrl, getMusicDurationType(list.dt),index)">
+			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.pic" @click="clickPlayList(list.id, list.al.pic, list.dt, index)">
 				<span class="music_index">
 					<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
 					<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
 				</span>
 				<div class="music_name">
 					<span class="span_name">{{list.name}}</span>
-					<div class="hover_menu">
-						<i class="icon-add" @click.stop="collectMusic(list.id, list.name, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt))"></i>
-					</div>
+					<div class="hover_menu"></div>
 				</div>
-				<span class="music_singer" v-if="list.ar">
-					<span @click.stop="searchMusic($event)">{{list.ar[0].name}}</span>
+				<span class="music_singer">
+					<span @click.stop="searchMusic($event)">{{list.singer}}</span>
 				</span>
 				<span class="music_zhuanji" v-if="list.al">
-					<span @click.stop="getAlbum(list.al.id)">{{list.al.name}}</span>
+					<span @click.stop="getAlbum(list.albumid)">{{list.albumname}}</span>
 				</span>
-				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
+				<span class="music_duration">{{list.dt}}</span>
 			</div>
 		</div>
 	</div>
@@ -104,31 +102,16 @@
   		},
   		// 初始化音乐播放器
 		initMusic () {
-			// alert(this.$router.sheetid)
-			// const id = this.$router.sheetId
-			// alert(JSON.stringify(this.params))
-			musicApi.getMusicSheet(this.params.id, this)
+			// 获取本地音乐
+			// musicApi.getAlbum(this.params.id)
   		},
   		AudiEle () {
   			return store.getters.getAudioEle
-		},
-		// list.id, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt)
-  		collectMusic (...items) {
-  			const musiccollect = {
-  				id: items[0],
-  				name: items[1],
-  				pic: items[2],
-  				singer: items[3],
-  				albumid: items[4],
-  				albumname: items[5],
-  				dt: items[6]
-  			}
-  			musicApi.collectMusic(musiccollect)
   		}
   	},
   	computed: {
   		musicList () {
-  			return store.getters.getMusicList
+  			return store.getters.getMusicCollectList
   		},
   		getCurrentMusic () {
   			return store.getters.getCurrentAudio
@@ -150,8 +133,8 @@
   	},
   	mounted () {
   		this.$nextTick(() => {
-			// alert(JSON.stringify(this.params))
-			this.initMusic()
+			alert(JSON.stringify(store.getters.getMusicCollectList))
+			// this.initMusic()
 			musicApi.musicEvent(this)
 		})
   	}
@@ -226,6 +209,7 @@
 					height:100%
 					right:0
 					top:0
+					// background:red
 					display:none
 			&.border-1px
 				border-1px($border_bottom_color,bottom)
@@ -235,8 +219,8 @@
 			overflow:auto
 			.music_list
 				position:relative
-				&:hover
-					background:$list_hover
+				// &:hover
+				// 	background:$list_hover
 				.music_name
 					.hover_menu
 						display:block

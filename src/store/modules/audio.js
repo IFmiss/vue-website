@@ -13,7 +13,13 @@ const audio = {
 		// 歌单列表
 		musicSheetList: {},
 		// 播放列表
-		musicPlayList: {}
+		musicPlayList: {},
+		musicCollectList: [{
+			id: 1,
+			url: 'aaaa',
+			dt: '222',
+			dl: 'asdasd'
+		}]
 	},
 	getters: {
 		getCurrentAudio: state => state.currentAudio,
@@ -21,7 +27,8 @@ const audio = {
 		getMusicList: state => state.musicList,
 		getMusicSearchList: state => state.musicSearchList,
 		getMusicSheetList: state => state.musicSheetList,
-		getMusicPlayList: state => state.musicPlayList
+		getMusicPlayList: state => state.musicPlayList,
+		getMusicCollectList: state => state.musicCollectList
 	},
 	mutations: {
 		setCurrentAudio (state, obj) {
@@ -41,6 +48,9 @@ const audio = {
 		},
 		setMusicPlayList (state, obj) {
 			state.musicPlayList = obj.data
+		},
+		setMusicCollectList (state, obj) {
+			state.musicCollectList = obj.data
 		}
 	},
 	actions: {
@@ -62,6 +72,9 @@ const audio = {
 		},
 		set_MusicPlayList ({commit}, obj) {
 			commit('setMusicPlayList', obj)
+		},
+		set_MusicCollectList ({commit}, obj) {
+			commit('setMusicCollectList', obj)
 		}
 	}
 }

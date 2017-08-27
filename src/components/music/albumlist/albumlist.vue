@@ -1,5 +1,5 @@
 <template>
-  <div class="music_sheet">
+  <div class="music_album">
   	<div class="list_content_info">
 		<div class="music_list_title border-1px">
 			<span class="music_index"></span>
@@ -16,9 +16,7 @@
 				</span>
 				<div class="music_name">
 					<span class="span_name">{{list.name}}</span>
-					<div class="hover_menu">
-						<i class="icon-add" @click.stop="collectMusic(list.id, list.name, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt))"></i>
-					</div>
+					<div class="hover_menu"></div>
 				</div>
 				<span class="music_singer" v-if="list.ar">
 					<span @click.stop="searchMusic($event)">{{list.ar[0].name}}</span>
@@ -75,9 +73,6 @@
   		lrccontent: {}
   	},
   	methods: {
-  		searchMusic (e) {
-  			this.$router.push({name: 'searchlist', params: { w: e.target.innerHTML }})
-  		},
   		getAlbum (id) {
   			this.$router.push({name: 'albumlist', params: { id: id }})
   		},
@@ -93,11 +88,6 @@
   			musicApi.clickIndex(data, this)
   		},
 
-  		// 获取歌词
-  		getMusicLrc (id) {
-  			musicApi.getMusicLrc(id, this)
-  		},
-
   		// 音乐时长格式
   		getMusicDurationType (time) {
   			return musicApi.getMusicDurantionType(time, this)
@@ -107,23 +97,10 @@
 			// alert(this.$router.sheetid)
 			// const id = this.$router.sheetId
 			// alert(JSON.stringify(this.params))
-			musicApi.getMusicSheet(this.params.id, this)
+			musicApi.getAlbum(this.params.id)
   		},
   		AudiEle () {
   			return store.getters.getAudioEle
-		},
-		// list.id, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt)
-  		collectMusic (...items) {
-  			const musiccollect = {
-  				id: items[0],
-  				name: items[1],
-  				pic: items[2],
-  				singer: items[3],
-  				albumid: items[4],
-  				albumname: items[5],
-  				dt: items[6]
-  			}
-  			musicApi.collectMusic(musiccollect)
   		}
   	},
   	computed: {
@@ -226,6 +203,7 @@
 					height:100%
 					right:0
 					top:0
+					// background:red
 					display:none
 			&.border-1px
 				border-1px($border_bottom_color,bottom)
@@ -235,8 +213,8 @@
 			overflow:auto
 			.music_list
 				position:relative
-				&:hover
-					background:$list_hover
+				// &:hover
+				// 	background:$list_hover
 				.music_name
 					.hover_menu
 						display:block

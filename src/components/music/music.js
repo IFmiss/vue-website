@@ -49,7 +49,7 @@ const musicApi = {
     },
 
     // 获取专辑信息
-    getMusicAlbum (id) {
+    getAlbum (id) {
         const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=album&id=${id}`
         fecth.get(apiUrl, {
             headers: {
@@ -221,6 +221,29 @@ const musicApi = {
                 clearInterval(t)
             }
         }, 1)
+    },
+
+    // 添加到我喜欢的音乐 使用本地存储的方法
+    collectMusic (opt) {
+        // set_MusicCollectList
+        let collectlist = store.getters.getMusicCollectList
+        let insertMusic = true
+        if (collectlist.length !== 0) {
+            collectlist.forEach((v, i, a) => {
+                if (opt.id === v.id) {
+                    insertMusic = false
+                    return
+                }
+            })
+        }
+        if (insertMusic) {
+            collectlist.push(opt)
+            store.commit({
+                type: 'setMusicCollectList',
+                data: collectlist
+            })
+            localStorage.setItem('musicCollectList', JSON.stringify(collectlist))
+        }
     }
 }
 

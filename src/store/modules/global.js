@@ -11,13 +11,15 @@ const globalStore = {
 		},
 		place: {},
 		weather: {},
-		showloading: true
+		showloading: true,
+		musicRouter: '/music/sheet/124995419'
 	},
 	getters: {
 		getGlobalInfo: state => state.globalInfo,
 		getPlace: state => state.place,
 		getShowLoading: state => state.showloading,
-		getWeatherInfo: state => state.weather
+		getWeatherInfo: state => state.weather,
+		getMusicRouter: state => state.musicRouter
 	},
 	mutations: {
 		setGlobalInfo (state, obj) {
@@ -43,6 +45,9 @@ const globalStore = {
 		},
 		setWeather (state, obj) {
 			state.weather = obj.data
+		},
+		setMusicRouter (state, obj) {
+			state.musicRouter = obj.data
 		}
 	},
 	actions: {
@@ -66,6 +71,9 @@ const globalStore = {
 		},
 		set_Weather ({commit}, obj) {
 			commit('setWeather', obj)
+		},
+		set_MusicRouter ({commit}, obj) {
+			commit('setMusicRouter', obj)
 		}
 	}
 }

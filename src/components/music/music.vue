@@ -7,12 +7,15 @@
   				<div class="music_home">
   					<div class="select_button">
 			  			<span class="todo_btn playing_btn">正在播放</span>
+			  			<router-link tag="span" to="/music/collection" class="todo_btn collect_btn">
+				        	我的收藏
+				        </router-link>
 			  			<span class="todo_btn sheet_btn">歌单列表</span>
 			  			<router-link tag="span" to="/music/search" class="todo_btn search_btn">
 				        	搜索列表
 				        </router-link>
 			  		</div>
-			  		<div class="list_content">
+			  		<!-- <div class="list_content">
 			  			<div class="music_list_title border-1px">
 			  				<span class="music_index"></span>
 			  				<span class="music_name">歌曲</span>
@@ -35,15 +38,18 @@
 				  				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
 			  				</div>
 			  			</div>
-			  		</div>
+			  		</div> -->
+			  		<transition name="silde-top">
+						<router-view class="list_content" name="listinfo"></router-view>
+					</transition>
   				</div>
   			</div>
   			<transition name="silde-top">
-				<router-view class="music_wrapper"></router-view>
+				<router-view class="music_wrapper" name="fullscreen"></router-view>
 			</transition>
   			<div class="right_info">
   				<div class="bg-info">
-  					<img class="music-bg" :src="getCurrentMusic.picurl ? getCurrentMusic.picurl : './static/18627925998890855.jpg'">
+  					<img class="music-bg" :src="getCurrentMusic.picurl ? getCurrentMusic.picurl : 'http://www.daiwei.org/vue/bg/18627925998890855.jpg'">
   				</div>
   				<div class="lrc-content" ref="lrcContent">
   					<div class="lrc-wrapper" ref="lrcWrapper">
@@ -99,17 +105,6 @@
   		searchMusic (e) {
   			musicApi.searchMusic(e.target.innerHTML, 1, this)
   		},
-  		// 点击播放音乐
-  		clickPlayList (id, pic, duration, index) {
-  			const data = {
-  				id: id,
-  				pic: pic,
-  				duration: duration,
-  				index: index,
-  				lrcContent: this.$refs.lrcContent
-  			}
-  			musicApi.clickIndex(data, this)
-  		},
   		// 专辑信息
   		getAlbum (id) {
   			musicApi.getMusicAlbum(id, this)
@@ -146,15 +141,21 @@
 			return this.currentMusicLrcIndex
   		}
   	},
-  	// watch: {
-  	// 	currentMusic (newval, oldval) {
-  	// 		alert(newval.lyric)
-  	// 	}
-  	// },
+  	watch: {
+  		// currentMusic (newval, oldval) {
+  		// 	alert(newval.lyric)
+  		// },
+  		'$route' (to, from) {
+			store.dispatch({
+				type: 'set_MusicRouter',
+				data: to.path
+			})
+        }
+  	},
   	mounted () {
   		// this.searchMusic()
-  		this.initMusic()
-  		musicApi.musicEvent(this)
+  		// this.initMusic()
+  		// musicApi.musicEvent(this)
   	}
   }
 </script>
@@ -299,6 +300,22 @@
 										top:0
 										// background:red
 										display:none
+										i
+											font-size:18px
+											display:inline-block
+											width:36px
+											height:36px
+											line-height:36px
+											color:$border_bottom_color_deep
+											text-align:center
+											border-radius:50%
+											vertical-align:middle
+											border:1px solid $border_bottom_color_deep
+											cursor:pointer
+											&:hover
+												color:$text_before_color
+												border:1px solid $text_before_color
+										
 								&.border-1px
 									border-1px($border_bottom_color,bottom)
 							.music_list_content
@@ -307,11 +324,11 @@
 								overflow:auto
 								.music_list
 									position:relative
-									// &:hover
-									// 	background:$list_hover
-									.music_name
-										.hover_menu
-											display:block
+									&:hover
+										background:$list_hover
+										.music_name
+											.hover_menu
+												display:block
 				.right_info
 					// display:inline-block
 					flex: 0 0 310px
