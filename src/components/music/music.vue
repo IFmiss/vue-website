@@ -1,6 +1,9 @@
 <template>
   <div class="music">
-  	<div class="music_bg"></div>
+  	<div class="music_bg" :style="{background:'url(' + getCurrentMusic.picurl + ') center center / cover'}">
+  		<div class="mask_bg"></div>
+  	</div>
+  	<div class="mask_linear_bg"></div>
   	<div class="music_content">
   		<div class="music_body">
   			<div class="left_list">
@@ -178,6 +181,26 @@
 			width:100%
 			right:0
 			z-index:-1
+			filter: blur(16px)
+			background-color:#000
+			transition:all 0.3s
+			.mask_bg
+				position:absolute
+				top:0
+				left:0;
+				bottom:0
+				width:100%
+				right:0
+				background:rgba(0,0,0,0.5)
+		.mask_linear_bg
+			position:absolute
+			top:0
+			left:0;
+			bottom:0
+			width:100%
+			right:0
+			z-index:-2
+			background:#000
 		.music_content
 			position:fixed
 			top:80px
