@@ -1,9 +1,9 @@
 <template>
   <div class="music">
-  	<div class="music_bg" :style="{background:'url(' + getCurrentMusic.picurl + ') center center / cover'}">
+  	<div class="music_bg" v-if="getIsAPP.isHigher768" :style="{background:'url(' + getCurrentMusic.picurl + ') center center / cover'}">
   		<div class="mask_bg"></div>
   	</div>
-  	<div class="mask_linear_bg"></div>
+<!--   	<div class="mask_linear_bg"></div> -->
   	<div class="music_content">
   		<div class="music_body">
   			<div class="left_list">
@@ -142,6 +142,9 @@
   		},
   		getCurrentMusicLrcIndex () {
 			return this.currentMusicLrcIndex
+  		},
+  		getIsAPP () {
+  			return store.getters.getGlobalInfo
   		}
   	},
   	watch: {

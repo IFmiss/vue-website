@@ -118,7 +118,7 @@ export default {
         type: 'setIsHigher768',
         data: isTrue
       })
-      console.log(isTrue)
+      // console.log(isTrue)
     },
     shouldLoadingBg () {
       if (window.localStorage) {
