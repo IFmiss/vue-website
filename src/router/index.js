@@ -14,6 +14,8 @@ import MusicSheet from '../components/music/sheet/sheet.vue'
 import MusicSearchList from '../components/music/searchlist/searchlist.vue'
 import MusicAlbumList from '../components/music/albumlist/albumlist.vue'
 import MusicCollection from '../components/music/collection/collection.vue'
+import MusicPlayList from '../components/music/playlist/playlist.vue'
+import MusicToplist from '../components/music/toplist/toplist.vue'
 
 Vue.use(Router)
 
@@ -71,6 +73,25 @@ export default new Router({
           name: 'musicindex',
           components: {
             listinfo: MusicSheet
+          }
+        },
+        {
+          path: '/music/sheet/',
+          redirect: store.getters.getMusicRouter,
+          components: {
+            listinfo: MusicSheet
+          }
+        },
+        {
+          path: '/music/playlist/',
+          components: {
+            listinfo: MusicPlayList
+          }
+        },
+        {
+          path: '/music/toplist/',
+          components: {
+            listinfo: MusicToplist
           }
         },
         {

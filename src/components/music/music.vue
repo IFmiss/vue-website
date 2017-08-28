@@ -3,17 +3,21 @@
   	<div class="music_bg" v-if="getIsAPP.isHigher768" :style="{background:'url(' + getCurrentMusic.picurl + ') center center / cover'}">
   		<div class="mask_bg"></div>
   	</div>
-<!--   	<div class="mask_linear_bg"></div> -->
+  	<div class="mask_linear_bg"></div>
   	<div class="music_content">
   		<div class="music_body">
   			<div class="left_list">
   				<div class="music_home">
   					<div class="select_button">
-			  			<span class="todo_btn playing_btn">正在播放</span>
+  						<router-link tag="span" to="/music/playlist" class="todo_btn playing_btn">
+				        	正在播放
+				        </router-link>
 			  			<router-link tag="span" to="/music/collection" class="todo_btn collect_btn">
 				        	我的收藏
 				        </router-link>
-			  			<span class="todo_btn sheet_btn">歌单列表</span>
+				        <router-link tag="span" to="/music/toplist" class="todo_btn top_btn">
+				        	排行榜/歌单
+				        </router-link>
 			  			<router-link tag="span" to="/music/search" class="todo_btn search_btn">
 				        	搜索列表
 				        </router-link>

@@ -1,29 +1,33 @@
 <template>
-  <div class="music_searchlist">
-	<div class="music_list_title border-1px">
-		<span class="music_index"></span>
-		<span class="music_name">歌曲</span>
-		<span class="music_singer">歌手</span>
-		<span class="music_zhuanji">专辑</span>
-		<span class="music_duration">时长</span>
-	</div>
-	<div class="music_list_content">
-		<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.al.picUrl, getMusicDurationType(list.dt),index)">
-			<span class="music_index">
-				<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
-				<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
-			</span>
-			<div class="music_name">
-				<span class="span_name">{{list.name}}</span>
-				<div class="hover_menu"></div>
+  <div class="music_play">
+  	<div class="list_content_info">
+		<div class="music_list_title border-1px">
+			<span class="music_index"></span>
+			<span class="music_name">歌曲</span>
+			<span class="music_singer">歌手</span>
+			<span class="music_zhuanji">专辑</span>
+			<span class="music_duration">时长</span>
+		</div>
+		<div class="music_list_content">
+			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.al.picUrl, getMusicDurationType(list.dt),index)">
+				<span class="music_index">
+					<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
+					<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
+				</span>
+				<div class="music_name">
+					<span class="span_name">{{list.name}}</span>
+					<div class="hover_menu">
+						<i class="icon-add" @click.stop="collectMusic(list.id, list.name, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt))"></i>
+					</div>
+				</div>
+				<span class="music_singer" v-if="list.ar">
+					<span @click.stop="searchMusic($event)">{{list.ar[0].name}}</span>
+				</span>
+				<span class="music_zhuanji" v-if="list.al">
+					<span @click.stop="getAlbum(list.al.id)">{{list.al.name}}</span>
+				</span>
+				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
 			</div>
-			<span class="music_singer" v-if="list.ar">
-				<span @click.stop="searchMusic($event)">{{list.ar[0].name}}</span>
-			</span>
-			<span class="music_zhuanji" v-if="list.al">
-				<span @click.stop="getAlbum(list.al.id)">{{list.al.name}}</span>
-			</span>
-			<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
 		</div>
 	</div>
   </div>
@@ -72,13 +76,14 @@
   	},
   	methods: {
   		searchMusic (e) {
-  			musicApi.searchMusic(e.target.innerHTML, 1, this)
+  			this.$router.push({name: 'searchlist', params: { w: e.target.innerHTML }})
   		},
   		getAlbum (id) {
   			this.$router.push({name: 'albumlist', params: { id: id }})
   		},
   		// 点击播放音乐
   		clickPlayList (id, pic, duration, index) {
+  			alert(this.$route.params)
   			const data = {
   				id: id,
   				pic: pic,
@@ -100,10 +105,26 @@
   		},
   		// 初始化音乐播放器
 		initMusic () {
-			musicApi.searchMusic(this.params.w, 1, this)
+			// alert(this.$router.sheetid)
+			// const id = this.$router.sheetId
+			// alert(JSON.stringify(this.params))
+			musicApi.getMusicSheet(this.params.id, this)
   		},
   		AudiEle () {
   			return store.getters.getAudioEle
+		},
+		// list.id, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt)
+  		collectMusic (...items) {
+  			const musiccollect = {
+  				id: items[0],
+  				name: items[1],
+  				pic: items[2],
+  				singer: items[3],
+  				albumid: items[4],
+  				albumname: items[5],
+  				dt: items[6]
+  			}
+  			musicApi.collectMusic(musiccollect)
   		}
   	},
   	computed: {
@@ -134,21 +155,14 @@
 			this.initMusic()
 			musicApi.musicEvent(this)
 		})
-  		// this.searchMusic()
-  // 		this.$router.push({
-		// 	path: '/music',
-		// 	query: {
-		// 		sheetid: '124995419'
-		// 	}
-		// })
   	}
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 	@import '../../../common/stylus/global.styl'
 	@import '../../../common/stylus/border-1px/index.styl'
-	.list_content
-		height:calc(100% - 60px)
+	.list_content_info
+		height:100%
 		padding:10px
 		box-sizing:border-box
 		.music_list_title,.music_list
@@ -213,7 +227,6 @@
 					height:100%
 					right:0
 					top:0
-					// background:red
 					display:none
 			&.border-1px
 				border-1px($border_bottom_color,bottom)
@@ -223,8 +236,8 @@
 			overflow:auto
 			.music_list
 				position:relative
-				// &:hover
-				// 	background:$list_hover
+				&:hover
+					background:$list_hover
 				.music_name
 					.hover_menu
 						display:block
