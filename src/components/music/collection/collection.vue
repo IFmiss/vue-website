@@ -9,19 +9,21 @@
 			<span class="music_duration">时长</span>
 		</div>
 		<div class="music_list_content">
-			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.pic" @click="clickPlayList(list.id, list.al.pic, list.dt, index)">
+			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.pic" @click="clickPlayList(list.id, list.pic, list.dt, index)">
 				<span class="music_index">
 					<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
 					<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
 				</span>
 				<div class="music_name">
 					<span class="span_name">{{list.name}}</span>
-					<div class="hover_menu"></div>
+					<div class="hover_menu">
+						<i class="icon-delete" @click.stop="deleteMusic(list.id)"></i>
+					</div>
 				</div>
 				<span class="music_singer">
 					<span @click.stop="searchMusic($event)">{{list.singer}}</span>
 				</span>
-				<span class="music_zhuanji" v-if="list.al">
+				<span class="music_zhuanji">
 					<span @click.stop="getAlbum(list.albumid)">{{list.albumname}}</span>
 				</span>
 				<span class="music_duration">{{list.dt}}</span>
@@ -91,22 +93,16 @@
   			musicApi.clickIndex(data, this)
   		},
 
-  		// 获取歌词
-  		getMusicLrc (id) {
-  			musicApi.getMusicLrc(id, this)
+  		// 删除收藏的音乐
+  		deleteMusic (id) {
+  			musicApi.deleteMusic(id)
   		},
 
-  		// 音乐时长格式
-  		getMusicDurationType (time) {
-  			return musicApi.getMusicDurantionType(time, this)
-  		},
   		// 初始化音乐播放器
 		initMusic () {
 			// 获取本地音乐
 			// musicApi.getAlbum(this.params.id)
-  		},
-  		AudiEle () {
-  			return store.getters.getAudioEle
+			musicApi.getLocalMusic()
   		}
   	},
   	computed: {
@@ -115,12 +111,6 @@
   		},
   		getCurrentMusic () {
   			return store.getters.getCurrentAudio
-  		},
-  		getMusicLrcLists () {
-  			return store.getters.getCurrentAudio.lyric
-  		},
-  		getCurrentMusicLrcIndex () {
-			return this.currentMusicLrcIndex
   		}
   	},
   	watch: {
@@ -133,8 +123,7 @@
   	},
   	mounted () {
   		this.$nextTick(() => {
-			alert(JSON.stringify(store.getters.getMusicCollectList))
-			// this.initMusic()
+			this.initMusic()
 			musicApi.musicEvent(this)
 		})
   	}

@@ -14,12 +14,7 @@ const audio = {
 		musicSheetList: {},
 		// 播放列表
 		musicPlayList: {},
-		musicCollectList: [{
-			id: 1,
-			url: 'aaaa',
-			dt: '222',
-			dl: 'asdasd'
-		}]
+		musicCollectList: []
 	},
 	getters: {
 		getCurrentAudio: state => state.currentAudio,

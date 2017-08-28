@@ -237,13 +237,34 @@ const musicApi = {
             })
         }
         if (insertMusic) {
-            collectlist.push(opt)
-            store.commit({
-                type: 'setMusicCollectList',
-                data: collectlist
-            })
+            collectlist.unshift(opt)
             localStorage.setItem('musicCollectList', JSON.stringify(collectlist))
         }
+    },
+
+    // 获取本地的音乐
+    getLocalMusic () {
+        const localmusic = localStorage.getItem('musicCollectList')
+        store.commit({
+            type: 'setMusicCollectList',
+            data: JSON.parse(localmusic)
+        })
+    },
+
+    // 删除收藏的音乐
+    deleteMusic (id) {
+        let collectlist = store.getters.getMusicCollectList
+        collectlist.forEach((v, i, a) => {
+            if (id === v.id) {
+                collectlist.splice(i, 1)
+                return
+            }
+        })
+        store.commit({
+            type: 'setMusicCollectList',
+            data: collectlist
+        })
+        localStorage.setItem('musicCollectList', JSON.stringify(collectlist))
     }
 }
 
