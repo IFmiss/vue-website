@@ -338,7 +338,12 @@ const musicApi = {
     },
     // 初始化音乐事件
     initAudioEvent (that) {
+        // audio Dom元素
         const ele = store.getters.getAudioEle
+        // 本地音乐初始化  （收藏的歌曲）
+        this.getLocalMusic()
+
+        // 音乐播放结束事件
         ele.onended = () => {
             this.playNextPrev(that, true)
         }
