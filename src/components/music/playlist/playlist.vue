@@ -82,14 +82,15 @@
   			this.$router.push({name: 'albumlist', params: { id: id }})
   		},
   		// 点击播放音乐
-  		clickPlayList (id, pic, duration, index) {
-  			alert(this.$route.params)
+  		clickPlayList (id, pic, duration, index, list) {
   			const data = {
   				id: id,
   				pic: pic,
   				duration: duration,
   				index: index,
-  				lrcContent: this.lrccontent
+  				lrcContent: this.lrccontent,
+  				list: list,
+  				type: 'unupdate'
   			}
   			musicApi.clickIndex(data, this)
   		},
@@ -129,7 +130,7 @@
   	},
   	computed: {
   		musicList () {
-  			return store.getters.getMusicList
+  			return store.getters.getMusicPlayList
   		},
   		getCurrentMusic () {
   			return store.getters.getCurrentAudio

@@ -5,7 +5,12 @@ const audio = {
 			duration: '',
 			picurl: ''
 		},
+		// 音乐的元素
 		audioEle: '',
+		// 滚动的歌词内容  为了之后的移动
+		audioLrcContent: '',
+		// lrc的索引   显示歌词使用
+		lrcIndex: 0,
 		// 音乐显示列表  其他列表都要把内容赋值给他 才能可以显示内容
 		musicList: {},
 		// 搜索列表
@@ -14,6 +19,7 @@ const audio = {
 		musicSheetList: {},
 		// 播放列表
 		musicPlayList: {},
+		// 收集歌曲的内容
 		musicCollectList: []
 	},
 	getters: {
@@ -23,7 +29,9 @@ const audio = {
 		getMusicSearchList: state => state.musicSearchList,
 		getMusicSheetList: state => state.musicSheetList,
 		getMusicPlayList: state => state.musicPlayList,
-		getMusicCollectList: state => state.musicCollectList
+		getMusicCollectList: state => state.musicCollectList,
+		getAudioLrcContent: state => state.audioLrcContent,
+		getAudiolrcIndex: state => state.lrcIndex
 	},
 	mutations: {
 		setCurrentAudio (state, obj) {
@@ -46,6 +54,12 @@ const audio = {
 		},
 		setMusicCollectList (state, obj) {
 			state.musicCollectList = obj.data
+		},
+		setAudioLrcContent (state, obj) {
+			state.audioLrcContent = obj.data
+		},
+		setAudiolrcIndex (state, obj) {
+			state.lrcIndex = obj.data
 		}
 	},
 	actions: {

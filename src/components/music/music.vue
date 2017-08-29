@@ -3,7 +3,7 @@
   	<div class="music_bg" v-if="getIsAPP.isHigher768" :style="{background:'url(' + getCurrentMusic.picurl + ') center center / cover'}">
   		<div class="mask_bg"></div>
   	</div>
-  	<div class="mask_linear_bg"></div>
+  	<div class="mask_linear_bg" v-if="getCurrentMusic.picurl"></div>
   	<div class="music_content">
   		<div class="music_body">
   			<div class="left_list">
@@ -79,9 +79,7 @@
   export default {
   	data () {
   		return {
-  			// musicInfo: {},
   			currentMusic: {},
-  			currentMusicLrcIndex: 0,
   			top_list_all: {
 				0: ['云音乐新歌榜', '/discover/toplist?id=3779629'],
 				1: ['云音乐热歌榜', '/discover/toplist?id=3778678'],
@@ -132,6 +130,27 @@
   		},
   		AudiEle () {
   			return store.getters.getAudioEle
+  		},
+  		// playPause () {
+  		// 	alert(1)
+  		// },
+  		keypress () {
+  			let that = this
+  			document.onkeydown = e => {
+				if (e && e.ctrlKey && e.keyCode === 32) {   // 同时按下 ctrl + 空格
+					musicApi.playPause()
+				}
+				if (e && e.ctrlKey && e.keyCode === 39) { 	// 同时按下 ctrl + -->
+					musicApi.playNextPrev(that, true)
+				}
+				if (e && e.ctrlKey && e.keyCode === 37) { 	// 同时按下 ctrl + <--
+					musicApi.playNextPrev(that, false)
+				}
+  			}
+  		},
+  		initAudioEvent () {
+  			const audio = store.getters.getAudioEle
+  			musicApi.initAudioEvent(this, audio)
   		}
   	},
   	computed: {
@@ -145,7 +164,7 @@
   			return store.getters.getCurrentAudio.lyric
   		},
   		getCurrentMusicLrcIndex () {
-			return this.currentMusicLrcIndex
+			return store.getters.getAudiolrcIndex
   		},
   		getIsAPP () {
   			return store.getters.getGlobalInfo
@@ -163,8 +182,13 @@
         }
   	},
   	mounted () {
+  		store.commit({
+  			type: 'setAudioLrcContent',
+  			data: this.$refs.lrcContent
+  		})
   		// this.searchMusic()
-  		// this.initMusic()
+  		this.initAudioEvent()
+  		this.keypress()
   		// musicApi.musicEvent(this)
   	}
   }
