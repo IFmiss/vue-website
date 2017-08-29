@@ -163,7 +163,6 @@
 	@import '../../../common/stylus/border-1px/index.styl'
 	.list_content_info
 		height:100%
-		padding:10px
 		box-sizing:border-box
 		.music_list_title,.music_list
 			height:50px

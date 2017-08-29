@@ -187,9 +187,13 @@
   			data: this.$refs.lrcContent
   		})
   		// this.searchMusic()
-  		this.initAudioEvent()
-  		this.keypress()
+  		// this.initAudioEvent()
+  		// this.keypress()
   		// musicApi.musicEvent(this)
+  		this.$nextTick(() => {
+  			this.initAudioEvent()
+  			this.keypress()
+  		})
   	}
   }
 </script>
@@ -212,9 +216,10 @@
 			width:100%
 			right:0
 			z-index:-1
+			backdrop-filter: blur(10px)
 			filter: blur(16px)
 			background-color:#000
-			transition:all 0.3s
+			transition:all 0.8s
 			.mask_bg
 				position:absolute
 				top:0
@@ -260,6 +265,7 @@
 				.left_list
 					width:100%
 					height:100%
+					overflow: hidden
 					position: relative
 					.music_home
 						// display:inline-block

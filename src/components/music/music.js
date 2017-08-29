@@ -73,7 +73,6 @@ const musicApi = {
     // 获取歌词
     getMusicLrc (data, that) {
         // alert(data.id)
-        console.log(that)
         const apiLyric = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=lyric&id=${data.id}`
         fecth.get(apiLyric).then((res) => {
             let parseLrc = {}
@@ -181,6 +180,10 @@ const musicApi = {
     clickIndex (data, that) {
         const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${data.id}`
         fecth.get(apiUrl).then((res) => {
+            if (res.data.data[0].url === null) {
+                this.playNextPrev(that, true)
+                return
+            }
             const newData = {
                 id: data.id,
                 url: res.data.data[0].url,
@@ -247,7 +250,7 @@ const musicApi = {
         // set_MusicCollectList
         let collectlist = store.getters.getMusicCollectList
         let insertMusic = true
-        if (collectlist.length !== 0) {
+        if (collectlist) {
             collectlist.forEach((v, i, a) => {
                 if (opt.id === v.id) {
                     insertMusic = false
@@ -315,6 +318,10 @@ const musicApi = {
         }
         const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${musicplaylist[index].id}`
         fecth.get(apiUrl).then((res) => {
+            if (res.data.data[0].url === null) {
+                this.playNextPrev(that, true)
+                return
+            }
             const newData = {
                 id: musicplaylist[index].id,
                 url: res.data.data[0].url,
@@ -324,16 +331,16 @@ const musicApi = {
                 list: store.getters.getMusicList,
                 type: 'unupdate'
             }
-            console.log(that)
             this.getMusicLrc(newData, that)
         }, (err) => {
             console.log(err)
         })
     },
     // 初始化音乐事件
-    initAudioEvent (that, audio) {
-        audio.onended = () => {
-            musicApi.playNextPrev(that, true)
+    initAudioEvent (that) {
+        const ele = store.getters.getAudioEle
+        ele.onended = () => {
+            this.playNextPrev(that, true)
         }
     }
 }

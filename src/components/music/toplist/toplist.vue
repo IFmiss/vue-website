@@ -1,32 +1,44 @@
 <template>
-  <div class="music_sheet">
-  	<div class="list_content_info">
-		<!-- <div class="music_list_title border-1px">
-			<span class="music_index"></span>
-			<span class="music_name">歌曲</span>
-			<span class="music_singer">歌手</span>
-			<span class="music_zhuanji">专辑</span>
-			<span class="music_duration">时长</span>
-		</div> -->
-		<div class="music_list_content">
-			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.al.picUrl, getMusicDurationType(list.dt),index)">
-				<span class="music_index">
-					<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
-					<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
-				</span>
-				<div class="music_name">
-					<span class="span_name">{{list.name}}</span>
-					<div class="hover_menu">
-						<i class="icon-add" @click.stop="collectMusic(list.id, list.name, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt))"></i>
-					</div>
-				</div>
-				<span class="music_singer" v-if="list.ar">
-					<span @click.stop="searchMusic($event)">{{list.ar[0].name}}</span>
-				</span>
-				<span class="music_zhuanji" v-if="list.al">
-					<span @click.stop="getAlbum(list.al.id)">{{list.al.name}}</span>
-				</span>
-				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
+  <div class="music_toplist container">
+  	<div class="toplist_content dw-boot-col-lg-12">
+		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="3779629" title="云音乐新歌榜，每天更新">
+				<img src="https://p3.music.126.net//N2HO5xfYEqyQ8q6oxCw8IQ==//18713687906568048.jpg?param=250y250" alt="云音乐新歌榜">
+			</div>
+		</div>
+		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="19723756" title="云音乐飙升榜，每天更新">
+				<img src="http://p1.music.126.net/DrRIg6CrgDfVLEph9SNh7w==/18696095720518497.jpg?param=250y250" alt="云音乐飙升榜">
+			</div>
+		</div>
+		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="3778678" title="云音乐热歌榜，每周四更新">
+				<img src="https:\/\/p3.music.126.net\/GhhuF6Ep5Tq9IEvLsyCN7w==\/18708190348409091.jpg?param=250y250" alt="云音乐热歌榜">
+			</div>
+		</div>
+		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="10520166" title="云音乐电音榜，每周五更新">
+				<img src="http://p1.music.126.net/4mh2HWH-bd5sRufQb-61bg==/3302932937414659.jpg?param=250y250" alt="云音乐电音榜">
+			</div>
+		</div>
+		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="180106" title="UK排行榜">
+				<img src="https:\/\/p3.music.126.net\/VQOMRRix9_omZbg4t-pVpw==\/18930291695438269.jpg?param=250y250" alt="UK排行榜周榜">
+			</div>
+		</div>
+		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="71385702" title="云音乐ACG音乐榜，每周四更新">
+				<img src="http://p1.music.126.net/vttjtRjL75Q4DEnjRsO8-A==/18752170813539664.jpg?param=250y250" alt="云音乐ACG音乐榜">
+			</div>
+		</div>
+		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="60198" title="云音乐ACG音乐榜，每周三更新">
+				<img src="http://p1.music.126.net/EBRqPmY8k8qyVHyF8AyjdQ==/18641120139148117.jpg?param=250y250" alt="美国Billboard周榜">
+			</div>
+		</div>
+		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="60131" title="日本Oricon周榜，每周三更新">
+				<img src="http://p1.music.126.net/Rgqbqsf4b3gNOzZKxOMxuw==/19029247741938160.jpg?param=250y250" alt="日本Oricon周榜">
 			</div>
 		</div>
 	</div>
@@ -34,8 +46,8 @@
 </template>
 <script>
   // import fecth from './../../utils/fecth.js'
-  import store from '../../../store'
-  import musicApi from './../music.js'
+  // import store from '../../../store'
+  // import musicApi from './../music.js'
   // import axios from 'axios'
   // import qs from 'qs'
   export default {
@@ -75,171 +87,72 @@
   		lrccontent: {}
   	},
   	methods: {
-  		searchMusic (e) {
-  			this.$router.push({name: 'searchlist', params: { w: e.target.innerHTML }})
-  		},
-  		getAlbum (id) {
-  			this.$router.push({name: 'albumlist', params: { id: id }})
-  		},
-  		// 点击播放音乐
-  		clickPlayList (id, pic, duration, index) {
-  			const data = {
-  				id: id,
-  				pic: pic,
-  				duration: duration,
-  				index: index,
-  				lrcContent: this.lrccontent
-  			}
-  			musicApi.clickIndex(data, this)
-  		},
-
-  		// 获取歌词
-  		getMusicLrc (id) {
-  			musicApi.getMusicLrc(id, this)
-  		},
-
-  		// 音乐时长格式
-  		getMusicDurationType (time) {
-  			return musicApi.getMusicDurantionType(time, this)
-  		},
-  		// 初始化音乐播放器
-		initMusic () {
-			// alert(this.$router.sheetid)
-			// const id = this.$router.sheetId
-			// alert(JSON.stringify(this.params))
-			musicApi.getMusicSheet(this.params.id, this)
-  		},
-  		AudiEle () {
-  			return store.getters.getAudioEle
-		},
-		// list.id, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt)
-  		collectMusic (...items) {
-  			const musiccollect = {
-  				id: items[0],
-  				name: items[1],
-  				pic: items[2],
-  				singer: items[3],
-  				albumid: items[4],
-  				albumname: items[5],
-  				dt: items[6]
-  			}
-  			musicApi.collectMusic(musiccollect)
+  		openTopList (e) {
+  			const id = e.target.getAttribute('data-id')
+  			this.$router.push({name: 'musicindex', params: {id: id}})
   		}
   	},
   	computed: {
-  		musicList () {
-  			return store.getters.getMusicList
-  		},
-  		getCurrentMusic () {
-  			return store.getters.getCurrentAudio
-  		},
-  		getMusicLrcLists () {
-  			return store.getters.getCurrentAudio.lyric
-  		},
-  		getCurrentMusicLrcIndex () {
-			return this.currentMusicLrcIndex
-  		}
   	},
   	watch: {
-  		// currentMusic (newval, oldval) {
-  		// 	alert(newval.lyric)
-  		// }
   		'$route' (to, from) {
   			this.params = this.$route.params
   		}
   	},
   	mounted () {
-  		this.$nextTick(() => {
-			// alert(JSON.stringify(this.params))
-			this.initMusic()
-			musicApi.musicEvent(this)
-		})
   	}
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 	@import '../../../common/stylus/global.styl'
 	@import '../../../common/stylus/border-1px/index.styl'
-	.list_content_info
-		height:100%
-		padding:10px
-		box-sizing:border-box
-		.music_list_title,.music_list
-			height:50px
-			line-height:50px
-			// background:red
-			font-size:0
-			span
-				display:inline-block
-				font-size:14px
-				color:$text_before_color
-				text-overflow:ellipsis
-				overflow:hidden
-				white-space:nowrap
-				vertical-align:middle
-				cursor:pointer
-				&.music_name
-					width:calc(50% - 50px)
-					font-size:14px
-				&.music_singer
-					width:20%
-					padding:0 5px
-					box-sizing:border-box
-					&:hover
-						text-decoration:underline
-				&.music_zhuanji
-					width:20%
-					padding:0 5px
-					box-sizing:border-box
-					&:hover
-						text-decoration:underline
-				&.music_duration
-					width:10%
-					padding:0 5px
-					box-sizing:border-box
-				&.music_index
-					width:50px
-					height:100%
-					text-align: center;
-			.music_name
-				width:calc(50% - 50px)
-				display:inline-block
-				font-size:14px
-				height:50px
-				line-height:50px
-				color:$text_before_color
-				text-overflow:ellipsis
-				overflow:hidden
-				white-space:nowrap
-				font-size:0
-				position:relative
-				vertical-align: middle;
-				.span_name
-					display:inline-block
-					width: 100% 
-					height:100%
-					// background:red
-					font-size:14px
-				.hover_menu
-					position:absolute
-					width:140px
-					height:100%
-					right:0
-					top:0
-					display:none
-			&.border-1px
-				border-1px($border_bottom_color,bottom)
-		.music_list_content
-			height:calc(100% - 50px)
+	.music_toplist
+		// background:red
+		.toplist_content
 			position:relative
-			overflow:auto
-			.music_list
-				position:relative
-				&:hover
-					background:$list_hover
-				.music_name
-					.hover_menu
+			box-sizing: border-box;
+			.toplist_l
+				padding: 30px
+				box-sizing:border-box
+				.toplist_detail
+					height:auto
+					cursor:pointer
+					position:relative
+					&:after
+						content:''
+						position:absolute
+						top:0
+						left:0
+						width:100%
+						height:100%
+						background:url('../../../../static/coverall.png')
+						background-position:0 0
+						background-size: 272%
+					&:before
+						content:attr(title)
+						position:absolute
+						bottom:0
+						right:0
+						left:0
+						width:100%
+						height:30px
+						line-height:30px
+						text-overflow:ellipsis
+						padding:0 5px
+						box-sizing:border-box
+						white-space:nowrap
+						overflow:hidden
+						background:rgba(0,0,0,0.3)
+						color:#fff
+						font-size:12px
+					img
 						display:block
-	video
-		display:none	
+						width:100%
+						height:auto
+			@media screen and (max-width: 1550px) 
+				.toplist_l
+					padding: 15px
+			@media screen and (max-width: 768px) 
+				.toplist_l
+					padding: 10px
 </style>
