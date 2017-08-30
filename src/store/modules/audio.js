@@ -3,7 +3,8 @@ const audio = {
 		currentAudio: {
 			url: '',
 			duration: '',
-			picurl: ''
+			picurl: '',
+			index: 1
 		},
 		// 音乐的元素
 		audioEle: '',
@@ -11,6 +12,8 @@ const audio = {
 		audioLrcContent: '',
 		// lrc的索引   显示歌词使用
 		lrcIndex: 0,
+		// 音频是否正在播放
+		isPlaying: false,
 		// 音乐显示列表  其他列表都要把内容赋值给他 才能可以显示内容
 		musicList: {},
 		// 搜索列表
@@ -31,7 +34,8 @@ const audio = {
 		getMusicPlayList: state => state.musicPlayList,
 		getMusicCollectList: state => state.musicCollectList,
 		getAudioLrcContent: state => state.audioLrcContent,
-		getAudiolrcIndex: state => state.lrcIndex
+		getAudiolrcIndex: state => state.lrcIndex,
+		getAudioIsPlay: state => state.isPlaying
 	},
 	mutations: {
 		setCurrentAudio (state, obj) {
@@ -60,6 +64,9 @@ const audio = {
 		},
 		setAudiolrcIndex (state, obj) {
 			state.lrcIndex = obj.data
+		},
+		setAudioIsPlay (state, obj) {
+			state.isPlaying = obj
 		}
 	},
 	actions: {

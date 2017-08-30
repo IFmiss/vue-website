@@ -109,6 +109,8 @@ const musicApi = {
             that.$nextTick(() => {
                 store.getters.getAudioEle.load()
                 store.getters.getAudioEle.play()
+                // 设置播放状态
+                store.commit('setAudioIsPlay', true)
             })
         }, (err) => {
             console.log(err)
@@ -181,6 +183,14 @@ const musicApi = {
         const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${data.id}`
         fecth.get(apiUrl).then((res) => {
             if (res.data.data[0].url === null) {
+                let initIndex = 0
+                const currentMusic = {
+                    index: store.getters.getCurrentAudio.index ? store.getters.getCurrentAudio.index + 1 : initIndex + 1
+                }
+                store.commit({
+                    type: 'setCurrentAudio',
+                    data: currentMusic
+                })
                 this.playNextPrev(that, true)
                 return
             }
@@ -292,11 +302,13 @@ const musicApi = {
     // 播放暂停
     playPause () {
         const ele = store.getters.getAudioEle
+        if (!(ele.src.indexOf('.mp3') > 0)) return
         if (ele.paused) {
             ele.play()
         } else {
             ele.pause()
         }
+        store.commit('setAudioIsPlay', ele.paused)
     },
     // 播放下一曲  可调用clickPlayindex  更换index 即可 (第2个参数为 true 或者 false  true表示下一首  false 表示上一首     第3个参数是判断是不是正在播放的音乐触发更新音乐列表    如果是正在播放的音乐点击播放index 的歌曲  和 自动播放 手动播放下一首 则不触发重新填充数据的操作)
     playNextPrev (that, isNext) {
@@ -319,7 +331,15 @@ const musicApi = {
         const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${musicplaylist[index].id}`
         fecth.get(apiUrl).then((res) => {
             if (res.data.data[0].url === null) {
-                this.playNextPrev(that, true)
+                let initIndex = 0
+                const currentMusic = {
+                    index: store.getters.getCurrentAudio.index ? (isNext ? store.getters.getCurrentAudio.index + 1 : store.getters.getCurrentAudio.index - 1) : (isNext ? initIndex + 1 : initIndex)
+                }
+                store.commit({
+                    type: 'setCurrentAudio',
+                    data: currentMusic
+                })
+                this.playNextPrev(that, isNext)
                 return
             }
             const newData = {

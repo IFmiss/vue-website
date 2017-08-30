@@ -3,7 +3,7 @@
   	<div class="music_bg" v-if="getIsAPP.isHigher768" :style="{background:'url(' + getCurrentMusic.picurl + ') center center / cover'}">
   		<div class="mask_bg"></div>
   	</div>
-  	<div class="mask_linear_bg" v-if="getCurrentMusic.picurl"></div>
+  	<div class="mask_linear_bg" v-if="getCurrentMusic.picurl && getIsAPP.isHigher768"></div>
   	<div class="music_content">
   		<div class="music_body">
   			<div class="left_list">
@@ -22,30 +22,6 @@
 				        	搜索列表
 				        </router-link>
 			  		</div>
-			  		<!-- <div class="list_content">
-			  			<div class="music_list_title border-1px">
-			  				<span class="music_index"></span>
-			  				<span class="music_name">歌曲</span>
-			  				<span class="music_singer">歌手</span>
-			  				<span class="music_zhuanji">专辑</span>
-			  				<span class="music_duration">时长</span> 
-			  			</div>
-			  			<div class="music_list_content">
-			  				<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.al.picUrl, getMusicDurationType(list.dt),index)">
-			  					<span class="music_index">
-			  						<span v-show="getCurrentMusic.index !== index">{{index + 1}}</span>
-			  						<img v-show="getCurrentMusic.index === index" src="static/wave.gif" alt="未曾遗忘的青春">
-			  					</span>
-			  					<div class="music_name">
-			  						<span class="span_name">{{list.name}}</span>
-			  						<div class="hover_menu"></div>
-			  					</div>
-				  				<span class="music_singer" v-if="list.ar"><span @click.stop="searchMusic($event)">{{list.ar[0].name}}</span></span>
-				  				<span class="music_zhuanji" v-if="list.al"><span @click.stop="getAlbum(list.al.id)">{{list.al.name}}</span></span>
-				  				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
-			  				</div>
-			  			</div>
-			  		</div> -->
 			  		<transition name="silde-top">
 						<router-view class="list_content" name="listinfo"></router-view>
 					</transition>
@@ -66,7 +42,18 @@
   				</div>
   			</div>
   		</div>
-  		<div class="music_ctrl"></div>
+  		<div class="music_ctrl">
+  			<div class="left_ctrl">
+  				<div class="music_detail_ctrl">
+  					<i class="playPrev icon-prevdetail" @click.stop="playPrev()"></i>
+  					<i class="playPause" :class="getAudioIsPlay ? 'icon-pause' : 'icon-play'" @click.stop="playPause()"></i>
+  					<i class="playNext icon-nextdetail" @click.stop="playNext()"></i>
+  				</div>
+  			</div>
+  			<div class="right_ctrl">
+  				
+  			</div>
+  		</div>
   	</div>
   </div>
 </template>
@@ -131,9 +118,15 @@
   		AudiEle () {
   			return store.getters.getAudioEle
   		},
-  		// playPause () {
-  		// 	alert(1)
-  		// },
+  		playPrev () {
+  			musicApi.playNextPrev(this, false)
+  		},
+  		playNext () {
+  			musicApi.playNextPrev(this, true)
+  		},
+  		playPause () {
+  			musicApi.playPause()
+  		},
   		keypress () {
   			let that = this
   			document.onkeydown = e => {
@@ -168,6 +161,9 @@
   		},
   		getIsAPP () {
   			return store.getters.getGlobalInfo
+  		},
+  		getAudioIsPlay () {
+  			return store.getters.getAudioIsPlay
   		}
   	},
   	watch: {
@@ -445,7 +441,30 @@
 			.music_ctrl
 				width:100%;
 				height:80px
-				background:rgba(0,0,0,0.3)
+				// background:rgba(0,0,0,0.3)
+				display:flex
+				.left_ctrl
+					flex: 1 1 auto
+					display:flex
+					.music_detail_ctrl
+						display:flex
+						align-items:center
+						i
+							color:$text_before_color
+							font-size:38px
+							margin:0 10px
+							transition:0.5s
+							cursor:pointer
+							&.playPause
+								font-size:46px
+							&:hover
+								color:$text_color
+				.right_ctrl
+					flex: 0 0 310px
+					// background:blue
+				@media screen and (max-width: 922px) 
+					.right_ctrl
+						display:none
 		@media screen and (max-width: 1440px) 
 			.music_content
 				top:40px
