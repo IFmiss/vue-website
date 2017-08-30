@@ -76,14 +76,16 @@
   		getAlbum (id) {
   			this.$router.push({name: 'albumlist', params: { id: id }})
   		},
+
   		// 点击播放音乐
   		clickPlayList (id, pic, duration, index) {
+  			// alert(JSON.stringify(this.$route.params))
   			const data = {
   				id: id,
   				pic: pic,
   				duration: duration,
   				index: index,
-  				lrcContent: this.lrccontent
+  				list: store.getters.getMusicList
   			}
   			musicApi.clickIndex(data, this)
   		},
@@ -139,7 +141,6 @@
 	@import '../../../common/stylus/border-1px/index.styl'
 	.list_content_info
 		height:100%
-		padding:10px
 		box-sizing:border-box
 		.music_list_title,.music_list
 			height:50px
