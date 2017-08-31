@@ -87,7 +87,9 @@ const musicApi = {
             this.lastLyric = -1
             const currentMusic = {
                 id: data.id,
+                name: data.name,
                 url: data.url,
+                singer: data.singer,
                 duration: data.duration,
                 picurl: data.picurl,
                 index: data.musicndex,
@@ -196,7 +198,9 @@ const musicApi = {
             }
             const newData = {
                 id: data.id,
+                name: data.name,
                 url: res.data.data[0].url,
+                singer: data.singer,
                 duration: data.duration,
                 picurl: data.pic,
                 musicndex: data.index,
@@ -232,18 +236,6 @@ const musicApi = {
         }, (err) => {
             console.log(err)
         })
-    },
-
-    // 音乐播放的一些事件集合
-    musicEvent (that) {
-        let musicEle = document.getElementsByTagName('audio')[0]
-        // alert(store.getters.getAudioEle)
-        musicEle.ontimeupdate = function () {
-            const currentT = Math.floor(musicEle.currentTime)
-            musicApi.scrollLyric(currentT, that)
-            // console.log(1)
-        }
-        // alert(musicEle.getAttribute('src'))
     },
 
     scrollAnimate (ele, position) {
@@ -344,7 +336,9 @@ const musicApi = {
             }
             const newData = {
                 id: musicplaylist[index].id,
+                name: musicplaylist[index].name,
                 url: res.data.data[0].url,
+                singer: musicplaylist[index].ar[0].name,
                 duration: musicApi.getMusicDurantionType(musicplaylist[index].dt),
                 picurl: musicplaylist[index].al.picUrl,
                 musicndex: index,
@@ -360,12 +354,21 @@ const musicApi = {
     initAudioEvent (that) {
         // audio Dom元素
         const ele = store.getters.getAudioEle
+        const _this = this
         // 本地音乐初始化  （收藏的歌曲）
         this.getLocalMusic()
 
         // 音乐播放结束事件
         ele.onended = () => {
             this.playNextPrev(that, true)
+        }
+
+        ele.ontimeupdate = function () {
+            const currentT = Math.floor(ele.currentTime)
+            musicApi.scrollLyric(currentT, that)
+            // 设置currentT
+            store.dispatch('set_AudioCurrentTime', _this.getMusicDurantionType(currentT * 1000))
+            // console.log(currentT)
         }
     }
 }

@@ -49,6 +49,20 @@
   					<i class="playPause" :class="getAudioIsPlay ? 'icon-pause' : 'icon-play'" @click.stop="playPause()"></i>
   					<i class="playNext icon-nextdetail" @click.stop="playNext()"></i>
   				</div>
+  				<div class="music_progress">
+  					<div class="music_current_detail">
+  						<span class="music_c_name">{{getCurrentMusic.name ? getCurrentMusic.name : '未曾遗忘的青春'}} - {{getCurrentMusic.singer ? getCurrentMusic.singer : '戴维戴维'}}</span>
+  						<span class="music_c_time">{{getMusicCurrentT}} / {{getCurrentMusic.duration ? getCurrentMusic.duration : '00:00'}}</span>
+  					</div>
+  					<div class="music_progress_bar">
+  						<div class="duration">
+  							<div class="buffering"></div>
+	  						<div class="real">
+	  							<div class="range"></div>
+	  						</div>
+  						</div>
+  					</div>
+  				</div>
   			</div>
   			<div class="right_ctrl">
   				
@@ -151,6 +165,7 @@
   			return store.getters.getMusicList
   		},
   		getCurrentMusic () {
+  			console.log(store.getters.getCurrentAudio)
   			return store.getters.getCurrentAudio
   		},
   		getMusicLrcLists () {
@@ -164,6 +179,12 @@
   		},
   		getAudioIsPlay () {
   			return store.getters.getAudioIsPlay
+  		},
+  		getMusicPlayingList () {
+  			return store.getters.getMusicPlayList
+  		},
+  		getMusicCurrentT () {
+			return store.getters.getAudioCurrentTime
   		}
   	},
   	watch: {
@@ -459,6 +480,63 @@
 								font-size:46px
 							&:hover
 								color:$text_color
+					.music_progress
+						width: 100%
+						box-sizing:border-box
+						padding: 0 20px
+						display:flex
+						align-items:center
+						flex-direction:column
+						justify-content: center
+						.music_current_detail
+							width:100%
+							height:auto
+							color:$text_before_color
+							.music_c_name
+								// text-align:left
+								float:left
+							.music_c_time
+								// text-align:right
+								float:right
+						.music_progress_bar
+							width:100%
+							height:8px
+							padding-top:6px
+							// background:$text_color_opacity
+							box-sizing:border-box
+							position:relative
+							cursor:pointer
+							.duration
+								width:100%
+								height:2px
+								position:relative
+								background:$progress_color
+								border-radius: 1px
+								.buffering
+									width:20%
+									height:100%
+									background:$buffering_color
+									border-radius: 1px
+									position:absolute
+									top:0
+									left:0
+								.real
+									width:10%
+									position:absolute
+									height:100%
+									left:0
+									background:$real_color
+									border-radius: 1px
+									.range
+										position:absolute
+										top:-4px
+										right:-4px
+										width:10px
+										height:10px
+										border-radius: 50%
+										background:$range_color
+										cursor:pointer
+								
 				.right_ctrl
 					flex: 0 0 310px
 					// background:blue
