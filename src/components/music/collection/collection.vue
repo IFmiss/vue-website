@@ -9,7 +9,7 @@
 			<span class="music_duration">时长</span>
 		</div>
 		<div class="music_list_content">
-			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.pic" @click="clickPlayList(list.id, list.pic, list.dt, index)">
+			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.pic" @click="clickPlayList(list.id, list.name, list.pic, list.singer, list.dt,index), musicList">
 				<span class="music_index">
 					<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
 					<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
@@ -81,14 +81,20 @@
   		getAlbum (id) {
   			this.$router.push({name: 'albumlist', params: { id: id }})
   		},
+  		getMusicDurationType (time) {
+  			return musicApi.getMusicDurantionType(time, this)
+  		},
   		// 点击播放音乐
-  		clickPlayList (id, pic, duration, index) {
+  		clickPlayList (id, name, pic, singer, duration, index, list) {
+  			// alert(JSON.stringify(this.$route.params))
   			const data = {
   				id: id,
+  				name: name,
   				pic: pic,
+  				singer: singer,
   				duration: duration,
   				index: index,
-  				lrcContent: this.lrccontent
+  				list: store.getters.getMusicList
   			}
   			musicApi.clickIndex(data, this)
   		},
@@ -124,7 +130,6 @@
   	mounted () {
   		this.$nextTick(() => {
 			this.initMusic()
-			musicApi.musicEvent(this)
 		})
   	}
   }

@@ -14,6 +14,8 @@ const audio = {
 		lrcIndex: 0,
 		// 当前的音乐时间
 		currentTime: '00:00',
+		// 当前的时长
+		currentD: 0,
 		// 音频是否正在播放
 		isPlaying: false,
 		// 音乐显示列表  其他列表都要把内容赋值给他 才能可以显示内容
@@ -38,7 +40,8 @@ const audio = {
 		getAudioLrcContent: state => state.audioLrcContent,
 		getAudiolrcIndex: state => state.lrcIndex,
 		getAudioIsPlay: state => state.isPlaying,
-		getAudioCurrentTime: state => state.currentTime
+		getAudioCurrentTime: state => state.currentTime,
+		getAudioCurrentD: state => state.currentD
 	},
 	mutations: {
 		setCurrentAudio (state, obj) {
@@ -73,6 +76,9 @@ const audio = {
 		},
 		setAudioCurrentTime (state, obj) {
 			state.currentTime = obj
+		},
+		setAudioCurrentD (state, obj) {
+			state.currentD = obj
 		}
 	},
 	actions: {
@@ -100,6 +106,9 @@ const audio = {
 		},
 		set_AudioCurrentTime ({commit}, obj) {
 			commit('setAudioCurrentTime', obj)
+		},
+		set_AudioCurrentD ({commit}, obj) {
+			commit('setAudioCurrentD', obj)
 		}
 	}
 }

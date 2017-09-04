@@ -15,7 +15,9 @@
 			</span>
 			<div class="music_name">
 				<span class="span_name">{{list.name}}</span>
-				<div class="hover_menu"></div>
+				<div class="hover_menu">
+					<i class="icon-add" @click.stop="collectMusic(list.id, list.name, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt))"></i>
+				</div>
 			</div>
 			<span class="music_singer" v-if="list.ar">
 				<span @click.stop="searchMusic($event)">{{list.ar[0].name}}</span>
@@ -104,6 +106,18 @@
   		},
   		AudiEle () {
   			return store.getters.getAudioEle
+  		},
+  		collectMusic (...items) {
+  			const musiccollect = {
+  				id: items[0],
+  				name: items[1],
+  				pic: items[2],
+  				singer: items[3],
+  				albumid: items[4],
+  				albumname: items[5],
+  				dt: items[6]
+  			}
+  			musicApi.collectMusic(musiccollect)
   		}
   	},
   	computed: {
@@ -132,7 +146,6 @@
   		this.$nextTick(() => {
 			// alert(JSON.stringify(this.params))
 			this.initMusic()
-			musicApi.musicEvent(this)
 		})
   		// this.searchMusic()
   // 		this.$router.push({

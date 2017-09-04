@@ -1,6 +1,6 @@
 import store from '../../store'
 import fecth from './../../utils/fecth.js'
-// import $ from 'jquery'
+import $ from 'jquery'
 const musicApi = {
     lastLyric: 0,
     lyric: {},    // 解析的歌詞
@@ -9,18 +9,18 @@ const musicApi = {
         const lyrics = lrc.split('\n')
         let lrcObj = {}
         for (let i = 0; i < lyrics.length; i++) {
-        const lyric = decodeURIComponent(lyrics[i])
-        const timeReg = /\[\d*:\d*((\.|\:)\d*)*\]/g
-        const timeRegExpArr = lyric.match(timeReg)
-        if (!timeRegExpArr) continue
-        const clause = lyric.replace(timeReg, '')
-        for (let k = 0, h = timeRegExpArr.length; k < h; k++) {
-        const t = timeRegExpArr[k]
-        let min = Number(String(t.match(/\[\d*/i)).slice(1))
-        let sec = Number(String(t.match(/\:\d*/i)).slice(1))
-        const time = min * 60 + sec
-        lrcObj[time] = clause
-        }
+            const lyric = decodeURIComponent(lyrics[i])
+            const timeReg = /\[\d*:\d*((\.|\:)\d*)*\]/g
+            const timeRegExpArr = lyric.match(timeReg)
+            if (!timeRegExpArr) continue
+            const clause = lyric.replace(timeReg, '')
+            for (let k = 0, h = timeRegExpArr.length; k < h; k++) {
+                const t = timeRegExpArr[k]
+                let min = Number(String(t.match(/\[\d*/i)).slice(1))
+                let sec = Number(String(t.match(/\:\d*/i)).slice(1))
+                const time = min * 60 + sec
+                lrcObj[time] = clause
+            }
         }
         return lrcObj
     },
@@ -72,6 +72,7 @@ const musicApi = {
 
     // 获取歌词
     getMusicLrc (data, that) {
+        const ele = store.getters.getAudioEle
         // alert(data.id)
         const apiLyric = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=lyric&id=${data.id}`
         fecth.get(apiLyric).then((res) => {
@@ -111,8 +112,14 @@ const musicApi = {
             that.$nextTick(() => {
                 store.getters.getAudioEle.load()
                 store.getters.getAudioEle.play()
+                // 设置歌词位置
+                store.commit({
+                    type: 'setAudiolrcIndex',
+                    data: 0
+                })
+                $('.lrc-content').stop().animate({scrollTop: 0}, 1000)
                 // 设置播放状态
-                store.commit('setAudioIsPlay', true)
+                store.commit('setAudioIsPlay', !ele.paused)
             })
         }, (err) => {
             console.log(err)
@@ -177,7 +184,11 @@ const musicApi = {
         var scroll = (document.getElementsByClassName('lrc-item')[0].offsetHeight * i) - store.getters.getAudioLrcContent.offsetHeight / 2
         // $('.lrc-wrapper').stop().animate({scrollTop: scroll}, 1000)  // 平滑滚动到当前歌词位置(更改这个数值可以改变歌词滚动速度，单位：毫秒)
         // console.log(scroll)
-        this.scrollAnimate(store.getters.getAudioLrcContent, scroll)
+        // this.scrollAnimate(store.getters.getAudioLrcContent, scroll)
+        // console.log($('.lrc-wrapper'))
+        // store.getters.getAudioLrcContent.animate({scrollTop: scroll}, 1000)
+        // console.log($)
+        $('.lrc-content').stop().animate({scrollTop: scroll}, 1000)
     },
 
     // 点击播放歌曲
@@ -300,7 +311,7 @@ const musicApi = {
         } else {
             ele.pause()
         }
-        store.commit('setAudioIsPlay', ele.paused)
+        store.commit('setAudioIsPlay', !ele.paused)
     },
     // 播放下一曲  可调用clickPlayindex  更换index 即可 (第2个参数为 true 或者 false  true表示下一首  false 表示上一首     第3个参数是判断是不是正在播放的音乐触发更新音乐列表    如果是正在播放的音乐点击播放index 的歌曲  和 自动播放 手动播放下一首 则不触发重新填充数据的操作)
     playNextPrev (that, isNext) {
@@ -354,7 +365,7 @@ const musicApi = {
     initAudioEvent (that) {
         // audio Dom元素
         const ele = store.getters.getAudioEle
-        const _this = this
+        // const _this = this
         // 本地音乐初始化  （收藏的歌曲）
         this.getLocalMusic()
 
@@ -362,15 +373,28 @@ const musicApi = {
         ele.onended = () => {
             this.playNextPrev(that, true)
         }
-
         ele.ontimeupdate = function () {
+            const duration = Math.floor(ele.duration)
             const currentT = Math.floor(ele.currentTime)
             musicApi.scrollLyric(currentT, that)
             // 设置currentT
-            store.dispatch('set_AudioCurrentTime', _this.getMusicDurantionType(currentT * 1000))
-            // console.log(currentT)
+            store.dispatch('set_AudioCurrentTime', currentT)
+            // 设置duration
+            store.dispatch('set_AudioCurrentD', currentT / duration * 100)
+            // console.log(currentT + ' ---- ' + duration)
         }
+        // 监听缓冲的进度
+        ele.onprogress = function () {
+            that.bufferingP = Math.floor(((ele.buffered.end(0) - ele.buffered.start(0)) / ele.duration) * 100)
+        }
+        // ele.onabort = function () {
+        //     this.playNextPrev(that, true)
+        // }
     }
+    // // 关联当前音乐至进度条
+    // syncProgress () {
+
+    // }
 }
 
 export default musicApi

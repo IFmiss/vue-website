@@ -107,9 +107,6 @@
   		},
   		// 初始化音乐播放器
 		initMusic () {
-			// alert(this.$router.sheetid)
-			// const id = this.$router.sheetId
-			// alert(JSON.stringify(this.params))
 			musicApi.getMusicSheet(this.params.id, this)
   		},
   		AudiEle () {
@@ -237,8 +234,6 @@
 			overflow:auto
 			.music_list
 				position:relative
-				&:hover
-					background:$list_hover
 				.music_name
 					.hover_menu
 						display:block

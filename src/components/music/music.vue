@@ -52,12 +52,12 @@
   				<div class="music_progress">
   					<div class="music_current_detail">
   						<span class="music_c_name">{{getCurrentMusic.name ? getCurrentMusic.name : '未曾遗忘的青春'}} - {{getCurrentMusic.singer ? getCurrentMusic.singer : '戴维戴维'}}</span>
-  						<span class="music_c_time">{{getMusicCurrentT}} / {{getCurrentMusic.duration ? getCurrentMusic.duration : '00:00'}}</span>
+  						<span class="music_c_time">{{getMusicCurrentT !== NaN & getMusicCurrentT !== '00:00' ? getMusicDurationType(getMusicCurrentT * 1000) : '00:00'}} / {{getCurrentMusic.duration ? getCurrentMusic.duration : '00:00'}}</span>
   					</div>
   					<div class="music_progress_bar">
   						<div class="duration">
-  							<div class="buffering"></div>
-	  						<div class="real">
+  							<div class="buffering" :style="{width:`${bufferingP}%`}"></div>
+	  						<div class="real" :style="{width: getMusicPro}">
 	  							<div class="range"></div>
 	  						</div>
   						</div>
@@ -81,6 +81,7 @@
   	data () {
   		return {
   			currentMusic: {},
+  			bufferingP: 0,
   			top_list_all: {
 				0: ['云音乐新歌榜', '/discover/toplist?id=3779629'],
 				1: ['云音乐热歌榜', '/discover/toplist?id=3778678'],
@@ -185,6 +186,10 @@
   		},
   		getMusicCurrentT () {
 			return store.getters.getAudioCurrentTime
+  		},
+  		getMusicPro () {
+  			const mp = store.getters.getAudioCurrentD
+  			return (mp).toFixed(2) + '%'
   		}
   	},
   	watch: {
@@ -371,7 +376,7 @@
 										font-size:14px
 									.hover_menu
 										position:absolute
-										width:140px
+										width:60px
 										height:100%
 										right:0
 										top:0
@@ -387,11 +392,11 @@
 											text-align:center
 											border-radius:50%
 											vertical-align:middle
-											border:1px solid $border_bottom_color_deep
+											border:2px solid $border_bottom_color_deep
 											cursor:pointer
 											&:hover
 												color:$text_before_color
-												border:1px solid $text_before_color
+												border:2px solid $text_before_color
 										
 								&.border-1px
 									border-1px($border_bottom_color,bottom)
@@ -402,7 +407,6 @@
 								.music_list
 									position:relative
 									&:hover
-										background:$list_hover
 										.music_name
 											.hover_menu
 												display:block
@@ -520,6 +524,7 @@
 									position:absolute
 									top:0
 									left:0
+									transition:width 0.3s
 								.real
 									width:10%
 									position:absolute
@@ -527,6 +532,7 @@
 									left:0
 									background:$real_color
 									border-radius: 1px
+									transition:width 0.3s
 									.range
 										position:absolute
 										top:-4px
@@ -558,7 +564,6 @@
 								.music_list
 									position:relative
 									&:hover
-										background:$list_hover
 										.music_name
 											.hover_menu
 												display:none

@@ -2,7 +2,7 @@
   <div id="app" @resize="isApp">
     <loader :isshow="getShowLoading" loaderbackground="rgba(0,0,0,0.3)"></loader>
     <div class="maincontent">
-      <fixed-bg v-if="imageInfo && imageSetting" :imagepath="imagePrevPath +'' + imageInfo.url" :maskcolor="getGlobalStyle.contentInfo.bgcolor" :maskopacity="getGlobalStyle.contentInfo.opacity"></fixed-bg>
+      <fixed-bg v-if="imageInfo.url && imageSetting" :imagepath="imagePrevPath +'' + imageInfo.url" :maskcolor="getGlobalStyle.contentInfo.bgcolor" :maskopacity="getGlobalStyle.contentInfo.opacity"></fixed-bg>
     </div>
     <v-content></v-content>
     <audio :src="getCurrentMusic.url" ref="myAudio"></audio>

@@ -76,11 +76,11 @@ module.exports = {
       { test: /jquery-mousewheel/, loader: 'imports?define=>false&this=>window' },
       { test: /malihu-custom-scrollbar-plugin/, loader: 'imports?define=>false&this=>window' }
     ]
-  },
-  plugins: [
-    new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery'
-    })
- ]
+  }
+ //  plugins: [
+ //    new webpack.ProvidePlugin({
+ //        $: 'jquery',
+ //        jQuery: 'jquery'
+ //    })
+ // ]
 }

@@ -106,9 +106,6 @@
   		},
   		// 初始化音乐播放器
 		initMusic () {
-			// alert(this.$router.sheetid)
-			// const id = this.$router.sheetId
-			// alert(JSON.stringify(this.params))
 			musicApi.getMusicSheet(this.params.id, this)
   		},
   		AudiEle () {
@@ -154,7 +151,6 @@
   		this.$nextTick(() => {
 			// alert(JSON.stringify(this.params))
 			this.initMusic()
-			musicApi.musicEvent(this)
 		})
   	}
   }
