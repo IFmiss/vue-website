@@ -7,7 +7,7 @@
           <li>首页</li>
           </router-link>
           <router-link tag="a" to="/pic">
-            <li>图片</li>
+            <li>状态</li>
           </router-link>
           <router-link tag="a" to="/music">
             <li>音乐</li>
@@ -27,7 +27,7 @@
               <li>首页</li>
               </router-link>
               <router-link tag="a" to="/pic">
-                <li>图片</li>
+                <li>状态</li>
               </router-link>
               <router-link tag="a" to="/music">
                 <li>音乐</li>

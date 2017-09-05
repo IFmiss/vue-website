@@ -29,14 +29,16 @@
   </div>
 </template>
 <script>
+  // import Vue from 'vue'
   import store from './../../store'
   import line from './../common/line/line.vue'
   import picList from './picList/picList.vue'
   import fecth from './../../utils/fecth.js'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  // import $ from 'jquery'
+  import $ from 'jquery'
   // require('jquery-mousewheel')
   // require('malihu-custom-scrollbar-plugin')
+  // require('malihu-custom-scrollbar-plugin')($)
 
   export default {
     data () {
@@ -163,7 +165,7 @@
       // $('.picList_content').mCustomScrollbar({
       //    theme: 'minimal-dark'
       // })
-      // this.$nextTick(() => { console.log(this.$refs) })
+      this.$nextTick(() => { setTimeout(() => { $('.pic_content').mCustomScrollbar() }, 3000) })
       // alert(this.$refs.abc)
       // alert(store.getters.getGlobalInfo)
       // this.swiper.slideTo(3, 1000, false)

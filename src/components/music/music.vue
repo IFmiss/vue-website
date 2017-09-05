@@ -166,7 +166,6 @@
   			return store.getters.getMusicList
   		},
   		getCurrentMusic () {
-  			console.log(store.getters.getCurrentAudio)
   			return store.getters.getCurrentAudio
   		},
   		getMusicLrcLists () {

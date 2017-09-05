@@ -5,7 +5,7 @@ import store from './../store'
 axios.interceptors.request.use(
   config => {
   // loading
-  console.log('loadding')
+  // console.log('loadding')
    store.dispatch({
     type: 'set_ShowLoading',
     data: true
@@ -31,7 +31,7 @@ function checkStatus (response) {
     return response
     // 如果不需要除了data之外的数据，可以直接 return response.data
   }
-  console.log('loadding')
+  // console.log('loadding')
    store.dispatch({
     type: 'set_ShowLoading',
     data: false
@@ -51,7 +51,7 @@ function checkCode (res) {
   if (res.data && (!res.data.success)) {
     // alert(res.data.error_msg)
   }
-  console.log('loadding')
+  // console.log('loadding')
    store.dispatch({
     type: 'set_ShowLoading',
     data: false

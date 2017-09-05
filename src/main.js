@@ -3,11 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// import $ from 'jquery'
+import $ from 'jquery'
 // import './../babel-polyfill'
+// import scrollbar from 'malihu-custom-scrollbar-plugin'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
-// Vue.prototype.$jq = $
+Vue.prototype.$jq = $
+// Vue.prototype.$scrollBar = scrollbar
 
 Vue.use(VueAwesomeSwiper)
 
