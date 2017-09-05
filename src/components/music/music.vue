@@ -456,6 +456,7 @@
 						.lrc-item
 							width:100%
 							height:auto
+							min-height:26px
 							line-height:26px
 							text-align:center
 							margin:0
