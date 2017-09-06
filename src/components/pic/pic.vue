@@ -28,6 +28,7 @@
     </transition>
   </div>
 </template>
+<script src="http://www.daiwei.org/global/js/jquery.mCustomScrollbar.min.js"></script>
 <script>
   // import Vue from 'vue'
   import store from './../../store'
@@ -36,6 +37,8 @@
   import fecth from './../../utils/fecth.js'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import $ from 'jquery'
+  import 'jquery-mousewheel'
+  import 'malihu-custom-scrollbar-plugin'
   // require('jquery-mousewheel')
   // require('malihu-custom-scrollbar-plugin')
   // require('malihu-custom-scrollbar-plugin')($)
@@ -162,10 +165,15 @@
     },
     mounted () {
       this.fetchData()
-      // $('.picList_content').mCustomScrollbar({
-      //    theme: 'minimal-dark'
-      // })
-      this.$nextTick(() => { setTimeout(() => { $('.pic_content').mCustomScrollbar() }, 3000) })
+      // setTimeout(() => {
+      //   $('.pic_content').mCustomScrollbar({
+      //     theme: 'dark'
+      //   })
+      // }, 100)
+      $('.pic_content').mCustomScrollbar({
+        theme: 'dark'
+      })
+      // this.$nextTick(() => { $('.pic_content').mCustomScrollbar() })
       // alert(this.$refs.abc)
       // alert(store.getters.getGlobalInfo)
       // this.swiper.slideTo(3, 1000, false)
@@ -223,7 +231,7 @@
       width:100%
       transform:translate3d(-50%,0,0)
       margin:0 auto
-      overflow-y:scroll
+      overflow-y:hidden
       box-sizing:border-box
       -webkit-overflow-scrolling: touch
       padding:15px;

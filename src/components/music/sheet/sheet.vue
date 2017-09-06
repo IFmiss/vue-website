@@ -38,6 +38,9 @@
   import musicApi from './../music.js'
   // import axios from 'axios'
   // import qs from 'qs'
+  // import $ from 'jquery'
+  // import 'jquery-mousewheel'
+  // import 'malihu-custom-scrollbar-plugin'
   export default {
   	data () {
   		return {
@@ -154,6 +157,9 @@
 			this.initMusic()
 			// musicApi.musicEvent(this)
 		})
+		// setTimeout(() => {
+		// 	$('.list_content_info').mCustomScrollbar()
+		// }, 100)
   	}
   }
 </script>

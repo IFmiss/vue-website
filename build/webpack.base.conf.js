@@ -30,6 +30,10 @@ module.exports = {
   },
   module: {
     rules: [
+      // {
+      //   test: require.resolve('jquery'),
+      //   loader: 'expose?jQuery!expose?$'
+      // },
       {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
