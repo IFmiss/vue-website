@@ -36,9 +36,9 @@
   import picList from './picList/picList.vue'
   import fecth from './../../utils/fecth.js'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import $ from 'jquery'
-  import 'jquery-mousewheel'
-  import 'malihu-custom-scrollbar-plugin'
+  // import $ from 'jquery'
+  // import 'jquery-mousewheel'
+  // import 'malihu-custom-scrollbar-plugin'
   // require('jquery-mousewheel')
   // require('malihu-custom-scrollbar-plugin')
   // require('malihu-custom-scrollbar-plugin')($)
@@ -170,9 +170,9 @@
       //     theme: 'dark'
       //   })
       // }, 100)
-      $('.pic_content').mCustomScrollbar({
-        theme: 'dark'
-      })
+      // $('.pic_content').mCustomScrollbar({
+      //   theme: 'dark'
+      // })
       // this.$nextTick(() => { $('.pic_content').mCustomScrollbar() })
       // alert(this.$refs.abc)
       // alert(store.getters.getGlobalInfo)
@@ -231,7 +231,7 @@
       width:100%
       transform:translate3d(-50%,0,0)
       margin:0 auto
-      overflow-y:hidden
+      overflow-y:auto
       box-sizing:border-box
       -webkit-overflow-scrolling: touch
       padding:15px;

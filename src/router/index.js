@@ -2,20 +2,36 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from './../store'
 import Home from '@/components/home'
-import Pic from '../components/pic/pic.vue'
-import Music from '../components/music/music.vue'
-import Blog from '../components/blog/blog.vue'
-import About from '../components/about/about.vue'
-import Setting from '../components/setting/setting.vue'
-import Works from '../components/works/works.vue'
-import Joke from '../components/joke/joke.vue'
-import MusicSearch from '../components/music/search/search.vue'
-import MusicSheet from '../components/music/sheet/sheet.vue'
-import MusicSearchList from '../components/music/searchlist/searchlist.vue'
-import MusicAlbumList from '../components/music/albumlist/albumlist.vue'
-import MusicCollection from '../components/music/collection/collection.vue'
-import MusicPlayList from '../components/music/playlist/playlist.vue'
-import MusicToplist from '../components/music/toplist/toplist.vue'
+const Pic = r => require.ensure([], () => r(require('@/components/pic/pic.vue')), 'pic')
+// import Pic from '@/components/pic/pic.vue'
+const Music = r => require.ensure([], () => r(require('@/components/music/music.vue')), 'music')
+// import Music from '@/components/music/music.vue'
+const Blog = r => require.ensure([], () => r(require('@/components/blog/blog.vue')), 'blog')
+// import Blog from '@/components/blog/blog.vue'
+const About = r => require.ensure([], () => r(require('@/components/about/about.vue')), 'about')
+// import About from '@/components/about/about.vue'
+const Setting = r => require.ensure([], () => r(require('@/components/setting/setting.vue')), 'setting')
+// import Setting from '@/components/setting/setting.vue'
+const Works = r => require.ensure([], () => r(require('@/components/works/works.vue')), 'works')
+// import Works from '@/components/works/works.vue'
+const Joke = r => require.ensure([], () => r(require('@/components/joke/joke.vue')), 'joke')
+// import Joke from '@/components/joke/joke.vue'
+const MusicSearch = r => require.ensure([], () => r(require('@/components/music/search/search.vue')), 'search')
+// import MusicSearch from '@/components/music/search/search.vue'
+const MusicSheet = r => require.ensure([], () => r(require('@/components/music/sheet/sheet.vue')), 'sheet')
+// import MusicSheet from '@/components/music/sheet/sheet.vue'
+const MusicSearchList = r => require.ensure([], () => r(require('@/components/music/searchlist/searchlist.vue')), 'searchlist')
+// import MusicSearchList from '@/components/music/searchlist/searchlist.vue'
+const MusicAlbumList = r => require.ensure([], () => r(require('@/components/music/albumlist/albumlist.vue')), 'albumlist')
+// import MusicAlbumList from '@/components/music/albumlist/albumlist.vue'
+const MusicCollection = r => require.ensure([], () => r(require('@/components/music/collection/collection.vue')), 'collection')
+// import MusicCollection from '@/components/music/collection/collection.vue'
+const MusicPlayList = r => require.ensure([], () => r(require('@/components/music/playlist/playlist.vue')), 'playlist')
+// import MusicPlayList from '@/components/music/playlist/playlist.vue'
+const MusicToplist = r => require.ensure([], () => r(require('@/components/music/toplist/toplist.vue')), 'toplist')
+// import MusicToplist from '@/components/music/toplist/toplist.vue'
+const Me = r => require.ensure([], () => r(require('@/components/me/me.vue')), 'me')
+// import Me from '@/components/me/me.vue'
 
 Vue.use(Router)
 
@@ -124,6 +140,10 @@ export default new Router({
         {
           path: '/about/joke',
           component: Joke
+        },
+        {
+          path: '/about/me',
+          component: Me
         }
       ]
     },

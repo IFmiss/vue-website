@@ -4,7 +4,7 @@
     {
       "icon": {
         "paths": [
-          "M512.256 182.016c-184.128 0-333.376 149.248-333.376 333.376 0 0.512 0 1.024 0 1.472 16.32-5.312 33.664-8.32 51.776-8.32 1.536 0 3.008 0.128 4.544 0.256v333.184h56.32c10.048 0 18.176-8.256 18.176-18.24v-305.472c0-10.048-8.128-18.176-18.176-18.176h-54.4c5.12-147.648 126.272-265.664 275.072-265.664s269.888 118.080 275.072 265.664h-50.368c-9.984 0-18.24 8.128-18.24 18.176v305.472c0 9.984 8.256 18.24 18.24 18.24h56.32v-333.44c18.304 0 35.84 3.072 52.288 8.512 0-0.576 0-1.152 0-1.664 0.128-184.128-149.056-333.376-333.248-333.376zM64 675.328c0 73.92 48.256 136.576 114.88 158.4v-316.8c-66.624 21.76-114.88 84.416-114.88 158.4zM845.632 517.056v316.352c66.432-21.888 114.368-84.416 114.368-158.080 0-73.856-47.936-136.256-114.368-158.272z"
+          "M400.139 279.591c0.002-0.182 0.028-0.354 0.028-0.529 0-0.181-0.028-0.356-0.028-0.532-90.004-5.262-161.901-77.16-167.163-167.166-0.181 0-0.353-0.027-0.532-0.027-0.181 0-0.352 0.027-0.532 0.027-5.264 90.006-77.161 161.905-167.165 167.166 0 0.176-0.027 0.353-0.027 0.532 0 0.175 0.027 0.347 0.027 0.529 90.004 5.265 161.901 77.157 167.165 167.162 0.179 0.005 0.35 0.027 0.532 0.027 0.178 0 0.351-0.021 0.532-0.027 5.261-90.005 77.158-161.898 167.163-167.162zM511.981 670.417c72.047 0 130.45-58.406 130.45-130.453 0-72.048-58.404-130.448-130.45-130.448s-130.451 58.399-130.451 130.448c-0.001 72.048 58.405 130.453 130.451 130.453zM791.519 260.427c-41.168 0-74.544 33.374-74.544 74.543 0 41.17 33.375 74.547 74.544 74.547s74.543-33.374 74.543-74.547c0-41.168-33.374-74.543-74.543-74.543zM733.971 713.238c-18.139-10.707-40.461-2.361-49.95 18.457-1.758 3.877-44.669 94.924-171.788 95.111-127.105-0.188-170.010-91.415-171.598-94.904-9.151-21.228-31.472-29.891-49.855-19.32-18.382 10.553-25.88 36.316-16.738 57.545 2.506 5.82 63.217 142.131 237.805 142.535h0.781c174.565-0.405 235.274-136.486 237.785-142.287 9.084-21.055 1.703-46.424-16.441-57.137zM956.583 220.998c-1.735-3.706-43.812-90.759-164.791-91.012h-0.541c-120.991 0.253-163.066 87.457-164.802 91.177-6.335 13.582-1.141 30.059 11.6 36.808 12.74 6.763 28.209 1.222 34.553-12.356 1.099-2.233 30.831-60.59 118.923-60.709 88.091 0.119 117.832 58.361 119.053 60.838 6.574 13.322 22.044 18.658 34.613 11.806 12.573-6.848 17.69-23.078 11.392-36.551z"
         ],
         "attrs": [
           {}
@@ -13,22 +13,138 @@
         "isMulticolor2": false,
         "grid": 0,
         "tags": [
-          "耳机"
+          "搞笑"
         ]
       },
       "attrs": [
         {}
       ],
       "properties": {
+        "order": 2,
+        "id": 59,
+        "name": "clown",
+        "prevSize": 32,
+        "code": 59698
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 0
+    },
+    {
+      "icon": {
+        "paths": [
+          "M900.162 183.924c0 30.588-24.741 55.395-55.329 55.395h-162.849c-30.621 0-55.395-24.807-55.395-55.395s24.774-55.395 55.395-55.395h162.849c30.588 0.033 55.329 24.84 55.329 55.395zM280.774 352.52c84.977 0 153.864-75.483 153.864-168.597s-68.887-168.597-153.864-168.597c-84.977 0-153.864 75.483-153.864 168.597s68.887 168.597 153.864 168.597zM48.26 488.844c21.438 285.267 221.415 508.862 465.358 508.862 243.745 0 443.788-223.628 465.259-508.862h-930.618z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "grid": 0,
+        "tags": [
+          "笑"
+        ]
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 3,
+        "id": 58,
+        "name": "smile",
+        "prevSize": 32,
+        "code": 59699
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 1
+    },
+    {
+      "icon": {
+        "paths": [
+          "M898.968 732.691l-244.070-244.070 204.947-204.455c82.807-82.249 41.254-119.984 19.291-142.252-21.917-22.223-64.049-58.516-137.866 22.033l-205.766 205.273-277.916-277.912-166.376 166.376 277.717 277.712-212.14 211.636c-1.562 1.538-2.885 3.252-4 5.093l-0.514-0.521-0.868 3.078c-1.351 2.882-2.23 6.045-2.652 9.392l-36.315 128.619c0 0 1.056 10.532 3.184 12.577 2.114 2.028 12.686 2.707 12.686 2.707l129.775-32.918c3.141-0.341 6.121-1.088 8.88-2.252l2.659-0.675-0.384-0.396c2.237-1.188 4.293-2.679 6.128-4.488l212.955-212.448 277.837 277.827 0.19-0.191 0.255 0.252 166.182-166.182-33.818-33.817zM149.002 259.653l110.556-110.556 21.503 21.503-34.852 34.854c-2.814 2.814-0.747 9.442 4.616 14.805l8.321 8.323c5.364 5.362 11.991 7.429 14.805 4.615l34.852-34.852 47.614 47.611-62.241 62.241c-4.076 4.076-3.030 11.725 2.33 17.090l8.324 8.321c5.364 5.364 13.014 6.407 17.087 2.334l62.241-62.241 47.614 47.611-40.056 40.060c-2.816 2.811-0.748 9.441 4.61 14.804l8.328 8.321c5.362 5.364 11.99 7.43 14.802 4.615l40.060-40.056 48.043 48.040-110.688 110.424-247.87-247.868zM257.859 838.687c-8.956 8.834-13.315 4.412-36.019-18.603l-17.955-18.206c-22.703-23.015-27.060-27.436-18.103-36.269l578.703-578.922c8.956-8.831 13.309-4.412 36.014 18.603l17.956 18.206c22.703 23.016 27.062 27.434 18.105 36.268l-578.699 578.924zM764.444 875.091l-248.174-248.171 110.689-110.419 51.432 51.433-67.446 67.445c-4.075 4.076-3.030 11.726 2.334 17.084l8.322 8.326c5.361 5.364 13.012 6.406 17.088 2.334l67.445-67.446 47.612 47.612-36.411 36.411c-2.811 2.812-0.748 9.445 4.611 14.808l8.327 8.322c5.362 5.362 11.989 7.432 14.801 4.615l36.416-36.412 44.19 44.185-69.528 69.534c-4.081 4.071-3.036 11.72 2.328 17.084l8.321 8.326c5.368 5.358 13.018 6.404 17.089 2.329l69.528-69.529 21.577 21.575-110.553 110.552z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "grid": 0,
+        "tags": [
+          "作品"
+        ]
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 4,
+        "id": 57,
+        "name": "works",
+        "prevSize": 32,
+        "code": 59700
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 2
+    },
+    {
+      "icon": {
+        "paths": [
+          "M626.633 16.703c70.528 3.867 124.583 64.336 120.728 135.071-3.854 70.723-64.162 124.929-134.69 121.063-70.536-3.868-124.583-64.343-120.729-135.071 3.86-70.732 64.162-124.931 134.691-121.063v0zM309.039 529.541c0 0 247.804-182.082 328.889-146.579 81.070 35.498-28.551 259.954-36.544 293.165-7.994 33.211-59.381 287.438 109.627 146.58 0 0 84.505-56.114-36.544 73.289-121.050 129.398-274.069 170.623-292.339 73.29-13.774-73.377 58.589-339.504 73.084-439.744 4.734-32.735-36.537 0-36.537 0s-118.816 83.658-146.172 36.652c-4.363-7.489 24.941-30.465 36.536-36.653v0zM309.039 529.541z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "grid": 0,
+        "tags": [
+          "关于"
+        ]
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 5,
+        "id": 56,
+        "name": "about",
+        "prevSize": 32,
+        "code": 59701
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 3
+    },
+    {
+      "icon": {
+        "paths": [
+          "M512.256 182.016c-184.128 0-333.376 149.248-333.376 333.376 0 0.512 0 1.024 0 1.472 16.32-5.312 33.664-8.32 51.776-8.32 1.536 0 3.008 0.128 4.544 0.256v333.184h56.32c10.048 0 18.176-8.256 18.176-18.24v-305.472c0-10.048-8.128-18.176-18.176-18.176h-54.4c5.12-147.648 126.272-265.664 275.072-265.664s269.888 118.080 275.072 265.664h-50.368c-9.984 0-18.24 8.128-18.24 18.176v305.472c0 9.984 8.256 18.24 18.24 18.24h56.32v-333.44c18.304 0 35.84 3.072 52.288 8.512 0-0.576 0-1.152 0-1.664 0.128-184.128-149.056-333.376-333.248-333.376zM64 675.328c0 73.92 48.256 136.576 114.88 158.4v-316.8c-66.624 21.76-114.88 84.416-114.88 158.4zM845.632 517.056v316.352c66.432-21.888 114.368-84.416 114.368-158.080 0-73.856-47.936-136.256-114.368-158.272z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "耳机"
+        ],
+        "grid": 0
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
         "order": 384,
-        "id": 55,
+        "id": 0,
         "name": "erji",
         "prevSize": 32,
         "code": 59697
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 0
+      "iconIdx": 4
     },
     {
       "icon": {
@@ -40,24 +156,24 @@
         ],
         "isMulticolor": false,
         "isMulticolor2": false,
-        "grid": 0,
         "tags": [
           "日历"
-        ]
+        ],
+        "grid": 0
       },
       "attrs": [
         {}
       ],
       "properties": {
         "order": 382,
-        "id": 54,
+        "id": 1,
         "name": "date",
         "prevSize": 32,
         "code": 59694
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 1
+      "iconIdx": 5
     },
     {
       "icon": {
@@ -69,24 +185,24 @@
         ],
         "isMulticolor": false,
         "isMulticolor2": false,
-        "grid": 0,
         "tags": [
           "排行榜"
-        ]
+        ],
+        "grid": 0
       },
       "attrs": [
         {}
       ],
       "properties": {
         "order": 381,
-        "id": 53,
+        "id": 2,
         "name": "rank-list",
         "prevSize": 32,
         "code": 59695
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 2
+      "iconIdx": 6
     },
     {
       "icon": {
@@ -98,24 +214,24 @@
         ],
         "isMulticolor": false,
         "isMulticolor2": false,
-        "grid": 0,
         "tags": [
           "收音机-01"
-        ]
+        ],
+        "grid": 0
       },
       "attrs": [
         {}
       ],
       "properties": {
         "order": 380,
-        "id": 52,
+        "id": 3,
         "name": "fm",
         "prevSize": 32,
         "code": 59696
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 3
+      "iconIdx": 7
     },
     {
       "icon": {
@@ -131,10 +247,10 @@
         ],
         "isMulticolor": false,
         "isMulticolor2": false,
-        "grid": 0,
         "tags": [
           "菜单 (1)"
-        ]
+        ],
+        "grid": 0
       },
       "attrs": [
         {},
@@ -143,14 +259,14 @@
       ],
       "properties": {
         "order": 5,
-        "id": 51,
+        "id": 4,
         "name": "list-circle-small",
         "prevSize": 32,
         "code": 59690
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 4
+      "iconIdx": 8
     },
     {
       "icon": {
@@ -162,24 +278,24 @@
         ],
         "isMulticolor": false,
         "isMulticolor2": false,
-        "grid": 0,
         "tags": [
           "下载"
-        ]
+        ],
+        "grid": 0
       },
       "attrs": [
         {}
       ],
       "properties": {
         "order": 4,
-        "id": 50,
+        "id": 5,
         "name": "download",
         "prevSize": 32,
         "code": 59691
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 5
+      "iconIdx": 9
     },
     {
       "icon": {
@@ -191,24 +307,24 @@
         ],
         "isMulticolor": false,
         "isMulticolor2": false,
-        "grid": 0,
         "tags": [
           "收藏"
-        ]
+        ],
+        "grid": 0
       },
       "attrs": [
         {}
       ],
       "properties": {
         "order": 3,
-        "id": 49,
+        "id": 6,
         "name": "like",
         "prevSize": 32,
         "code": 59692
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 6
+      "iconIdx": 10
     },
     {
       "icon": {
@@ -220,24 +336,24 @@
         ],
         "isMulticolor": false,
         "isMulticolor2": false,
-        "grid": 0,
         "tags": [
           "信息"
-        ]
+        ],
+        "grid": 0
       },
       "attrs": [
         {}
       ],
       "properties": {
         "order": 2,
-        "id": 48,
+        "id": 7,
         "name": "msg",
         "prevSize": 32,
         "code": 59693
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 7
+      "iconIdx": 11
     },
     {
       "icon": {
@@ -259,14 +375,14 @@
       ],
       "properties": {
         "order": 379,
-        "id": 0,
+        "id": 8,
         "name": "playdetail",
         "prevSize": 32,
         "code": 59685
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 8
+      "iconIdx": 12
     },
     {
       "icon": {
@@ -294,14 +410,14 @@
       ],
       "properties": {
         "order": 378,
-        "id": 1,
+        "id": 9,
         "name": "pause-detail",
         "prevSize": 32,
         "code": 59686
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 9
+      "iconIdx": 13
     },
     {
       "icon": {
@@ -323,14 +439,14 @@
       ],
       "properties": {
         "order": 377,
-        "id": 2,
+        "id": 10,
         "name": "prevdetail",
         "prevSize": 32,
         "code": 59687
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 10
+      "iconIdx": 14
     },
     {
       "icon": {
@@ -352,14 +468,14 @@
       ],
       "properties": {
         "order": 376,
-        "id": 3,
+        "id": 11,
         "name": "nextdetail",
         "prevSize": 32,
         "code": 59688
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 11
+      "iconIdx": 15
     },
     {
       "icon": {
@@ -381,14 +497,14 @@
       ],
       "properties": {
         "order": 375,
-        "id": 4,
+        "id": 12,
         "name": "music-shunxu",
         "prevSize": 32,
         "code": 59689
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 12
+      "iconIdx": 16
     },
     {
       "icon": {
@@ -410,14 +526,14 @@
       ],
       "properties": {
         "order": 372,
-        "id": 5,
+        "id": 13,
         "name": "back",
         "prevSize": 32,
         "code": 59684
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 13
+      "iconIdx": 17
     },
     {
       "icon": {
@@ -439,14 +555,14 @@
       ],
       "properties": {
         "order": 370,
-        "id": 6,
+        "id": 14,
         "name": "edit-paper",
         "prevSize": 32,
         "code": 59648
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 14
+      "iconIdx": 18
     },
     {
       "icon": {
@@ -468,14 +584,14 @@
       ],
       "properties": {
         "order": 369,
-        "id": 7,
+        "id": 15,
         "name": "edit",
         "prevSize": 32,
         "code": 59675
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 15
+      "iconIdx": 19
     },
     {
       "icon": {
@@ -497,14 +613,14 @@
       ],
       "properties": {
         "order": 363,
-        "id": 8,
+        "id": 16,
         "name": "delete",
         "prevSize": 32,
         "code": 59683
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 16
+      "iconIdx": 20
     },
     {
       "icon": {
@@ -535,14 +651,14 @@
       ],
       "properties": {
         "order": 360,
-        "id": 9,
+        "id": 17,
         "name": "add-project",
         "prevSize": 32,
         "code": 59667
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 17
+      "iconIdx": 21
     },
     {
       "icon": {
@@ -564,14 +680,14 @@
       ],
       "properties": {
         "order": 362,
-        "id": 10,
+        "id": 18,
         "name": "add",
         "prevSize": 32,
         "code": 59681
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 18
+      "iconIdx": 22
     },
     {
       "icon": {
@@ -609,14 +725,14 @@
       ],
       "properties": {
         "order": 356,
-        "id": 11,
+        "id": 19,
         "name": "list-music",
         "prevSize": 32,
         "code": 59677
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 19
+      "iconIdx": 23
     },
     {
       "icon": {
@@ -642,14 +758,14 @@
       ],
       "properties": {
         "order": 355,
-        "id": 12,
+        "id": 20,
         "name": "night",
         "prevSize": 32,
         "code": 59678
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 20
+      "iconIdx": 24
     },
     {
       "icon": {
@@ -671,14 +787,14 @@
       ],
       "properties": {
         "order": 354,
-        "id": 13,
+        "id": 21,
         "name": "day",
         "prevSize": 32,
         "code": 59679
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 21
+      "iconIdx": 25
     },
     {
       "icon": {
@@ -700,14 +816,14 @@
       ],
       "properties": {
         "order": 353,
-        "id": 14,
+        "id": 22,
         "name": "community",
         "prevSize": 32,
         "code": 59680
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 22
+      "iconIdx": 26
     },
     {
       "icon": {
@@ -729,14 +845,14 @@
       ],
       "properties": {
         "order": 352,
-        "id": 15,
+        "id": 23,
         "name": "wangyi",
         "prevSize": 32,
         "code": 59662
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 23
+      "iconIdx": 27
     },
     {
       "icon": {
@@ -758,14 +874,14 @@
       ],
       "properties": {
         "order": 351,
-        "id": 16,
+        "id": 24,
         "name": "share",
         "prevSize": 32,
         "code": 59663
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 24
+      "iconIdx": 28
     },
     {
       "icon": {
@@ -787,14 +903,14 @@
       ],
       "properties": {
         "order": 349,
-        "id": 17,
+        "id": 25,
         "name": "play",
         "prevSize": 32,
         "code": 59664
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 25
+      "iconIdx": 29
     },
     {
       "icon": {
@@ -816,14 +932,14 @@
       ],
       "properties": {
         "order": 348,
-        "id": 18,
+        "id": 26,
         "name": "list-circle",
         "prevSize": 32,
         "code": 59665
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 26
+      "iconIdx": 30
     },
     {
       "icon": {
@@ -848,14 +964,14 @@
       ],
       "properties": {
         "order": 346,
-        "id": 19,
+        "id": 27,
         "name": "setting",
         "prevSize": 32,
         "code": 59668
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 27
+      "iconIdx": 31
     },
     {
       "icon": {
@@ -877,14 +993,14 @@
       ],
       "properties": {
         "order": 345,
-        "id": 20,
+        "id": 28,
         "name": "theme",
         "prevSize": 32,
         "code": 59669
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 28
+      "iconIdx": 32
     },
     {
       "icon": {
@@ -906,14 +1022,14 @@
       ],
       "properties": {
         "order": 344,
-        "id": 21,
+        "id": 29,
         "name": "friend",
         "prevSize": 32,
         "code": 59670
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 29
+      "iconIdx": 33
     },
     {
       "icon": {
@@ -935,14 +1051,14 @@
       ],
       "properties": {
         "order": 343,
-        "id": 22,
+        "id": 30,
         "name": "set-time",
         "prevSize": 32,
         "code": 59671
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 30
+      "iconIdx": 34
     },
     {
       "icon": {
@@ -979,14 +1095,14 @@
       ],
       "properties": {
         "order": 342,
-        "id": 23,
+        "id": 31,
         "name": "lock",
         "prevSize": 32,
         "code": 59672
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 31
+      "iconIdx": 35
     },
     {
       "icon": {
@@ -1008,14 +1124,14 @@
       ],
       "properties": {
         "order": 341,
-        "id": 24,
+        "id": 32,
         "name": "car",
         "prevSize": 32,
         "code": 59673
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 32
+      "iconIdx": 36
     },
     {
       "icon": {
@@ -1037,14 +1153,14 @@
       ],
       "properties": {
         "order": 340,
-        "id": 25,
+        "id": 33,
         "name": "cloud",
         "prevSize": 32,
         "code": 59674
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 33
+      "iconIdx": 37
     },
     {
       "icon": {
@@ -1069,14 +1185,14 @@
       ],
       "properties": {
         "order": 336,
-        "id": 26,
+        "id": 34,
         "name": "exit",
         "prevSize": 32,
         "code": 59676
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 34
+      "iconIdx": 38
     },
     {
       "icon": {
@@ -1098,14 +1214,14 @@
       ],
       "properties": {
         "order": 332,
-        "id": 27,
+        "id": 35,
         "name": "place",
         "prevSize": 32,
         "code": 59657
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 35
+      "iconIdx": 39
     },
     {
       "icon": {
@@ -1127,14 +1243,14 @@
       ],
       "properties": {
         "order": 333,
-        "id": 28,
+        "id": 36,
         "name": "SHARE2",
         "prevSize": 32,
         "code": 59658
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 36
+      "iconIdx": 40
     },
     {
       "icon": {
@@ -1159,14 +1275,14 @@
       ],
       "properties": {
         "order": 328,
-        "id": 29,
+        "id": 37,
         "name": "zuijinplay",
         "prevSize": 32,
         "code": 59659
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 37
+      "iconIdx": 41
     },
     {
       "icon": {
@@ -1188,14 +1304,14 @@
       ],
       "properties": {
         "order": 327,
-        "id": 30,
+        "id": 38,
         "name": "diantai",
         "prevSize": 32,
         "code": 59660
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 38
+      "iconIdx": 42
     },
     {
       "icon": {
@@ -1220,14 +1336,14 @@
       ],
       "properties": {
         "order": 326,
-        "id": 31,
+        "id": 39,
         "name": "collect",
         "prevSize": 32,
         "code": 59661
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 39
+      "iconIdx": 43
     },
     {
       "icon": {
@@ -1250,14 +1366,14 @@
       ],
       "properties": {
         "order": 314,
-        "id": 32,
+        "id": 40,
         "name": "coin",
         "prevSize": 32,
         "code": 59656
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 40
+      "iconIdx": 44
     },
     {
       "icon": {
@@ -1279,14 +1395,14 @@
       ],
       "properties": {
         "order": 307,
-        "id": 33,
+        "id": 41,
         "name": "market",
         "prevSize": 32,
         "code": 59649
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 41
+      "iconIdx": 45
     },
     {
       "icon": {
@@ -1314,14 +1430,14 @@
       ],
       "properties": {
         "order": 306,
-        "id": 34,
+        "id": 42,
         "name": "menu",
         "prevSize": 32,
         "code": 59650
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 42
+      "iconIdx": 46
     },
     {
       "icon": {
@@ -1343,14 +1459,14 @@
       ],
       "properties": {
         "order": 305,
-        "id": 35,
+        "id": 43,
         "name": "message",
         "prevSize": 32,
         "code": 59651
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 43
+      "iconIdx": 47
     },
     {
       "icon": {
@@ -1372,14 +1488,14 @@
       ],
       "properties": {
         "order": 358,
-        "id": 36,
+        "id": 44,
         "name": "music",
         "prevSize": 32,
         "code": 59652
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 44
+      "iconIdx": 48
     },
     {
       "icon": {
@@ -1401,14 +1517,14 @@
       ],
       "properties": {
         "order": 303,
-        "id": 37,
+        "id": 45,
         "name": "search",
         "prevSize": 32,
         "code": 59653
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 45
+      "iconIdx": 49
     },
     {
       "icon": {
@@ -1433,14 +1549,14 @@
       ],
       "properties": {
         "order": 310,
-        "id": 38,
+        "id": 46,
         "name": "vip",
         "prevSize": 32,
         "code": 59654
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 46
+      "iconIdx": 50
     },
     {
       "icon": {
@@ -1462,14 +1578,14 @@
       ],
       "properties": {
         "order": 301,
-        "id": 39,
+        "id": 47,
         "name": "wangyiyun",
         "prevSize": 32,
         "code": 59655
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 47
+      "iconIdx": 51
     },
     {
       "icon": {
@@ -1494,14 +1610,14 @@
       ],
       "properties": {
         "order": 323,
-        "id": 40,
+        "id": 48,
         "name": "close",
         "prevSize": 32,
         "code": 59666
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 48
+      "iconIdx": 52
     },
     {
       "icon": {
@@ -1523,14 +1639,14 @@
       ],
       "properties": {
         "order": 320,
-        "id": 41,
+        "id": 49,
         "name": "down",
         "prevSize": 32,
         "code": 59682
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 49
+      "iconIdx": 53
     },
     {
       "icon": {
@@ -1552,14 +1668,14 @@
       ],
       "properties": {
         "order": 319,
-        "id": 42,
+        "id": 50,
         "name": "left",
         "prevSize": 32,
         "code": 59712
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 50
+      "iconIdx": 54
     },
     {
       "icon": {
@@ -1581,14 +1697,14 @@
       ],
       "properties": {
         "order": 324,
-        "id": 43,
+        "id": 51,
         "name": "pause",
         "prevSize": 32,
         "code": 59733
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 51
+      "iconIdx": 55
     },
     {
       "icon": {
@@ -1610,14 +1726,14 @@
       ],
       "properties": {
         "order": 318,
-        "id": 44,
+        "id": 52,
         "name": "right",
         "prevSize": 32,
         "code": 59747
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 52
+      "iconIdx": 56
     },
     {
       "icon": {
@@ -1639,14 +1755,14 @@
       ],
       "properties": {
         "order": 316,
-        "id": 45,
+        "id": 53,
         "name": "up",
         "prevSize": 32,
         "code": 59768
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 53
+      "iconIdx": 57
     },
     {
       "icon": {
@@ -1675,14 +1791,14 @@
       ],
       "properties": {
         "order": 365,
-        "id": 46,
+        "id": 54,
         "name": "music-danqu1",
         "prevSize": 32,
         "code": 59722
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 54
+      "iconIdx": 58
     },
     {
       "icon": {
@@ -1710,14 +1826,14 @@
       ],
       "properties": {
         "order": 366,
-        "id": 47,
+        "id": 55,
         "name": "music-random",
         "prevSize": 32,
         "code": 59723
       },
       "setIdx": 0,
       "setId": 3,
-      "iconIdx": 55
+      "iconIdx": 59
     },
     {
       "icon": {

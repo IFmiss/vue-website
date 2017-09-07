@@ -6,26 +6,26 @@
 	    	<div class="dw-boot-container" v-show="isShowPanel">
 	    		<router-link tag="a" to="/about/works">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-		        		<i class="icon-music"></i>
+		        		<i class="icon-works"></i>
 		        		<span>作品信息</span>
 		        	</li>
 		        </router-link>
 	        	<router-link tag="a" to="/about/joke">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-		        		<i class="icon-music"></i>
+		        		<i class="icon-smile"></i>
 		        		<span>每日一笑</span>
 		        	</li>
 		        </router-link>
-		        <router-link tag="a" to="/about/works">
+		        <router-link tag="a" to="/about/me">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-		        		<i class="icon-music"></i>
-		        		<span>作品信息</span>
+		        		<i class="icon-about"></i>
+		        		<span>关于作者</span>
 		        	</li>
 		        </router-link>
-		        <router-link tag="a" to="/about/works">
+		        <router-link tag="a" to="/about/suggest">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-		        		<i class="icon-music"></i>
-		        		<span>作品信息</span>
+		        		<i class="icon-message"></i>
+		        		<span>意见建议</span>
 		        	</li>
 		        </router-link>
 	    	</div>
