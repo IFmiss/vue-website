@@ -1,0 +1,131 @@
+<template>
+  <div class="suggest">
+  	<div class="div_back" @click="back"><i class="icon-back"></i></div>
+  	<div class="suggest_content">
+  		<div class="suggest_detail">
+  			<p class="title">想说什么尽管说。我改！</p>
+	  		<textarea class="suggest_area" ref="content" name="suggest" id="" cols="30" rows="6"></textarea>
+	  		<p class="title">请留下您的联系方式(也可以不填写)</p>
+	  		<textarea class="suggest_area" ref="contactinfo" name="suggest" id="" cols="30" rows="2"></textarea>
+	  		<span class="submit_suggest" @click.stop="submitSuggest">提交</span>
+  		</div>
+  	</div>
+  </div>
+</template>
+<script>
+// import store from '../../store'
+import fecth from './../../utils/fecth.js'
+export default {
+	computed: {
+	},
+	methods: {
+		back () {
+			this.$router.go(-1)
+		},
+		submitSuggest () {
+			const fecthUrl = `http://www.daiwei.org/vue/server/home.php?inAjax=1&do=submitSuggestInfo`
+			const suggestInfo = this.$refs.content.value
+			const contactInfo = this.$refs.contactinfo.value
+			const suggestT = this.getDateNow()
+			if (suggestInfo === '') {
+				alert('建议内容不能为空')
+			} else if (suggestInfo.length < 10) {
+				alert('内容不能少于10个字符哦！多说点真心话吧！！！')
+			} else {
+				fecth.post(fecthUrl, {suggestContent: suggestInfo, contact: contactInfo, getDate: suggestT}).then((res) => {
+					alert('提交成功')
+				}, (err) => {
+					console.log(`数据加载错误${err}`)
+				})
+			}
+		},
+		getDateNow () {
+			const date = new Date()
+			const year = date.getFullYear()
+			const month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) + '' : date.getMonth() + 1
+			const day = date.getDate() < 10 ? '0' + date.getDate() + '' : date.getDate()
+			const hours = date.getHours() < 10 ? '0' + date.getHours() + '' : date.getHours()
+			const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() + '' : date.getMinutes()
+			const seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() + '' : date.getSeconds()
+			return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
+		}
+	}
+}
+</script>
+<style lang="stylus" rel="stylesheet/stylus">
+  @import '../../common/stylus/global.styl'
+	.suggest
+	  	position:fixed
+	    top:0
+	    left:0
+	    bottom:0
+	    width:100%
+	    right:0
+	    border-radius:12px
+		.div_back
+			position:absolute
+			top:0
+			left:15px
+			width:40px
+			height:40px
+			color:$text_color
+			text-align:center
+			line-height:42px
+			font-size:20px
+			border-radius:50%
+			transition: all 0.3s
+			&:hover
+				background:rgba(0,0,0,0.3)
+		.suggest_content
+			position:fixed
+			top:50px
+			bottom:0
+			left:50%
+			max-width:1240px
+			width:100%
+			transform:translate3d(-50%,0,0)
+			margin:0 auto
+			overflow-y:auto
+			box-sizing:border-box
+			-webkit-overflow-scrolling: touch
+			padding:15px
+			box-sizing:border-box
+			opacity:1
+			transition: all 0.5s 0.3s
+			.type_name
+				color:#fff
+				margin:0
+			.suggest_detail
+				display:block
+				margin:0 auto
+				width:400px
+				max-width:100%
+				.title
+					color:$text_color
+			.suggest_area
+				background:transparent
+				color:$text_color
+				resize: none
+				width:100%
+				display:block
+				margin:0 auto
+				outline:none
+				padding:10px
+				box-sizing:border-box
+				line-height:1.5
+			.submit_suggest
+				display:block
+				width:100%
+				height:50px
+				line-height:50px
+				margin-top:30px
+				color:$text_color
+				font-size:16px
+				text-align:center
+				box-sizing:border-box
+				border:1px solid $text_color
+				cursor:pointer
+				transition:background 0.3s
+				&:hover
+					background: $btn_hover_color
+</style>

@@ -32,6 +32,8 @@ const MusicToplist = r => require.ensure([], () => r(require('@/components/music
 // import MusicToplist from '@/components/music/toplist/toplist.vue'
 const Me = r => require.ensure([], () => r(require('@/components/me/me.vue')), 'me')
 // import Me from '@/components/me/me.vue'
+const Suggest = r => require.ensure([], () => r(require('@/components/suggest/suggest.vue')), 'suggest')
+// import Suggest from '@/components/suggest/suggest.vue'
 
 Vue.use(Router)
 
@@ -144,6 +146,10 @@ export default new Router({
         {
           path: '/about/me',
           component: Me
+        },
+        {
+          path: '/about/suggest',
+          component: Suggest
         }
       ]
     },
