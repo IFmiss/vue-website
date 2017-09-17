@@ -7,8 +7,8 @@
 		<span class="music_zhuanji">专辑</span>
 		<span class="music_duration">时长</span>
 	</div>
-	<div class="music_list_content">
-		<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.al.picUrl, getMusicDurationType(list.dt),index)">
+	<div class="music_list_content" @scroll="searchMoreMusic">
+		<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.name, list.al.picUrl, list.ar[0].name, getMusicDurationType(list.dt),index), musicList">
 			<span class="music_index">
 				<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
 				<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
@@ -16,7 +16,7 @@
 			<div class="music_name">
 				<span class="span_name">{{list.name}}</span>
 				<div class="hover_menu">
-					<i class="icon-add" @click.stop="collectMusic(list.id, list.name, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt))"></i>
+					<i class="icon-add" @click.stop="collectMusic(index)"></i>
 				</div>
 			</div>
 			<span class="music_singer" v-if="list.ar">
@@ -40,6 +40,8 @@
   	data () {
   		return {
   			// musicInfo: {},
+  			searchMusicIndex: 1,
+  			searchMusicList: [],
   			currentMusic: {},
   			params: this.$route.params,
   			currentMusicLrcIndex: 0,
@@ -73,20 +75,21 @@
   		lrccontent: {}
   	},
   	methods: {
-  		searchMusic (e) {
-  			musicApi.searchMusic(e.target.innerHTML, 1, this)
-  		},
   		getAlbum (id) {
   			this.$router.push({name: 'albumlist', params: { id: id }})
   		},
+
   		// 点击播放音乐
-  		clickPlayList (id, pic, duration, index) {
+  		clickPlayList (id, name, pic, singer, duration, index, list) {
+  			// alert(JSON.stringify(this.$route.params))
   			const data = {
   				id: id,
+  				name: name,
   				pic: pic,
+  				singer: singer,
   				duration: duration,
   				index: index,
-  				lrcContent: this.lrccontent
+  				list: store.getters.getMusicList
   			}
   			musicApi.clickIndex(data, this)
   		},
@@ -102,21 +105,42 @@
   		},
   		// 初始化音乐播放器
 		initMusic () {
-			musicApi.searchMusic(this.params.w, 1, this)
+			musicApi.searchMusic(this.params.w, this.searchMusicIndex, this)
+  		},
+  		searchMusic (e) {
+  			this.searchMusicIndex = 1
+  			this.searchMusicList = []
+  			musicApi.searchMusic(e.target.innerHTML, this.searchMusicIndex, this)
+  		},
+  		searchMoreMusic (e) {
+			const mContent = e.target
+
+			// // 滚动的高加可视化的高 的 和   应该等于 元素的scrollHeight  才加载数据
+			const mContentSH = mContent.scrollTop + mContent.offsetHeight
+			if (mContent.scrollHeight === mContentSH) {
+				this.searchMusicIndex ++
+				musicApi.searchMusic(this.params.w, this.searchMusicIndex, this)
+			} else {
+				return
+			}
   		},
   		AudiEle () {
   			return store.getters.getAudioEle
   		},
-  		collectMusic (...items) {
-  			const musiccollect = {
-  				id: items[0],
-  				name: items[1],
-  				pic: items[2],
-  				singer: items[3],
-  				albumid: items[4],
-  				albumname: items[5],
-  				dt: items[6]
-  			}
+  		// collectMusic (...items) {
+  		// 	const musiccollect = {
+  		// 		id: items[0],
+  		// 		name: items[1],
+  		// 		pic: items[2],
+  		// 		singer: items[3],
+  		// 		albumid: items[4],
+  		// 		albumname: items[5],
+  		// 		dt: items[6]
+  		// 	}
+  		// 	musicApi.collectMusic(musiccollect)
+  		// }
+  		collectMusic (index) {
+  			const musiccollect = store.getters.getMusicList[index]
   			musicApi.collectMusic(musiccollect)
   		}
   	},

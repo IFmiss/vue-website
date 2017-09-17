@@ -1,7 +1,7 @@
 <template>
   <div class="pic" v-if="picinfo.length">
     <!-- <div class="pic_bg" v-if="globalInfo.contentInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div> -->
-    <div class="pic_content g-content">
+    <div class="pic_content g-content" @scroll="getNewData">
       <picList @showswiper= "showSwiper" v-for="(item, index) in picinfo" :key="item.id" :data-index="index" :data-info="item"></picList>
     </div>
     <transition name="fade-scale">
@@ -46,7 +46,7 @@
   export default {
     data () {
       return {
-        picinfo: {},
+        picinfo: [],
         // 获取数据的索引
         getPicDataIndex: 0,
         showImageDetail: false,
@@ -100,14 +100,26 @@
       fetchData () {
         const getImageConditions = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageCondition'
         fecth.post(getImageConditions, {index: this.getPicDataIndex, count: 5}).then((res) => {
-          // alert(JSON.stringify(res))
-          this.picinfo = res.data
+          res.data.forEach((value, index, array) => {
+            this.picinfo.push(value)
+          })
           if (res.data === 0) {
             this.getPicDataIndex ++
           }
         }, (err) => {
           alert(err)
         })
+      },
+      getNewData () {
+        const pContent = document.querySelector('.pic_content')
+        // 滚动的高加可视化的高 的 和   应该等于 元素的scrollHeight  才加载数据
+        const pContentSH = pContent.scrollTop + pContent.offsetHeight
+        if (pContent.scrollHeight === pContentSH) {
+          this.getPicDataIndex = this.getPicDataIndex + 1
+          this.fetchData()
+        } else {
+          return
+        }
       },
       showSwiper (index) {
         this.showImageDetail = true
@@ -182,30 +194,7 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   @import '../../common/stylus/global.styl'
-  @import '../../common/stylus/style.styl'
-    // ::-webkit-scrollbar
-    //   background:rgba(55,55,55,0.1)
-    //   width:4px
-    //   border-radius:2px
-    //   margin-left:12px
-    // ::-webkit-scrollbar-button    
-    //   display:none
-    // ::-webkit-scrollbar-track  
-    //   border-radius:2px
-    //   background:rgba(55,55,55,0.1)
-    // ::-webkit-scrollbar-track-piece 
-    //   border-radius:2px
-    //   background:rgba(55,55,55,0.1)
-    // ::-webkit-scrollbar-thumb  
-    //   cursor:pointer
-    //   border-radius:2px
-    //   background:rgba(222,222,222,0.1)
-    // ::-webkit-scrollbar-button      
-    // ::-webkit-scrollbar-track       
-    // ::-webkit-scrollbar-track-piece 
-    // ::-webkit-scrollbar-thumb       
-    // ::-webkit-scrollbar-corner      
-    // ::-webkit-resizer               
+  @import '../../common/stylus/style.styl'             
   .pic
     position:fixed
     top:0

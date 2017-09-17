@@ -110,8 +110,12 @@ const musicApi = {
                 })
             }
             that.$nextTick(() => {
-                store.getters.getAudioEle.load()
-                store.getters.getAudioEle.play()
+                try {
+                    store.getters.getAudioEle.load()
+                    store.getters.getAudioEle.play()
+                } catch (e) {
+                    return
+                }
                 // 设置歌词位置
                 store.commit({
                     type: 'setAudiolrcIndex',
@@ -176,19 +180,13 @@ const musicApi = {
             type: 'setAudiolrcIndex',
             data: i
         })
-        // alert(data.lrcContent)
-        // alert(data.lrcContent.childNodes[0].offsetHeight)
-        // alert(i)
-        // var scroll = (data.lrcContent.childtNode().offsetHeight * i)
-        // console.log(document.getElementsByClassName('lrc-item')[0].offsetHeight)
-        var scroll = (document.getElementsByClassName('lrc-item')[0].offsetHeight * i) - store.getters.getAudioLrcContent.offsetHeight / 2
-        // $('.lrc-wrapper').stop().animate({scrollTop: scroll}, 1000)  // 平滑滚动到当前歌词位置(更改这个数值可以改变歌词滚动速度，单位：毫秒)
-        // console.log(scroll)
-        // this.scrollAnimate(store.getters.getAudioLrcContent, scroll)
-        // console.log($('.lrc-wrapper'))
-        // store.getters.getAudioLrcContent.animate({scrollTop: scroll}, 1000)
-        // console.log($)
-        $('.lrc-content').stop().animate({scrollTop: scroll}, 1000)
+
+        try {
+            var scroll = (document.getElementsByClassName('lrc-item')[0].offsetHeight * i) - store.getters.getAudioLrcContent.offsetHeight / 2
+            $('.lrc-content').stop().animate({scrollTop: scroll}, 1000)
+        } catch (e) {
+            return
+        }
     },
 
     // 点击播放歌曲
@@ -234,16 +232,21 @@ const musicApi = {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then((res) => {
-            // console.log(JSON.stringify(res.data.result.songs))
-            // that.musicInfo = res.data.result.songs
-            store.dispatch({
-                type: 'set_MusicSearchList',
-                data: res.data.result.songs
-            })
-            store.dispatch({
-                type: 'set_MusicList',
-                data: res.data.result.songs
-            })
+            try {
+                res.data.result.songs.forEach((value, index, array) => {
+                    that.searchMusicList.push(value)
+                })
+                store.dispatch({
+                    type: 'set_MusicSearchList',
+                    data: that.searchMusicList
+                })
+                store.dispatch({
+                    type: 'set_MusicList',
+                    data: that.searchMusicList
+                })
+            } catch (e) {
+                return
+            }
         }, (err) => {
             console.log(err)
         })
@@ -261,7 +264,7 @@ const musicApi = {
     // 添加到我喜欢的音乐 使用本地存储的方法
     collectMusic (opt) {
         // set_MusicCollectList
-        let collectlist = store.getters.getMusicCollectList
+        let collectlist = store.getters.getMusicCollectList === null ? [] : store.getters.getMusicCollectList
         let insertMusic = true
         if (collectlist) {
             collectlist.forEach((v, i, a) => {
@@ -271,6 +274,7 @@ const musicApi = {
                 }
             })
         }
+
         if (insertMusic) {
             collectlist.unshift(opt)
             localStorage.setItem('musicCollectList', JSON.stringify(collectlist))
@@ -304,14 +308,18 @@ const musicApi = {
 
     // 播放暂停
     playPause () {
-        const ele = store.getters.getAudioEle
-        if (!(ele.src.indexOf('.mp3') > 0)) return
-        if (ele.paused) {
-            ele.play()
-        } else {
-            ele.pause()
+        try {
+            const ele = store.getters.getAudioEle
+            if (!(ele.src.indexOf('.mp3') > 0)) return
+            if (ele.paused) {
+                ele.play()
+            } else {
+                ele.pause()
+            }
+            store.commit('setAudioIsPlay', !ele.paused)
+        } catch (e) {
+            return
         }
-        store.commit('setAudioIsPlay', !ele.paused)
     },
     // 播放下一曲  可调用clickPlayindex  更换index 即可 (第2个参数为 true 或者 false  true表示下一首  false 表示上一首     第3个参数是判断是不是正在播放的音乐触发更新音乐列表    如果是正在播放的音乐点击播放index 的歌曲  和 自动播放 手动播放下一首 则不触发重新填充数据的操作)
     playNextPrev (that, isNext) {

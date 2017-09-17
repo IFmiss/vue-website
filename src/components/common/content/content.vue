@@ -51,8 +51,11 @@
           {{getPlace.city}}
           <weather :isShow="showWeatherList"></weather>
         </span>
+        <a href="https://www.github.com/ifmiss/vue-website" target="_black">
+          <li class="li-icon" title="github"><i class="icon-github"></i></li>
+        </a>
         <router-link tag="a" to="/setting" class="a-icon">
-          <li class="li-icon" @click="hideLeftContent"><i class="icon-setting"></i></li>
+          <li class="li-icon" title="设置" @click="hideLeftContent"><i class="icon-setting"></i></li>
         </router-link>
       </div>
     </ul>
@@ -159,85 +162,18 @@ export default {
         .place
           display:inline-block
           font-size: 14px
+          padding:0 8px
           height:100%
           vertical-align: middle
           color:$text_color
           vertical-align:top
           cursor:pointer
           position:relative
-          // .weather-content
-          //   border-radius:4px
-          //   position:absolute
-          //   height:auto
-          //   right:0
-          //   width:280px
-          //   overflow:hidden
-          //   &.fade-up-enter-to,&.fade-up-leave-to
-          //     transition:all 0.5s 0.2s
-          //   &.fade-up-enter,&.fade-up-leave-to
-          //     opacity:0
-          //     transform:translate3d(0,50px,0)
-          //   .bg-info
-          //     position:absolute
-          //     top:0
-          //     left:0
-          //     right:0
-          //     bottom:0
-          //     z-index:-1
-          //   .weather-detail
-          //     width:100%
-          //     height:100%
-          //     padding:15px
-          //     box-sizing:border-box
-          //     .weather-today
-          //       width:100%
-          //       height:auto
-          //       padding-bottom:5px
-          //       border-bottom:1px solid $border_bottom_color
-          //       .top-today
-          //         width:100%
-          //         height:50px
-          //         font-size:0
-          //         .left-info
-          //           display:inline-block
-          //           width:100px
-          //           font-size:28px
-          //         .right-info
-          //           display:inline-block
-          //           width:auto;
-          //           font-size:14px
-          //       span
-          //         display:block
-          //         margin:0
-          //         padding:4px 0
-          //         font-size:12px
-          //         height:auto
-          //         line-height:1.5 
-          //     .weather-other
-          //       width:100%;
-          //       overflow:hidden
-          //       height:40px
-          //       border-bottom:1px dashed $border_bottom_color
-          //       padding:4px 0
-          //       font-size:0
-          //       .weather-wendu,.weather-type,.weather-time
-          //         display:inline-block
-          //         height:100%
-          //         overflow:hidden
-          //         text-overflow:ellipsis
-          //         white-space:nowrap
-          //         font-size:12px
-          //       .weather-wendu
-          //         width:40%
-          //       .weather-time
-          //         width:20%
-          //       .weather-type
-          //         width:40%
         a
           list-style:none
           display:inline-block
           font-size:14px
-          padding:0 14px
+          padding:0 8px
           margin:0
           color:$text_color
           cursor:pointer

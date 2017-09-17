@@ -17,7 +17,7 @@
 				<div class="music_name">
 					<span class="span_name">{{list.name}}</span>
 					<div class="hover_menu">
-						<i class="icon-add" @click.stop="collectMusic(list.id, list.name, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt))"></i>
+						<i class="icon-add" @click.stop="collectMusic(index)"></i>
 					</div>
 				</div>
 				<span class="music_singer" v-if="list.ar">
@@ -116,16 +116,8 @@
   			return store.getters.getAudioEle
 		},
 		// list.id, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt)
-  		collectMusic (...items) {
-  			const musiccollect = {
-  				id: items[0],
-  				name: items[1],
-  				pic: items[2],
-  				singer: items[3],
-  				albumid: items[4],
-  				albumname: items[5],
-  				dt: items[6]
-  			}
+  		collectMusic (index) {
+  			const musiccollect = store.getters.getMusicList[index]
   			musicApi.collectMusic(musiccollect)
   		}
   	},

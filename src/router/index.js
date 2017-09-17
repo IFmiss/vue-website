@@ -38,7 +38,11 @@ const Suggest = r => require.ensure([], () => r(require('@/components/suggest/su
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
+  hashbang: true,
+  history: false, // 这个参数改为false就可以了
+  saveScrollPosition: true,
+  suppressTransitionError: true,
   routes: [
     {
       path: '/',

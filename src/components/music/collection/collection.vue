@@ -9,7 +9,7 @@
 			<span class="music_duration">时长</span>
 		</div>
 		<div class="music_list_content">
-			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.pic" @click="clickPlayList(list.id, list.name, list.pic, list.singer, list.dt,index), musicList">
+			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.name, list.al.picUrl, list.ar[0].name, getMusicDurationType(list.dt),index), musicList">
 				<span class="music_index">
 					<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
 					<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
@@ -20,13 +20,13 @@
 						<i class="icon-delete" @click.stop="deleteMusic(list.id)"></i>
 					</div>
 				</div>
-				<span class="music_singer">
-					<span @click.stop="searchMusic($event)">{{list.singer}}</span>
+				<span class="music_singer" v-if="list.ar">
+					<span @click.stop="searchMusic($event)">{{list.ar[0].name}}</span>
 				</span>
-				<span class="music_zhuanji">
-					<span @click.stop="getAlbum(list.albumid)">{{list.albumname}}</span>
+				<span class="music_zhuanji" v-if="list.al">
+					<span @click.stop="getAlbum(list.al.id)">{{list.al.name}}</span>
 				</span>
-				<span class="music_duration">{{list.dt}}</span>
+				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
 			</div>
 		</div>
 	</div>
@@ -94,7 +94,7 @@
   				singer: singer,
   				duration: duration,
   				index: index,
-  				list: store.getters.getMusicList
+  				list: store.getters.getMusicCollectList
   			}
   			musicApi.clickIndex(data, this)
   		},

@@ -203,7 +203,7 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus">
 @import 'common/stylus/border-1px/index.styl'
-@import 'common/font-icon/style.css'
+@import '/static/font-icon/style.css'
   audio
     display:none
   body,html
