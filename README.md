@@ -2,6 +2,8 @@
 
 > this is my website start at 2014-7-19
 
+演示地址   www.daiwei.org/new.html
+
 ## 执行方法
 
 ``` bash
