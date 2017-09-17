@@ -2,7 +2,22 @@
 
 > this is my website start at 2014-7-19
 
-演示地址   www.daiwei.org/new.html
+## 演示地址   www.daiwei.org/new.html
+
+## 网页截图
+
+首页
+![](https://github.com/IFmiss/vue-website/blob/master/static/testimg/w1.jpg)
+
+状态  
+![](https://github.com/IFmiss/vue-website/blob/master/static/testimg/w2.jpg)
+
+音乐  
+![](https://github.com/IFmiss/vue-website/blob/master/static/testimg/w3.jpg)
+
+设置  
+![](https://github.com/IFmiss/vue-website/blob/master/static/testimg/w4.jpg)
+
 
 ## 执行方法
 
