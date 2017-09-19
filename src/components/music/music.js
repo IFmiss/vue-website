@@ -4,6 +4,8 @@ import $ from 'jquery'
 const musicApi = {
     lastLyric: 0,
     lyric: {},    // 解析的歌詞
+    maxProgressWidth: 0,
+    dragProgressTo: 0,
     parseLrc (lrc) {
         if (lrc === '') return ''
         const lyrics = lrc.split('\n')
@@ -393,15 +395,66 @@ const musicApi = {
         }
         // 监听缓冲的进度
         ele.onprogress = function () {
-            that.bufferingP = Math.floor(((ele.buffered.end(0) - ele.buffered.start(0)) / ele.duration) * 100)
+            const durationT = Math.floor(ele.duration)
+            try {
+               if (ele.buffered.length > 0) {
+                    var bufferedT = 0
+                    for (var i = 0; i < ele.buffered.length; i++) {
+                        bufferedT += ele.buffered.end(i) - ele.buffered.start(i)
+                        if (bufferedT > durationT) {
+                            bufferedT = durationT
+                            console.log('缓冲完成')
+                        }
+                    }
+                    var bufferedP = Math.floor((bufferedT / durationT) * 100)
+                    that.bufferingP = bufferedP
+               }
+            } catch (e) {
+                return
+            }
         }
         // ele.onabort = function () {
         //     this.playNextPrev(that, true)
         // }
+    },
+    dragMouseDown (that, event) {
+        const ele = store.getters.getAudioEle
+        var _this = this
+        that.isDrag = true
+        let e = event || window.event
+        var x = e.clientX
+        let l = e.target.offsetLeft
+        _this.maxProgressWidth = document.getElementById('music_progressD').offsetWidth
+        const moveProgress = document.getElementById('music_progressB')
+        // console.log(this.maxProgressWidth)
+        moveProgress.onmousemove = function (event) {
+            if (that.isDrag) {
+                let e = event || window.event
+                let thisX = e.clientX
+                _this.dragProgressTo = Math.min(_this.maxProgressWidth, Math.max(0, l + (thisX - x)))
+                console.log(_this.dragProgressTo + '--------')
+            }
+        }
+        moveProgress.onmouseup = function (event) {
+            const durationT = ele.duration
+            if (that.isDrag) {
+                that.isDrag = false
+                ele.currentTime = Math.floor(_this.dragProgressTo / _this.maxProgressWidth * durationT)
+            }
+        }
+        moveProgress.onmouseleave = function (event) {
+            const durationT = ele.duration
+            if (that.isDrag) {
+                that.isDrag = false
+                ele.currentTime = Math.floor(_this.dragProgressTo / _this.maxProgressWidth * durationT)
+            }
+        }
     }
-    // // 关联当前音乐至进度条
-    // syncProgress () {
-
+    // updateProgress (that) {
+    //     const durationT = ele.duration
+    //     const durationT = ele.duration
+    //     // 设置duration
+    //     store.dispatch('set_AudioCurrentD', currentT / duration * 100)
     // }
 }
 

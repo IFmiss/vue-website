@@ -54,13 +54,12 @@
   						<span class="music_c_name">{{getCurrentMusic.name ? getCurrentMusic.name : '未曾遗忘的青春'}} - {{getCurrentMusic.singer ? getCurrentMusic.singer : '戴维戴维'}}</span>
   						<span class="music_c_time">{{getMusicCurrentT !== NaN & getMusicCurrentT !== '00:00' ? getMusicDurationType(getMusicCurrentT * 1000) : '00:00'}} / {{getCurrentMusic.duration ? getCurrentMusic.duration : '00:00'}}</span>
   					</div>
-  					<div class="music_progress_bar">
-  						<div class="duration">
+  					<div class="music_progress_bar" id="music_progressB">
+  						<div class="duration" id="music_progressD">
   							<div class="buffering" :style="{width:`${bufferingP}%`}"></div>
-	  						<div class="real" :style="{width: getMusicPro}">
-	  							<div class="range"></div>
-	  						</div>
+  							<div class="real" :style="{width: getMusicPro}"></div>
   						</div>
+  						<div class="range" @mousedown="dragMouseDown" :style="{left:`${getMusicPro}`}"></div>
   					</div>
   				</div>
   			</div>
@@ -80,6 +79,7 @@
   export default {
   	data () {
   		return {
+  			isDrag: false,
   			currentMusic: {},
   			bufferingP: 0,
   			top_list_all: {
@@ -159,7 +159,19 @@
   		initAudioEvent () {
   			const audio = store.getters.getAudioEle
   			musicApi.initAudioEvent(this, audio)
+  		},
+  		dragMouseDown (e) {
+  			musicApi.dragMouseDown(this, e)
   		}
+  		// dragMouseMove (e) {
+  		// 	musicApi.dragMouseMove(this, e)
+  		// },
+  		// dragMouseUp (e) {
+  		// 	musicApi.dragMouseUp(this, e)
+  		// },
+  		// dragMouseLeave (e) {
+  		// 	musicApi.dragMouseLeave(this, e)
+  		// }
   	},
   	computed: {
   		musicList () {
@@ -188,7 +200,7 @@
   		},
   		getMusicPro () {
   			const mp = store.getters.getAudioCurrentD
-  			return (mp).toFixed(2) + '%'
+  			return (mp).toFixed(4) + '%'
   		}
   	},
   	watch: {
@@ -498,18 +510,30 @@
 							color:$text_before_color
 							.music_c_name
 								// text-align:left
+								width:calc(100% - 100px)
+								white-space:nowrap
+								overflow:hidden
+								text-overflow:ellipsis
 								float:left
 							.music_c_time
 								// text-align:right
+								width:100px
 								float:right
 						.music_progress_bar
 							width:100%
-							height:8px
-							padding-top:6px
+							height:2px
 							// background:$text_color_opacity
 							box-sizing:border-box
 							position:relative
 							cursor:pointer
+							&:before{
+								content: ''
+								position:absolute
+								bottom:2px
+								width:100%
+								height:10px
+								background:transparent
+							}
 							.duration
 								width:100%
 								height:2px
@@ -533,15 +557,41 @@
 									background:$real_color
 									border-radius: 1px
 									transition:width 0.3s
-									.range
-										position:absolute
-										top:-4px
-										right:-4px
-										width:10px
-										height:10px
-										border-radius: 50%
-										background:$range_color
-										cursor:pointer
+							.range
+								// position:absolute
+								// top:-4px
+								// right:-4px
+								// width:10px
+								// height:10px
+								// border-radius: 50%
+								// background:$range_color
+								// cursor:pointer
+								width: 6px
+								height: 6px
+								margin-top: -3px
+								margin-left: 0
+								border-radius: 50%
+								background-color: #f00
+								position: absolute
+								left: 0
+								top: 50%
+								z-index: 2
+								cursor:pointer
+								&:before
+									content: " ";
+									display: block;
+									position: absolute;
+									width: 24px;
+									height: 24px;
+									border-radius: 50%;
+									background: radial-gradient(rgba(0, 0, 0, 0) 20%, rgba(255, 255, 255, 0.6) 50%, rgba(0, 0, 0, 0) 60%);
+									top: 50%;
+									margin-top: -12px;
+									margin-left: -9px;
+									cursor: pointer;
+									outline: 0;
+									-webkit-tap-highlight-color: transparent;
+								
 								
 				.right_ctrl
 					flex: 0 0 310px
