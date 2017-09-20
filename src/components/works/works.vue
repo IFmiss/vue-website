@@ -73,6 +73,16 @@ export default {
 								]
 					}, {
 						type: 2,
+						name: '原生Js',
+						detail: [
+									{
+										name: '微信公众号播放器插件',
+										link: 'http://www.daiwei.org/components/wx-audio/html/audio.html',
+										github: 'https://github.com/IFmiss/wx-audio'
+									}
+								]
+					}, {
+						type: 3,
 						name: 'Js小游戏',
 						detail: [
 									{
@@ -136,7 +146,9 @@ export default {
 			box-sizing:border-box
 			opacity:1
 			transition: all 0.5s 0.3s
-			.type_name
-				color:#fff
-				margin:0
+			.type_content
+				margin:10px 0
+				.type_name
+					color:#fff
+					margin:0
 </style>

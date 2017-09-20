@@ -45,21 +45,21 @@
   		<div class="music_ctrl">
   			<div class="left_ctrl">
   				<div class="music_detail_ctrl">
-  					<i class="playPrev icon-prevdetail" @click.stop="playPrev()"></i>
-  					<i class="playPause" :class="getAudioIsPlay ? 'icon-pause' : 'icon-play'" @click.stop="playPause()"></i>
-  					<i class="playNext icon-nextdetail" @click.stop="playNext()"></i>
+  					<i class="playPrev icon-prevdetail" @click.stop="playPrev()" title="上一曲 ctrl + left"></i>
+  					<i class="playPause" :class="getAudioIsPlay ? 'icon-pause' : 'icon-play'" @click.stop="playPause()" title="播放/暂停 ctrl + space"></i>
+  					<i class="playNext icon-nextdetail" title="下一曲 ctrl + right" @click.stop="playNext()"></i>
   				</div>
-  				<div class="music_progress">
+  				<div class="music_progress" id="music_progress">
   					<div class="music_current_detail">
   						<span class="music_c_name">{{getCurrentMusic.name ? getCurrentMusic.name : '未曾遗忘的青春'}} - {{getCurrentMusic.singer ? getCurrentMusic.singer : '戴维戴维'}}</span>
   						<span class="music_c_time">{{getMusicCurrentT !== NaN & getMusicCurrentT !== '00:00' ? getMusicDurationType(getMusicCurrentT * 1000) : '00:00'}} / {{getCurrentMusic.duration ? getCurrentMusic.duration : '00:00'}}</span>
   					</div>
-  					<div class="music_progress_bar" id="music_progressB">
+  					<div class="music_progress_bar" id="music_progress" >
   						<div class="duration" id="music_progressD">
   							<div class="buffering" :style="{width:`${bufferingP}%`}"></div>
   							<div class="real" :style="{width: getMusicPro}"></div>
   						</div>
-  						<div class="range" @mousedown="dragMouseDown" :style="{left:`${getMusicPro}`}"></div>
+  						<div class="range" @mousedown="dragMouseDown" @touchstart="dragTouchStart" @touchmove="dragTouchMove" @touchend="dragTouchEnd" :style="{left:`${getMusicPro}`}"></div>
   					</div>
   				</div>
   			</div>
@@ -160,9 +160,14 @@
   			const audio = store.getters.getAudioEle
   			musicApi.initAudioEvent(this, audio)
   		},
+  		// 鼠标点击拖动事件
   		dragMouseDown (e) {
   			musicApi.dragMouseDown(this, e)
-  		}
+  		},
+  		// 点击跳转位置
+  		clickProgress (e) {
+  			musicApi.clickProgress(e)
+  		},
   		// dragMouseMove (e) {
   		// 	musicApi.dragMouseMove(this, e)
   		// },
@@ -172,6 +177,15 @@
   		// dragMouseLeave (e) {
   		// 	musicApi.dragMouseLeave(this, e)
   		// }
+  		dragTouchStart (e) {
+  			musicApi.dragTouchStart(this, e)
+  		},
+  		dragTouchMove (e) {
+  			musicApi.dragTouchMove(this, e)
+  		},
+  		dragTouchEnd (e) {
+  			musicApi.dragTouchEnd(this, e)
+  		}
   	},
   	computed: {
   		musicList () {
@@ -508,6 +522,7 @@
 							width:100%
 							height:auto
 							color:$text_before_color
+							margin-bottom: 10px
 							.music_c_name
 								// text-align:left
 								width:calc(100% - 100px)
@@ -556,7 +571,7 @@
 									left:0
 									background:$real_color
 									border-radius: 1px
-									transition:width 0.3s
+									// transition:width 0.3s
 							.range
 								// position:absolute
 								// top:-4px

@@ -6,6 +6,8 @@ const musicApi = {
     lyric: {},    // 解析的歌詞
     maxProgressWidth: 0,
     dragProgressTo: 0,
+    x: 0,  // x 的位置
+    l: 0,  // offsetleft
     parseLrc (lrc) {
         if (lrc === '') return ''
         const lyrics = lrc.split('\n')
@@ -373,25 +375,31 @@ const musicApi = {
     },
     // 初始化音乐事件
     initAudioEvent (that) {
+        // const _this = this
         // audio Dom元素
         const ele = store.getters.getAudioEle
         // const _this = this
         // 本地音乐初始化  （收藏的歌曲）
         this.getLocalMusic()
 
+        ele.onloadedmetadata = () => {
+        }
+
         // 音乐播放结束事件
         ele.onended = () => {
             this.playNextPrev(that, true)
         }
         ele.ontimeupdate = function () {
-            const duration = Math.floor(ele.duration)
-            const currentT = Math.floor(ele.currentTime)
-            musicApi.scrollLyric(currentT, that)
-            // 设置currentT
-            store.dispatch('set_AudioCurrentTime', currentT)
-            // 设置duration
-            store.dispatch('set_AudioCurrentD', currentT / duration * 100)
-            // console.log(currentT + ' ---- ' + duration)
+            if (!that.isDrag) {
+                const ele = store.getters.getAudioEle
+                const duration = Math.floor(ele.duration)
+                const currentT = Math.floor(ele.currentTime)
+                musicApi.scrollLyric(currentT, that)
+                // 设置currentT
+                store.dispatch('set_AudioCurrentTime', currentT)
+                // 设置duration
+                store.dispatch('set_AudioCurrentD', currentT / duration * 100)
+            }
         }
         // 监听缓冲的进度
         ele.onprogress = function () {
@@ -419,20 +427,23 @@ const musicApi = {
     },
     dragMouseDown (that, event) {
         const ele = store.getters.getAudioEle
+        if (ele.src.indexOf('.') < 0) return
         var _this = this
         that.isDrag = true
         let e = event || window.event
         var x = e.clientX
         let l = e.target.offsetLeft
         _this.maxProgressWidth = document.getElementById('music_progressD').offsetWidth
-        const moveProgress = document.getElementById('music_progressB')
+        const moveProgress = document.getElementById('music_progress')
         // console.log(this.maxProgressWidth)
         moveProgress.onmousemove = function (event) {
             if (that.isDrag) {
                 let e = event || window.event
                 let thisX = e.clientX
                 _this.dragProgressTo = Math.min(_this.maxProgressWidth, Math.max(0, l + (thisX - x)))
-                console.log(_this.dragProgressTo + '--------')
+                _this.updateDragProgress(that, _this.maxProgressWidth, _this.dragProgressTo)
+                console.log(_this.dragProgressTo)
+                console.log(_this.maxProgressWidth)
             }
         }
         moveProgress.onmouseup = function (event) {
@@ -449,13 +460,59 @@ const musicApi = {
                 ele.currentTime = Math.floor(_this.dragProgressTo / _this.maxProgressWidth * durationT)
             }
         }
+    },
+    dragTouchStart (that, event) {
+        const ele = store.getters.getAudioEle
+        if (ele.src.indexOf('.') < 0) return
+        const _this = this
+        that.isDrag = true
+        const e = event || window.event
+        _this.x = e.touches[0].clientX
+        _this.l = e.target.offsetLeft
+        _this.maxProgressWidth = document.getElementById('music_progressD').offsetWidth
+        // console.log(this.maxProgressWidth)
+    },
+    dragTouchMove (that, event) {
+        const _this = this
+        if (that.isDrag) {
+            let e = event || window.event
+            let thisX = e.touches[0].clientX
+            _this.dragProgressTo = Math.min(_this.maxProgressWidth, Math.max(0, _this.l + (thisX - _this.x)))
+            _this.updateDragProgress(that, _this.maxProgressWidth, _this.dragProgressTo)
+        }
+    },
+    dragTouchEnd (that, event) {
+        const _this = this
+        const ele = store.getters.getAudioEle
+        const durationT = ele.duration
+        if (that.isDrag) {
+            that.isDrag = false
+            ele.currentTime = Math.floor(_this.dragProgressTo / _this.maxProgressWidth * durationT)
+        }
+    },
+    // 拖动  点击的进度效果   l length  to 移动的位置
+    updateDragProgress (that, l, to) {
+        const ele = store.getters.getAudioEle
+        const durationT = ele.duration
+        // const duration = Math.floor(ele.duration)
+        // const currentT = Math.floor(ele.currentTime)
+        musicApi.scrollLyric(Math.floor(to / l * durationT), that)
+        // 设置currentT
+        store.dispatch('set_AudioCurrentTime', Math.floor(to / l * durationT))
+        // 设置duration
+        store.dispatch('set_AudioCurrentD', (Math.floor(to / l * durationT)) / durationT * 100)
+        // console.log(currentT + ' ---- ' + duration)
+    },
+
+    clickProgress (event) {
+        const ele = store.getters.getAudioEle
+        const durationT = ele.duration
+        const e = event || window.event
+        const l = e.layerX
+        const w = e.target.offsetWidth
+        // console.log(l + '------------' + w)
+        ele.currentTime = Math.floor(l / w * durationT)
     }
-    // updateProgress (that) {
-    //     const durationT = ele.duration
-    //     const durationT = ele.duration
-    //     // 设置duration
-    //     store.dispatch('set_AudioCurrentD', currentT / duration * 100)
-    // }
 }
 
 export default musicApi

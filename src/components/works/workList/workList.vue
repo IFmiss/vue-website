@@ -41,7 +41,7 @@
 	  		text-overflow:ellipsis
 	  		overflow:hidden
 	  		white-space:nowrap
-	  		color:$text_color
+	  		color:#f0f0f0
 	  		margin:0
 	  		height:46px
 	  		line-height:46px
