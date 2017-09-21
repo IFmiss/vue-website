@@ -525,7 +525,7 @@
 							margin-bottom: 10px
 							.music_c_name
 								// text-align:left
-								width:calc(100% - 100px)
+								width:calc(100% - 110px)
 								white-space:nowrap
 								overflow:hidden
 								text-overflow:ellipsis

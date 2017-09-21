@@ -180,6 +180,7 @@ export default {
     }
   },
   mounted () {
+    // this.$toast()
       // 设置audio 的refs
       this.setAudioRef()
     // this.$nextTick(() => {
