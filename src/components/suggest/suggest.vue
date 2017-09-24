@@ -111,6 +111,7 @@ export default {
 				margin:0 auto
 				outline:none
 				padding:10px
+				border:1px solid $text_color
 				box-sizing:border-box
 				line-height:1.5
 			.submit_suggest

@@ -8,7 +8,7 @@
   		<div class="music_body">
   			<div class="left_list">
   				<div class="music_home">
-  					<div class="select_button">
+  					<div v-if="getIsAPP.isHigher768" class="select_button">
   						<router-link tag="span" to="/music/playlist" class="todo_btn playing_btn">
 				        	正在播放
 				        </router-link>
@@ -19,7 +19,21 @@
 				        	排行榜/歌单
 				        </router-link>
 			  			<router-link tag="span" to="/music/search" class="todo_btn search_btn">
-				        	搜索列表
+				        	搜索音乐
+				        </router-link>
+			  		</div>
+			  		<div v-if="!getIsAPP.isHigher768" class="select_m_button">
+			  			<router-link tag="span" to="/music/playlist" class="todo_btn playing_btn">
+				        	正在播放
+				        </router-link>
+			  			<router-link tag="span" to="/music/collection" class="todo_btn collect_btn">
+				        	收藏
+				        </router-link>
+				        <router-link tag="span" to="/music/toplist" class="todo_btn top_btn">
+				        	排行榜/歌单
+				        </router-link>
+			  			<router-link tag="span" to="/music/search" class="todo_btn search_btn">
+				        	搜索
 				        </router-link>
 			  		</div>
 			  		<transition name="silde-top">
@@ -321,6 +335,26 @@
 						height:100%
 						// background:#A99E9E
 						vertical-align:top
+						.select_m_button
+							width:100%
+							height:60px
+							display:flex
+							align-items:center
+							.todo_btn
+								width:auto
+								height:24px
+								line-height:24px
+								color:$text_before_color
+								border:1px solid $border_bottom_color_deep
+								border-radius:2px
+								padding:0px 7px
+								margin:10px
+								font-size:12px
+								cursor:pointer
+								&:hover,&.active
+									color:$text_before_color
+									border:1px solid $text_before_color				
+								
 						.select_button
 							width:100%
 							height:60px
@@ -512,28 +546,42 @@
 								color:$text_color
 					.music_progress
 						width: 100%
-						box-sizing:border-box
 						padding: 0 20px
+						box-sizing:border-box
 						display:flex
 						align-items:center
 						flex-direction:column
 						justify-content: center
 						.music_current_detail
+							display:block
 							width:100%
 							height:auto
 							color:$text_before_color
 							margin-bottom: 10px
+							font-size:0
+							overflow:hidden
 							.music_c_name
+								display:inline-block
 								// text-align:left
-								width:calc(100% - 110px)
+								width:calc(100% - 115px)
 								white-space:nowrap
 								overflow:hidden
 								text-overflow:ellipsis
-								float:left
+								font-size:16px
+								vertical-align:top
+								// float:left
 							.music_c_time
+								display:inline-block
+								font-size:16px
+								vertical-align:top
+								text-align:right
+								white-space:nowrap
+								overflow:hidden
+								text-overflow:ellipsis
 								// text-align:right
-								width:100px
-								float:right
+								width:110px
+								// float:right
+									
 						.music_progress_bar
 							width:100%
 							height:2px
@@ -696,6 +744,7 @@
 				left: 0px
 				padding:0
 				.music_body
+					height:calc(100% - 110px)
 					.left_list
 						.select_button
 							.todo_btn
@@ -719,6 +768,23 @@
 								display:none
 						.music_list_content
 							height:100%!important
-	video
+				.music_ctrl
+					height:110px
+					.left_ctrl
+						flex-direction: column
+						.music_detail_ctrl
+							justify-content:space-between
+							padding:0 50px
+							margin-bottom:6px
+							i
+								font-size:32px!important
+							.playPause 
+								font-size:38px!important
+						.music_progress
+							.music_current_detail
+								margin-bottom:3px
+								position:relative
+								
+	video 
 		display:none	
 </style>

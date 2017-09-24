@@ -146,6 +146,8 @@
     position:relative
     margin-top:50px
     font-size:0
+    height: calc(100% - 140px)
+    overflow:auto
     &.silde-bottom-enter-to,&.silde-bottom-leave-to
       transition: all 0.8s 0.2s
     &.silde-bottom-enter,&.silde-bottom-leave-to
