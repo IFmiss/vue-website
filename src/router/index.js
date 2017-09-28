@@ -12,9 +12,9 @@ const About = r => require.ensure([], () => r(require('@/components/about/about.
 // import About from '@/components/about/about.vue'
 const Setting = r => require.ensure([], () => r(require('@/components/setting/setting.vue')), 'setting')
 // import Setting from '@/components/setting/setting.vue'
-const Works = r => require.ensure([], () => r(require('@/components/works/works.vue')), 'works')
+const Works = r => require.ensure([], () => r(require('@/components/about/works/works.vue')), 'works')
 // import Works from '@/components/works/works.vue'
-const Joke = r => require.ensure([], () => r(require('@/components/joke/joke.vue')), 'joke')
+const Joke = r => require.ensure([], () => r(require('@/components/about/joke/joke.vue')), 'joke')
 // import Joke from '@/components/joke/joke.vue'
 const MusicSearch = r => require.ensure([], () => r(require('@/components/music/search/search.vue')), 'search')
 // import MusicSearch from '@/components/music/search/search.vue'
@@ -30,9 +30,9 @@ const MusicPlayList = r => require.ensure([], () => r(require('@/components/musi
 // import MusicPlayList from '@/components/music/playlist/playlist.vue'
 const MusicToplist = r => require.ensure([], () => r(require('@/components/music/toplist/toplist.vue')), 'toplist')
 // import MusicToplist from '@/components/music/toplist/toplist.vue'
-const Me = r => require.ensure([], () => r(require('@/components/me/me.vue')), 'me')
+const Me = r => require.ensure([], () => r(require('@/components/about/me/me.vue')), 'me')
 // import Me from '@/components/me/me.vue'
-const Suggest = r => require.ensure([], () => r(require('@/components/suggest/suggest.vue')), 'suggest')
+const Suggest = r => require.ensure([], () => r(require('@/components/about/suggest/suggest.vue')), 'suggest')
 // import Suggest from '@/components/suggest/suggest.vue'
 
 Vue.use(Router)

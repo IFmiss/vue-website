@@ -7,7 +7,7 @@
   			<span class="tip_list" v-for="(list, index) in personal_tips" @click.stop="clickTips(list.biaoQianName)">
 				<span class="name">{{list.biaoQianName}}</span>
 				<span class="count">{{list.biaoQianValue}}</span>
-  				<span class="bg-content" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor, opacity : getGlobalInfo.contentInfo.opacity * 1 + 0.4 - index * 0.03}">
+  				<span class="bg-content" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor, opacity : getGlobalInfo.contentInfo.opacity * 1 + 0.4 - index * 0.05}">
   				</span>
   			</span>
   		</div>
@@ -16,7 +16,7 @@
   			<span class="tip_list" v-for="(list, index) in technology_tips" @click.stop="clickTips(list.biaoQianName)">
 				<span class="name">{{list.biaoQianName}}</span>
 				<span class="count">{{list.biaoQianValue}}</span>
-  				<span class="bg-content" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor, opacity : getGlobalInfo.contentInfo.opacity * 1 + 0.4 - index * 0.03}">
+  				<span class="bg-content" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor, opacity : getGlobalInfo.contentInfo.opacity * 1 + 0.4 - index * 0.05}">
   				</span>
   			</span>
   		</div>
@@ -24,8 +24,8 @@
   </div>
 </template>
 <script>
-import store from '../../store'
-import fecth from './../../utils/fecth.js'
+import store from '../../../store'
+import fecth from './../../../utils/fecth.js'
 // import axios from 'axios'
 export default {
 	data () {
@@ -79,7 +79,7 @@ export default {
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-  @import '../../common/stylus/global.styl'
+  @import '../../../common/stylus/global.styl'
 	.div_back
 		position:absolute
 		top:0

@@ -14,7 +14,7 @@
 </template>
 <script>
 // import store from '../../store'
-import fecth from './../../utils/fecth.js'
+import fecth from './../../../utils/fecth.js'
 export default {
 	computed: {
 	},
@@ -53,7 +53,7 @@ export default {
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-  @import '../../common/stylus/global.styl'
+  @import '../../../common/stylus/global.styl'
 	.suggest
 	  	position:fixed
 	    top:0

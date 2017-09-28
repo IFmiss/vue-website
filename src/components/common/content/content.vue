@@ -12,6 +12,9 @@
           <router-link tag="a" to="/music">
             <li>音乐</li>
           </router-link>
+          <a href="http://www.daiwei.org/blog">
+            <li>博客</li>
+          </a>
           <router-link tag="a" to="/about">
             <li>关于</li>
           </router-link>
@@ -32,6 +35,9 @@
               <router-link tag="a" to="/music">
                 <li>音乐</li>
               </router-link>
+              <a href="http://www.daiwei.org/blog">
+                <li>博客</li>
+              </a>
               <router-link tag="a" to="/about">
                 <li>关于</li>
               </router-link>

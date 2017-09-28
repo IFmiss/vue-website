@@ -62,8 +62,8 @@ export default {
 						detail: [
 									{
 										name: '网易云音乐播放器(vue2.0)',
-										link: 'http://www.jq22.com/yanshi14633',
-										github: 'https://github.com/IFmiss/loading'
+										link: 'http://www.daiwei.org/vue-music.html#/mymusic',
+										github: 'https://github.com/IFmiss/vue-music'
 									},
 									{
 										name: 'Vue2.0新网站改版',
@@ -107,7 +107,7 @@ export default {
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-  @import '../../common/stylus/global.styl'
+  @import '../../../common/stylus/global.styl'
 	.works
 	  	position:fixed
 	    top:0

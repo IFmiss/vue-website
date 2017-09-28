@@ -1,7 +1,7 @@
 <template>
 	<div class="weather">
 		<transition name="fade-up">
-			<div class="weather-content" v-show="isShow">
+			<div class="weather-content" v-if="isShow">
 	          <div class="bg-info" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor,opacity:(getGlobalInfo.contentInfo.opacity * 1 + 0.3 > 1 ? 1 : getGlobalInfo.contentInfo.opacity * 1 + 0.2)}"></div>
 	          <div class="weather-detail" v-if="getWeather">
 	            <div class="weather-today" v-if="getWeather[0]">
