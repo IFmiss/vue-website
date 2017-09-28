@@ -34,6 +34,8 @@ const Me = r => require.ensure([], () => r(require('@/components/about/me/me.vue
 // import Me from '@/components/me/me.vue'
 const Suggest = r => require.ensure([], () => r(require('@/components/about/suggest/suggest.vue')), 'suggest')
 // import Suggest from '@/components/suggest/suggest.vue'
+const Contact = r => require.ensure([], () => r(require('@/components/about/contact/contact.vue')), 'contact')
+// import Suggest from '@/components/contact/contact.vue'
 
 Vue.use(Router)
 
@@ -154,6 +156,10 @@ export default new Router({
         {
           path: '/about/suggest',
           component: Suggest
+        },
+        {
+          path: '/about/contact',
+          component: Contact
         }
       ]
     },

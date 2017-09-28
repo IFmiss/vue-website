@@ -28,6 +28,12 @@
 		        		<span>意见建议</span>
 		        	</li>
 		        </router-link>
+		        <router-link tag="a" to="/about/contact">
+		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
+		        		<i class="icon-community"></i>
+		        		<span>Contact me</span>
+		        	</li>
+		        </router-link>
 	    	</div>
     	</transition>
     	<transition name="silde-top">
@@ -43,7 +49,8 @@
   		getRoutePath () {
   			// return this.$route.path
 			// if (this.$route.path.indexOf('/about'))
-			if (this.$route.path.indexOf('/about') === 0 && this.$route.path.length > 6) {
+			// 进入子页面的时候  路由路径的长度  来判断实在子路由还是父路由中
+			if (this.$route.path.indexOf('/about') === 0 && this.$route.path.length > 7) {
 				store.commit({
 					type: 'setAboutChildrenRouter',
 					data: false
@@ -61,6 +68,7 @@
 			return store.getters.getGlobalInfo
 		},
 		isShowPanel () {
+			console.log(store.getters.getAboutChildrenRouter)
 			return store.getters.getAboutChildrenRouter
 		}
 	},
