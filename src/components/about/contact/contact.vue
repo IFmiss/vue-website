@@ -3,11 +3,11 @@
   	<div class="div_back" @click="back"><i class="icon-back"></i></div>
   	<div class="contact_content">
   		<div class="contact_list dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-  			<img src="/static/42687529637959352.jpg" alt="未曾遗忘的青春">
+  			<img src="/static/818741753301018324.jpg" alt="未曾遗忘的青春">
   			<p class="disc">Q Q</p>
   		</div>
   		<div class="contact_list dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-  			<img src="/static/66811634915180340.jpg" alt="未曾遗忘的青春">
+  			<img src="/static/101920356445396365.jpg" alt="未曾遗忘的青春">
   			<p class="disc">微 信</p>
   		</div>
   	</div>
