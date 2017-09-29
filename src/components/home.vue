@@ -5,7 +5,7 @@
           <h1 class="title" key="title">{{imageInfo.title}}</h1>
           <p class="disc" key="disc">{{imageInfo.disc}}</p>
         </div>
-        <span class="tips">{{isShowBingImage}}</span>
+        <span class="tips" :title="isShowBingImage">{{isShowBingImage}}</span>
       </div>
       <!-- <div class="pic_bg" v-if="picBg" :style="{backgroundColor:picBg.contentInfo.bgcolor, opacity : picBg.contentInfo.opacity}"></div> -->
     </div>
@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     isShowBingImage () {
-      return store.getters.getGlobalInfo.showBingImage ? '每日一图由 bing 提供' : '每日一图由 未曾遗忘的青春 提供'
+      return store.getters.getGlobalInfo.showBingImage ? '每日一图由 bing 提供 | Copyright © 2016~2017 DAIWEI.ORG' : '每日一图由 未曾遗忘的青春 提供 | Copyright © 2016~2017 DAIWEI.ORG'
     },
     imageInfo () {
       return store.getters.getFixedImageInfo
@@ -75,7 +75,12 @@ export default {
       .tips
         position:absolute
         right:30px
+        left:30px
         bottom:0
         color:$text_color
         font-size:12px
+        text-overflow:ellipsis
+        overflow:hidden
+        white-space:nowrap
+        text-align: right;
 </style>
