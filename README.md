@@ -2,7 +2,7 @@
 
 > this is my website start at 2014-7-19
 
-## 演示地址   www.daiwei.org/new.html
+## 演示地址   www.daiwei.org
 
 ## 网页截图
 
