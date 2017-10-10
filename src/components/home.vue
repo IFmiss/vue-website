@@ -2,7 +2,7 @@
     <div class="home">
       <div class="home_center">
         <div class="home_content">
-          <h1 class="title" key="title">{{imageInfo.title}}</h1>
+          <h1 class="title" key="title">{{imageInfo.title}} <span v-if="imageInfo">{{(imageInfo.date).split(' ')[0]}}</span></h1>
           <p class="disc" key="disc">{{imageInfo.disc}}</p>
         </div>
         <span class="tips" :title="isShowBingImage">{{isShowBingImage}}</span>
@@ -69,6 +69,11 @@ export default {
         .title
           font-size:22px
           color:#fff
+          span
+            font-size:14px
+            vertical-align: bottom
+            font-weight:normal
+            margin-left:20px
         .disc
           font-size:14px
           color:#fff

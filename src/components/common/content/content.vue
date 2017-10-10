@@ -12,13 +12,13 @@
           <router-link tag="a" to="/music">
             <li>音乐</li>
           </router-link>
-          <a href="http://www.daiwei.org/blog">
+          <a href="http://www.daiwei.org/blog" target="_black">
             <li>博客</li>
           </a>
           <router-link tag="a" to="/about">
             <li>关于</li>
           </router-link>
-          <a href="http://www.daiwei.org">
+          <a href="http://www.daiwei.org/v1.html" target="_black">
             <li>回归旧版</li>
           </a>
         </div>
@@ -35,13 +35,13 @@
               <router-link tag="a" to="/music">
                 <li>音乐</li>
               </router-link>
-              <a href="http://www.daiwei.org/blog">
+              <a href="http://www.daiwei.org/blog" target="_black">
                 <li>博客</li>
               </a>
               <router-link tag="a" to="/about">
                 <li>关于</li>
               </router-link>
-              <a href="http://www.daiwei.org">
+              <a href="http://www.daiwei.org/v1.html" target="_black">
                 <li>回归旧版</li>
               </a>
             </div>
