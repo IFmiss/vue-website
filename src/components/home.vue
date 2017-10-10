@@ -2,7 +2,7 @@
     <div class="home">
       <div class="home_center">
         <div class="home_content">
-          <h1 class="title" key="title">{{imageInfo.title}} <span v-if="imageInfo">{{(imageInfo.date).split(' ')[0]}}</span></h1>
+          <h1 class="title" key="title">{{imageInfo.title}} <span v-if="imageInfo.date">{{(imageInfo.date).split(' ')[0]}}</span></h1>
           <p class="disc" key="disc">{{imageInfo.disc}}</p>
         </div>
         <span class="tips" :title="isShowBingImage">{{isShowBingImage}}</span>
