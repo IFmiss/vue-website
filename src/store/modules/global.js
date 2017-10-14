@@ -7,7 +7,7 @@ const globalStore = {
 				bgcolor: 'rgb(0, 0, 0)'
 			},
 			isHigher768: false,
-			showBingImage: true
+			showBingImage: false
 		},
 		place: {},
 		weather: {},
