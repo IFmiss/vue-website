@@ -6,7 +6,7 @@
           <p class="disc" key="disc">{{imageInfo.disc}}</p>
         </div>
         <div class="home_set">
-          <div class="set_list" @click="toggleFullScreen">
+          <div class="set_list" v-if="globalInfo.isHigher768" @click="toggleFullScreen">
             <i :class="isFullScreen ? 'icon-canclefullscreen' : 'icon-fullscreen'" :title="isFullScreen ? '取消全屏' : '全屏'"></i>
           </div>
 <!--           <div class="set_list" @click="exitFullscreen">
@@ -15,7 +15,7 @@
         </div>
         <span class="tips" :title="bingImageDisc">{{bingImageDisc}}</span>
       </div>
-      <!-- <div class="pic_bg" v-if="picBg" :style="{backgroundColor:picBg.contentInfo.bgcolor, opacity : picBg.contentInfo.opacity}"></div> -->
+      <!-- <div class="pic_bg" v-if="globalInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div> -->
     </div>
 </template>
 
@@ -35,7 +35,7 @@ export default {
     imageInfo () {
       return store.getters.getFixedImageInfo
     },
-    picBg () {
+    globalInfo () {
       return store.getters.getGlobalInfo
     }
   },
