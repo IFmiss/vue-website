@@ -167,7 +167,7 @@ export default {
           cursor:pointer
           i
             color:#fff
-            vertical-align:inherit
+            vertical-align:baseline
       .tips
         position:absolute
         right:30px
