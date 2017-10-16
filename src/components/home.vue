@@ -6,7 +6,7 @@
             {{imageInfo.title}}
             <span v-if="imageInfo.date">{{(imageInfo.date).split(' ')[0]}}</span> 
             <span class="playpause" @click="playpause" v-if="imageInfo.musicUrl">
-              <i class="icon-volume-medium"></i>{{getAudioIsPlay ? '暂停' : '播放'}}
+              <i class="icon-volume-medium"></i>{{isPlay ? '暂停' : '播放'}}
             </span>
           </h1>
           <p class="disc" key="disc">{{imageInfo.disc}}</p>
@@ -22,6 +22,7 @@
         <span class="tips" :title="bingImageDisc">{{bingImageDisc}}</span>
       </div>
       <!-- <div class="pic_bg" v-if="globalInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div> -->
+      <audio v-if="imageInfo.musicUrl" ref="homeAudio" style="display:none" loop="" :src="imageInfo.musicUrl"></audio>
     </div>
 </template>
 
@@ -31,7 +32,8 @@ export default {
   data () {
     return {
       showHomeContent: false,
-      isFullScreen: false
+      isFullScreen: false,
+      isPlay: false
     }
   },
   computed: {
@@ -57,28 +59,33 @@ export default {
       }
     },
 
-    getDefaultMusic () {
-      const musicEle = store.getters.getAudioEle
-      const musicUrl = store.getters.getFixedImageInfo.musicUrl
-      console.log(musicUrl)
-      if (!musicUrl) {
-        return
-      }
-      musicEle.src = musicUrl
-    },
-
     playpause () {
-      const musicEle = store.getters.getAudioEle
-      const musicUrl = store.getters.getFixedImageInfo.musicUrl
-      if (musicEle.src !== musicUrl) {
-        musicEle.src = musicUrl
+      var globalAudioEle = store.getters.getAudioEle
+      if (!globalAudioEle.paused) {
+        globalAudioEle.pause()
+        store.commit('setAudioIsPlay', !globalAudioEle.paused)
       }
+
+      var musicEle = this.$refs.homeAudio
       if (musicEle.paused) {
         musicEle.play()
+        this.isPlay = true
       } else {
         musicEle.pause()
+        this.isPlay = false
       }
-      store.commit('setAudioIsPlay', !musicEle.paused)
+    },
+
+    getRoutePath () {
+      // return this.$route.path
+      // if (this.$route.path.indexOf('/about'))
+      // 进入子页面的时候  路由路径的长度  来判断实在子路由还是父路由中
+      if (this.$route.path === '/home') {
+        // 进入home
+        return
+      } else {
+        this.isPlay = false
+      }
     },
 
     fullScreen () {
@@ -134,10 +141,12 @@ export default {
         }
     }
   },
+  watch: {
+    '$route': 'getRoutePath'
+  },
   mounted () {
     this.showHomeContent = true
     this.screenChangeEvent()
-    this.getDefaultMusic()
   }
 }
 </script>
