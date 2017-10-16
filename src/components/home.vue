@@ -2,7 +2,13 @@
     <div class="home">
       <div class="home_center">
         <div class="home_content">
-          <h1 class="title" key="title">{{imageInfo.title}} <span v-if="imageInfo.date">{{(imageInfo.date).split(' ')[0]}}</span></h1>
+          <h1 class="title" key="title">
+            {{imageInfo.title}}
+            <span v-if="imageInfo.date">{{(imageInfo.date).split(' ')[0]}}</span> 
+            <span class="playpause" @click="playpause" v-if="imageInfo.musicUrl">
+              <i class="icon-volume-medium"></i>{{getAudioIsPlay ? '暂停' : '播放'}}
+            </span>
+          </h1>
           <p class="disc" key="disc">{{imageInfo.disc}}</p>
         </div>
         <div class="home_set">
@@ -37,6 +43,9 @@ export default {
     },
     globalInfo () {
       return store.getters.getGlobalInfo
+    },
+    getAudioIsPlay () {
+      return store.getters.getAudioIsPlay
     }
   },
   methods: {
@@ -47,6 +56,31 @@ export default {
         this.fullScreen()
       }
     },
+
+    getDefaultMusic () {
+      const musicEle = store.getters.getAudioEle
+      const musicUrl = store.getters.getFixedImageInfo.musicUrl
+      console.log(musicUrl)
+      if (!musicUrl) {
+        return
+      }
+      musicEle.src = musicUrl
+    },
+
+    playpause () {
+      const musicEle = store.getters.getAudioEle
+      const musicUrl = store.getters.getFixedImageInfo.musicUrl
+      if (musicEle.src !== musicUrl) {
+        musicEle.src = musicUrl
+      }
+      if (musicEle.paused) {
+        musicEle.play()
+      } else {
+        musicEle.pause()
+      }
+      store.commit('setAudioIsPlay', !musicEle.paused)
+    },
+
     fullScreen () {
       // W3C
       if (document.documentElement.requestFullscreen) {
@@ -83,11 +117,11 @@ export default {
     },
     screenChangeEvent () {
       const _this = this
-      var eventList = ['webkitfullscreenchange', 'mozfullscreenchange', 'fullscreenchange', 'msfullscreenchange']
-        for (var i = 0; i < eventList.length; i++) {
+      const eventList = ['webkitfullscreenchange', 'mozfullscreenchange', 'fullscreenchange', 'msfullscreenchange']
+        for (let i = 0; i < eventList.length; i++) {
           document.addEventListener(eventList[i], function () {
             // 全屏显示的网页元素
-            var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement
+            const fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement
 
             if (fullscreenElement) {
               _this.isFullScreen = true
@@ -103,6 +137,7 @@ export default {
   mounted () {
     this.showHomeContent = true
     this.screenChangeEvent()
+    this.getDefaultMusic()
   }
 }
 </script>
@@ -143,6 +178,24 @@ export default {
             vertical-align: bottom
             font-weight:normal
             margin-left:20px
+            &.playpause
+              background:#fff
+              display:inline-block
+              color:#F55021
+              width:auto
+              vertical-align:middle
+              height:24px
+              font-weight:600
+              font-size:12px
+              line-height:24px
+              padding: 0 8px
+              border-radius:4px
+              cursor:pointer
+              i{
+                vertical-align:middle
+                display: inline-table
+                padding-bottom:2px
+              }
         .disc
           font-size:14px
           color:#fff
