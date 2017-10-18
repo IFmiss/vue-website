@@ -3,8 +3,8 @@
   	<div class="div_back" @click="back"><i class="icon-back"></i></div>
   	<div class="friendship_content dw-boot-container">
   		<div class="friendship_list dw-boot-col-lg-3 dw-boot-col-md-3 dw-boot-col-sm-4" v-if="friendShipList" v-for="item in friendShipList">
-			<a :href="item.linksrc" :target="item.target">
-				<li :title="item.disc">{{item.title}}</li>
+			<a :href="item.url" target="_black">
+				<li :title="item.disc">{{item.name}}</li>
 			</a>
   		</div>
   	</div>
@@ -13,23 +13,11 @@
 <script>
 // import store from '../../../store'
 // import axios from 'axios'
+import fecth from './../../../utils/fecth.js'
 export default {
 	data () {
 		return {
-			friendShipList: [
-				{
-					title: '凯冰科技',
-					linksrc: 'http://www.zkbhj.com/',
-					target: '_black',
-					disc: '郑凯的个人网站，无任何盈利性目的，着实为编程爱好的产物，希望能通过自己的学习，为自己和身边的朋友带来些许的便利。'
-				},
-				{
-					title: '全网视频',
-					linksrc: 'http://www.hcc11.cn/',
-					target: '_black',
-					disc: '全网都能搜索的视频，尽在全网视频'
-				}
-			]
+			friendShipList: {}
 		}
 	},
 	computed: {
@@ -40,10 +28,17 @@ export default {
 	methods: {
 		back () {
 			this.$router.go(-1)
+		},
+		initData () {
+			const apiUrl = `http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getLinksInfo`
+			fecth.get(apiUrl).then((res) => {
+				this.friendShipList = res.data
+			})
 		}
 	},
 	mounted () {
-		// this.getTipsInfo()
+		// this.getTipsInfo
+		this.initData()
 	}
 }
 </script>
