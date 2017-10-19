@@ -1,5 +1,6 @@
 <template>
   <div class="music_toplist container">
+  	<p class="toplist_title">网易音乐排行榜</p>
   	<div class="toplist_content dw-boot-col-lg-12">
 		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
 			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="3779629" title="云音乐新歌榜，每天更新">
@@ -42,10 +43,18 @@
 			</div>
 		</div>
 	</div>
+	<p class="toplist_title">热门歌单</p>
+	<div class="toplist_content dw-boot-col-lg-12" v-if="top_list_hot">
+		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4" v-for="(item,index) in top_list_hot">
+			<div class="toplist_detail" @click.stop="openTopList($event)" :data-id="item.id" :title="item.name">
+				<div class="bg_list" :style="{backgroundImage: 'url(' + item.coverImgUrl + ')',backgroundSize: 'cover'}"></div>
+			</div>
+		</div>
+	</div>
   </div>
 </template>
 <script>
-  // import fecth from './../../utils/fecth.js'
+  import fecth from './../../../utils/fecth.js'
   // import store from '../../../store'
   // import musicApi from './../music.js'
   // import axios from 'axios'
@@ -80,7 +89,8 @@
 				19: ['法国 NRJ EuroHot 30周榜', '/discover/toplist?id=27135204'],
 				20: ['台湾Hito排行榜', '/discover/toplist?id=112463'],
 				21: ['Beatport全球电子舞曲榜', '/discover/toplist?id=3812895']
-			}
+			},
+			top_list_hot: {}
   		}
   	},
   	props: {
@@ -90,6 +100,14 @@
   		openTopList (e) {
   			const id = e.target.getAttribute('data-id')
   			this.$router.push({name: 'musicindex', params: {id: id}})
+  		},
+  		getTopList () {
+  			var url = 'http://www.daiwei.org/vue/server/music.php?inAjax=1&do=albums'
+  			fecth.get(url).then((res) => {
+  				this.top_list_hot = res.data.playlists
+  			}, (err) => {
+  				console.log(err)
+  			})
   		}
   	},
   	computed: {
@@ -100,6 +118,7 @@
   		}
   	},
   	mounted () {
+  		this.getTopList()
   	}
   }
 </script>
@@ -108,6 +127,9 @@
 	@import '../../../common/stylus/border-1px/index.styl'
 	.music_toplist
 		// background:red
+		.toplist_title
+			font-size:18px
+			color:$text_color
 		.toplist_content
 			position:relative
 			box-sizing: border-box;
@@ -149,6 +171,12 @@
 						display:block
 						width:100%
 						height:auto
+					.bg_list{
+						display:block
+						width:100%
+						height:0
+						padding-top:100%
+					}
 			@media screen and (max-width: 1550px) 
 				.toplist_l
 					padding: 15px
