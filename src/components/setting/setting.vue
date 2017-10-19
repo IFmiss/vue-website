@@ -101,6 +101,17 @@
 				localStorage.removeItem('fixedImageBg')
 				window.location.reload()
 			}
+		},
+		getRoutePath () {
+			// return this.$route.path
+			// if (this.$route.path.indexOf('/about'))
+			// 进入子页面的时候  路由路径的长度  来判断实在子路由还是父路由中
+			if (this.$route.path === '/setting') {
+				// 更新
+				this.getIsActive()
+			} else {
+				return
+			}
 		}
 	},
 	computed: {
@@ -118,6 +129,9 @@
   		'v-switch': Switch,
   		'colorpicker': ColorPicker
   	},
+  	watch: {
+		'$route': 'getRoutePath'
+	},
   	mounted () {
   		this.getIsActive()
   	}

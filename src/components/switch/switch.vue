@@ -58,6 +58,7 @@
   	computed: {
   		rangeStyleInfo () {
   			let styleInfo = {}
+        console.log(this.switchOpt.isactive)
   			if (this.switchOpt.isactive) {
   				styleInfo.backgroundColor = this.switchOpt.rangeactivebg
   				styleInfo.transform = `translate(100%,0)`
@@ -68,9 +69,6 @@
   			return styleInfo
   		}
   	}
-    // mounted () {
-    //   alert(this.switchOpt.isactive)
-    // }
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">

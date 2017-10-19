@@ -12,6 +12,9 @@
           <p class="disc" key="disc">{{imageInfo.disc}}</p>
         </div>
         <div class="home_set">
+          <div class="set_list">
+            <i class="icon-imgsetting" title="设置默认壁纸" @click="defaultData"></i>
+          </div>
           <div class="set_list" v-if="globalInfo.isHigher768" @click="toggleFullScreen">
             <i :class="isFullScreen ? 'icon-canclefullscreen' : 'icon-fullscreen'" :title="isFullScreen ? '取消全屏' : '全屏'"></i>
           </div>
@@ -28,6 +31,7 @@
 
 <script>
 import store from '../store'
+import fecth from '../utils/fecth.js'
 export default {
   data () {
     return {
@@ -74,6 +78,31 @@ export default {
         musicEle.pause()
         this.isPlay = false
       }
+    },
+
+    defaultData () {
+      var globalData = store.getters.getGlobalInfo
+      globalData.showBingImage = false
+      // alert(JSON.stringify(globalData))
+      store.dispatch({
+        type: 'set_GlobalInfo',
+        data: globalData
+      })
+      const url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
+      fecth.get(url).then((res) => {
+        let imageInfo = {}
+        imageInfo.url = res.data.url
+        imageInfo.title = res.data.title
+        imageInfo.disc = res.data.disc
+        imageInfo.date = res.data.date
+        imageInfo.musicUrl = res.data.musicUrl
+        store.dispatch({
+          type: 'set_FixedImageInfo',
+          data: imageInfo
+        })
+        localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
+        localStorage.setItem('fixedImageBg', JSON.stringify(store.getters.getFixedImageInfo))
+      })
     },
 
     getRoutePath () {
