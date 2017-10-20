@@ -47,7 +47,6 @@ export default {
           imageInfo.url = res.data.url
           imageInfo.title = res.data.title
           imageInfo.disc = res.data.disc
-          imageInfo.musicUrl = res.data.musicUrl || null
           imageInfo.date = this.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
           store.dispatch({
             type: 'set_FixedImageInfo',
@@ -66,6 +65,7 @@ export default {
             imageInfo.disc = res.data.disc
             imageInfo.date = res.data.date
             imageInfo.musicUrl = res.data.musicUrl
+            imageInfo.musicName = res.data.musicName
             store.dispatch({
               type: 'set_FixedImageInfo',
               data: imageInfo

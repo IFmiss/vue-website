@@ -5,7 +5,7 @@
           <h1 class="title" key="title">
             {{imageInfo.title}}
             <span v-if="imageInfo.date">{{(imageInfo.date).split(' ')[0]}}</span> 
-            <span class="playpause" @click="playpause" v-if="imageInfo.musicUrl">
+            <span class="playpause" @click="playpause" v-if="imageInfo.musicUrl" :title="imageInfo.musicName">
               <i class="icon-volume-medium"></i>{{isPlay ? '暂停' : '播放'}}
             </span>
           </h1>
@@ -95,6 +95,7 @@ export default {
         imageInfo.title = res.data.title
         imageInfo.disc = res.data.disc
         imageInfo.date = res.data.date
+        imageInfo.musicName = res.data.musicName
         imageInfo.musicUrl = res.data.musicUrl
         store.dispatch({
           type: 'set_FixedImageInfo',
