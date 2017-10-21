@@ -1,6 +1,8 @@
 const fixedimage = {
 	state: {
-		fixedImageInfo: {},
+		fixedImageInfo: {
+			index: 0
+		},
 		fixedBgInfo: {
 			opacity: '0.4',
 			bgcolor: 'rgb(51, 102, 153)'
@@ -8,7 +10,8 @@ const fixedimage = {
 	},
 	getters: {
 		getFixedImageInfo: state => state.fixedImageInfo,
-		getFixedBgInfo: state => state.fixedBgInfo
+		getFixedBgInfo: state => state.fixedBgInfo,
+		getFixedBgIndex: state => state.index
 	},
 	mutations: {
 		setFixedImageInfo (state, obj) {
@@ -16,6 +19,9 @@ const fixedimage = {
 		},
 		setFixedBgInfo (state, obj) {
 			state.fixedBgInfo = obj.data
+		},
+		setFixedBgIndex (state, obj) {
+			state.index = obj.data
 		}
 	},
 	actions: {

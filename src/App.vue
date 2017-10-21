@@ -59,13 +59,15 @@ export default {
       } else {
         // 自定义图片  默认是我设置的图片
         if ((hasFixedImageBg === null || '')) {
-           fecth.get(getbingApi).then((res) => {
+           var index = store.getters.getFixedImageInfo.index
+           fecth.post(getbingApi, {index: index}).then((res) => {
             let imageInfo = {}
             imageInfo.url = res.data.url
             imageInfo.title = res.data.title
             imageInfo.disc = res.data.disc
             imageInfo.date = res.data.date
             imageInfo.musicUrl = res.data.musicUrl
+            imageInfo.index = index
             store.dispatch({
               type: 'set_FixedImageInfo',
               data: imageInfo

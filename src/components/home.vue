@@ -12,8 +12,14 @@
           <p class="disc" key="disc">{{imageInfo.disc}}</p>
         </div>
         <div class="home_set">
-          <div class="set_list">
-            <i class="icon-imgsetting" title="设置默认壁纸" @click="defaultData"></i>
+          <div class="set_list" @click="defaultData(2)">
+            <i class="icon-left" title="上一页"></i>
+          </div>
+          <div class="set_list" @click="defaultData(0)">
+            <i class="icon-imgsetting" title="设置默认壁纸"></i>
+          </div>
+          <div class="set_list" @click="defaultData(1)">
+            <i class="icon-right" title="下一页"></i>
           </div>
           <div class="set_list" v-if="globalInfo.isHigher768" @click="toggleFullScreen">
             <i :class="isFullScreen ? 'icon-canclefullscreen' : 'icon-fullscreen'" :title="isFullScreen ? '取消全屏' : '全屏'"></i>
@@ -37,7 +43,8 @@ export default {
     return {
       showHomeContent: false,
       isFullScreen: false,
-      isPlay: false
+      isPlay: false,
+      index: 0
     }
   },
   computed: {
@@ -80,7 +87,25 @@ export default {
       }
     },
 
-    defaultData () {
+    // 设置壁纸的信息   0 则是默认的壁纸  索引为0  1 则是索引 --     2 则是 ++    根据 limit(index, 1) 来获取数据
+    defaultData (type) {
+      this.index = store.getters.getFixedImageInfo.index
+      if (type === 1) {
+        this.index --
+        this.index = this.index < 0 ? 0 : this.index
+      }
+
+      if (type === 2) {
+        this.index ++
+        this.index = this.index > 4 ? 4 : this.index
+      }
+
+      if (type === 0) {
+        this.index = 0
+      }
+
+      var index = this.index
+
       var globalData = store.getters.getGlobalInfo
       globalData.showBingImage = false
       // alert(JSON.stringify(globalData))
@@ -89,17 +114,22 @@ export default {
         data: globalData
       })
       const url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
-      fecth.get(url).then((res) => {
+      fecth.post(url, {index: index}).then((res) => {
         let imageInfo = {}
         imageInfo.url = res.data.url
         imageInfo.title = res.data.title
         imageInfo.disc = res.data.disc
         imageInfo.date = res.data.date
         imageInfo.musicUrl = res.data.musicUrl
+        imageInfo.index = index
         store.dispatch({
           type: 'set_FixedImageInfo',
           data: imageInfo
         })
+
+        // 设置图片索引
+        store.getters.getFixedBgIndex
+
         localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
         localStorage.setItem('fixedImageBg', JSON.stringify(store.getters.getFixedImageInfo))
       })
