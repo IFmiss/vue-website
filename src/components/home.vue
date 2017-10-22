@@ -12,14 +12,14 @@
           <p class="disc" key="disc">{{imageInfo.disc}}</p>
         </div>
         <div class="home_set">
-          <div class="set_list" @click="defaultData(2)">
-            <i class="icon-left" title="上一页"></i>
+          <div class="set_list" title="上一张壁纸" @click="defaultData(2)">
+            <i class="icon-left"></i>
           </div>
-          <div class="set_list" @click="defaultData(0)">
-            <i class="icon-imgsetting" title="设置默认壁纸"></i>
+          <div class="set_list" title="设置默认壁纸" @click="defaultData(0)">
+            <i class="icon-imgsetting"></i>
           </div>
-          <div class="set_list" @click="defaultData(1)">
-            <i class="icon-right" title="下一页"></i>
+          <div class="set_list" title="下一张壁纸" @click="defaultData(1)">
+            <i class="icon-right"></i>
           </div>
           <div class="set_list" v-if="globalInfo.isHigher768" @click="toggleFullScreen">
             <i :class="isFullScreen ? 'icon-canclefullscreen' : 'icon-fullscreen'" :title="isFullScreen ? '取消全屏' : '全屏'"></i>
@@ -89,6 +89,8 @@ export default {
 
     // 设置壁纸的信息   0 则是默认的壁纸  索引为0  1 则是索引 --     2 则是 ++    根据 limit(index, 1) 来获取数据
     defaultData (type) {
+      // 如果有播放器 需要设置暂停状态
+      this.isPlay = false
       this.index = store.getters.getFixedImageInfo.index
       if (type === 1) {
         this.index --
