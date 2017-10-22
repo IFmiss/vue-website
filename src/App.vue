@@ -44,6 +44,7 @@ export default {
       if (isShowBingImage) {
         fecth.get(getbingApi).then((res) => {
           let imageInfo = {}
+          imageInfo.type = 'bing'
           imageInfo.url = res.data.url
           imageInfo.title = res.data.title
           imageInfo.disc = res.data.disc
@@ -61,6 +62,7 @@ export default {
            var index = store.getters.getFixedImageInfo.index
            fecth.post(getbingApi, {index: index}).then((res) => {
             let imageInfo = {}
+            imageInfo.type = 'home'
             imageInfo.url = res.data.url
             imageInfo.title = res.data.title
             imageInfo.disc = res.data.disc

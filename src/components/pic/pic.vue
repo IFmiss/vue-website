@@ -140,6 +140,7 @@
         }
         const el = document.getElementById('detail_' + this.swiper.activeIndex)
         const data = {
+          type: 'pic',
           url: el.getAttribute('src'),
           disc: el.getAttribute('data-disc'),
           title: el.getAttribute('data-title'),

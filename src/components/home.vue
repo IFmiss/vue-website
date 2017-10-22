@@ -12,13 +12,13 @@
           <p class="disc" key="disc">{{imageInfo.disc}}</p>
         </div>
         <div class="home_set">
-          <div class="set_list" :class="index === 4 ? 'disabled' : ''" title="上一张壁纸" @click="defaultData(2)">
+          <div class="set_list" v-if="imageInfo.type === 'home'" :class="index === 4 ? 'disabled' : ''" title="上一张壁纸" @click="defaultData(2)">
             <i class="icon-left"></i>
           </div>
           <div class="set_list" title="设置默认壁纸" @click="defaultData(0)">
             <i class="icon-imgsetting"></i>
           </div>
-          <div class="set_list" :class="index === 0 ? 'disabled' : ''" title="下一张壁纸" @click="defaultData(1)">
+          <div class="set_list" v-if="imageInfo.type === 'home'" :class="index === 0 ? 'disabled' : ''" title="下一张壁纸" @click="defaultData(1)">
             <i class="icon-right"></i>
           </div>
           <div class="set_list" v-if="globalInfo.isHigher768" @click="toggleFullScreen">
@@ -124,6 +124,7 @@ export default {
       const url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
       fecth.post(url, {index: index}).then((res) => {
         let imageInfo = {}
+        imageInfo.type = 'home'
         imageInfo.url = res.data.url
         imageInfo.title = res.data.title
         imageInfo.disc = res.data.disc
