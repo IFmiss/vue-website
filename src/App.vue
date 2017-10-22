@@ -49,6 +49,7 @@ export default {
           imageInfo.title = res.data.title
           imageInfo.disc = res.data.disc
           imageInfo.date = this.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
+          imageInfo.index = 0
           store.dispatch({
             type: 'set_FixedImageInfo',
             data: imageInfo
