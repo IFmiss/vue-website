@@ -118,7 +118,6 @@ const musicApi = {
                     store.getters.getAudioEle.load()
                     store.getters.getAudioEle.play()
                 } catch (e) {
-                    console.log(store.getters.getAudioEle.src + ' --- ' + e)
                     return
                 }
                 // 设置歌词位置
