@@ -12,13 +12,13 @@
           <p class="disc" key="disc">{{imageInfo.disc}}</p>
         </div>
         <div class="home_set">
-          <div class="set_list" title="上一张壁纸" @click="defaultData(2)">
+          <div class="set_list" :class="index === 4 ? 'disabled' : ''" title="上一张壁纸" @click="defaultData(2)">
             <i class="icon-left"></i>
           </div>
           <div class="set_list" title="设置默认壁纸" @click="defaultData(0)">
             <i class="icon-imgsetting"></i>
           </div>
-          <div class="set_list" title="下一张壁纸" @click="defaultData(1)">
+          <div class="set_list" :class="index === 0 ? 'disabled' : ''" title="下一张壁纸" @click="defaultData(1)">
             <i class="icon-right"></i>
           </div>
           <div class="set_list" v-if="globalInfo.isHigher768" @click="toggleFullScreen">
@@ -93,13 +93,19 @@ export default {
       this.isPlay = false
       this.index = store.getters.getFixedImageInfo.index
       if (type === 1) {
-        this.index --
-        this.index = this.index < 0 ? 0 : this.index
+        this.index--
+        if (this.index < 0) {
+          this.index = 0
+          return
+        }
       }
 
       if (type === 2) {
-        this.index ++
-        this.index = this.index > 4 ? 4 : this.index
+        this.index++
+        if (this.index > 4) {
+          this.index = 4
+          return
+        }
       }
 
       if (type === 0) {
@@ -292,6 +298,11 @@ export default {
           i
             color:#fff
             vertical-align:baseline
+          &.disabled
+            cursor:default
+            border:2px solid rgba(233,233,233,0.46)
+            i
+              color:rgba(233,233,233,0.46)
       .tips
         position:absolute
         right:30px
@@ -300,7 +311,7 @@ export default {
         color:$text_color
         height:40px
         line-height:40px
-        font-size:12px
+        font-size:10px
         text-overflow:ellipsis
         overflow:hidden
         white-space:nowrap
