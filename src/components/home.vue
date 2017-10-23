@@ -91,7 +91,6 @@ export default {
     defaultData (type) {
       // 如果有播放器 需要设置暂停状态
       this.isPlay = false
-      this.index = store.getters.getFixedImageInfo.index
       if (type === 1) {
         this.index--
         if (this.index < 0) {
@@ -216,6 +215,8 @@ export default {
   mounted () {
     this.showHomeContent = true
     this.screenChangeEvent()
+    const fixedImageBg = localStorage.getItem('fixedImageBg')
+    this.index = fixedImageBg ? JSON.parse(fixedImageBg).index : store.getters.getFixedImageInfo.index
   }
 }
 </script>
