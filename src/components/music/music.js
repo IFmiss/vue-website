@@ -197,6 +197,7 @@ const musicApi = {
     clickIndex (data, that) {
         const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${data.id}`
         fecth.get(apiUrl).then((res) => {
+            // 如果代码不允许被播放（付费音乐）
             if (res.data.data[0].url === null) {
                 let initIndex = 0
                 const currentMusic = {
