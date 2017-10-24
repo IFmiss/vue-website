@@ -13,6 +13,7 @@ const musicApi = {
         const lyrics = lrc.split('\n')
         let lrcObj = {}
         for (let i = 0; i < lyrics.length; i++) {
+            // 解码
             const lyric = decodeURIComponent(lyrics[i])
             const timeReg = /\[\d*:\d*((\.|\:)\d*)*\]/g
             const timeRegExpArr = lyric.match(timeReg)
