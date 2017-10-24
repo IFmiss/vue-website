@@ -93,7 +93,7 @@ const musicApi = {
             const currentMusic = {
                 id: data.id,
                 name: data.name,
-                url: data.url,
+                url: musicApi.replaceUrl(data.url),
                 singer: data.singer,
                 duration: data.duration,
                 picurl: data.picurl,
@@ -212,7 +212,7 @@ const musicApi = {
             const newData = {
                 id: data.id,
                 name: data.name,
-                url: res.data.data[0].url,
+                url: musicApi.replaceUrl(res.data.data[0].url),
                 singer: data.singer,
                 duration: data.duration,
                 picurl: data.pic,
@@ -360,7 +360,7 @@ const musicApi = {
             const newData = {
                 id: musicplaylist[index].id,
                 name: musicplaylist[index].name,
-                url: res.data.data[0].url,
+                url: musicApi.replaceUrl(res.data.data[0].url),
                 singer: musicplaylist[index].ar[0].name,
                 duration: musicApi.getMusicDurantionType(musicplaylist[index].dt),
                 picurl: musicplaylist[index].al.picUrl,
@@ -512,6 +512,11 @@ const musicApi = {
         const w = e.target.offsetWidth
         // console.log(l + '------------' + w)
         ele.currentTime = Math.floor(l / w * durationT)
+    },
+
+    // 由于网易云地址有添加防盗链  m8c,m7c 的地址替换成m8,m7 就可以正常播放
+    replaceUrl (url) {
+        return url.indexOf('//m7c') < 0 ? (url.indexOf('//m8c') ? url.replace('//m8c', '//m8') : url) : url.replace('//m7c', '//m7')
     }
 }
 
