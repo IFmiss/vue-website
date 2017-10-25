@@ -68,7 +68,7 @@
   						<span class="music_c_name">{{getCurrentMusic.name ? getCurrentMusic.name : '未曾遗忘的青春'}} - {{getCurrentMusic.singer ? getCurrentMusic.singer : '戴维戴维'}}</span>
   						<span class="music_c_time">{{getMusicCurrentT !== NaN & getMusicCurrentT !== '00:00' ? getMusicDurationType(getMusicCurrentT * 1000) : '00:00'}} / {{getCurrentMusic.duration ? getCurrentMusic.duration : '00:00'}}</span>
   					</div>
-  					<div class="music_progress_bar" id="music_progress" >
+  					<div class="music_progress_bar" id="music_progress" @click="clickProgress">
   						<div class="duration" id="music_progressD">
   							<div class="buffering" :style="{width:`${bufferingP}%`}"></div>
   							<div class="real" :style="{width: getMusicPro}"></div>

@@ -510,9 +510,9 @@ const musicApi = {
         const ele = store.getters.getAudioEle
         const durationT = ele.duration
         const e = event || window.event
-        const l = e.layerX
-        const w = e.target.offsetWidth
-        // console.log(l + '------------' + w)
+        const l = e.offsetX
+        const w = document.getElementById('music_progress').offsetWidth
+        console.log(l + '------------' + w)
         ele.currentTime = Math.floor(l / w * durationT)
     },
 
