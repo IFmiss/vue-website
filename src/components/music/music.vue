@@ -311,7 +311,7 @@
 			// width:100%
 			// transform:translate3d(-50%,0,0)
 			margin:0 auto
-			overflow-y:scroll
+			overflow-y:auto
 			box-sizing:border-box
 			-webkit-overflow-scrolling: touch
 			padding:15px;
