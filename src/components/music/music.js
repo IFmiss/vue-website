@@ -511,7 +511,7 @@ const musicApi = {
         const durationT = ele.duration
         const e = event || window.event
         const l = e.offsetX
-        const w = document.getElementById('music_progress').offsetWidth
+        const w = document.getElementById('music_progressD').offsetWidth
         console.log(l + '------------' + w)
         ele.currentTime = Math.floor(l / w * durationT)
     },

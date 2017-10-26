@@ -15,7 +15,7 @@
           <div class="set_list" v-if="imageInfo.type === 'home'" :class="index === 4 ? 'disabled' : ''" title="上一张壁纸" @click="defaultData(2)">
             <i class="icon-left"></i>
           </div>
-          <div class="set_list" title="设置默认壁纸" @click="defaultData(0)">
+          <div class="set_list" :title="isBingImage ? '设置默认壁纸' : '设置为Bing壁纸'" @click="getHomeImage">
             <i class="icon-imgsetting"></i>
           </div>
           <div class="set_list" v-if="imageInfo.type === 'home'" :class="index === 0 ? 'disabled' : ''" title="下一张壁纸" @click="defaultData(1)">
@@ -59,6 +59,9 @@ export default {
     },
     getAudioIsPlay () {
       return store.getters.getAudioIsPlay
+    },
+    isBingImage () {
+      return store.getters.getGlobalInfo.showBingImage
     }
   },
   methods: {
@@ -84,6 +87,14 @@ export default {
       } else {
         musicEle.pause()
         this.isPlay = false
+      }
+    },
+
+    getHomeImage () {
+      if (this.isBingImage) {
+        this.defaultData(0)
+      } else {
+        this.bingData()
       }
     },
 
@@ -113,13 +124,6 @@ export default {
 
       var index = this.index
 
-      var globalData = store.getters.getGlobalInfo
-      globalData.showBingImage = false
-      // alert(JSON.stringify(globalData))
-      store.dispatch({
-        type: 'set_GlobalInfo',
-        data: globalData
-      })
       const url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
       fecth.post(url, {index: index}).then((res) => {
         let imageInfo = {}
@@ -131,9 +135,18 @@ export default {
         imageInfo.musicName = res.data.musicName
         imageInfo.musicUrl = res.data.musicUrl
         imageInfo.index = index
+
         store.dispatch({
           type: 'set_FixedImageInfo',
           data: imageInfo
+        })
+
+        var globalData = store.getters.getGlobalInfo
+        globalData.showBingImage = false
+        // alert(JSON.stringify(globalData))
+        store.dispatch({
+          type: 'set_GlobalInfo',
+          data: globalData
         })
 
         // 设置图片索引
@@ -142,6 +155,57 @@ export default {
         localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
         localStorage.setItem('fixedImageBg', JSON.stringify(store.getters.getFixedImageInfo))
       })
+    },
+
+    bingData () {
+      var getbingApi = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageByBingJson'
+      fecth.get(getbingApi).then((res) => {
+          let imageInfo = {}
+          imageInfo.type = 'bing'
+          imageInfo.url = res.data.url
+          imageInfo.title = res.data.title
+          imageInfo.disc = res.data.disc
+          imageInfo.date = this.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
+          imageInfo.index = 0
+          store.dispatch({
+            type: 'set_FixedImageInfo',
+            data: imageInfo
+          })
+
+          var globalData = store.getters.getGlobalInfo
+          globalData.showBingImage = true
+          // alert(JSON.stringify(globalData))
+          store.dispatch({
+            type: 'set_GlobalInfo',
+            data: globalData
+          })
+
+          localStorage.setItem('fixedImageBg', JSON.stringify(store.getters.getFixedImageInfo))
+          localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
+        }, (err) => {
+          alert(err)
+        })
+    },
+
+    formatDate (data, fmt) {
+      var o = {
+        'M+': data.getMonth() + 1,                 // 月份
+        'd+': data.getDate(),                    // 日
+        'h+': data.getHours(),                   // 小时
+        'm+': data.getMinutes(),                 // 分
+        's+': data.getSeconds(),                 // 秒
+        'q+': Math.floor((data.getMonth() + 3) / 3), // 季度
+        'S': data.getMilliseconds()             // 毫秒
+      }
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (data.getFullYear() + '').substr(4 - RegExp.$1.length))
+      }
+      for (var k in o) {
+        if (new RegExp('(' + k + ')').test(fmt)) {
+          fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
+        }
+      }
+      return fmt
     },
 
     getRoutePath () {
