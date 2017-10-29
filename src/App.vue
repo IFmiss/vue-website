@@ -59,7 +59,7 @@ export default {
         })
       } else {
         // 自定义图片  默认是我设置的图片
-        if ((hasFixedImageBg === null || '')) {
+        if ((hasFixedImageBg === null || '' || JSON.parse(hasFixedImageBg).type === 'bing')) {
            var index = store.getters.getFixedImageInfo.index
            fecth.post(getbingApi, {index: index}).then((res) => {
             let imageInfo = {}

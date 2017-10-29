@@ -330,6 +330,7 @@
 					height:100%
 					overflow: hidden
 					position: relative
+					flex:1
 					.music_home
 						// display:inline-block
 						flex: 1 1 auto
