@@ -110,10 +110,17 @@ export default {
         // })
         // this.getWeather(res.data.data.city)
         // console.log(JSON.stringify(res.data))
-        store.dispatch({
-          type: 'set_Weather',
-          data: res.data.data.forecast
-        })
+        try {
+          store.dispatch({
+            type: 'set_Weather',
+            data: res.data.data.forecast
+          })
+        } catch (e) {
+          store.dispatch({
+            type: 'set_Weather',
+            data: {}
+          })
+        }
       }, (err) => {
         alert(err)
       })

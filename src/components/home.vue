@@ -16,7 +16,7 @@
             <i class="icon-left"></i>
           </div>
           <div class="set_list" :title="isBingImage ? '设置默认壁纸' : '设置为Bing壁纸'" @click="getHomeImage">
-            <i class="icon-imgsetting"></i>
+            <i :class="isBingImage ? 'icon-imgsetting' : 'icon-bing'"></i>
           </div>
           <div class="set_list" v-if="imageInfo.type === 'home'" :class="index === 0 ? 'disabled' : ''" title="下一张壁纸" @click="defaultData(1)">
             <i class="icon-right"></i>

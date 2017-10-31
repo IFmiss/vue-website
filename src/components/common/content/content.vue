@@ -53,7 +53,7 @@
       </div>
       <!-- pc 移动端设置按钮 -->
       <div class="right-menu">
-        <span class="place" :data-place="getPlace.region" @mouseover="showWeatherInfo" @mouseleave="hideWeatherInfo">
+        <span class="place" v-show="getPlace.region" :data-place="getPlace.region" @mouseover="showWeatherInfo" @mouseleave="hideWeatherInfo">
           {{getPlace.city}}
           <weather :isShow="showWeatherList"></weather>
         </span>
@@ -92,8 +92,8 @@ export default {
     },
     // 显示天气信息
     showWeatherInfo () {
-      clearTimeout(t)
-      this.showWeatherList = true
+        clearTimeout(t)
+        this.showWeatherList = true
     },
     // 隐藏天气信息
     hideWeatherInfo () {

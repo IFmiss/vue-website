@@ -43,7 +43,7 @@
 	    	</div>
     	</transition>
     	<transition name="silde-top">
-			<router-view class="li_about" v-show="!isShowPanel"></router-view>
+			<router-view class="li_about"></router-view>
 		</transition>
     </div>
   </div>
@@ -83,6 +83,9 @@
 	},
 	create () {
 		return this.$router.path
+	},
+	mounted () {
+		this.getRoutePath()
 	}
   }
 </script>
@@ -118,6 +121,7 @@
 					a
 						color:$text_color
 						text-decoration: none
+						transition: all 0.3s
 						li
 							list-style:none	
 							display:flex
@@ -150,6 +154,9 @@
 								i
 									font-size:16px
 									vertical-align:middle
+						&:hover{
+							color:$text_color_opacity
+						}
 				.li_about
 					position:fixed
 					top:0
