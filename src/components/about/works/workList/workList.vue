@@ -31,7 +31,7 @@
 	  	line-height:46px
 	  	// cursor:pointer
 	  	box-sizing:border-box
-	  	padding: 0 10px
+	  	padding: 0 0 0 30px;
 	  	// &:hover
 	  	// 	background:rgba(0,0,0,0.3)
 	  	&.border-1px
