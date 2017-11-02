@@ -1,6 +1,5 @@
 # 网站版本更新
 
-> this is my website start at 2014-7-19
 
 ## 演示地址   www.daiwei.org
 
