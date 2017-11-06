@@ -9,7 +9,8 @@ import Toast from './components/common/toast/toast.js'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 // Vue.prototype.$scrollBar = scrollbar
-Vue.use(Toast)
+Vue.use(Toast, {text: 'aaa'})
+// console.log(Toast)
 Vue.use(VueAwesomeSwiper)
 
 Vue.config.productionTip = false

@@ -277,6 +277,7 @@ export default {
     '$route': 'getRoutePath'
   },
   mounted () {
+    this.$toast({text: 'hahahaah'})
     this.showHomeContent = true
     this.screenChangeEvent()
     const fixedImageBg = localStorage.getItem('fixedImageBg')
