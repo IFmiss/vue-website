@@ -1,0 +1,25 @@
+.vue-toast
+	position:fixed
+	background:rgba(0,0,0,0.3)
+	font-size:14px
+	color:#fff
+	line-height:1.5
+	padding: 4px 10px
+	width:auto
+	border-radius:8px
+	max-width:300px
+	display:inline-block
+	user-select: none
+	word-wrap: break-word
+	&.bottom
+		bottom: 10%
+		left:50%
+		transform:translate(-50%,0)
+	&.center
+		top: 50%
+		left:50%
+		transform:translate(-50%,-50%)
+	&.top
+		top: 10%
+		left:50%
+		transform:translate(-50%,0)
