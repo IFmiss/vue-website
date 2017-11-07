@@ -277,7 +277,6 @@ export default {
     '$route': 'getRoutePath'
   },
   mounted () {
-    this.$toast({text: 'hahahaah', duration: 3000})
     this.showHomeContent = true
     this.screenChangeEvent()
     const fixedImageBg = localStorage.getItem('fixedImageBg')
@@ -286,7 +285,6 @@ export default {
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-@import './common/toast/toast.styl'
 @import '../common/stylus/global.styl'
   .home
     position:fixed
