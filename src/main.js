@@ -3,13 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Toast from './components/common/toast/toast.js'
-// import './../babel-polyfill'
+// import 'babel-polyfill'
 // import scrollbar from 'malihu-custom-scrollbar-plugin'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
-// Vue.prototype.$scrollBar = scrollbar
-Vue.use(Toast, {text: 'aaa'})
 // console.log(Toast)
 Vue.use(VueAwesomeSwiper)
 
