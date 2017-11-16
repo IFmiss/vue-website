@@ -1,15 +1,21 @@
+import MyToast from './toast.vue'
+
 const Toast = {
 	showToast: false,
 	showToastNew: null,
 	time: null,  	// 定时器
 	install (Vue, options) {
-		// Vue.component('Toast', MyToast)
+		if (typeof window !== 'undefined' && window.Vue) {
+			Vue = window.Vue
+		}
+		Vue.component('Toast', MyToast)
+
 		Vue.prototype.$toast = (obj, callBack) => {
 			let opt = {
 				text: 'Hello World',	// 默认文案
-				type: 'bottom',   // 默认显示位置
+				position: 'bottom',   // 默认显示位置
 				duration: 3000,     // 持续时间
-				background: 'rgba(0,0,0,0.5)'   // 默认背景色
+				background: 'rgba(7,17,27,0.8)'   // 默认背景色
 			}
 
 			for (let property in options) {
@@ -17,8 +23,9 @@ const Toast = {
 			}
 
 			if (typeof obj !== Object) {
-				opt.text = obj || 'Hello World'
+				opt.text = obj ? obj || 'Hello World' : options.text || opt.text
 			}
+
 			for (let property in obj) {
 				opt[property] = obj[property]  // 使用 options 的配置
 			}
@@ -32,7 +39,7 @@ const Toast = {
 			}
 			if (!Toast.showToastNew) {
 				let ToastT = Vue.extend({     // 1、创建构造器，定义好提示信息的模板
-					template: '<transition name=fade-up><div class="vue-toast ' + opt.type + '" style="background:' + opt.background + '" v-show="isShow">' + opt.text + '</div></transition>',
+					template: '<transition name=fade-up><div class="vue-toast ' + opt.position + '" style="background:' + opt.background + '" v-show="isShow">' + opt.text + '</div></transition>',
 					data () {
 						return {
 							isShow: Toast.showToast

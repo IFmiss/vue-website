@@ -30,9 +30,11 @@ export default {
 			this.$router.go(-1)
 		},
 		initData () {
+			const _this = this
 			const apiUrl = `http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getLinksInfo`
 			fecth.get(apiUrl).then((res) => {
 				this.friendShipList = res.data
+				_this.$toast('想互换友链的朋友可以给我留言哦!')
 			})
 		}
 	},

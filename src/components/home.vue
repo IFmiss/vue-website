@@ -92,8 +92,10 @@ export default {
 
     getHomeImage () {
       if (this.isBingImage) {
+        this.$toast('已经切换到自定义壁纸')
         this.defaultData(0)
       } else {
+        this.$toast('已经切换到Bing每日壁纸')
         this.bingData()
       }
     },
@@ -264,9 +266,11 @@ export default {
 
             if (fullscreenElement) {
               _this.isFullScreen = true
+              _this.$toast('进入全屏')
               console.log('全屏')
             } else {
               _this.isFullScreen = false
+              _this.$toast('退出全屏')
               console.log('不是全屏')
             }
           })
