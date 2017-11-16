@@ -7,8 +7,8 @@ import Toast from 'vue-message'
 // import './../babel-polyfill'
 // import scrollbar from 'malihu-custom-scrollbar-plugin'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-// Vue.prototype.$scrollBar = scrollbar
 Vue.use(Toast, {text: 'Hello world', duration: 3000, background: 'rgba(7,17,27,0.6)'})
+
 // console.log(Toast)
 Vue.use(VueAwesomeSwiper)
 
