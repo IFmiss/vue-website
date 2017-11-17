@@ -5,6 +5,7 @@
       <fixed-bg v-if="imageInfo.url && imageSetting" :imagepath="imagePrevPath +'' + imageInfo.url" :maskcolor="getGlobalStyle.contentInfo.bgcolor" :maskopacity="getGlobalStyle.contentInfo.opacity"></fixed-bg>
     </div>
     <v-content></v-content>
+    <updatetips></updatetips>
     <audio :src="getCurrentMusic.url" ref="myAudio"></audio>
   </div>
 </template>
@@ -17,6 +18,7 @@ import fixedbg from './components/common/fixedbg/fixedbg.vue'
 import content from './components/common/content/content.vue'
 import pic from './components/pic/pic.vue'
 import loader from './components/common/loader/loader.vue'
+import updatetips from './components/common/updatetips/updatetips.vue'
 // import $ from 'jquery'
 
 export default {
@@ -31,7 +33,8 @@ export default {
     'v-content': content,
     'fixed-bg': fixedbg,
     pic,
-    loader
+    loader,
+    updatetips
   },
   methods: {
     fetchData () {
@@ -92,11 +95,13 @@ export default {
     },
     getPlace () {
       fecth.get('http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getAdress').then((res) => {
-        store.dispatch({
-          type: 'set_Place',
-          data: res.data.data
-        })
-        this.getWeather(res.data.data.city)
+        if (res.data) {
+          store.dispatch({
+            type: 'set_Place',
+            data: res.data.data
+          })
+          this.getWeather(res.data.data.city)
+        }
       }, (err) => {
         alert(err)
       })

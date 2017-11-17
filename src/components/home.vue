@@ -266,12 +266,8 @@ export default {
 
             if (fullscreenElement) {
               _this.isFullScreen = true
-              _this.$toast('进入全屏')
-              console.log('全屏')
             } else {
               _this.isFullScreen = false
-              _this.$toast('退出全屏')
-              console.log('不是全屏')
             }
           })
         }
