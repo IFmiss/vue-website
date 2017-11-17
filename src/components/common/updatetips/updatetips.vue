@@ -48,7 +48,7 @@
   			console.log(this.updateInfo)
   			Cookie.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
   			console.log(Cookie.getCookie('update'))
-  			// location.href = location.href + (location.href.indexOf('?') > -1 ? '&' : '?') + 'v=' + this.updateInf.version
+  			location.href = location.href + (location.href.indexOf('?') > -1 ? '&' : '?') + 'v=' + this.updateInf.version
   		},
 
   		showUpdate () {
@@ -91,19 +91,21 @@
 					}
 				} else {
 					console.log('没有versionStorage')
-					if (Cookie.getCookie('update') !== null) {
-						console.log('如果有cookie')
-						if (Cookie.getCookie('update') !== _this.updateInfo.version) {
-							console.log('cookie版本不同')
-							_this.showInfo = true
-						} else {
-							console.log('cookie版本相同')
-							_this.showInfo = false
-						}
-					} else {
-						console.log('如果没有cookie')
-						_this.showInfo = true
-					}
+					// if (Cookie.getCookie('update') !== null) {
+					// 	console.log('如果有cookie')
+					// 	if (Cookie.getCookie('update') !== _this.updateInfo.version) {
+					// 		console.log('cookie版本不同')
+					// 		_this.showInfo = true
+					// 	} else {
+					// 		console.log('cookie版本相同')
+					// 		_this.showInfo = false
+					// 	}
+					// } else {
+					// 	console.log('如果没有cookie')
+					// 	_this.showInfo = true
+					// }
+					window.localStorage.setItem('web_version', this.updateInfo.version)
+					Cookie.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
 				}
 				// if (versionStorage !== null && versionStorage !== _this.updateInfo.version && Cookie.getCookie('update') === null) {
 				// 	_this.showInfo = true
