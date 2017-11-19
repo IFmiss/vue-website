@@ -7,13 +7,9 @@
 			<div class="updatetips_info" v-show="showInfo">
 				<div class="img_bg">
 					<img src="http://oiq8j9er1.bkt.clouddn.com/update_bg.jpg" alt="未曾遗忘的青春">
-					<span class="update_version">V 2.1.0</span>
+					<span class="update_version">v{{updateInfo.version}}</span>
 				</div>
-				<div class="content">
-					1.顶顶顶的更新</br>
-					2.顶顶顶的更新</br>
-					3.顶顶顶的更新</br>
-					4.顶顶顶的更新</br>
+				<div class="content" v-html="updateInfo.disc">
 				</div>
 				<div class="update_select">
 					<input type="button" @click="unUpdate" class="giveup_update" value="暂不体验">
@@ -45,10 +41,8 @@
   		update () {
   			this.showInfo = false
   			window.localStorage.setItem('web_version', this.updateInfo.version)
-  			console.log(this.updateInfo)
   			Cookie.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
-  			console.log(Cookie.getCookie('update'))
-  			location.href = location.href + (location.href.indexOf('?') > -1 ? '&' : '?') + 'v=' + this.updateInf.version
+  			location.href = location.href + (location.href.indexOf('?') > -1 ? '&' : '?') + 'v=' + this.updateInfo.version
   		},
 
   		showUpdate () {
@@ -91,25 +85,9 @@
 					}
 				} else {
 					console.log('没有versionStorage')
-					// if (Cookie.getCookie('update') !== null) {
-					// 	console.log('如果有cookie')
-					// 	if (Cookie.getCookie('update') !== _this.updateInfo.version) {
-					// 		console.log('cookie版本不同')
-					// 		_this.showInfo = true
-					// 	} else {
-					// 		console.log('cookie版本相同')
-					// 		_this.showInfo = false
-					// 	}
-					// } else {
-					// 	console.log('如果没有cookie')
-					// 	_this.showInfo = true
-					// }
 					window.localStorage.setItem('web_version', this.updateInfo.version)
 					Cookie.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
 				}
-				// if (versionStorage !== null && versionStorage !== _this.updateInfo.version && Cookie.getCookie('update') === null) {
-				// 	_this.showInfo = true
-				// }
 			}, (err) => {
 				alert(err)
 			})
@@ -177,15 +155,18 @@
 					right:30px
 					top:50px
 					color:#fff
-					font-size:16px
+					font-size:14px
 					font-weight:600
 			.content
 				width:100%
 				height:120px
 				padding: 0 15px
-				line-height:30px
+				line-height:1.6
 				font-size: 14px
-				color:#333
+				overflow:hidden
+				color:#666
+				font-weight:400
+				box-sizing: border-box;
 			.update_select
 				width:100%
 				height:36px
@@ -204,6 +185,8 @@
 					outline:0 none
 					background:#fff
 					cursor:pointer
+					-webkit-appearance:none
+					outline:none
 					&.giveup_update
 						border-radius:0 0 0 4px
 						color: $update_primary_color

@@ -151,6 +151,7 @@
           data: data
         })
         localStorage.setItem('fixedImageBg', JSON.stringify(store.getters.getFixedImageInfo))
+        this.$toast('设置成功')
       },
       hideSwiper () {
         this.showImageDetail = false

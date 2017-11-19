@@ -4,7 +4,7 @@ const globalStore = {
 			// 路由的背景色 全屏状态下
 			contentInfo: {
 				opacity: '0.25',
-				bgcolor: 'rgb(7, 17, 27)'
+				bgcolor: 'rgb(0, 0, 0)'
 			},
 			isHigher768: false,
 			showBingImage: false

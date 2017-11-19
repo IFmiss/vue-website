@@ -30,6 +30,7 @@
   	<div class="selectBg" v-show="showSetBgColorPicker">
 		<colorpicker @isclose="closeColorPicker"></colorpicker>
 	</div>
+	<span class="version" v-if="version">版本号: v{{version}}</span>
   </div>
 </template>
 <script>
@@ -47,7 +48,8 @@
 				ref: 'bg'
 			},
 			showSetBgColorPicker: false,
-			showOpacityInput: false
+			showOpacityInput: false,
+			version: window.localStorage.getItem('web_version') || false
 		}
 	},
 	methods: {
@@ -240,4 +242,13 @@
 			background:rgba(0,0,0,0.3)
 			display:flex
 			align-items:center
+		.version
+			position:absolute
+			bottom:0
+			right:30px
+			height:40px
+			line-height:40px
+			color: $text_color
+			font-size: 12px
+			
 </style>

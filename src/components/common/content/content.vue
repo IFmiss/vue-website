@@ -24,7 +24,7 @@
         </div>
         <!-- 移动端菜单按钮 -->
         <transition name="fade">
-          <div class="fixed-fade-menu" v-show="showLeftMenu" @click="hideLeftContent">
+          <div class="fixed-fade-menu" ref="fixed_menu" v-show="showLeftMenu" @click="hideLeftContent">
             <div class="fixed-menu-content" @click="hideLeftContent">
               <router-link tag="a" to="/home">
               <li>首页</li>
@@ -86,6 +86,12 @@ export default {
   methods: {
     toggleMenuContent () {
       this.showLeftMenu = !this.showLeftMenu
+      if (this.showLeftMenu) {
+        // 如果是苹果显示模糊效果
+        if (/iPhone|iPod/i.test(navigator.userAgent)) {
+          this.$refs.fixed_menu.style.cssText = `-webkit-backdrop-filter: blur(10px);background:rgba(0,0,0,0.5)`
+        }
+      }
     },
     hideLeftContent () {
       this.showLeftMenu = false
@@ -219,7 +225,7 @@ export default {
         left: 0
         bottom: 0
         right: 0
-        background:$mask_color
+        background: rgba(0,0,0,0.86)
         &.fade-enter-to,&.fade-leave-to
           transition: all 0.5s
         &.fade-enter,&.fade-leave-to
