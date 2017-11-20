@@ -3,10 +3,12 @@
 		<transition name="fade" @after-leave="hideUpdate" @before-enter="showUpdate">
 			<div class="update_mask" v-show="showInfo"></div>
 		</transition>
+		<span class="updatetime">{{updateInfo.updatetime}}</span>
 		<transition name="scale">
 			<div class="updatetips_info" v-show="showInfo">
 				<div class="img_bg">
-					<img src="http://oiq8j9er1.bkt.clouddn.com/update_bg.jpg" alt="未曾遗忘的青春">
+					<!-- <img src="http://oiq8j9er1.bkt.clouddn.com/update_bg.jpg" alt="未曾遗忘的青春"> -->
+					<h3 class="title">更新提示</h3>
 					<span class="update_version">v{{updateInfo.version}}</span>
 				</div>
 				<div class="content" v-html="updateInfo.disc">
@@ -100,7 +102,9 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-	$update_primary_color = orange
+	$update_primary_color = rgba(0,0,0,0.5)
+	$bginfo = rgba(0,0,0,0.5)
+	$text_title = rgba(255,255,255,0.6)
 	.updatetips
 		position:fixed
 		top:0
@@ -110,29 +114,40 @@
 		z-index:11
 		font-weight:500
 		display:none
+		.updatetime
+			position:absolute
+			bottom:30px
+			right:30px
+			color:$text_title
+			font-size:12px
 		.update_mask
 			position:absolute
 			top:0
 			left:0
 			bottom:0
 			right:0
-			background:rgba(7,17,27,0.6)
+			background:rgba(12,14,27,0.98)
 			&.fade-enter-to,&.fade-leave-to
 				transition:all 0.5s
 			&.fade-enter,&.fade-leave-to
 				opacity:0
 		.updatetips_info
 			position:absolute
-			top:50%
+			top:46%
 			left:50%
 			bottom:0
 			right:0
-			background:#fff
-			width:260px
-			height:280px
+			// background:$update_primary_color
+			width:100%
+			max-width:414px
+			padding: 0 15px
+			height:300px
 			transform:translate(-50%,-50%) scale(1)
 			border-radius: 4px
-			overflow:hiden
+			overflow:hidden
+			display:flex
+			flex-direction:column
+			justify-content:center
 			&.scale-enter-to,&.scale-leave-to
 				transition:all 0.3s
 			&.scale-enter
@@ -143,9 +158,13 @@
 			.img_bg
 				width:100%
 				height:auto
-				min-height:80px
+				min-height:70px
 				position:relative
 				border-radius: 4px 4px 0 0
+				.title
+					color:rgba(255,255,255,0.6)
+					padding: 0 15px 
+					margin:0
 				img
 					width:100%
 					height:auto
@@ -153,28 +172,31 @@
 				.update_version
 					position:absolute
 					right:30px
-					top:50px
-					color:#fff
+					top:40px
+					color:$text_title
 					font-size:14px
 					font-weight:600
 			.content
 				width:100%
 				height:120px
 				padding: 0 15px
-				line-height:1.6
+				line-height:1.7
 				font-size: 14px
 				overflow:hidden
-				color:#666
+				color:$text_title
 				font-weight:400
 				box-sizing: border-box;
 			.update_select
-				width:100%
+				width:250px
 				height:36px
 				font-size:0
 				position:absolute
+				left:50%
+				transform:translate3d(-50%,0,0)
 				bottom:0
 				border-radius:0 0 4px 4px
-				border-top:1px solid $update_primary_color
+				// border-top:1px solid $text_title 
+				background:transparent
 				input
 					width:50%
 					height:100%
@@ -183,15 +205,20 @@
 					line-height:36px
 					border:0 none
 					outline:0 none
-					background:#fff
+					// background:$update_primary_color
 					cursor:pointer
 					-webkit-appearance:none
 					outline:none
+					background:transparent
 					&.giveup_update
 						border-radius:0 0 0 4px
-						color: $update_primary_color
+						color: $text_title
+						// border-right:1px solid $text_title  
 					&.go_update
 						border-radius:0 0 4px 0
-						color: #fff
-						background:$update_primary_color
+						color: $text_title 
+						// background:$update_primary_color
+					&:hover{
+						color: rgba(255,255,255,0.9)
+					}
 </style>
