@@ -59,7 +59,7 @@
     "stylus-loader": "^3.0.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^12.1.0",
-    "vue-message": "^1.1.5",
+    "vue-message": "^1.2.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.3.3",
     "vuex": "^2.4.1",

@@ -135,7 +135,7 @@
       },
       setBg () {
         if (this.getFixedImageInfo) {
-          this.$toast('需要在设置页面将背景图设置自定义才可以使用状态图片作为背景哦！')
+          this.$msg('需要在设置页面将背景图设置自定义才可以使用状态图片作为背景哦！')
           return
         }
         const el = document.getElementById('detail_' + this.swiper.activeIndex)
@@ -151,7 +151,7 @@
           data: data
         })
         localStorage.setItem('fixedImageBg', JSON.stringify(store.getters.getFixedImageInfo))
-        this.$toast('设置成功')
+        this.$msg('设置成功')
       },
       hideSwiper () {
         this.showImageDetail = false

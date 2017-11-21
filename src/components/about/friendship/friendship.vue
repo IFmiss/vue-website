@@ -34,7 +34,7 @@ export default {
 			const apiUrl = `http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getLinksInfo`
 			fecth.get(apiUrl).then((res) => {
 				this.friendShipList = res.data
-				_this.$toast('想互换友链的朋友可以给我留言哦!')
+				_this.$msg('想互换友链的朋友可以给我留言哦!')
 			})
 		}
 	},

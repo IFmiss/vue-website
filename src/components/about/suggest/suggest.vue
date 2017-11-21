@@ -29,12 +29,12 @@ export default {
 			const contactInfo = this.$refs.contactinfo.value
 			const suggestT = this.getDateNow()
 			if (suggestInfo === '') {
-				_this.$toast('建议内容不能为空')
+				_this.$msg('建议内容不能为空')
 			} else if (suggestInfo.length < 10) {
-				_this.$toast('内容不能少于10个字符哦！多说点真心话吧')
+				_this.$msg('内容不能少于10个字符哦！多说点真心话吧')
 			} else {
 				fecth.post(fecthUrl, {suggestContent: suggestInfo, contact: contactInfo, getDate: suggestT}).then((res) => {
-					_this.$toast('提交成功!')
+					_this.$msg('提交成功!')
 				}, (err) => {
 					console.log(`数据加载错误${err}`)
 				})
