@@ -19,9 +19,15 @@
 		        <router-link tag="a" to="/about/me">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
 		        		<i class="icon-about"></i>
-		        		<span>关于作者</span>
+		        		<span>个人标签</span>
 		        	</li>
 		        </router-link>
+<!-- 		        <router-link tag="a" to="/about/user">
+		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
+		        		<i class="icon-about"></i>
+		        		<span>关于作者</span>
+		        	</li>
+		        </router-link> -->
 		        <router-link tag="a" to="/about/suggest">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
 		        		<i class="icon-message"></i>
@@ -43,7 +49,9 @@
 	    	</div>
     	</transition>
     	<transition name="silde-top">
-			<router-view class="li_about"></router-view>
+    		<keep-alive>
+				<router-view class="li_about"></router-view>
+			</keep-alive>
 		</transition>
     </div>
   </div>

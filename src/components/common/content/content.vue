@@ -24,7 +24,7 @@
         </div>
         <!-- 移动端菜单按钮 -->
         <transition name="fade">
-          <div class="fixed-fade-menu" ref="fixed_menu" v-show="showLeftMenu" @click="hideLeftContent">
+          <div class="fixed-fade-menu" ref="fixed_menu" :class="{ios: isIos}" v-show="showLeftMenu" @click="hideLeftContent">
             <div class="fixed-menu-content" @click="hideLeftContent">
               <router-link tag="a" to="/home">
               <li>首页</li>
@@ -86,12 +86,6 @@ export default {
   methods: {
     toggleMenuContent () {
       this.showLeftMenu = !this.showLeftMenu
-      if (this.showLeftMenu) {
-        // 如果是苹果显示模糊效果
-        if (/iPhone|iPod/i.test(navigator.userAgent)) {
-          this.$refs.fixed_menu.style.cssText = `-webkit-backdrop-filter: blur(10px);background:rgba(0,0,0,0.5)`
-        }
-      }
     },
     hideLeftContent () {
       this.showLeftMenu = false
@@ -119,10 +113,10 @@ export default {
     getPlace () {
       // alert(JSON.stringify(store.getters.getPlace))
       return store.getters.getPlace
+    },
+    isIos () {
+      return /iPhone|iPod/i.test(navigator.userAgent)
     }
-    // getWeather () {
-    //   return store.getters.getWeatherInfo
-    // }
   },
   components: {
     weather
@@ -226,6 +220,9 @@ export default {
         bottom: 0
         right: 0
         background: rgba(0,0,0,0.86)
+        &.ios
+          -webkit-backdrop-filter: blur(10px)
+          background:rgba(0,0,0,0.5)
         &.fade-enter-to,&.fade-leave-to
           transition: all 0.5s
         &.fade-enter,&.fade-leave-to

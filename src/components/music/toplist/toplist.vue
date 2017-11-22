@@ -45,6 +45,11 @@
 	</div>
 	<p class="toplist_title">热门歌单</p>
 	<div class="toplist_content dw-boot-col-lg-12" v-if="top_list_hot">
+		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="124995419" title="未曾遗忘的青春的歌单">
+				<img src="http://www.daiwei.org/vue/bg/657952152722629515.jpg" alt="日本Oricon周榜">
+			</div>
+		</div>
 		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4" v-for="(item,index) in top_list_hot">
 			<div class="toplist_detail" @click.stop="openTopList($event)" :data-id="item.id" :title="item.name">
 				<img :src="(item.coverImgUrl).replace('.jpg','?param=250y250')" alt="日本Oricon周榜">

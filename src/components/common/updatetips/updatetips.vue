@@ -163,7 +163,8 @@
 				border-radius: 4px 4px 0 0
 				.title
 					color:rgba(255,255,255,0.6)
-					padding: 0 15px 
+					padding: 0 15px
+					text-align:center 
 					margin:0
 				img
 					width:100%
@@ -179,7 +180,7 @@
 			.content
 				width:100%
 				height:120px
-				padding: 0 15px
+				padding: 0 35px
 				line-height:1.7
 				font-size: 14px
 				overflow:hidden

@@ -46,7 +46,7 @@
 			</transition>
   			<div class="right_info">
   				<div class="bg-info">
-  					<img class="music-bg" :src="getCurrentMusic.picurl ? getCurrentMusic.picurl : 'http://www.daiwei.org/vue/bg/18627925998890855.jpg'">
+  					<img class="music-bg" :src="getCurrentMusic.picurl ? getCurrentMusic.picurl : 'http://www.daiwei.org/vue/bg/657952152722629515.jpg'">
   				</div>
   				<div class="lrc-content" ref="lrcContent">
   					<div class="lrc-wrapper" ref="lrcWrapper">
@@ -279,8 +279,9 @@
 			width:100%
 			right:0
 			z-index:-1
-			backdrop-filter: blur(10px)
 			filter: blur(16px)
+			-webkit-backdrop-filter: blur(10px)
+			backdrop-filter: blur(10px)
 			background-color:#000
 			transition:all 0.8s
 			.mask_bg
