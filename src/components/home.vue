@@ -182,8 +182,8 @@ export default {
             data: globalData
           })
 
-          localStorage.setItem('fixedImageBg', JSON.stringify(store.getters.getFixedImageInfo))
-          localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
+          localStorage.setItem('fixedImageBg', JSON.stringify(imageInfo))
+          localStorage.setItem('globalInfo', JSON.stringify(globalData))
         }, (err) => {
           alert(err)
         })

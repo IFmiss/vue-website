@@ -57,6 +57,7 @@ export default {
             type: 'set_FixedImageInfo',
             data: imageInfo
           })
+          localStorage.setItem('fixedImageBg', JSON.stringify(imageInfo))
         }, (err) => {
           alert(err)
         })
