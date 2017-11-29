@@ -3,19 +3,19 @@
 		<transition name="fade" @after-leave="hideUpdate" @before-enter="showUpdate">
 			<div class="update_mask" v-show="showInfo"></div>
 		</transition>
-		<span class="updatetime">{{updateInfo.updatetime}}</span>
+		<span class="updatetime">更新时间 : {{updateInfo.updatetime}}</span>
 		<transition name="scale">
 			<div class="updatetips_info" v-show="showInfo">
 				<div class="img_bg">
 					<!-- <img src="http://oiq8j9er1.bkt.clouddn.com/update_bg.jpg" alt="未曾遗忘的青春"> -->
 					<h3 class="title">更新提示</h3>
-					<span class="update_version">v{{updateInfo.version}}</span>
+					<span class="update_version">版本号 : v{{updateInfo.version}}</span>
 				</div>
 				<div class="content" v-html="updateInfo.disc">
 				</div>
 				<div class="update_select">
-					<input type="button" @click="unUpdate" class="giveup_update" value="暂不体验">
-					<input type="button" @click="update" class="go_update" value="体验新版">
+					<!-- <input type="button" @click="unUpdate" class="giveup_update" value="暂不体验"> -->
+					<input type="button" @click="update" class="go_update" value="我知道了  ^ O ^">
 				</div>
 			</div>
 		</transition>
@@ -102,9 +102,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-	$update_primary_color = rgba(0,0,0,0.5)
-	$bginfo = rgba(0,0,0,0.5)
-	$text_title = rgba(255,255,255,0.6)
+	@import './../../../common/stylus/global.styl'
 	.updatetips
 		position:fixed
 		top:0
@@ -118,7 +116,7 @@
 			position:absolute
 			bottom:30px
 			right:30px
-			color:$text_title
+			color:$com_text_color
 			font-size:12px
 		.update_mask
 			position:absolute
@@ -126,22 +124,23 @@
 			left:0
 			bottom:0
 			right:0
-			background:rgba(12,14,27,0.98)
+			background:$com_bg
 			&.fade-enter-to,&.fade-leave-to
 				transition:all 0.5s
 			&.fade-enter,&.fade-leave-to
 				opacity:0
 		.updatetips_info
+			box-sizing:border-box
 			position:absolute
-			top:46%
+			top:45%
 			left:50%
 			bottom:0
 			right:0
 			// background:$update_primary_color
 			width:100%
 			max-width:414px
-			padding: 0 15px
-			height:300px
+			padding: 0 30px
+			height:auto
 			transform:translate(-50%,-50%) scale(1)
 			border-radius: 4px
 			overflow:hidden
@@ -162,8 +161,8 @@
 				position:relative
 				border-radius: 4px 4px 0 0
 				.title
-					color:rgba(255,255,255,0.6)
-					padding: 0 15px
+					color:$com_text_color_deep
+					padding: 15px
 					text-align:center 
 					margin:0
 				img
@@ -171,35 +170,32 @@
 					height:auto
 					border-radius: 4px
 				.update_version
-					position:absolute
-					right:30px
-					top:40px
-					color:$text_title
-					font-size:14px
+					float:right
+					color:$com_text_color_deep
+					font-size:12px
 					font-weight:600
 			.content
 				width:100%
-				height:120px
-				padding: 0 35px
-				line-height:1.7
+				height:auto
+				padding: 15px 0
+				line-height:1.8
 				font-size: 14px
 				overflow:hidden
-				color:$text_title
+				color:$com_text_color_deep
 				font-weight:400
 				box-sizing: border-box;
 			.update_select
-				width:250px
+				width:100%
 				height:36px
+				margin: 0 auto
+				margin-top: 30px
 				font-size:0
-				position:absolute
-				left:50%
-				transform:translate3d(-50%,0,0)
-				bottom:0
-				border-radius:0 0 4px 4px
-				// border-top:1px solid $text_title 
-				background:transparent
+				border-radius: 0
+				border:1px solid rgba(255,12,12,0.2)
+				background: rgba(255,12,12,0.03)
+				// border-top:1px solid $com_text_color 
 				input
-					width:50%
+					width:100%
 					height:100%
 					font-size:14px
 					height:36px
@@ -213,13 +209,14 @@
 					background:transparent
 					&.giveup_update
 						border-radius:0 0 0 4px
-						color: $text_title
-						// border-right:1px solid $text_title  
+						color: $com_text_color
+						// border-right:1px solid $com_text_color  
 					&.go_update
 						border-radius:0 0 4px 0
-						color: $text_title 
+						color: $com_text_color 
 						// background:$update_primary_color
 					&:hover{
-						color: rgba(255,255,255,0.9)
+						color: $com_text_color_active
+						background: rgba(255,12,12,0.08)
 					}
 </style>
