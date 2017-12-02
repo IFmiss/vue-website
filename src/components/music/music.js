@@ -3,6 +3,7 @@ import fecth from './../../utils/fecth.js'
 import $ from 'jquery'
 const musicApi = {
     lastLyric: 0,
+    typeType: localStorage.getItem('audioPlayType') || store.getters.getAudioPlayType,
     lyric: {},    // 解析的歌詞
     maxProgressWidth: 0,
     dragProgressTo: 0,
@@ -335,16 +336,22 @@ const musicApi = {
         let index = store.getters.getCurrentAudio.index || 0
         const length = store.getters.getMusicPlayList.length || 0
         const musicplaylist = store.getters.getMusicPlayList || []
-        if (isNext) {
-            index++
-            if (index > length - 1) {
-                index = 0
+
+        // 判断是否是随机模式
+        if (this.typeType !== 3) {
+            if (isNext) {
+                index++
+                if (index > length - 1) {
+                    index = 0
+                }
+            } else {
+                index--
+                if (index < 0) {
+                    index = length - 1
+                }
             }
         } else {
-            index--
-            if (index < 0) {
-                index = length - 1
-            }
+            index = Math.floor(Math.random() * length)
         }
         if (musicplaylist[index].id === undefined) {
             return
@@ -379,6 +386,7 @@ const musicApi = {
             console.log(err)
         })
     },
+
     // 初始化音乐事件
     initAudioEvent (that) {
         // const _this = this
@@ -523,6 +531,16 @@ const musicApi = {
     // 由于网易云地址有添加防盗链  m8c,m7c 的地址替换成m8,m7 就可以正常播放
     replaceUrl (url) {
         return url.indexOf('//m7c') < 0 ? (url.indexOf('//m8c') ? url.replace('//m8c', '//m8') : url) : url.replace('//m7c', '//m7')
+    },
+
+    setPlayType (type) {
+        this.typeType = Number.parseInt(type)
+        // 设置本地存储和 store
+        store.dispatch({
+            type: 'set_AudioPlayType',
+            data: this.typeType
+        })
+        localStorage.setItem('audioPlayType', this.typeType)
     }
 }
 

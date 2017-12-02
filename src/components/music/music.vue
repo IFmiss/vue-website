@@ -178,6 +178,32 @@
   			e.stopPropagation()
 			e.preventDefault()
   			musicApi.dragTouchEnd(this, e)
+  		},
+  		selectAudioType (isclick) {
+  			let atype = localStorage.getItem('audioPlayType') || store.getters.getAudioPlayType || 1
+  			const audioEle = this.AudiEle()
+  			// 判断是点击的还是 init的
+  			if (isclick) {
+  				atype = atype++ >= 3 ? 1 : atype
+  			}
+  			switch (Number.parseInt(atype)) {
+  				case 1:
+  					this.textPlayType = '列表播放'
+  					audioEle.loop = false
+  					break
+  				case 2:
+  					this.textPlayType = '单曲循环'
+  					audioEle.loop = true
+  					break
+  				case 3:
+  					this.textPlayType = '随机播放'
+  					audioEle.loop = false
+  					break
+  				default:
+  					console.log('haha')
+  					break
+  			}
+			musicApi.setPlayType(atype)
   		}
   	},
   	computed: {
@@ -208,27 +234,6 @@
   		getMusicPro () {
   			const mp = store.getters.getAudioCurrentD
   			return (mp).toFixed(4) + '%'
-  		},
-  		selectAudioType (isinit) {
-  			let atype = localStorage.getItem('audioPlayType') || store.getters.getAudioPlayType
-  			if (!isinit) {
-				atype = atype++ > 3 ? 1 : atype
-				store.dispatch({
-					name: 'set_AudioPlayType',
-					data: atype
-				})
-  			}
-  			switch (atype) {
-  				case 1:
-  					this.textPlayType = '列表播放'
-  					break
-  				case 2:
-  					this.textPlayType = '循环播放'
-  					break
-  				case 3:
-  					this.textPlayType = '随机播放'
-  					break
-  			}
   		}
   	},
   	watch: {
@@ -247,6 +252,7 @@
   			type: 'setAudioLrcContent',
   			data: this.$refs.lrcContent
   		})
+  		this.selectAudioType() // 初始化音频模式
   		// this.searchMusic()
   		// this.initAudioEvent()
   		// this.keypress()
