@@ -28,7 +28,16 @@
             <i class="icon-music"></i>
           </div> -->
         </div>
-        <span class="tips" :title="bingImageDisc">{{bingImageDisc}}</span>
+        <span class="tips" :title="bingImageDisc">{{bingImageDisc}}
+          <span v-if="globalInfo.isHigher768">
+            <router-link tag="a" to="/about/suggest">
+              <span>意见建议</span>
+            </router-link>
+            <router-link tag="a" to="/about/friendship">
+              <span>友情链接</span>
+            </router-link>
+          </span>
+        </span>
       </div>
       <!-- <div class="pic_bg" v-if="globalInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div> -->
       <audio v-if="imageInfo.musicUrl" ref="homeAudio" style="display:none" loop="" :src="imageInfo.musicUrl"></audio>
@@ -381,5 +390,9 @@ export default {
         text-overflow:ellipsis
         overflow:hidden
         white-space:nowrap
-        text-align: right;
+        text-align: right
+        a
+          color:$text_color
+          margin-left:10px
+          text-decoration:none
 </style>
