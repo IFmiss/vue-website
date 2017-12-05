@@ -10,6 +10,12 @@
 		        		<span>作品信息</span>
 		        	</li>
 		        </router-link>
+		        <router-link tag="a" to="/about/resources">
+		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
+		        		<i class="icon-rank-list"></i>
+		        		<span>资源搜索</span>
+		        	</li>
+		        </router-link>
 	        	<router-link tag="a" to="/about/joke">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
 		        		<i class="icon-smile"></i>
@@ -37,7 +43,7 @@
 		        <router-link tag="a" to="/about/contact">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
 		        		<i class="icon-community"></i>
-		        		<span>Contact me</span>
+		        		<span>联系作者</span>
 		        	</li>
 		        </router-link>
 		        <router-link tag="a" to="/about/updateinfo">

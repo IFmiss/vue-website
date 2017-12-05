@@ -39,6 +39,9 @@ const Contact = r => require.ensure([], () => r(require('@/components/about/cont
 const Friendship = r => require.ensure([], () => r(require('@/components/about/friendship/friendship.vue')), 'friendship')
 // import Suggest from '@/components/friendship/friendship.vue'  友情链接
 const Updateinfo = r => require.ensure([], () => r(require('@/components/about/updateinfo/updateinfo.vue')), 'updateinfo')
+// import Suggest from '@/components/updateinfo/updateinfo.vue'  更新记录
+const Resources = r => require.ensure([], () => r(require('@/components/about/resources/resources.vue')), 'resources')
+// import Suggest from '@/components/resources/resources.vue'  资源搜索
 Vue.use(Router)
 
 export default new Router({
@@ -170,6 +173,10 @@ export default new Router({
         {
           path: '/about/updateinfo',
           component: Updateinfo
+        },
+        {
+          path: '/about/resources',
+          component: Resources
         }
       ]
     },

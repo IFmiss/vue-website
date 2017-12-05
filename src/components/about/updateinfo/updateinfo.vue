@@ -31,9 +31,6 @@
 			},
 			back () {
 				this.$router.go(-1)
-			},
-			showUpdateDetail () {
-				// 显示更新详情
 			}
 		},
 		created () {

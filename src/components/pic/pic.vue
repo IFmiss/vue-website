@@ -103,7 +103,8 @@
           res.data.forEach((value, index, array) => {
             this.picinfo.push(value)
           })
-          if (res.data === 0) {
+          if (JSON.stringify(res.data).length < 3) {
+            this.$msg('状态已完全加载.')
             this.getPicDataIndex ++
           }
         }, (err) => {
