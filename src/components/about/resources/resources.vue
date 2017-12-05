@@ -2,12 +2,15 @@
 	<div class="resources">
 		<div class="div_back" @click="back"><i class="icon-back"></i></div>
 		<div class="resources_content">
+			<div class="selectContent">
+				<input type="text" v-model="searchKey"><button @click="getResource()">搜索</button>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-	// import fecth from './../../../utils/fecth.js'
+	import fecth from './../../../utils/fecth.js'
 	export default {
 		data () {
 			return {
@@ -15,6 +18,15 @@
 			}
 		},
 		methods: {
+			getResource () {
+				let url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getResources'
+				let parm = {'keyword': this.searchKey}
+				fecth.post(url, parm).then((res) => {
+					alert(JSON.stringify(res.data))
+				}, (err) => {
+					alert(JSON.stringify(err))
+				})
+			},
 			back () {
 				this.$router.go(-1)
 			}
