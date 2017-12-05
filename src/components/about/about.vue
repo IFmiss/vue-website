@@ -40,6 +40,12 @@
 		        		<span>Contact me</span>
 		        	</li>
 		        </router-link>
+		        <router-link tag="a" to="/about/updateinfo">
+		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
+		        		<i class="icon-up"></i>
+		        		<span>版本记录</span>
+		        	</li>
+		        </router-link>
 		        <router-link tag="a" to="/about/friendship">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
 		        		<i class="icon-friend"></i>

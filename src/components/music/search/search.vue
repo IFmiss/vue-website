@@ -68,7 +68,6 @@
         this.$router.go(-1)
       },
       clickSearchMusic (e) {
-        // musicApi.searchMusic(e.target.innerHTML, 1, this)
         this.$router.push({name: 'searchlist', params: { w: e.target.innerHTML }})
       }
     },

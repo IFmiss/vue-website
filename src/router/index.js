@@ -38,6 +38,7 @@ const Contact = r => require.ensure([], () => r(require('@/components/about/cont
 // import Suggest from '@/components/contact/contact.vue'
 const Friendship = r => require.ensure([], () => r(require('@/components/about/friendship/friendship.vue')), 'friendship')
 // import Suggest from '@/components/friendship/friendship.vue'  友情链接
+const Updateinfo = r => require.ensure([], () => r(require('@/components/about/updateinfo/updateinfo.vue')), 'updateinfo')
 Vue.use(Router)
 
 export default new Router({
@@ -165,6 +166,10 @@ export default new Router({
         {
           path: '/about/friendship',
           component: Friendship
+        },
+        {
+          path: '/about/updateinfo',
+          component: Updateinfo
         }
       ]
     },
