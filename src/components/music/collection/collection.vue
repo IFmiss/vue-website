@@ -9,6 +9,7 @@
 			<span class="music_duration">时长</span>
 		</div>
 		<div class="music_list_content">
+			<span class="list_empty" v-if="!musicList.length">暂无收藏的音乐哦 !</span>
 			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.name, list.al.picUrl, list.ar[0].name, getMusicDurationType(list.dt),index), musicList">
 				<span class="music_index">
 					<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
@@ -101,7 +102,7 @@
 
   		// 删除收藏的音乐
   		deleteMusic (id) {
-  			musicApi.deleteMusic(id)
+  			musicApi.deleteMusic.call(this, id)
   		},
 
   		// 初始化音乐播放器
@@ -210,6 +211,13 @@
 			height:calc(100% - 50px)
 			position:relative
 			overflow:auto
+			.list_empty
+				width:100%
+				display:block
+				padding:10px 0
+				text-align:center
+				color:$text_before_color
+				font-size:14px
 			.music_list
 				position:relative
 				// &:hover

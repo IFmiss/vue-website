@@ -118,7 +118,7 @@
 		// list.id, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt)
   		collectMusic (index) {
   			const musiccollect = store.getters.getMusicList[index]
-  			musicApi.collectMusic(musiccollect)
+  			musicApi.collectMusic.call(this, musiccollect)
   		}
   	},
   	computed: {

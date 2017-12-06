@@ -141,7 +141,7 @@
   		// }
   		collectMusic (index) {
   			const musiccollect = store.getters.getMusicList[index]
-  			musicApi.collectMusic(musiccollect)
+  			musicApi.collectMusic.call(this, musiccollect)
   		}
   	},
   	computed: {

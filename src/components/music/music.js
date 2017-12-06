@@ -286,6 +286,7 @@ const musicApi = {
         if (insertMusic) {
             collectlist.unshift(opt)
             localStorage.setItem('musicCollectList', JSON.stringify(collectlist))
+            this.$msg('收藏音乐成功 ^ O ^')
         }
     },
 
@@ -312,6 +313,7 @@ const musicApi = {
             data: collectlist
         })
         localStorage.setItem('musicCollectList', JSON.stringify(collectlist))
+        this.$msg('删除音乐成功')
     },
 
     // 播放暂停
