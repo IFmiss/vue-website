@@ -42,6 +42,10 @@ const Updateinfo = r => require.ensure([], () => r(require('@/components/about/u
 // import Suggest from '@/components/updateinfo/updateinfo.vue'  更新记录
 const Resources = r => require.ensure([], () => r(require('@/components/about/resources/resources.vue')), 'resources')
 // import Suggest from '@/components/resources/resources.vue'  资源搜索
+const DownloadAudio = r => require.ensure([], () => r(require('@/components/about/resources/audio/audio.vue')), 'audio')
+// import Suggest from '@/components/resources/resources/audio.vue'  音频下载
+const DownloadVideo = r => require.ensure([], () => r(require('@/components/about/resources/video/video.vue')), 'video')
+// import Suggest from '@/components/resources/resources/video.vue'  视频下载
 Vue.use(Router)
 
 export default new Router({
@@ -176,7 +180,28 @@ export default new Router({
         },
         {
           path: '/about/resources',
-          component: Resources
+          component: Resources,
+          children: [
+            {
+              path: '/',
+              redirect: '/about/resources/audio/:keyword',
+              component: Resources
+            },
+            {
+              path: '/about/resources/audio/:keyword',
+              name: 'audiolist',
+              components: {
+                downloadlist: DownloadAudio
+              }
+            },
+            {
+              path: '/about/resources/video/:keywords',
+              name: 'videolist',
+              components: {
+                downloadlist: DownloadVideo
+              }
+            }
+          ]
         }
       ]
     },

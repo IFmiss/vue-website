@@ -10,10 +10,6 @@
   			<img src="http://www.daiwei.org/new/static/101920356445396365.jpg" alt="未曾遗忘的青春">
   			<p class="disc">微 信</p>
   		</div>
-  		<div class="contact_list dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-  			<img src="http://www.daiwei.org/new/static/1512569552055.png" alt="未曾遗忘的青春">
-  			<p class="disc">QQ交流群</p>
-  		</div>
   	</div>
   </div>
 </template>

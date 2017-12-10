@@ -63,8 +63,8 @@ export default {
         })
       } else {
         // 自定义图片  默认是我设置的图片
-        if ((hasFixedImageBg === null || '' || JSON.parse(hasFixedImageBg).type === 'bing')) {
-           var index = store.getters.getFixedImageInfo.index
+        if ((hasFixedImageBg === null || hasFixedImageBg === '' || JSON.parse(hasFixedImageBg).type === 'bing')) {
+           let index = store.getters.getFixedImageInfo.index
            fecth.post(getbingApi, {index: index}).then((res) => {
             let imageInfo = {}
             imageInfo.type = 'home'
@@ -79,18 +79,43 @@ export default {
               type: 'set_FixedImageInfo',
               data: imageInfo
             })
+            localStorage.setItem('fixedImageBg', JSON.stringify(imageInfo))
           }, (err) => {
             alert(err)
           })
         } else {
           // 背景图片地址设置本地存储
           const getFixedImageBg = JSON.parse(localStorage.getItem('fixedImageBg'))
-          if (!(getFixedImageBg === null || '')) {
-            store.dispatch({
-              type: 'set_FixedImageInfo',
-              data: getFixedImageBg
-            })
-          }
+          let index = store.getters.getFixedImageInfo.index
+          fecth.post(getbingApi, {index: index}).then((res) => {
+            if (!(getFixedImageBg === null || '')) {
+              // 判断是否和本地数据一样  一样则用本地的数据 不一样则请求最新的数据
+              if (getFixedImageBg.url === res.data.url) {
+                store.dispatch({
+                  type: 'set_FixedImageInfo',
+                  data: getFixedImageBg
+                })
+              } else {
+                // 否则获取最新的图片信息
+                fecth.post(getbingApi, {index: 0}).then((res) => {
+                  let imageInfo = {}
+                  imageInfo.type = 'home'
+                  imageInfo.url = res.data.url
+                  imageInfo.title = res.data.title
+                  imageInfo.disc = res.data.disc
+                  imageInfo.date = res.data.date
+                  imageInfo.musicUrl = res.data.musicUrl
+                  imageInfo.musicName = res.data.musicName
+                  imageInfo.index = 0
+                  store.dispatch({
+                    type: 'set_FixedImageInfo',
+                    data: imageInfo
+                  })
+                  localStorage.setItem('fixedImageBg', JSON.stringify(imageInfo))
+                })
+              }
+            }
+          })
         }
       }
     },

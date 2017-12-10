@@ -37,12 +37,12 @@
 				        </router-link>
 			  		</div>
 			  		<transition name="silde-top">
-						<router-view class="list_content" name="listinfo"></router-view>
+			  			<router-view class="list_content" name="listinfo"></router-view>
 					</transition>
   				</div>
   			</div>
   			<transition name="silde-top">
-				<router-view class="music_wrapper" name="fullscreen"></router-view>
+  				<router-view class="music_wrapper" name="fullscreen"></router-view>
 			</transition>
   			<div class="right_info">
   				<div class="bg-info">

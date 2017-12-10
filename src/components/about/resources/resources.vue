@@ -7,7 +7,9 @@
 					<input class="searchInfo" type="text" placeholder="搜索你想搜的资源" v-model="searchKey"><button @click="getResource()">搜索</button>
 				</div>
 			</div>
-			<div class="listsResourse"></div>
+			<transition name="silde-top">
+				<router-view class="list_resources" name="downloadlist"></router-view>
+			</transition>
 		</div>
 	</div>
 </template>
@@ -17,14 +19,15 @@
 	export default {
 		data () {
 			return {
-				searchKey: ''
+				searchKey: '',
+				downloaddata: ''
 			}
 		},
 		methods: {
 			getResource () {
-				let url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getResources'
+				let url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getResourceNew'
 				let parm = {'keyword': this.searchKey}
-				fecth.post(url, parm).then((res) => {
+				fecth.get(url, parm).then((res) => {
 					alert(JSON.stringify(res.data))
 				}, (err) => {
 					alert(JSON.stringify(err))
@@ -131,12 +134,14 @@
 						outline:0 none
 						margin:0
 						cursor:pointer
-			.listsResourse
+			.list_resources
 				position:absolute
 				top: 80px
 				bottom:0
 				left:0
 				right:0
 				width:100%
-				background:red			
+				box-sizing:border-box
+				padding:15px
+				// background:red			
 </style>
