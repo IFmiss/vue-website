@@ -5,33 +5,49 @@
 			<div class="serachArea">
 				<div class="selectContent">
 					<input class="searchInfo" type="text" placeholder="搜索你想搜的资源" v-model="searchKey"><button @click="getResource()">搜索</button>
+					<select class="serachType" name="serachType" v-model="selected" @change="getResource()">
+						<option v-for="opt in options" :value="opt.value">{{opt.text}}</option>
+					</select>
 				</div>
 			</div>
 			<transition name="silde-top">
-				<router-view class="list_resources" name="downloadlist"></router-view>
+				<router-view class="list_resources" name="downloadlist" :keyword="searchKey"></router-view>
 			</transition>
 		</div>
 	</div>
 </template>
 
 <script>
-	import fecth from './../../../utils/fecth.js'
+	// import fecth from './../../../utils/fecth.js'
 	export default {
 		data () {
 			return {
 				searchKey: '',
-				downloaddata: ''
+				downloaddata: '',
+				selected: 'A',
+				options: [
+					{ text: '视频搜索', value: 'A' },
+					{ text: '音频搜索', value: 'B' }
+				]
 			}
 		},
 		methods: {
 			getResource () {
-				let url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getResourceNew'
-				let parm = {'keyword': this.searchKey}
-				fecth.get(url, parm).then((res) => {
-					alert(JSON.stringify(res.data))
-				}, (err) => {
-					alert(JSON.stringify(err))
-				})
+				if (this.selected === 'A') {
+					this.$router.push({name: 'videolist', params: { k: this.searchKey }})
+				}
+
+				if (this.selected === 'B') {
+					this.$router.push({name: 'audiolist', params: { k: this.searchKey }})
+				}
+				// let url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getResourceNew'
+				// let parm = {'keyword': this.searchKey}
+				// fecth.get(url, parm).then((res) => {
+				// 	this.downloaddata = res.data
+				// 	alert(JSON.stringify(res.data))
+				// }, (err) => {
+				// 	alert(JSON.stringify(err))
+				// })
 			},
 			back () {
 				this.$router.go(-1)
@@ -104,6 +120,7 @@
 					height:36px
 					font-size:0
 					color:$text_color
+					position:relative
 					.searchInfo
 						display:inline-block
 						vertical-align:top
@@ -113,13 +130,25 @@
 						padding:0
 						text-indent:5px
 						color:$text_color
-						background:transparent
+						background:rgba(0,0,0,0.1)
 						border-radius:4px 0 0 4px
 						border:1px solid $text_color
 						border-right:0 none
 						outline:0 none
 						margin:0
 						box-sizing:border-box
+					.serachType
+						position:absolute
+						top: 5px
+						bottom: 5px
+						right: 74px
+						width:80px
+						background:rgba(0,0,0,0.1)
+						outline: none
+						color: $text_color
+						padding: 0 2px
+						option
+							background:rgba(0,0,0,0.6)
 					button
 						display:inline-block
 						vertical-align:top
@@ -129,11 +158,13 @@
 						color:$text_color
 						border-radius:0 4px 4px 0
 						border:1px solid $text_color
-						background:transparent
+						background:rgba(0,0,0,0.1)
 						padding:0
 						outline:0 none
 						margin:0
 						cursor:pointer
+						&:hover
+							background:rgba(0,0,0,0.3)
 			.list_resources
 				position:absolute
 				top: 80px

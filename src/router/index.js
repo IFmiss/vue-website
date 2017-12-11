@@ -49,11 +49,11 @@ const DownloadVideo = r => require.ensure([], () => r(require('@/components/abou
 Vue.use(Router)
 
 export default new Router({
-  // mode: 'history',
-  hashbang: true,
-  history: false, // 这个参数改为false就可以了
-  saveScrollPosition: true,
-  suppressTransitionError: true,
+  mode: 'history',
+  // hashbang: true,
+  // history: false, // 这个参数改为false就可以了
+  // saveScrollPosition: true,
+  // suppressTransitionError: true,
   routes: [
     {
       path: '/',
@@ -134,10 +134,6 @@ export default new Router({
             listinfo: MusicSearchList
           }
         }
-        // {
-        //   path: '/about/joke',
-        //   component: Joke
-        // }
       ]
     },
     {
@@ -184,18 +180,31 @@ export default new Router({
           children: [
             {
               path: '/',
-              redirect: '/about/resources/audio/:keyword',
-              component: Resources
+              redirect: '/about/resources/audio/'
             },
             {
-              path: '/about/resources/audio/:keyword',
+              path: '/about/resources/audio/',
               name: 'audiolist',
               components: {
                 downloadlist: DownloadAudio
               }
             },
             {
-              path: '/about/resources/video/:keywords',
+              path: '/about/resources/audio/:k',
+              name: 'audiolist',
+              components: {
+                downloadlist: DownloadAudio
+              }
+            },
+            {
+              path: '/about/resources/video/',
+              name: 'videolist',
+              components: {
+                downloadlist: DownloadVideo
+              }
+            },
+            {
+              path: '/about/resources/video/:k',
               name: 'videolist',
               components: {
                 downloadlist: DownloadVideo
@@ -209,10 +218,5 @@ export default new Router({
       path: '/setting',
       component: Setting
     }
-    // 作品列表
-    // {
-    //   path: '/works',
-    //   component: Works
-    // }
   ]
 })

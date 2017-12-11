@@ -7,9 +7,19 @@
 <script>
 	export default {
 		data () {
+			return {
+				keywords: ''
+			}
+		},
+		props: ['keyword'],
+		method: {
+			getAudioDownloadInfo () {
+				// this.$router.push({name: 'videolist', params: { k: this.keyword }})
+				alert(1)
+			}
 		},
 		mounted () {
-			alert(1)
+			this.getAudioDownloadInfo()
 		}
 	}
 </script>

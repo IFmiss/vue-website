@@ -1,5 +1,7 @@
 <template>
-	<div class="video_download"></div>
+	<div class="video_download">
+		bbb
+	</div>
 </template>
 
 <script>
