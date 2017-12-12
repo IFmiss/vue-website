@@ -50,15 +50,9 @@
   			this.$emit('selectBgType', callback)
   		}
   	},
-    // watch: {
-    //   switchOpt (newval, oldval) {
-    //     alert(JSON.stringify(newval))
-    //   }
-    // },
   	computed: {
   		rangeStyleInfo () {
   			let styleInfo = {}
-        console.log(this.switchOpt.isactive)
   			if (this.switchOpt.isactive) {
   				styleInfo.backgroundColor = this.switchOpt.rangeactivebg
   				styleInfo.transform = `translate(100%,0)`

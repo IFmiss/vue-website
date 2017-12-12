@@ -7,7 +7,7 @@
   			<span class="tip_list" v-for="(list, index) in personal_tips" @click.stop="clickTips(list.biaoQianName)">
 				<span class="name">{{list.biaoQianName}}</span>
 				<span class="count">{{list.biaoQianValue}}</span>
-  				<span class="bg-content" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor, opacity : getGlobalInfo.contentInfo.opacity * 1 + 0.4 - index * 0.05}">
+  				<span class="bg-content" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor, opacity : (getGlobalInfo.contentInfo.opacity * 1 + 0.4 > 0.88 ? 0.88 : getGlobalInfo.contentInfo.opacity * 1 + 0.4) - index * 0.05}">
   				</span>
   			</span>
   		</div>
@@ -16,7 +16,7 @@
   			<span class="tip_list" v-for="(list, index) in technology_tips" @click.stop="clickTips(list.biaoQianName)">
 				<span class="name">{{list.biaoQianName}}</span>
 				<span class="count">{{list.biaoQianValue}}</span>
-  				<span class="bg-content" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor, opacity : getGlobalInfo.contentInfo.opacity * 1 + 0.4 - index * 0.05}">
+  				<span class="bg-content" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor, opacity : (getGlobalInfo.contentInfo.opacity * 1 + 0.4 > 0.88 ? 0.88 : getGlobalInfo.contentInfo.opacity * 1 + 0.4) - index * 0.05}">
   				</span>
   			</span>
   		</div>

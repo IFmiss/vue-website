@@ -3,7 +3,7 @@
 		<transition name="fade-up">
 			<div class="weather-content" v-if="isShow">
           <span class="weather-tips" v-if="!getWeather.length">暂时没有天气信息哦，请刷新页面重试！</span>
-          <div class="bg-info" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor,opacity:(getGlobalInfo.contentInfo.opacity * 1 + 0.3 > 1 ? 1 : getGlobalInfo.contentInfo.opacity * 1 + 0.2)}"></div>
+          <div class="bg-info" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor,opacity:(getGlobalInfo.contentInfo.opacity * 1 + 0.3 > 0.5 ? 0.5 : getGlobalInfo.contentInfo.opacity * 1 + 0.2)}"></div>
           <div class="weather-detail" v-if="getWeather">
             <div class="weather-today" v-if="getWeather[0]">
               <div class="top-today">

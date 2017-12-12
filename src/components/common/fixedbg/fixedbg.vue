@@ -1,6 +1,6 @@
 <template>
   <div class="fixedbg" ref="fixedbg" :style="{backgroundImage : 'url(' + imagepath + ')', backgroundSize:imagesize, backgroundPosition:imageposition}">
-    <div class="mask-fixedbg" :style="{background:maskcolor,opacity:maskopacity}"></div>
+    <div class="mask-fixedbg" :style="maskType"></div>
   </div>
 </template>
 <script>
@@ -27,6 +27,26 @@ export default {
     maskopacity: {
       type: String,
       default: '0.5'
+    },
+    masktype: {
+      type: String,
+      default: 'default'
+    }
+  },
+  computed: {
+    maskType () {
+      if (this.masktype === 'default') {
+        return {
+          background: this.maskcolor,
+          opacity: this.maskopacity
+        }
+      }
+      if (this.masktype === 'radial-gradient-ellipse') {
+        return {
+          background: `-webkit-radial-gradient(50% 50%,ellipse closest-corner,rgba(0,0,0,0) 10%, ${this.maskcolor} 90%)`,
+          opacity: this.maskopacity
+        }
+      }
     }
   },
   watch: {
@@ -54,7 +74,9 @@ export default {
     }
   },
   mounted () {
-    this.initMoveBg()
+    this.$nextTick(() => {
+      this.initMoveBg()
+    })
   }
 }
 </script>

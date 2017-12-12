@@ -55,8 +55,8 @@
 	methods: {
 		selectBgType (info) {
 			if (info.ref === 'bg') {
-				store.dispatch({
-					type: 'set_ShowBingImage',
+				store.commit({
+					type: 'setShowBingImage',
 					data: info.active
 				})
 			}

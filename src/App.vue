@@ -2,7 +2,7 @@
   <div id="app" @resize="isApp">
     <loader :isshow="getShowLoading" loaderbackground="rgba(0,0,0,0.3)"></loader>
     <div class="maincontent">
-      <fixed-bg v-if="imageInfo.url && imageSetting" :imagepath="imagePrevPath +'' + imageInfo.url" :maskcolor="getGlobalStyle.contentInfo.bgcolor" :maskopacity="getGlobalStyle.contentInfo.opacity"></fixed-bg>
+      <fixed-bg v-if="imageInfo.url && imageSetting" :imagepath="imageInfo.url" :maskcolor="getGlobalStyle.contentInfo.bgcolor" :maskopacity="getGlobalStyle.contentInfo.opacity" :masktype="getGlobalStyle.contentInfo.type"></fixed-bg>
     </div>
     <v-content></v-content>
     <updatetips></updatetips>
@@ -42,13 +42,12 @@ export default {
       const isShowBingImage = store.getters.getGlobalInfo.showBingImage
       let getbingApi = isShowBingImage ? 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageByBingJson' : 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
       const hasFixedImageBg = localStorage.getItem('fixedImageBg')
-
       // bing 的每日一图
       if (isShowBingImage) {
         fecth.get(getbingApi).then((res) => {
           let imageInfo = {}
           imageInfo.type = 'bing'
-          imageInfo.url = res.data.url
+          imageInfo.url = 'http://www.bing.com' + res.data.url
           imageInfo.title = res.data.title
           imageInfo.disc = res.data.disc
           imageInfo.date = this.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
@@ -88,7 +87,7 @@ export default {
           const getFixedImageBg = JSON.parse(localStorage.getItem('fixedImageBg'))
           let index = store.getters.getFixedImageInfo.index
           fecth.post(getbingApi, {index: index}).then((res) => {
-            if (!(getFixedImageBg === null || '')) {
+            if (!(getFixedImageBg === null || '') && res.data) {
               // 判断是否和本地数据一样  一样则用本地的数据 不一样则请求最新的数据
               if (getFixedImageBg.url === res.data.url) {
                 store.dispatch({
@@ -135,12 +134,6 @@ export default {
     // 获取天气信息
     getWeather (city) {
       fecth.post(`http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getWeather`, {place: city}).then((res) => {
-        // store.dispatch({
-        //   type: 'set_Place',
-        //   data: res.data.data
-        // })
-        // this.getWeather(res.data.data.city)
-        // console.log(JSON.stringify(res.data))
         try {
           store.dispatch({
             type: 'set_Weather',
@@ -217,6 +210,19 @@ export default {
         type: 'setAudioEle',
         data: this.$refs.myAudio
       })
+    },
+    consoleLog (texts, isOneLines, authors) {
+      let text = texts || 'this is console!'
+      let author = authors || '                           by DW '
+      let isOneLine = isOneLines || 'one'
+      if (isOneLine === 'one') {
+        console.log('')
+        console.log('%c' + text + ' ' + author + '', "background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzY2Y2NjYyIvPjxzdG9wIG9mZnNldD0iMjAlIiBzdG9wLWNvbG9yPSIjMzM5OTk5Ii8+PHN0b3Agb2Zmc2V0PSI0MCUiIHN0b3AtY29sb3I9IiNjY2NjOTkiLz48c3RvcCBvZmZzZXQ9IjYwJSIgc3RvcC1jb2xvcj0iIzk5Y2NmZiIvPjxzdG9wIG9mZnNldD0iODAlIiBzdG9wLWNvbG9yPSIjY2NjY2ZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmY5OWNjIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');background-size: 100%;background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #66cccc), color-stop(20%, #339999), color-stop(40%, #cccc99), color-stop(60%, #99ccff), color-stop(80%, #ccccff), color-stop(100%, #ff99cc));background-image: -moz-linear-gradient(left, #66cccc 0%, #339999 20%, #cccc99 40%, #99ccff 60%, #ccccff 80%, #ff99cc 100%);background-image: -webkit-linear-gradient(left, #66cccc 0%, #339999 20%, #cccc99 40%, #99ccff 60%, #ccccff 80%, #ff99cc 100%);background-image: linear-gradient(to right, #66cccc 0%, #339999 20%, #cccc99 40%, #99ccff 60%, #ccccff 80%, #ff99cc 100%);padding:20px 40px;color:#fff;font-size:12px;")
+        console.log('')
+      } else if (isOneLine === 'more') {
+        console.log('%c' + text + ' ' + author + '', "background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzY2Y2NjYyIvPjxzdG9wIG9mZnNldD0iMjAlIiBzdG9wLWNvbG9yPSIjMzM5OTk5Ii8+PHN0b3Agb2Zmc2V0PSI0MCUiIHN0b3AtY29sb3I9IiNjY2NjOTkiLz48c3RvcCBvZmZzZXQ9IjYwJSIgc3RvcC1jb2xvcj0iIzk5Y2NmZiIvPjxzdG9wIG9mZnNldD0iODAlIiBzdG9wLWNvbG9yPSIjY2NjY2ZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmY5OWNjIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');background-size: 100%;background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #66cccc), color-stop(20%, #339999), color-stop(40%, #cccc99), color-stop(60%, #99ccff), color-stop(80%, #ccccff), color-stop(100%, #ff99cc));background-image: -moz-linear-gradient(left, #66cccc 0%, #339999 20%, #cccc99 40%, #99ccff 60%, #ccccff 80%, #ff99cc 100%);background-image: -webkit-linear-gradient(left, #66cccc 0%, #339999 20%, #cccc99 40%, #99ccff 60%, #ccccff 80%, #ff99cc 100%);background-image: linear-gradient(to right, #66cccc 0%, #339999 20%, #cccc99 40%, #99ccff 60%, #ccccff 80%, #ff99cc 100%);padding:0;color:#fff;font-size:12px;")
+        console.log('')
+      }
     }
   },
   watch: {
@@ -226,9 +232,6 @@ export default {
     }
   },
   computed: {
-    imagePrevPath () {
-      return store.getters.getGlobalInfo.showBingImage ? 'http://www.bing.com' : ''
-    },
     getGlobalStyle () {
       return store.getters.getGlobalInfo
     },
@@ -249,22 +252,24 @@ export default {
     }
   },
   mounted () {
-      // 设置audio 的refs
-      this.setAudioRef()
+    // 输出信息
+    this.consoleLog('基于vue2.0的网站新版更新', 'one', '未曾遗忘的青春')
+    // 设置audio 的refs
+    this.setAudioRef()
     // this.$nextTick(() => {
-      // 是否在线加载壁纸
-      this.shouldLoadingBg()
-      // 获取用户地址
-      this.getPlace()
-      // 是否小于768
+    // 是否在线加载壁纸
+    this.shouldLoadingBg()
+    // 获取用户地址
+    this.getPlace()
+    // 是否小于768
+    this.isApp()
+    // 加载数据
+    this.fetchData()
+    // 挂载 onresize事件
+    window.onresize = () => {
       this.isApp()
-      // 加载数据
-      this.fetchData()
-      // 挂载 onresize事件
-      window.onresize = () => {
-        this.isApp()
-      }
-      localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
+    }
+    localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
     // })
   }
 }
