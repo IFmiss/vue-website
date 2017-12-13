@@ -23,20 +23,29 @@
   				<input class="inputText" ref="inputBgOpacity" type="text" v-show="showOpacityInput" @keyup.enter="onEnter($event)" placeholder="0-1,回车确认" :value="getGlobalInfo.contentInfo.opacity" @blur="closeInputOpacity">
 			</div>
   		</div>
+  		<div class="set_list border-1px" @click="showMaskType">
+  			<span class="name cursor">遮罩类型</span>
+			<div class="switch_bg switch-right">
+  				<div class="title">默认样式</div>
+			</div>
+  		</div>
   		<div class="set_list">
-  			<span class="name center" @click="clearSettingInfo">重置所有设置</span>
+  			<span class="name center"><span @click="clearSettingInfo">重置所有设置</span></span>
   		</div>
   	</div>
   	<div class="selectBg" v-show="showSetBgColorPicker">
 		<colorpicker @isclose="closeColorPicker"></colorpicker>
 	</div>
+	<!-- 遮罩层设置 -->
+	<selectmask :maskoption="selectmaskOpt"></selectmask>
 	<span class="version" v-if="version">版本号: v{{version}}</span>
   </div>
 </template>
 <script>
   import store from './../../store'
-  import Switch from './../switch/switch.vue'
+  import Switch from './../common/switch/switch.vue'
   import ColorPicker from './../common/colorpicker/colorpicker.vue'
+  import SelectMask from './../common/selectmask/selectmask.vue'
   export default {
   	data () {
   		return {
@@ -49,7 +58,21 @@
 			},
 			showSetBgColorPicker: false,
 			showOpacityInput: false,
-			version: window.localStorage.getItem('web_version') || false
+			version: window.localStorage.getItem('web_version') || false,
+			selectmaskOpt: {
+				isShow: false,
+				globalInfo: this.getGlobalInfo,
+				data: [
+					{
+						type: 'default',
+						title: '默认浮层样式'
+					},
+					{
+						type: 'radial-gradient-ellipse',
+						title: '径向渐变-椭圆'
+					}
+				]
+			}
 		}
 	},
 	methods: {
@@ -114,10 +137,15 @@
 			} else {
 				return
 			}
+		},
+		// 设置显示遮罩类型
+		showMaskType () {
+			this.selectmaskOpt.isShow = true
 		}
 	},
 	computed: {
 		getGlobalInfo () {
+			this.selectmaskOpt.globalInfo = store.getters.getGlobalInfo
 			return store.getters.getGlobalInfo
 		},
 		getImageInfo () {
@@ -129,7 +157,8 @@
 	},
   	components: {
   		'v-switch': Switch,
-  		'colorpicker': ColorPicker
+  		'colorpicker': ColorPicker,
+  		'selectmask': SelectMask
   	},
   	watch: {
 		'$route': 'getRoutePath'
@@ -184,7 +213,7 @@
 					border-1px($border_bottom_color_deep, bottom)
 				.name
 					display:inline-block
-					font-size:16px
+					font-size:14px
 					vertical-align:middle
 					width: calc(100% - 150px)
 					&.center
@@ -192,7 +221,12 @@
 						text-align:center
 						width:100%
 						display:block
+					&.cursor
 						cursor:pointer
+					span
+						cursor:pointer
+						&:hover
+							text-decoration:underline
 				.switch-right
 					display:inline-block
 					vertical-align:middle

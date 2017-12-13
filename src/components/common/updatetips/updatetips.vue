@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import {Cookie} from '@/common/js/global.js'
+  import DGlobal from '@/common/js/global.js'
   import fecth from './../../../utils/fecth.js'
   export default {
   	data () {
@@ -36,14 +36,14 @@
   		unUpdate () {
   			this.showInfo = false
   			// 添加cookie方便以后过期再弹窗
-  			Cookie.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
+  			DGlobal.storage.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
   		},
 
   		// 更新网页  包括默认配置  以及 清除缓存刷新页面
   		update () {
   			this.showInfo = false
   			window.localStorage.setItem('web_version', this.updateInfo.version)
-  			Cookie.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
+  			DGlobal.storage.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
   			location.href = location.href + (location.href.indexOf('?') > -1 ? '&' : '?') + 'v=' + this.updateInfo.version
   		},
 
@@ -67,9 +67,9 @@
 				// 如果在2小时内又更新了一个版本   则还是需要弹窗更新
 				if (versionStorage !== null) {
 					console.log('有versionStorage')
-					if (Cookie.getCookie('update') !== null) {
+					if (DGlobal.storage.getCookie('update') !== null) {
 						console.log('有cookie')
-						if (Cookie.getCookie('update') !== _this.updateInfo.version) {
+						if (DGlobal.storage.getCookie('update') !== _this.updateInfo.version) {
 							console.log('cookie版本不同 --- 弹窗')
 							_this.showInfo = true
 						} else {
@@ -88,7 +88,7 @@
 				} else {
 					console.log('没有versionStorage')
 					window.localStorage.setItem('web_version', this.updateInfo.version)
-					Cookie.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
+					DGlobal.storage.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
 				}
 			}, (err) => {
 				alert(err)
@@ -96,6 +96,7 @@
   		}
   	},
   	mounted () {
+  		console.log(DGlobal)
   		this.isNeedUpdate()
   	}
   }
