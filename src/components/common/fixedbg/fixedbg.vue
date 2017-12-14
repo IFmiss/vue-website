@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+import SetMaskType from './../selectmask/selectmask.js'
 export default {
   data () {
     return {
@@ -31,22 +32,16 @@ export default {
     masktype: {
       type: String,
       default: 'default'
+    },
+    maskglobainfo: {
+      type: Object,
+      default: {}
     }
   },
   computed: {
     maskType () {
-      if (this.masktype === 'default') {
-        return {
-          background: this.maskcolor,
-          opacity: this.maskopacity
-        }
-      }
-      if (this.masktype === 'radial-gradient-ellipse') {
-        return {
-          background: `-webkit-radial-gradient(50% 50%,ellipse closest-corner,rgba(0,0,0,0) 10%, ${this.maskcolor} 90%)`,
-          opacity: this.maskopacity
-        }
-      }
+      var styleCss = SetMaskType(this.masktype, this.maskglobainfo)
+      return styleCss
     }
   },
   watch: {

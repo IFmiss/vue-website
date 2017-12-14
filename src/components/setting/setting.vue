@@ -26,18 +26,21 @@
   		<div class="set_list border-1px" @click="showMaskType">
   			<span class="name cursor">遮罩类型</span>
 			<div class="switch_bg switch-right">
-  				<div class="title">默认样式</div>
+  				<div class="title">{{getMaskTypeText}}</div>
 			</div>
   		</div>
   		<div class="set_list">
   			<span class="name center"><span @click="clearSettingInfo">重置所有设置</span></span>
   		</div>
   	</div>
-  	<div class="selectBg" v-show="showSetBgColorPicker">
-		<colorpicker @isclose="closeColorPicker"></colorpicker>
-	</div>
-	<!-- 遮罩层设置 -->
-	<selectmask :maskoption="selectmaskOpt"></selectmask>
+  	<!-- 遮罩层颜色设置 -->
+  	<transition name="fade">
+  		<div class="selectBg" v-show="showSetBgColorPicker">
+			<colorpicker @isclose="closeColorPicker"></colorpicker>
+		</div>
+  	</transition>
+	<!-- 遮罩层类型设置 -->
+	<selectmask :isshow="maskIsShow" :maskdata="maskData" :maskimage="getFixedImage.url" :maskglobainfo="getGlobalInfo" @setmasktype="setmasktypeByCom"></selectmask>
 	<span class="version" v-if="version">版本号: v{{version}}</span>
   </div>
 </template>
@@ -59,20 +62,18 @@
 			showSetBgColorPicker: false,
 			showOpacityInput: false,
 			version: window.localStorage.getItem('web_version') || false,
-			selectmaskOpt: {
-				isShow: false,
-				globalInfo: this.getGlobalInfo,
-				data: [
-					{
-						type: 'default',
-						title: '默认浮层样式'
-					},
-					{
-						type: 'radial-gradient-ellipse',
-						title: '径向渐变-椭圆'
-					}
-				]
-			}
+			// 設置遮罩的传递的数据
+			maskIsShow: false,
+			maskData: [
+							{
+								type: 'default',
+								title: '默认浮层样式'
+							},
+							{
+								type: 'radial-gradient-ellipse',
+								title: '径向渐变-椭圆'
+							}
+						]
 		}
 	},
 	methods: {
@@ -140,12 +141,20 @@
 		},
 		// 设置显示遮罩类型
 		showMaskType () {
-			this.selectmaskOpt.isShow = true
+			this.maskIsShow = true
+		},
+		setmasktypeByCom (type) {
+			store.dispatch({
+				type: 'set_MaskType',
+				data: type
+			})
+			localStorage.setItem('globalInfo', JSON.stringify(this.getGlobalInfo))
+			this.maskIsShow = false
+			this.$msg('设置成功 ^ O ^')
 		}
 	},
 	computed: {
 		getGlobalInfo () {
-			this.selectmaskOpt.globalInfo = store.getters.getGlobalInfo
 			return store.getters.getGlobalInfo
 		},
 		getImageInfo () {
@@ -153,6 +162,21 @@
 		},
 		getImageInfoTitle () {
 			return store.getters.getGlobalInfo.showBingImage ? 'bing壁纸' : '自定义壁纸'
+		},
+		// 固定图片信息
+		getFixedImage () {
+			return store.getters.getFixedImageInfo
+		},
+		// 获取mask的text文本
+		getMaskTypeText () {
+			let title = ''
+			let gtype = this.getGlobalInfo.contentInfo.type
+			for (let i = 0; i < this.maskData.length; i++) {
+				if (this.maskData[i].type === gtype) {
+					title = this.maskData[i].title
+				}
+			}
+			return title
 		}
 	},
   	components: {
@@ -276,6 +300,10 @@
 			background:rgba(0,0,0,0.3)
 			display:flex
 			align-items:center
+			&.fade-enter-to,&.fade-leave-to
+				transition:all 0.5s
+			&.fade-enter,&.fade-leave-to
+				opacity:0
 		.version
 			position:absolute
 			bottom:0

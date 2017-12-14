@@ -38,6 +38,9 @@ const globalStore = {
 		setGlobaBglColorOpacity (state, obj) {
 			state.globalInfo.contentInfo.opacity = obj.data
 		},
+		setMaskType (state, obj) {
+			state.globalInfo.contentInfo.type = obj.data
+		},
 		setPlace (state, obj) {
 			state.place = obj.data
 		},
@@ -63,6 +66,9 @@ const globalStore = {
 		},
 		set_GlobaBglColorOpacity ({commit}, obj) {
 			commit('setGlobaBglColorOpacity', obj)
+		},
+		set_MaskType ({commit}, obj) {
+			commit('setMaskType', obj)
 		},
 		set_Place ({commit}, obj) {
 			commit('setPlace', obj)

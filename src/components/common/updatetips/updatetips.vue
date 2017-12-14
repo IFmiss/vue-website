@@ -192,8 +192,8 @@
 				margin-top: 30px
 				font-size:0
 				border-radius: 0
-				border:1px solid rgba(255,12,12,0.2)
-				background: rgba(255,12,12,0.03)
+				border:1px solid $com_button_color
+				background: $com_button_active_color
 				// border-top:1px solid $com_text_color 
 				input
 					width:100%
@@ -218,6 +218,6 @@
 						// background:$update_primary_color
 					&:hover{
 						color: $com_text_color_active
-						background: rgba(255,12,12,0.08)
+						background: $com_button_deep
 					}
 </style>
