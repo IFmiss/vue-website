@@ -46,6 +46,8 @@ const DownloadAudio = r => require.ensure([], () => r(require('@/components/abou
 // import Suggest from '@/components/resources/resources/audio.vue'  音频下载
 const DownloadVideo = r => require.ensure([], () => r(require('@/components/about/resources/video/video.vue')), 'video')
 // import Suggest from '@/components/resources/resources/video.vue'  视频下载
+const News = r => require.ensure([], () => r(require('@/components/about/news/news.vue')), 'news')
+// import News from '@/components/about/news/news.vue' 新闻头条
 Vue.use(Router)
 
 export default new Router({
@@ -173,6 +175,17 @@ export default new Router({
         {
           path: '/about/updateinfo',
           component: Updateinfo
+        },
+        {
+          path: '/about/news',
+          component: News,
+          children: [
+            {
+              path: '/about/news/:type',
+              name: 'newstype',
+              component: News
+            }
+          ]
         },
         {
           path: '/about/resources',

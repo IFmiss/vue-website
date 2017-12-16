@@ -11,7 +11,7 @@
 				</div>
 			</div>
 			<transition name="silde-top">
-				<router-view class="list_resources" name="downloadlist" :keyword="searchKey"></router-view>
+				<router-view class="list_resources" name="downloadlist" :keyword="searchKey" :selectedvalue="selected" :serchoptions="options"></router-view>
 			</transition>
 		</div>
 	</div>
