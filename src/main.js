@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueLazyload from 'vue-lazyload'
 import Msg from 'vue-message'
 // import './../babel-polyfill'
 // import scrollbar from 'malihu-custom-scrollbar-plugin'
@@ -10,6 +11,10 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(Msg, {text: 'Hello world', duration: 3000, background: 'rgba(7,17,27,0.6)'})
 
 Vue.use(VueAwesomeSwiper)
+
+Vue.use(VueLazyload, {
+  loading: 'static/dw.png'
+})
 
 Vue.config.productionTip = false
 

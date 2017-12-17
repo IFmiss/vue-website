@@ -11,9 +11,9 @@
 				<a v-if="newsData.length" v-for="(item, index) in newsData" :href="item.url">
 					<p class="newstitle">{{item.title}}</p>
 					<div v-if="newsData" class="image_lists">
-						<img v-if="item.thumbnail_pic_s" :src="item.thumbnail_pic_s" :alt="item.title">
-						<img v-if="item.thumbnail_pic_s02" :src="item.thumbnail_pic_s02" :alt="item.title">
-						<img v-if="item.thumbnail_pic_s03" :src="item.thumbnail_pic_s03" :alt="item.title">
+						<img v-if="item.thumbnail_pic_s" v-lazy="item.thumbnail_pic_s" :alt="item.title">
+						<img v-if="item.thumbnail_pic_s02" v-lazy="item.thumbnail_pic_s02" :alt="item.title">
+						<img v-if="item.thumbnail_pic_s03" v-lazy="item.thumbnail_pic_s03" :alt="item.title">
 					</div>
 					<span class="tips author_name">{{item.author_name}}</span>
 					<span class="tips data">{{item.date}}</span>
