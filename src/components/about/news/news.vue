@@ -2,7 +2,7 @@
 	<div class="news">
 		<div class="div_back" @click="back"><i class="icon-back"></i></div>
 		<div class="news_content">
-			<div class="selectNewsType">
+			<div class="selectNewsType" ref="scrollType">
 				<div class="content_type" @click="getNewsInfoByType(e)">
 					<span v-for="(item, index) in defaultType" class="news_type_list" :activeindex="index" :class="type === item.type ? 'active' : ''" :type="item.type">{{item.name}}</span>
 				</div>
@@ -24,6 +24,7 @@
 </template>
 <script>
 	import fecth from './../../../utils/fecth.js'
+	import Bscroll from 'better-scroll'
 	export default {
 		data () {
 			// top(头条，默认),shehui(社会),guonei(国内),guoji(国际),yule(娱乐),tiyu(体育)junshi(军事),keji(科技),caijing(财经),shishang(时尚)
@@ -93,10 +94,19 @@
 			},
 			back () {
 				this.$router.go(-1)
+			},
+			initBscroll () {
+				this.scroll = new Bscroll(this.$refs.scrollType, {
+					scrollX: true,
+					scrollY: false
+				})
 			}
 		},
 		mounted () {
 			this.getNewsInfo()
+			this.$nextTick(() => {
+				this.initBscroll()
+			})
 		}
 	}
 </script>
@@ -147,7 +157,7 @@
 				right:0
 				height:36px
 				line-height:36px
-				overflow-x: auto
+				overflow-x: hidden
 				.content_type
 					width:max-content
 					height:100%
