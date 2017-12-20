@@ -67,12 +67,19 @@
 			maskData: [
 							{
 								type: 'default',
-								title: '默认浮层样式'
+								title: '默认浮层样式',
+								img: ''
 							},
 							{
 								type: 'radial-gradient-ellipse',
-								title: '径向渐变-椭圆'
+								title: '径向渐变-椭圆',
+								img: ''
 							}
+							// {
+							// 	type: 'image-old',
+							// 	title: '怀旧',
+							// 	img: '../../../../static/masktype/overlay-bg-1.png'
+							// }
 						]
 		}
 	},

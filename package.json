@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
+    "better-scroll": "^1.6.0",
     "vue": "^2.3.3",
     "vue-awesome-swiper": "^2.5.4",
+    "vue-lazyload": "^1.1.4",
     "vue-message": "^1.2.3",
     "vue-router": "^2.6.0"
   },
