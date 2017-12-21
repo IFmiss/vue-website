@@ -6,7 +6,7 @@
           <div class="mask_list_info" :masktype="item.type" :class="getGlobalInfo.contentInfo.type === item.type ? 'active' : ''" @click="fnSetMaskType(item.type)">
             <div class="demo_info">
               <img class="demo_img" :src="getFixImageInfo"  alt="">
-              <div class="demo_bg" :style="getMaskTypeCss(item)"></div>
+              <div class="demo_bg" :style="getMaskTypeCss(item.type)"></div>
             </div>
             <span class="title">{{item.title}}</span>
           </div>
@@ -37,8 +37,8 @@
       }
     },
     methods: {
-      getMaskTypeCss (item) {
-        let style = SetMaskType(item, this.maskglobainfo)
+      getMaskTypeCss (type) {
+        let style = SetMaskType(type, this.maskglobainfo)
         return style
       },
       // 将type数据存到store本地且关闭页面

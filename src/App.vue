@@ -260,10 +260,6 @@ export default {
     window.onresize = () => {
       this.isApp()
     }
-    // 设置背景色
-    // DGlobal.utils.setMoreEleStyle('*', (dom) => {
-    //   dom.style.filter = 'grayscale(1)'
-    // })
     localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
     // })
   }

@@ -5,6 +5,8 @@
 </template>
 <script>
 import SetMaskType from './../selectmask/selectmask.js'
+import DGlobal from '@/common/js/global.js'
+
 export default {
   data () {
     return {
@@ -52,7 +54,7 @@ export default {
     }
   },
   methods: {
-    initMoveBg () {
+    fnMoveBg () {
       const _this = this
       if (this.moveBg && /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
         let sizeY = window.screen.height
@@ -66,6 +68,15 @@ export default {
           // _this.$refs.fixedbg.style.WebkitTransform = `translate3d(${_this.gamma}px,${_this.beta}px,0)`
         })
       }
+    },
+    initMoveBg () {
+      // 设置背景色
+      DGlobal.utils.moveImage().then(() => {
+        this.fnMoveBg()
+      }, () => {
+        // this.fnMoveBg()
+        this.$msg('让我猜一下,你一定是安卓手机,hahaha')
+      })
     }
   },
   mounted () {
