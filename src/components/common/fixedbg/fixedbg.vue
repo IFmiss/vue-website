@@ -62,8 +62,8 @@ export default {
         _this.$refs.fixedbg.style.backgroundSize = `auto calc(${sizeY}px)`
         window.addEventListener('deviceorientation', function (event) {
           _this.alpha = Math.round(event.alpha)
-          _this.beta = Math.round(event.beta)
-          _this.gamma = Math.round(event.gamma)
+          _this.beta = (Math.round(event.beta) > 50 ? 50 : Math.round(event.beta)) < -50 ? -50 : (Math.round(event.beta) > 50 ? 50 : Math.round(event.beta))
+          _this.gamma = (Math.round(event.gamma) > 30 ? 30 : Math.round(event.gamma)) < -30 ? -30 : (Math.round(event.gamma) > 30 ? 30 : Math.round(event.gamma))
           _this.$refs.fixedbg.style.backgroundPosition = `calc(${_this.gamma} / 45 * 15px + 50%) calc(${_this.beta} / 45 * 15px + 50%) `
           // _this.$refs.fixedbg.style.WebkitTransform = `translate3d(${_this.gamma}px,${_this.beta}px,0)`
         })
@@ -95,7 +95,6 @@ export default {
     right:0
     bottom:0
     background-color:#000
-    // transition:all 0.3s
     .mask-fixedbg
       position:fixed
       z-index:111111111111

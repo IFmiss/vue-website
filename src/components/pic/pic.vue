@@ -196,9 +196,7 @@
     }
   }
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
-  @import '../../common/stylus/global.styl'
-  @import '../../common/stylus/style.styl'             
+<style lang="stylus" rel="stylesheet/stylus">        
   .pic
     position:fixed
     top:0

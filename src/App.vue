@@ -211,9 +211,6 @@ export default {
         type: 'setAudioEle',
         data: this.$refs.myAudio
       })
-    },
-    consoleLog (texts, isOneLines, authors) {
-      DGlobal.utils.setConsole(texts, isOneLines, authors)
     }
   },
   watch: {
@@ -244,7 +241,7 @@ export default {
   },
   mounted () {
     // 输出信息
-    this.consoleLog('基于vue2.0的网站新版更新', 1, '未曾遗忘的青春')
+    DGlobal.utils.setConsole('基于vue2.0的网站新版更新', 1, '未曾遗忘的青春')
     // 设置audio 的refs
     this.setAudioRef()
     // this.$nextTick(() => {

@@ -192,36 +192,32 @@ export default new Router({
           component: Resources,
           children: [
             {
-              path: '/',
-              redirect: '/about/resources/audio/'
-            },
-            {
               path: '/about/resources/audio/',
               name: 'audiolist',
               components: {
                 downloadlist: DownloadAudio
-              }
-            },
-            {
-              path: '/about/resources/audio/:k',
-              name: 'audiolist',
-              components: {
-                downloadlist: DownloadAudio
-              }
+              },
+              children: [
+                {
+                  path: '/about/resources/audio/:k',
+                  components: {
+                    downloadlist: DownloadAudio
+                  }
+                }
+              ]
             },
             {
               path: '/about/resources/video/',
               name: 'videolist',
               components: {
                 downloadlist: DownloadVideo
-              }
-            },
-            {
-              path: '/about/resources/video/:k',
-              name: 'videolist',
-              components: {
-                downloadlist: DownloadVideo
-              }
+              },
+              children: [{
+                path: '/about/resources/video/:k',
+                  components: {
+                    downloadlist: DownloadVideo
+                  }
+                }]
             }
           ]
         }

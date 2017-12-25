@@ -5,13 +5,13 @@
 			<div class="serachArea">
 				<div class="selectContent">
 					<input class="searchInfo" type="text" placeholder="搜索你想搜的资源" v-model="searchKey"><button @click="getResource()">搜索</button>
-					<select class="serachType" name="serachType" v-model="selected" @change="getResource()">
+					<select class="serachType" name="serachType" v-model="selected" @change="initType()">
 						<option v-for="opt in options" :value="opt.value">{{opt.text}}</option>
 					</select>
 				</div>
 			</div>
 			<transition name="silde-top">
-				<router-view class="list_resources" name="downloadlist" :keyword="searchKey" :selectedvalue="selected" :serchoptions="options"></router-view>
+				<router-view class="list_resources" ref="resourceslist" name="downloadlist" :keyword="searchKey" :selectedvalue="selected" :serchoptions="options"></router-view>
 			</transition>
 		</div>
 	</div>
@@ -22,7 +22,7 @@
 	export default {
 		data () {
 			return {
-				searchKey: '',
+				searchKey: this.$route.params.k || '',
 				downloaddata: '',
 				selected: 'A',
 				options: [
@@ -32,7 +32,7 @@
 			}
 		},
 		methods: {
-			getResource () {
+			initType () {
 				if (this.selected === 'A') {
 					this.$router.push({name: 'videolist', params: { k: this.searchKey }})
 				}
@@ -40,20 +40,16 @@
 				if (this.selected === 'B') {
 					this.$router.push({name: 'audiolist', params: { k: this.searchKey }})
 				}
-				// let url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getResourceNew'
-				// let parm = {'keyword': this.searchKey}
-				// fecth.get(url, parm).then((res) => {
-				// 	this.downloaddata = res.data
-				// 	alert(JSON.stringify(res.data))
-				// }, (err) => {
-				// 	alert(JSON.stringify(err))
-				// })
+			},
+			getResource () {
+				this.$refs.resourceslist.getListData()
 			},
 			back () {
 				this.$router.go(-1)
 			}
 		},
 		created () {
+			this.initType()
 		}
 	}
 </script>
