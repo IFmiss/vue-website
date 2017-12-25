@@ -5,18 +5,43 @@
 
 ## 网页截图
 
-首页
+#### 首页
+
 ![](https://github.com/IFmiss/vue-website/blob/master/static/testimg/w1.jpg)
 
-状态  
+#### 状态  
+
 ![](https://github.com/IFmiss/vue-website/blob/master/static/testimg/w2.jpg)
 
-音乐  
+#### 音乐  
+
 ![](https://github.com/IFmiss/vue-website/blob/master/static/testimg/w3.jpg)
 
-设置  
+#### 设置  
+
 ![](https://github.com/IFmiss/vue-website/blob/master/static/testimg/w4.jpg)
 
+#### News
+
+![](https://github.com/IFmiss/vue-website/blob/master/static/testimg/w5.jpg)
+
+#### 作品信息
+
+![](https://github.com/IFmiss/vue-website/blob/master/static/testimg/w6.jpg)
+
+#### 标签信息
+
+![](https://github.com/IFmiss/vue-website/blob/master/static/testimg/w7.jpg)
+
+#### 浮层类型
+
+![](https://github.com/IFmiss/vue-website/blob/master/static/testimg/w8.jpg)
+
+#### 版本记录
+
+![](https://github.com/IFmiss/vue-website/blob/master/static/testimg/w9.jpg)
+
+等等...
 
 ## 执行方法
 
