@@ -201,7 +201,7 @@ const musicApi = {
         fecth.get(apiUrl).then((res) => {
             // 如果代码不允许被播放（付费音乐）
             if (res.data.data[0].url === null) {
-                that.$toast('音乐无法播放,以为您切换到下一曲!')
+                that.$msg('音乐无法播放,以为您切换到下一曲!')
                 let initIndex = 0
                 const currentMusic = {
                     index: store.getters.getCurrentAudio.index ? store.getters.getCurrentAudio.index + 1 : initIndex + 1
