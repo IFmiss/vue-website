@@ -4,7 +4,7 @@
 		<div class="resources_content">
 			<div class="serachArea">
 				<div class="selectContent">
-					<input class="searchInfo" type="text" placeholder="搜索你想搜的资源" v-model="searchKey"><button @click="getResource()">搜索</button>
+					<input class="searchInfo" type="text" placeholder="搜索你想搜的资源" v-model="searchKey" @keyup.enter="getResource()"><button @click="getResource()">搜索</button>
 					<select class="serachType" name="serachType" v-model="selected" @change="initType()">
 						<option v-for="opt in options" :value="opt.value">{{opt.text}}</option>
 					</select>

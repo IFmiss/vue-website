@@ -1,8 +1,18 @@
 <template>
 	<div class="audio_download">
 		<div class="empty" v-if="!audioInfo.length">嘤嘤嘤,暂无搜索结果</div>
-		<div class="audiolists" v-if="audioInfo.length">
-			{{audioInfo}}
+		<div class="resultlists" v-if="audioInfo.length">
+			<h3 class="name">
+				关键词: {{keyword}}	
+			</h3>
+			<p class="downloadtip">点击下载图标即可下载到本地</p>
+			<div class="resultlist">
+				<li class="list" v-for="(item, index) in audioInfo" v-if="item.AAcUrl">
+					<img class="singerimg" v-lazy="item.SingerImg || 'http://www.daiwei.org/vue/bg/657952152722629515.jpg'" :alt="item.SongName">
+					<span class="name">{{item.SongName}}</span>
+					<a class="download" target="_black" :href="item.AAcUrl"><i class="icon-download"></i></a>
+				</li>
+			</div>
 		</div>
 	</div>
 </template>
@@ -33,7 +43,10 @@
 					fecth.get(url, {'keyword': this.keyword}).then((res) => {
 						if (SUCCESS_NO === res.data.Code) {
 							this.audioInfo = res.data.ResultData
+							return
 						}
+						this.$msg('暂无搜索结果，建议重试一次!')
+						this.audioInfo = {}
 					}, (err) => {
 						alert(JSON.stringify(err))
 					})
@@ -63,4 +76,45 @@
 			display:block
 			width: 100%
 			font-size: 14px
+		.resultlists
+			user-select:text
+			.name
+				color:$text_color
+			.downloadtip
+				font-size:14px
+				color:$text_color
+			.resultlist
+				width:100%
+				height:auto
+				padding: 15px 0
+				.list
+					width:100%
+					height:auto
+					font-size:0
+					padding: 5px 0
+					border-bottom:1px solid $border_bottom_color
+					.singerimg
+						width:50px
+						display:inline-block
+						vertical-align:middle
+						border:none 0
+					.name
+						display:inline-block
+						color:$text_color
+						font-size:14px
+						width:calc(100% - 101px)
+						vertical-align:middle
+						box-sizing:border-box
+						padding:0 10px
+					.download
+						display:inline-block
+						width:50px
+						height: 50px
+						line-height:50px
+						vertical-align:middle
+						text-align: center
+						font-size:20px
+						cursor:pointer
+						color:$text_color_opacity
+				
 </style>

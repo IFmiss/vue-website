@@ -16,12 +16,12 @@
 		        		<span>每日一笑</span>
 		        	</li>
 		        </router-link>
-		  <!--       <router-link tag="a" to="/about/resources">
+		        <router-link tag="a" to="/about/resources">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
 		        		<i class="icon-rank-list"></i>
 		        		<span>资源搜索</span>
 		        	</li>
-		        </router-link> -->
+		        </router-link>
 		        <router-link tag="a" to="/about/me">
 		        	<li class="dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
 		        		<i class="icon-about"></i>
