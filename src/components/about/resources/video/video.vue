@@ -21,7 +21,7 @@
 
 <script>
 	import fecth from './../../../../utils/fecth.js'
-	const SUCCESS_NO = 201
+	const SUCCESS_NO = 200
 	export default {
 		data () {
 			return {
@@ -108,6 +108,7 @@
 							padding-left:10px
 							color: $text_link_color
 							font-size:14px
+						    word-break: break-word
 					
 				
 				

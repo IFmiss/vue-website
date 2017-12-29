@@ -45,10 +45,13 @@
 				this.$refs.resourceslist.getListData()
 			},
 			back () {
-				this.$router.go(-1)
+				this.$router.push({path: '/about'})
 			}
 		},
 		created () {
+			this.initType()
+		},
+		activated () {
 			this.initType()
 		}
 	}
