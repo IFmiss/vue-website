@@ -51,10 +51,16 @@
 		created () {
 			this.initType()
 		},
+<<<<<<< HEAD
 		// 解决keep alive 导致第二次进入的时候无法获取到refs的问题
 		activated () {
           this.initType()
         }
+=======
+		activated () {
+			this.initType()
+		}
+>>>>>>> 0b5187e85e6ee15098834903f8918e8fda34aea7
 	}
 </script>
 
