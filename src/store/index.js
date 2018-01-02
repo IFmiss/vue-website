@@ -5,6 +5,7 @@ import GlobalInfo from './modules/global.js'
 import PicList from './modules/pic.js'
 import Router from './modules/router.js'
 import Audio from './modules/audio.js'
+import Other from './modules/other.js'
 
 Vue.use(Vuex)
 
@@ -14,7 +15,8 @@ const store = new Vuex.Store({
 		globalInfo: GlobalInfo,
 		picList: PicList,
 		router: Router,
-		audio: Audio
+		audio: Audio,
+		other: Other
 	}
 })
 

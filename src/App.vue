@@ -5,7 +5,7 @@
       <fixed-bg v-if="imageInfo.url && imageSetting" :imagepath="imageInfo.url" :maskcolor="getGlobalStyle.contentInfo.bgcolor" :maskopacity="getGlobalStyle.contentInfo.opacity" :masktype="getGlobalStyle.contentInfo.type" :maskglobainfo="getGlobalStyle" ></fixed-bg>
     </div>
     <v-content></v-content>
-    <updatetips></updatetips>
+    <updatetips :defaultvalue="getVersionList"></updatetips>
     <audio :src="getCurrentMusic.url" ref="myAudio"></audio>
   </div>
 </template>
@@ -237,6 +237,9 @@ export default {
     },
     getCurrentMusic () {
       return store.getters.getCurrentAudio
+    },
+    getVersionList () {
+      return store.getters.getVersionList
     }
   },
   mounted () {

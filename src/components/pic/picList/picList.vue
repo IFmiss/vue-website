@@ -30,7 +30,7 @@
   			return store.getters.getGlobalInfo
   		},
 		getNewDate () {
-			return this.dataInfo.datetime.substr(5, 5)
+			return this.dataInfo.datetime.split(' ')[0]
 		},
 		getTimeLength () {
 			const parseDate = Date.parse(new Date(this.dataInfo.datetime)) / 1000
@@ -91,7 +91,7 @@
 			padding:5px
 			box-sizing:border-box
 			.title
-				font-size:48px
+				font-size:36px
 				font-weight:400
 				color:$text_color
 				margin:15px 0

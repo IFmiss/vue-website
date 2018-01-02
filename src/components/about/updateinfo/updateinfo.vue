@@ -2,7 +2,7 @@
 	<div class="updateinfo">
 		<div class="div_back" @click="back"><i class="icon-back"></i></div>
 		<div class="updateinfo_content">
-			<div class="updatelist" @click.stop="showUpdateDetail()" v-if="updateInfo" v-for="(item,index) in updateInfo">
+			<div class="updatelist" @click.stop="showUpdateDetail(item)" v-if="updateInfo" v-for="(item,index) in updateInfo">
 				<span class="index">{{index + 1}}</span>
 				<span class="updatetime">{{item.updatetime}}</span>
 				<span class="updatecontent" :title="item.disc">{{item.disc}}</span>
@@ -14,6 +14,7 @@
 
 <script>
 	import fecth from './../../../utils/fecth.js'
+	import store from './../../../store'
 	export default {
 		data () {
 			return {
@@ -31,6 +32,12 @@
 			},
 			back () {
 				this.$router.go(-1)
+			},
+			showUpdateDetail (item) {
+				store.commit({
+					type: 'setVersionList',
+					data: item
+				})
 			}
 		},
 		created () {

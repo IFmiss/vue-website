@@ -17,6 +17,7 @@
 					<!-- <input type="button" @click="unUpdate" class="giveup_update" value="暂不体验"> -->
 					<input type="button" @click="update" class="go_update" value="我知道了  ^ O ^">
 				</div>
+				<span>111{{defaultvalue}}</span>
 			</div>
 		</transition>
 	</div>
@@ -25,13 +26,20 @@
 <script>
   import DGlobal from '@/common/js/global.js'
   import fecth from './../../../utils/fecth.js'
+  // import store from './../../../store'
   export default {
   	data () {
   		return {
-  			showInfo: false,
-  			updateInfo: {}
+			showInfo: false,
+			updateInfo: {}
   		}
   	},
+  	props: {
+		defaultvalue: {
+			type: Object,
+			default: {}
+		}
+	},
   	methods: {
   		unUpdate () {
   			this.showInfo = false
@@ -41,10 +49,12 @@
 
   		// 更新网页  包括默认配置  以及 清除缓存刷新页面
   		update () {
+  			if (!this.defaultvalue.length) {
+				window.localStorage.setItem('web_version', this.updateInfo.version)
+				DGlobal.storage.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
+				location.href = location.href + (location.href.indexOf('?') > -1 ? '&' : '?') + 'v=' + this.updateInfo.version
+  			}
   			this.showInfo = false
-  			window.localStorage.setItem('web_version', this.updateInfo.version)
-  			DGlobal.storage.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
-  			location.href = location.href + (location.href.indexOf('?') > -1 ? '&' : '?') + 'v=' + this.updateInfo.version
   		},
 
   		showUpdate () {
@@ -93,11 +103,28 @@
 			}, (err) => {
 				alert(err)
 			})
+  		},
+
+  		// 显示版本信息
+  		versionInfo () {
+  			this.updateInfo = this.defaultvalue
+  			this.showInfo = true
+  		},
+
+  		watch: {
+  			defaultvalue (newinfo, oldinfo) {
+  				this.versionInfo()
+  			}
   		}
   	},
   	mounted () {
-  		// console.log(DGlobal)
-  		this.isNeedUpdate()
+  		if (this.defaultvalue && this.defaultvalue.length) {
+  			alert(1)
+  			this.versionInfo()
+  		} else {
+  			alert(2)
+  			this.isNeedUpdate()
+  		}
   	}
   }
 </script>
