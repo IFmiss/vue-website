@@ -214,10 +214,10 @@ export default new Router({
               },
               children: [{
                 path: '/about/resources/video/:k',
-                  components: {
-                    downloadlist: DownloadVideo
-                  }
-                }]
+                components: {
+                  downloadlist: DownloadVideo
+                }
+              }]
             }
           ]
         }

@@ -66,27 +66,27 @@
 				// 如果设置2小时之后再弹窗  则超出之后再弹窗更新
 				// 如果在2小时内又更新了一个版本   则还是需要弹窗更新
 				if (versionStorage !== null) {
-					console.log('有versionStorage')
+					// console.log('有versionStorage')
 					if (DGlobal.storage.getCookie('update') !== null) {
-						console.log('有cookie')
+						// console.log('有cookie')
 						if (DGlobal.storage.getCookie('update') !== _this.updateInfo.version) {
-							console.log('cookie版本不同 --- 弹窗')
+							// console.log('cookie版本不同 --- 弹窗')
 							_this.showInfo = true
 						} else {
-							console.log('cookie版本相同 --- 不弹窗')
+							// console.log('cookie版本相同 --- 不弹窗')
 							_this.showInfo = false
 						}
 					} else {
 						if (versionStorage !== _this.updateInfo.version) {
-							console.log('没有cookie时候  versionStorage版本不同 --- 弹窗')
+							// console.log('没有cookie时候  versionStorage版本不同 --- 弹窗')
 							_this.showInfo = true
 						} else {
-							console.log('versionStorage版本相同')
+							// console.log('versionStorage版本相同')
 							_this.showInfo = false
 						}
 					}
 				} else {
-					console.log('没有versionStorage')
+					// console.log('没有versionStorage')
 					window.localStorage.setItem('web_version', this.updateInfo.version)
 					DGlobal.storage.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
 				}
@@ -96,7 +96,7 @@
   		}
   	},
   	mounted () {
-  		console.log(DGlobal)
+  		// console.log(DGlobal)
   		this.isNeedUpdate()
   	}
   }

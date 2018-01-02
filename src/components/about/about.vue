@@ -100,7 +100,6 @@
 			return store.getters.getGlobalInfo
 		},
 		isShowPanel () {
-			console.log(store.getters.getAboutChildrenRouter)
 			return store.getters.getAboutChildrenRouter
 		}
 	},

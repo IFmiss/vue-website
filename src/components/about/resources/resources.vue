@@ -45,12 +45,16 @@
 				this.$refs.resourceslist.getListData()
 			},
 			back () {
-				this.$router.go(-1)
+				this.$router.push({path: '/about'})
 			}
 		},
 		created () {
 			this.initType()
-		}
+		},
+		// 解决keep alive 导致第二次进入的时候无法获取到refs的问题
+		activated () {
+          this.initType()
+        }
 	}
 </script>
 

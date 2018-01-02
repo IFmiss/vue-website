@@ -8,7 +8,7 @@
 			<p class="downloadtip">点击下载图标即可下载到本地</p>
 			<div class="resultlist">
 				<li class="list" v-for="(item, index) in audioInfo" v-if="item.AAcUrl">
-					<img class="singerimg" v-lazy="item.SingerImg || 'http://www.daiwei.org/vue/bg/657952152722629515.jpg'" :alt="item.SongName">
+					<img class="singerimg" v-lazy="item.SingerImg" :alt="item.SongName">
 					<span class="name">{{item.SongName}}</span>
 					<a class="download" target="_black" :href="item.AAcUrl"><i class="icon-download"></i></a>
 				</li>
