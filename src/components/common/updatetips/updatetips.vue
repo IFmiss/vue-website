@@ -49,7 +49,7 @@
 
   		// 更新网页  包括默认配置  以及 清除缓存刷新页面
   		update () {
-  			if (!this.defaultvalue.length) {
+  			if (!this.defaultvalue) {
 				window.localStorage.setItem('web_version', this.updateInfo.version)
 				DGlobal.storage.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
 				location.href = location.href + (location.href.indexOf('?') > -1 ? '&' : '?') + 'v=' + this.updateInfo.version
@@ -109,20 +109,17 @@
   		versionInfo () {
   			this.updateInfo = this.defaultvalue
   			this.showInfo = true
-  		},
-
-  		watch: {
-  			defaultvalue (newinfo, oldinfo) {
-  				this.versionInfo()
-  			}
   		}
   	},
+  	watch: {
+		defaultvalue (newinfo, oldinfo) {
+			this.versionInfo()
+		}
+	},
   	mounted () {
   		if (this.defaultvalue && this.defaultvalue.length) {
-  			alert(1)
   			this.versionInfo()
   		} else {
-  			alert(2)
   			this.isNeedUpdate()
   		}
   	}
