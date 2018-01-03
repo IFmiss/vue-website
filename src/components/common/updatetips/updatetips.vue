@@ -49,7 +49,7 @@
 
   		// 更新网页  包括默认配置  以及 清除缓存刷新页面
   		update () {
-  			if (!this.defaultvalue) {
+  			if (!this.defaultvalue || !this.defaultvalue.length) {
 				window.localStorage.setItem('web_version', this.updateInfo.version)
 				DGlobal.storage.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
 				location.href = location.href + (location.href.indexOf('?') > -1 ? '&' : '?') + 'v=' + this.updateInfo.version

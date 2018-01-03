@@ -21,7 +21,7 @@
 
 <script>
 	import fecth from './../../../../utils/fecth.js'
-	const SUCCESS_NO = 200
+	const SUCCESS_NO = 201
 	export default {
 		data () {
 			return {
