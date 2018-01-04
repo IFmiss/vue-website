@@ -3,8 +3,11 @@
     <ul class="ul-header border-1px">
       <!-- pc 页面菜单 -->
       <div class="left-menu" v-show="getGlobalInfo.isHigher768">
-        <router-link tag="a" to="/home">
-          <li>首页</li>
+          <router-link class="logo" tag="a" to="/home">
+            <img src="http://www.daiwei.org/new/static/dw.png" alt="">
+          </router-link>
+          <router-link tag="a" to="/home">
+            <li>首页</li>
           </router-link>
           <router-link tag="a" to="/pic">
             <li>状态</li>
@@ -159,6 +162,11 @@ export default {
             li
               color:$text_color_active
               border-bottom:1px solid $border_color
+          &.logo
+            padding-left:0
+          img
+            width:36px
+            vertical-align:middle
       .right-menu
         position:absolute
         right:10px
