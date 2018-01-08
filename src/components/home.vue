@@ -36,6 +36,7 @@
             <router-link tag="a" to="/about/friendship">
               <span>友情链接</span>
             </router-link>
+            <a href="http://www.miitbeian.gov.cn/" target="_black" title="皖ICP备16011217号" style="width:100%;height:auto">皖ICP备16011217号</a>
           </span>
         </span>
       </div>

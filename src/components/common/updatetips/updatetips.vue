@@ -17,7 +17,6 @@
 					<!-- <input type="button" @click="unUpdate" class="giveup_update" value="暂不体验"> -->
 					<input type="button" @click="update" class="go_update" value="我知道了  ^ O ^">
 				</div>
-				<span>111{{defaultvalue}}</span>
 			</div>
 		</transition>
 	</div>
@@ -49,7 +48,7 @@
 
   		// 更新网页  包括默认配置  以及 清除缓存刷新页面
   		update () {
-  			if (!this.defaultvalue || !this.defaultvalue.length) {
+  			if (!this.defaultvalue || !this.defaultvalue.id) {
 				window.localStorage.setItem('web_version', this.updateInfo.version)
 				DGlobal.storage.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
 				location.href = location.href + (location.href.indexOf('?') > -1 ? '&' : '?') + 'v=' + this.updateInfo.version
