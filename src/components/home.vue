@@ -38,6 +38,7 @@
             </router-link>
             <a href="http://www.miitbeian.gov.cn/" target="_black" title="皖ICP备16011217号" style="width:100%;height:auto">皖ICP备16011217号</a>
           </span>
+          <!-- <a href="http://www.miitbeian.gov.cn/" title="皖ICP备16011217号" style="width:100%;height:auto">皖ICP备16011217号</a> <--></-->
         </span>
       </div>
       <!-- <div class="pic_bg" v-if="globalInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div> -->
@@ -59,7 +60,7 @@ export default {
   },
   computed: {
     bingImageDisc () {
-      return store.getters.getGlobalInfo.showBingImage ? '每日一图由 bing 提供 | Copyright © 2016~2017 DAIWEI.ORG' : '每日一图由 未曾遗忘的青春 提供 | Copyright © 2016~2017 DAIWEI.ORG'
+      return store.getters.getGlobalInfo.showBingImage ? '每日一图由 bing 提供 | Copyright © 2016~2017 DAIWEI.ORG' : '每日一图由 未曾遗忘的青春 提供 | Copyright © 2016~2018 DAIWEI.ORG'
     },
     imageInfo () {
       return store.getters.getFixedImageInfo
