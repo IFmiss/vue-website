@@ -1,5 +1,6 @@
 <template>
     <div class="home">
+      <adv></adv>
       <div class="home_center">
         <div class="home_content">
           <h1 class="title" key="title">
@@ -38,7 +39,6 @@
             </router-link>
             <a href="http://www.miitbeian.gov.cn/" target="_black" title="皖ICP备16011217号" style="width:100%;height:auto">皖ICP备16011217号</a>
           </span>
-          <!-- <a href="http://www.miitbeian.gov.cn/" title="皖ICP备16011217号" style="width:100%;height:auto">皖ICP备16011217号</a> <--></-->
         </span>
       </div>
       <!-- <div class="pic_bg" v-if="globalInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div> -->
@@ -47,8 +47,9 @@
 </template>
 
 <script>
-import store from '../store'
-import fecth from '../utils/fecth.js'
+import store from 'store'
+import adv from 'components/common/advertisement/advertisement'
+import fecth from 'utils/fecth.js'
 export default {
   data () {
     return {
@@ -74,6 +75,9 @@ export default {
     isBingImage () {
       return store.getters.getGlobalInfo.showBingImage
     }
+  },
+  conponents: {
+    adv
   },
   methods: {
     toggleFullScreen () {

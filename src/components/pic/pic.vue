@@ -31,10 +31,10 @@
 <script src="http://www.daiwei.org/global/js/jquery.mCustomScrollbar.min.js"></script>
 <script>
   // import Vue from 'vue'
-  import store from './../../store'
-  import line from './../common/line/line.vue'
-  import picList from './picList/picList.vue'
-  import fecth from './../../utils/fecth.js'
+  import store from 'store'
+  import line from 'components/common/line/line.vue'
+  import picList from 'components/pic/picList/picList.vue'
+  import fecth from 'utils/fecth.js'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   // import $ from 'jquery'
   // import 'jquery-mousewheel'
@@ -197,7 +197,7 @@
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus"> 
-@import '../../common/stylus/global.styl'       
+@import '~common/stylus/global.styl'       
   .pic
     position:fixed
     top:0

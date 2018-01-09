@@ -17,9 +17,9 @@
   </div>
 </template>
 <script>
-import fecth from './../../../utils/fecth.js'
+import fecth from 'utils/fecth.js'
 // import store from '../../store'
-import workList from './workList/workList.vue'
+import workList from 'components/about/works/workList/workList.vue'
 export default {
 	data () {
 		return {

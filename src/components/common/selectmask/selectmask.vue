@@ -68,7 +68,7 @@
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-@import '../../../common/stylus/global.styl'
+@import '~common/stylus/global.styl'
 .selectmask
   position: fixed
   width: 100%

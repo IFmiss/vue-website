@@ -13,7 +13,7 @@
 <script>
 // import store from '../../../store'
 // import axios from 'axios'
-import fecth from './../../../utils/fecth.js'
+import fecth from 'utils/fecth.js'
 export default {
 	data () {
 		return {
@@ -45,7 +45,7 @@ export default {
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-  @import '../../../common/stylus/global.styl'
+  @import '~common/stylus/global.styl'
 	.div_back
 		position:absolute
 		top:0

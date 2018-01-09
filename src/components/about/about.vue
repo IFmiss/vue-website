@@ -75,7 +75,7 @@
   </div>
 </template>
 <script>
-  import store from './../../store'
+  import store from 'store'
   export default {
   	methods: {
   		getRoutePath () {
@@ -115,9 +115,9 @@
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-	@import '../../common/response.css'
-	@import '../../common/stylus/global.styl'
-	@import '../../common/stylus/style.styl'
+	@import '~common/response.css'
+	@import '~common/stylus/global.styl'
+	@import '~common/stylus/style.styl'
 		.about
 			position:fixed
 			top:0

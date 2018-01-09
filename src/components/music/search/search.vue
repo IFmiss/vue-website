@@ -80,9 +80,9 @@
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-@import '../../../common/response.css'
-@import '../../../common/stylus/global.styl'
-@import '../../../common/stylus/style.styl'
+@import '~common/response.css'
+@import '~common/stylus/global.styl'
+@import '~common/stylus/style.styl'
 .search
   position:fixed
   left:0

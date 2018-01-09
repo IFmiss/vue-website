@@ -24,7 +24,7 @@
 
 <script>
   import DGlobal from '@/common/js/global.js'
-  import fecth from './../../../utils/fecth.js'
+  import fecth from 'utils/fecth.js'
   // import store from './../../../store'
   export default {
   	data () {
@@ -126,7 +126,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-	@import './../../../common/stylus/global.styl'
+	@import '~common/stylus/global.styl'
 	.updatetips
 		position:fixed
 		top:0

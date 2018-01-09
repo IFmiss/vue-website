@@ -45,10 +45,10 @@
   </div>
 </template>
 <script>
-  import store from './../../store'
-  import Switch from './../common/switch/switch.vue'
-  import ColorPicker from './../common/colorpicker/colorpicker.vue'
-  import SelectMask from './../common/selectmask/selectmask.vue'
+  import store from 'store'
+  import Switch from 'components/common/switch/switch.vue'
+  import ColorPicker from 'components/common/colorpicker/colorpicker.vue'
+  import SelectMask from 'components/common/selectmask/selectmask.vue'
   export default {
   	data () {
   		return {

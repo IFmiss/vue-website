@@ -11,15 +11,15 @@
 </template>
 <script>
 // import axios from 'axios'
-import store from './store'
-import fecth from './utils/fecth.js'
-import home from './components/home.vue'
-import fixedbg from './components/common/fixedbg/fixedbg.vue'
-import content from './components/common/content/content.vue'
-import pic from './components/pic/pic.vue'
-import loader from './components/common/loader/loader.vue'
-import updatetips from './components/common/updatetips/updatetips.vue'
-import DGlobal from '@/common/js/global.js'
+import store from 'store'
+import fecth from 'utils/fecth.js'
+import home from 'components/home.vue'
+import fixedbg from 'components/common/fixedbg/fixedbg.vue'
+import content from 'components/common/content/content.vue'
+import pic from 'components/pic/pic.vue'
+import loader from 'components/common/loader/loader.vue'
+import updatetips from 'components/common/updatetips/updatetips.vue'
+import DGlobal from 'common/js/global.js'
 // import $ from 'jquery'
 
 export default {
@@ -267,7 +267,7 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-@import 'common/stylus/border-1px/index.styl'
+@import '~common/stylus/border-1px/index.styl'
 @import '/static/font-icon/style.css'
   audio
     display:none
