@@ -30,7 +30,7 @@
 	</div>
 </template>
 <script>
-  import store from './../../../store'
+  import store from 'store'
   let t
   export default {
   props: {
@@ -68,9 +68,9 @@
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-@import '../../../common/response.css'
-@import '../../../common/stylus/global.styl'
-@import '../../../common/stylus/style.styl'
+@import '~common/response.css'
+@import '~common/stylus/global.styl'
+@import '~common/stylus/style.styl'
 .weather
   width:auto
   height:auto

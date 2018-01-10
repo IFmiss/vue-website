@@ -1,5 +1,5 @@
-import store from '../../store'
-import fecth from './../../utils/fecth.js'
+import store from 'store'
+import fecth from 'utils/fecth.js'
 import $ from 'jquery'
 const musicApi = {
     lastLyric: 0,

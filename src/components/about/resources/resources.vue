@@ -59,7 +59,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  @import '../../../common/stylus/global.styl'
+  @import '~common/stylus/global.styl'
   	::-webkit-input-placeholder
   		color:$text_color_opacity
  	:-moz-placeholder

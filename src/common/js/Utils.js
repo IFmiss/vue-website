@@ -25,6 +25,7 @@ export const Utils = {
 		}
 	},
 
+	// 一个promise  通过手机自带的设备传感器感应xyz方向的角度实现移动端背景图片视差显示效果
 	moveImage () {
 		const deviceVersion = Navigator.deviceVersion()
 		return new Promise((resolve, reject) => {

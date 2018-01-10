@@ -7,7 +7,7 @@
   </div>
 </template>
 <script>
-import store from './../../../store'
+import store from 'store'
 export default {
   data () {
     return {
@@ -72,7 +72,7 @@ export default {
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-@import '../../../common/stylus/global.styl'
+@import '~common/stylus/global.styl'
   .colorpicker
     position:relative
     width:80%

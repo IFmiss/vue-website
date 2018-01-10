@@ -1,5 +1,6 @@
 <template>
     <div class="home">
+      <advertisement></advertisement>
       <div class="home_center">
         <div class="home_content">
           <h1 class="title" key="title">
@@ -24,9 +25,6 @@
           <div class="set_list" v-if="globalInfo.isHigher768" @click="toggleFullScreen">
             <i :class="isFullScreen ? 'icon-canclefullscreen' : 'icon-fullscreen'" :title="isFullScreen ? '取消全屏' : '全屏'"></i>
           </div>
-<!--           <div class="set_list" @click="exitFullscreen">
-            <i class="icon-music"></i>
-          </div> -->
         </div>
         <span class="tips" :title="bingImageDisc">{{bingImageDisc}}
           <span v-if="globalInfo.isHigher768">
@@ -40,14 +38,14 @@
           </span>
         </span>
       </div>
-      <!-- <div class="pic_bg" v-if="globalInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div> -->
       <audio v-if="imageInfo.musicUrl" ref="homeAudio" style="display:none" loop="" :src="imageInfo.musicUrl"></audio>
     </div>
 </template>
 
 <script>
-import store from '../store'
-import fecth from '../utils/fecth.js'
+import store from 'store'
+import advertisement from 'components/common/advertisement/advertisement'
+import fecth from 'utils/fecth.js'
 export default {
   data () {
     return {
@@ -59,7 +57,7 @@ export default {
   },
   computed: {
     bingImageDisc () {
-      return store.getters.getGlobalInfo.showBingImage ? '每日一图由 bing 提供 | Copyright © 2016~2017 DAIWEI.ORG' : '每日一图由 未曾遗忘的青春 提供 | Copyright © 2016~2017 DAIWEI.ORG'
+      return store.getters.getGlobalInfo.showBingImage ? '每日一图由 bing 提供 | Copyright © 2016~2017 DAIWEI.ORG' : '每日一图由 未曾遗忘的青春 提供 | Copyright © 2016~2018 DAIWEI.ORG'
     },
     imageInfo () {
       return store.getters.getFixedImageInfo
@@ -73,6 +71,9 @@ export default {
     isBingImage () {
       return store.getters.getGlobalInfo.showBingImage
     }
+  },
+  components: {
+    advertisement
   },
   methods: {
     toggleFullScreen () {
@@ -396,4 +397,8 @@ export default {
           color:$text_color
           margin-left:10px
           text-decoration:none
+      @media screen and (min-width: 992px)
+        .home_content
+          padding: 0 80px 50px 80px
+          position:relative
 </style>

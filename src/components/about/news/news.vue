@@ -23,7 +23,7 @@
 	</div>
 </template>
 <script>
-	import fecth from './../../../utils/fecth.js'
+	import fecth from 'utils/fecth.js'
 	import Bscroll from 'better-scroll'
 	export default {
 		data () {
@@ -111,7 +111,7 @@
 	}
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-  @import '../../../common/stylus/global.styl'
+  @import '~common/stylus/global.styl'
 	.news
 		position:fixed
 		top:0

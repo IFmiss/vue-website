@@ -66,7 +66,7 @@
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-@import '../../../common/stylus/global.styl'
+@import '~common/stylus/global.styl'
 	.switch
 		width:38px;
 		height:20px;

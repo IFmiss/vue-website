@@ -20,8 +20,7 @@
 </template>
 
 <script>
-	import fecth from './../../../../utils/fecth.js'
-	const SUCCESS_NO = 201
+	import fecth from 'utils/fecth.js'
 	export default {
 		data () {
 			return {
@@ -43,7 +42,7 @@
 				if (this.keyword !== '') {
 					let url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getResourceVideo'
 					fecth.get(url, {'keyword': this.keyword}).then((res) => {
-						if (SUCCESS_NO === res.data.Code) {
+						if (res.data && res.data.ResultData) {
 							this.videoInfo = res.data.ResultData
 							return
 						}
@@ -64,8 +63,8 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-	@import './../../../../common/stylus/global.styl'
-	@import './../../../../common/stylus/border-1px/index.styl'
+	@import '~common/stylus/global.styl'
+	@import '~common/stylus/border-1px/index.styl'
 	.video_download
 		max-width: 768px
 		margin: 0 auto

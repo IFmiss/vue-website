@@ -9,8 +9,8 @@
 </template>
 <script>
 // import store from '../../store'
-import fecth from './../../../utils/fecth.js'
-import jokeList from './jokeList/jokeList.vue'
+import fecth from 'utils/fecth.js'
+import jokeList from 'components/about/joke/jokeList/jokeList.vue'
 // import axios from 'axios'
 export default {
 	data () {
@@ -40,7 +40,7 @@ export default {
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-  @import '../../../common/stylus/global.styl'
+  @import '~common/stylus/global.styl'
 	.div_back
 		position:absolute
 		top:0

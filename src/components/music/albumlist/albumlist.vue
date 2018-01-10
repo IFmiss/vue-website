@@ -34,8 +34,8 @@
 </template>
 <script>
   // import fecth from './../../utils/fecth.js'
-  import store from '../../../store'
-  import musicApi from './../music.js'
+  import store from 'store'
+  import musicApi from 'components/music/music.js'
   // import axios from 'axios'
   // import qs from 'qs'
   export default {
@@ -145,8 +145,8 @@
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-	@import '../../../common/stylus/global.styl'
-	@import '../../../common/stylus/border-1px/index.styl'
+	@import '~common/stylus/global.styl'
+	@import '~common/stylus/border-1px/index.styl'
 	.list_content_info
 		height:100%
 		box-sizing:border-box

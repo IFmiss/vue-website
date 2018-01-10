@@ -3,8 +3,11 @@
     <ul class="ul-header border-1px">
       <!-- pc 页面菜单 -->
       <div class="left-menu" v-show="getGlobalInfo.isHigher768">
-        <router-link tag="a" to="/home">
-          <li>首页</li>
+          <router-link class="logo" tag="a" to="/home">
+            <img src="http://www.daiwei.org/new/static/dw.png" title="未曾遗忘的青春 | 萌芽 - web前端_技术分享_戴伟的个人网站" alt="">
+          </router-link>
+          <router-link tag="a" to="/home">
+            <li>首页</li>
           </router-link>
           <router-link tag="a" to="/pic">
             <li>状态</li>
@@ -73,8 +76,8 @@
   </section>
 </template>
 <script>
-import store from './../../../store'
-import weather from './../weather/weather.vue'
+import store from 'store'
+import weather from 'components/common/weather/weather.vue'
 let t
 export default {
   data () {
@@ -159,6 +162,11 @@ export default {
             li
               color:$text_color_active
               border-bottom:1px solid $border_color
+          &.logo
+            padding-left:0
+          img
+            width:36px
+            vertical-align:middle
       .right-menu
         position:absolute
         right:10px

@@ -15,7 +15,7 @@
 	</div>
 </template>
 <script>
-  import store from './../../../store'
+  import store from 'store'
   // import { swiper, swiperSlide } from 'vue-awesome-swiper'
   // var $ = require('jquery')
   // require('jquery-mousewheel')($)
@@ -83,7 +83,7 @@
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-@import '../../../common/stylus/global.styl'
+@import '~common/stylus/global.styl'
 	.picList_content
 		// width:100%
 		// height:100%

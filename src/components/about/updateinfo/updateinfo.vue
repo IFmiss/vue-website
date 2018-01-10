@@ -13,8 +13,8 @@
 </template>
 
 <script>
-	import fecth from './../../../utils/fecth.js'
-	import store from './../../../store'
+	import fecth from 'utils/fecth.js'
+	import store from 'store'
 	export default {
 		data () {
 			return {
@@ -47,7 +47,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  @import '../../../common/stylus/global.styl'
+  @import '~common/stylus/global.styl'
 	.works
 	  	position:fixed
 	    top:0
