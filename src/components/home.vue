@@ -44,7 +44,7 @@
 
 <script>
 import store from 'store'
-import adv from 'components/common/advertisement/advertisement'
+import advertisement from 'components/common/advertisement/advertisement'
 import fecth from 'utils/fecth.js'
 export default {
   data () {
