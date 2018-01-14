@@ -4,20 +4,20 @@
       <!-- pc 页面菜单 -->
       <div class="left-menu" v-show="getGlobalInfo.isHigher768">
           <router-link class="logo" tag="a" to="/home">
-            <img src="http://www.daiwei.org/new/static/dw.png" title="未曾遗忘的青春 | 萌芽 - web前端_技术分享_戴伟的个人网站" alt="">
+            <img width="36" height="36" src="http://www.daiwei.org/new/static/dw.png" title="未曾遗忘的青春 | 萌芽 - web前端_技术分享_戴伟的个人网站" alt="">
           </router-link>
           <router-link tag="a" to="/home">
             <li>首页</li>
           </router-link>
+          <a href="http://www.daiwei.org/blog" target="_black">
+            <li>博客</li>
+          </a>
           <router-link tag="a" to="/pic">
             <li>状态</li>
           </router-link>
           <router-link tag="a" to="/music">
             <li>音乐</li>
           </router-link>
-          <a href="http://www.daiwei.org/blog" target="_black">
-            <li>博客</li>
-          </a>
           <router-link tag="a" to="/about">
             <li>关于</li>
           </router-link>
@@ -32,15 +32,15 @@
               <router-link tag="a" to="/home">
               <li>首页</li>
               </router-link>
+              <a href="http://www.daiwei.org/blog" target="_black">
+                <li>博客</li>
+              </a>
               <router-link tag="a" to="/pic">
                 <li>状态</li>
               </router-link>
               <router-link tag="a" to="/music">
                 <li>音乐</li>
               </router-link>
-              <a href="http://www.daiwei.org/blog" target="_black">
-                <li>博客</li>
-              </a>
               <router-link tag="a" to="/about">
                 <li>关于</li>
               </router-link>
@@ -167,6 +167,7 @@ export default {
           img
             width:36px
             vertical-align:middle
+            border: none
       .right-menu
         position:absolute
         right:10px

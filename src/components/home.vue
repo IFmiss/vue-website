@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-      <advertisement></advertisement>
+      <!-- <advertisement></advertisement> -->
       <div class="home_center">
         <div class="home_content">
           <h1 class="title" key="title">
@@ -44,7 +44,7 @@
 
 <script>
 import store from 'store'
-import advertisement from 'components/common/advertisement/advertisement'
+// import advertisement from 'components/common/advertisement/advertisement'
 import fecth from 'utils/fecth.js'
 export default {
   data () {
@@ -72,9 +72,9 @@ export default {
       return store.getters.getGlobalInfo.showBingImage
     }
   },
-  components: {
-    advertisement
-  },
+  // components: {
+  //   advertisement
+  // },
   methods: {
     toggleFullScreen () {
       if (this.isFullScreen) {

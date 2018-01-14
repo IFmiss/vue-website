@@ -52,7 +52,7 @@
 		</div>
 		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4" v-for="(item,index) in top_list_hot">
 			<div class="toplist_detail" @click.stop="openTopList($event)" :data-id="item.id" :title="item.name">
-				<img :src="(item.coverImgUrl).replace('.jpg','?param=250y250')" alt="日本Oricon周榜">
+				<img v-lazy="(item.coverImgUrl).replace('.jpg','?param=250y250')" alt="日本Oricon周榜">
 			</div>
 		</div>
 	</div>
