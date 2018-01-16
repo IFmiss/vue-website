@@ -1,6 +1,6 @@
 <template>
 	<div class="audio_download">
-		<div class="empty" v-if="!audioInfo.length">嘤嘤嘤,暂无搜索结果</div>
+		<div class="empty" v-if="!audioInfo.length || searching">{{tips}}</div>
 		<div class="resultlists" v-if="audioInfo.length">
 			<h3 class="name">
 				关键词: {{keyword}}	
@@ -22,7 +22,9 @@
 	export default {
 		data () {
 			return {
-				audioInfo: {}
+				audioInfo: {},
+				tips: 'search music, do it, just do it',
+				searching: false
 			}
 		},
 		props: {
@@ -38,13 +40,18 @@
 		methods: {
 			getListData () {
 				if (this.keyword !== '') {
+					this.tips = '数据查询中，请稍候...'
+					this.searching = true
 					let url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getResourceAudio'
 					fecth.get(url, {'keyword': this.keyword}).then((res) => {
 						if (res.data && res.data.ResultData) {
 							this.audioInfo = res.data.ResultData
+							this.searching = false
 							return
 						}
 						this.$msg('暂无搜索结果，建议重试一次!')
+						this.tips = '嘤嘤嘤,暂无搜索结果'
+						this.searching = false
 						this.audioInfo = {}
 					}, (err) => {
 						alert(JSON.stringify(err))

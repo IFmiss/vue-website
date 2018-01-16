@@ -1,6 +1,6 @@
 <template>
 	<div class="video_download">
-		<div class="empty" v-if="!videoInfo.length">嘤嘤嘤,暂无搜索结果</div>
+		<div class="empty" v-if="!videoInfo.length || searching">{{tips}}</div>
 		<div class="resultlists" v-if="videoInfo.length">
 			<h3 class="name">
 				关键词: {{keyword}}	
@@ -24,7 +24,9 @@
 	export default {
 		data () {
 			return {
-				videoInfo: {}
+				videoInfo: {},
+				tips: 'search movie, do it, just do it',
+				searching: false
 			}
 		},
 		props: {
@@ -40,14 +42,19 @@
 		methods: {
 			getListData () {
 				if (this.keyword !== '') {
+					this.searching = true
+					this.tips = '数据查询中，请稍候...'
 					let url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getResourceVideo'
 					fecth.get(url, {'keyword': this.keyword}).then((res) => {
 						if (res.data && res.data.ResultData) {
 							this.videoInfo = res.data.ResultData
+							this.searching = false
 							return
 						}
 						this.$msg('暂无搜索结果，建议重试一次!')
 						this.videoInfo = {}
+						this.tips = '嘤嘤嘤,暂无搜索结果'
+						this.searching = false
 					}, (err) => {
 						alert(JSON.stringify(err))
 					})
