@@ -79,11 +79,13 @@
     position:absolute
     height:auto
     right:0
-    width:280px
+    width:260px
     overflow:hidden
     padding:15px
-    &.fade-up-enter-to,&.fade-up-leave-to
-      transition:all 0.5s 0.2s
+    &.fade-up-enter-to
+      transition:all 0.3s
+    &.fade-up-leave-to
+      transition:all 0.2s 0.1s
     &.fade-up-enter,&.fade-up-leave-to
       opacity:0
       transform:translate3d(0,50px,0)
