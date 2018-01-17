@@ -12,3 +12,16 @@ export function addClass (el, className) {
   newClass.push(className)
   el.className = newClass.join(' ')
 }
+
+export function removeClass (el, className) {
+	if (hasClass(el, className)) {
+		let newClass = el.className.split(' ')
+		newClass.forEach((value, index, array) => {
+			if (value === className) {
+				newClass.splice(index, 1)
+			}
+		})
+		el.className = newClass
+	}
+}
+

@@ -6,6 +6,7 @@
 <script>
 import SetMaskType from './../selectmask/selectmask.js'
 import DGlobal from '@/common/js/global.js'
+import {addClass, removeClass} from '@/common/js/Dom.js'
 
 export default {
   data () {
@@ -49,7 +50,7 @@ export default {
   watch: {
     imagepath (cur, old) {
       this.$nextTick(() => {
-        this.initMoveBg()
+        this.loadimgTrans()
       })
     }
   },
@@ -69,6 +70,16 @@ export default {
         })
       }
     },
+
+    loadimgTrans () {
+      addClass(this.$refs.fixedbg, 'load')
+      let img = new Image()
+      img.src = this.imagepath
+      img.onload = () => {
+        removeClass(this.$refs.fixedbg, 'load')
+      }
+    },
+
     initMoveBg () {
       // 设置背景色
       DGlobal.utils.moveImage().then(() => {
@@ -87,6 +98,7 @@ export default {
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
+  @import '~common/stylus/global.styl'
   .fixedbg
     position:fixed
     z-index:-2
@@ -95,6 +107,28 @@ export default {
     right:0
     bottom:0
     background-color:#000
+    &:before
+      content: ''
+      position:absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom:0
+      background-color: $color_deep_gray
+      opacity: 0
+      visibility:hidden
+      transition: all 0.5s
+    &.load
+      &:before
+        content: ''
+        position:absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom:0
+        opacity: 1
+        visibility:visible
+        background-color: $color_deep_gray
     .mask-fixedbg
       position:fixed
       z-index:111111111111

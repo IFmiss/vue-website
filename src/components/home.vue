@@ -175,7 +175,7 @@ export default {
       fecth.get(getbingApi).then((res) => {
           let imageInfo = {}
           imageInfo.type = 'bing'
-          imageInfo.url = res.data.url
+          imageInfo.url = 'http://www.bing.com' + res.data.url
           imageInfo.title = res.data.title
           imageInfo.disc = res.data.disc
           imageInfo.date = this.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
