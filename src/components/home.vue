@@ -45,7 +45,10 @@
 <script>
 import store from 'store'
 // import advertisement from 'components/common/advertisement/advertisement'
-import fecth from 'utils/fecth.js'
+
+// 引入背景请求的api  getBingInfo
+import {getBingInfo, getMineBgByIndex} from 'common/api/background.js'
+
 export default {
   data () {
     return {
@@ -107,7 +110,7 @@ export default {
         this.defaultData(0)
       } else {
         this.$msg('切换至Bing每日壁纸...')
-        this.bingData()
+        this.getBingImageInfo()
       }
     },
 
@@ -138,25 +141,10 @@ export default {
       var index = this.index
 
       const url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
-      fecth.post(url, {index: index}).then((res) => {
-        let imageInfo = {}
-        imageInfo.type = 'home'
-        imageInfo.url = res.data.url
-        imageInfo.title = res.data.title
-        imageInfo.disc = res.data.disc
-        imageInfo.date = res.data.date
-        imageInfo.musicName = res.data.musicName
-        imageInfo.musicUrl = res.data.musicUrl
-        imageInfo.index = index
-
-        store.dispatch({
-          type: 'set_FixedImageInfo',
-          data: imageInfo
-        })
-
+      getMineBgByIndex(url, index).then((res) => {
         var globalData = store.getters.getGlobalInfo
         globalData.showBingImage = false
-        // alert(JSON.stringify(globalData))
+        // 全局设置
         store.dispatch({
           type: 'set_GlobalInfo',
           data: globalData
@@ -164,40 +152,22 @@ export default {
 
         // 设置图片索引
         store.getters.getFixedBgIndex
-
         localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
-        localStorage.setItem('fixedImageBg', JSON.stringify(store.getters.getFixedImageInfo))
       })
     },
 
-    bingData () {
+    getBingImageInfo () {
       var getbingApi = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageByBingJson'
-      fecth.get(getbingApi).then((res) => {
-          let imageInfo = {}
-          imageInfo.type = 'bing'
-          imageInfo.url = 'http://www.bing.com' + res.data.url
-          imageInfo.title = res.data.title
-          imageInfo.disc = res.data.disc
-          imageInfo.date = this.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
-          imageInfo.index = 0
-          store.dispatch({
-            type: 'set_FixedImageInfo',
-            data: imageInfo
-          })
-
-          var globalData = store.getters.getGlobalInfo
+      getBingInfo(getbingApi, 0).then((res) => {
+        var globalData = store.getters.getGlobalInfo
           globalData.showBingImage = true
           // alert(JSON.stringify(globalData))
           store.dispatch({
             type: 'set_GlobalInfo',
             data: globalData
           })
-
-          localStorage.setItem('fixedImageBg', JSON.stringify(imageInfo))
           localStorage.setItem('globalInfo', JSON.stringify(globalData))
-        }, (err) => {
-          alert(err)
-        })
+      })
     },
 
     formatDate (data, fmt) {

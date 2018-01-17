@@ -13,7 +13,8 @@ const globalStore = {
 		place: {},
 		weather: {},
 		showloading: true,
-		musicRouter: '/music/sheet/124995419'
+		musicRouter: '/music/sheet/124995419',
+		host: 'http://www.daiwei.org'
 	},
 	getters: {
 		getGlobalInfo: state => state.globalInfo,

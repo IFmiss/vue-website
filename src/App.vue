@@ -20,6 +20,9 @@ import pic from 'components/pic/pic.vue'
 import loader from 'components/common/loader/loader.vue'
 import updatetips from 'components/common/updatetips/updatetips.vue'
 import DGlobal from 'common/js/global.js'
+
+// 引入背景请求的api
+import {getBingInfo, getMineBgByIndex} from 'common/api/background.js'
 // import $ from 'jquery'
 
 export default {
@@ -39,50 +42,20 @@ export default {
   },
   methods: {
     fetchData () {
-      // 获取壁纸信息
+      // 是否需要获取壁纸信息
       const isShowBingImage = store.getters.getGlobalInfo.showBingImage
+      // api地址
       let getbingApi = isShowBingImage ? 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageByBingJson' : 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
+      // 判断本地是否有背景设置的数据信息
       const hasFixedImageBg = localStorage.getItem('fixedImageBg')
       // bing 的每日一图
       if (isShowBingImage) {
-        fecth.get(getbingApi).then((res) => {
-          let imageInfo = {}
-          imageInfo.type = 'bing'
-          imageInfo.url = 'http://www.bing.com' + res.data.url
-          imageInfo.title = res.data.title
-          imageInfo.disc = res.data.disc
-          imageInfo.date = this.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
-          imageInfo.index = 0
-          store.dispatch({
-            type: 'set_FixedImageInfo',
-            data: imageInfo
-          })
-          localStorage.setItem('fixedImageBg', JSON.stringify(imageInfo))
-        }, (err) => {
-          alert(err)
-        })
+        getBingInfo(getbingApi, 0)
       } else {
         // 自定义图片  默认是我设置的图片
         if ((hasFixedImageBg === null || hasFixedImageBg === '' || JSON.parse(hasFixedImageBg).type === 'bing')) {
            let index = store.getters.getFixedImageInfo.index
-           fecth.post(getbingApi, {index: index}).then((res) => {
-            let imageInfo = {}
-            imageInfo.type = 'home'
-            imageInfo.url = res.data.url
-            imageInfo.title = res.data.title
-            imageInfo.disc = res.data.disc
-            imageInfo.date = res.data.date
-            imageInfo.musicUrl = res.data.musicUrl
-            imageInfo.musicName = res.data.musicName
-            imageInfo.index = index
-            store.dispatch({
-              type: 'set_FixedImageInfo',
-              data: imageInfo
-            })
-            localStorage.setItem('fixedImageBg', JSON.stringify(imageInfo))
-          }, (err) => {
-            alert(err)
-          })
+           getMineBgByIndex(getbingApi, index)
         } else {
           // 背景图片地址设置本地存储
           const getFixedImageBg = JSON.parse(localStorage.getItem('fixedImageBg'))
@@ -97,22 +70,7 @@ export default {
                 })
               } else {
                 // 否则获取最新的图片信息
-                fecth.post(getbingApi, {index: 0}).then((res) => {
-                  let imageInfo = {}
-                  imageInfo.type = 'home'
-                  imageInfo.url = res.data.url
-                  imageInfo.title = res.data.title
-                  imageInfo.disc = res.data.disc
-                  imageInfo.date = res.data.date
-                  imageInfo.musicUrl = res.data.musicUrl
-                  imageInfo.musicName = res.data.musicName
-                  imageInfo.index = 0
-                  store.dispatch({
-                    type: 'set_FixedImageInfo',
-                    data: imageInfo
-                  })
-                  localStorage.setItem('fixedImageBg', JSON.stringify(imageInfo))
-                })
+                getBingInfo(getbingApi, 0)
               }
             }
           })
