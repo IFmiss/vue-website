@@ -201,11 +201,12 @@ const musicApi = {
         fecth.get(apiUrl).then((res) => {
             // 如果代码不允许被播放（付费音乐）
             if (res.data.data[0].url === null) {
-                that.$msg('音乐无法播放,以为您切换到下一曲!')
-                let initIndex = 0
+                that.$msg('音乐无法播放,已为您切换到下一曲!')
+                console.log(store.getters.getCurrentAudio.index)
                 const currentMusic = {
-                    index: store.getters.getCurrentAudio.index ? store.getters.getCurrentAudio.index + 1 : initIndex + 1
+                    index: store.getters.getCurrentAudio.index
                 }
+                console.log(currentMusic.index)
                 store.commit({
                     type: 'setCurrentAudio',
                     data: currentMusic
@@ -355,7 +356,8 @@ const musicApi = {
         } else {
             index = Math.floor(Math.random() * length)
         }
-        if (musicplaylist[index].id === undefined) {
+
+        if (musicplaylist[index] === undefined) {
             return
         }
         const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${musicplaylist[index].id}`
