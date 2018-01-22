@@ -10,7 +10,7 @@ const musicApi = {
     x: 0,  // x 的位置
     l: 0,  // offsetleft
     parseLrc (lrc) {
-        if (lrc === '') return ''
+        if (!lrc) return ''
         const lyrics = lrc.split('\n')
         let lrcObj = {}
         for (let i = 0; i < lyrics.length; i++) {
