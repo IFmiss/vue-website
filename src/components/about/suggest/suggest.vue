@@ -34,7 +34,11 @@ export default {
 				_this.$msg('内容不能少于10个字符哦！多说点真心话吧')
 			} else {
 				fecth.post(fecthUrl, {suggestContent: suggestInfo, contact: contactInfo, getDate: suggestT}).then((res) => {
-					_this.$msg('提交成功!')
+					if (res.data.trim() === 'success') {
+						_this.$msg('提交成功!')
+					} else {
+						_this.$msg('请一个小时之后再进行提交哦！！！')
+					}
 				}, (err) => {
 					console.log(`数据加载错误${err}`)
 				})
