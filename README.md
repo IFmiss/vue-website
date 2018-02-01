@@ -1,5 +1,5 @@
 ## 网站版本更新
-![](https://img.shields.io/badge/vue-2.3.3-4EDD96.svg) ![](https://img.shields.io/badge/stylus-0.54.5-F6B386.svg)  ![](https://img.shields.io/badge/vue_awesome_swiper-2.5.4-FD9494.svg) ![](https://img.shields.io/badge/vuex-2.4.1-69D3E3.svg)  ![](https://img.shields.io/badge/axios-0.16.2-56DD7F.svg) ![](https://img.shields.io/badge/vue_message-1.2.3-F876B5.svg) ![](https://img.shields.io/badge/vue_lazyload-1.1.4-68CBD2.svg) ![](https://img.shields.io/badge/better_scroll-1.6.0-B07541.svg) 
+![](https://img.shields.io/badge/vue-2.3.3-4EDD96.svg) ![](https://img.shields.io/badge/stylus-0.54.5-F6B386.svg)  ![](https://img.shields.io/badge/vue_awesome_swiper-2.5.4-FD9494.svg) ![](https://img.shields.io/badge/vuex-2.4.1-69D3E3.svg)  ![](https://img.shields.io/badge/axios-0.16.2-56DD7F.svg) ![](https://img.shields.io/badge/vue_message-1.3.0-F876B5.svg) ![](https://img.shields.io/badge/vue_lazyload-1.1.4-68CBD2.svg) ![](https://img.shields.io/badge/better_scroll-1.6.0-B07541.svg) 
 
 ## 演示地址   www.daiwei.org
 
