@@ -167,7 +167,6 @@
 			height:auto
 			transform:translate(-50%,-50%) scale(1)
 			border-radius: 4px
-			overflow:hidden
 			display:flex
 			flex-direction:column
 			justify-content:center
@@ -204,7 +203,6 @@
 				padding: 15px 0
 				line-height:1.8
 				font-size: 14px
-				overflow:hidden
 				color:$com_text_color_deep
 				font-weight:400
 				box-sizing: border-box;

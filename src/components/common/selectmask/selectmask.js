@@ -12,4 +12,33 @@ export default function (type, data) {
 			opacity: data.contentInfo.opacity
 		}
 	}
+
+	if (type === 'linear-gradient-toptobottom') {
+		return {
+			background: `-webkit-linear-gradient(90deg, rgba(0,0,0,0) 0%, ${data.contentInfo.bgcolor} 100%)`,
+			opacity: data.contentInfo.opacity
+		}
+	}
+
+	if (type === 'linear-gradient-bottomtotop') {
+		return {
+			background: `-webkit-linear-gradient(270deg, rgba(0,0,0,0) 0%, ${data.contentInfo.bgcolor} 100%)`,
+			opacity: data.contentInfo.opacity
+		}
+	}
+
+	// top right to left bottom
+	if (type === 'linear-gradient-trtolb') {
+		return {
+			background: `-webkit-linear-gradient(45deg, ${data.contentInfo.bgcolor} 0%, rgba(0,0,0,0) 50%, ${data.contentInfo.bgcolor} 100%)`,
+			opacity: data.contentInfo.opacity
+		}
+	}
+
+	if (type === 'cut-lefttoright') {
+		return {
+			background: `-webkit-linear-gradient(45deg, ${data.contentInfo.bgcolor} 0%, rgba(0,0,0,0) 50%, ${data.contentInfo.bgcolor} 50%)`,
+			opacity: data.contentInfo.opacity
+		}
+	}
 }

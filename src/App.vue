@@ -45,35 +45,54 @@ export default {
       // 是否需要获取壁纸信息
       const isShowBingImage = store.getters.getGlobalInfo.showBingImage
       // api地址
-      let getbingApi = isShowBingImage ? 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageByBingJson' : 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
+      let api = isShowBingImage ? 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageByBingJson' : 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
       // 判断本地是否有背景设置的数据信息
       const hasFixedImageBg = localStorage.getItem('fixedImageBg')
       // bing 的每日一图
       if (isShowBingImage) {
-        getBingInfo(getbingApi, 0)
+        getBingInfo(api, 0)
       } else {
         // 自定义图片  默认是我设置的图片
         if ((hasFixedImageBg === null || hasFixedImageBg === '' || JSON.parse(hasFixedImageBg).type === 'bing')) {
            let index = store.getters.getFixedImageInfo.index
-           getMineBgByIndex(getbingApi, index)
+           getMineBgByIndex(api, index)
         } else {
           // 背景图片地址设置本地存储
           const getFixedImageBg = JSON.parse(localStorage.getItem('fixedImageBg'))
           let index = store.getters.getFixedImageInfo.index
-          fecth.post(getbingApi, {index: index}).then((res) => {
-            if (!(getFixedImageBg === null || '') && res.data) {
-              // 判断是否和本地数据一样  一样则用本地的数据 不一样则请求最新的数据
-              if (getFixedImageBg.url === res.data.url) {
-                store.dispatch({
-                  type: 'set_FixedImageInfo',
-                  data: getFixedImageBg
-                })
-              } else {
-                // 否则获取最新的图片信息
-                getBingInfo(getbingApi, 0)
+          // 如果是自定义壁纸 判断有没有最新的壁纸  有就更新 没有就不更新
+          if (getFixedImageBg && getFixedImageBg.type === 'home') {
+            fecth.post(api, {index: index}).then((res) => {
+              if (!(getFixedImageBg === null || '') && res.data) {
+                // 判断是否和本地数据一样  一样则用本地的数据 不一样则请求最新的数据
+                if (getFixedImageBg.url === res.data.url) {
+                  store.dispatch({
+                    type: 'set_FixedImageInfo',
+                    data: getFixedImageBg
+                  })
+                } else {
+                  // 否则获取最新的图片信息
+                  getMineBgByIndex(api, 0)
+                }
               }
-            }
-          })
+            })
+          } else {
+            // 如果是bing壁纸 判断有没有最新的壁纸  有就更新 没有就不更新
+            fecth.post(api, {index: index}).then((res) => {
+              if (!(getFixedImageBg === null || '') && res.data) {
+                // 判断是否和本地数据一样  一样则用本地的数据 不一样则请求最新的数据
+                if (getFixedImageBg.url === res.data.url) {
+                  store.dispatch({
+                    type: 'set_FixedImageInfo',
+                    data: getFixedImageBg
+                  })
+                } else {
+                  // 否则获取最新的图片信息
+                  getBingInfo(api, 0)
+                }
+              }
+            })
+          }
         }
       }
     },

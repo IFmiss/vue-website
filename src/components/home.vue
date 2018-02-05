@@ -28,10 +28,10 @@
         </div>
         <span class="tips" :title="bingImageDisc">{{bingImageDisc}}
           <span v-if="globalInfo.isHigher768">
-            <router-link tag="a" to="/about/suggest">
+            <router-link tag="a" to="/about/suggest" title="请提出你的意见">
               <span>意见建议</span>
             </router-link>
-            <router-link tag="a" to="/about/friendship">
+            <router-link tag="a" to="/about/friendship" title="希望能互换友链">
               <span>友情链接</span>
             </router-link>
             <a href="http://www.miitbeian.gov.cn/" target="_black" title="皖ICP备16011217号" style="width:100%;height:auto">皖ICP备16011217号</a>

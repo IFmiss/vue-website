@@ -74,12 +74,27 @@
 								type: 'radial-gradient-ellipse',
 								title: '径向渐变-椭圆',
 								img: ''
+							},
+							{
+								type: 'linear-gradient-toptobottom',
+								title: '线性渐变-上到下',
+								img: ''
+							},
+							{
+								type: 'linear-gradient-bottomtotop',
+								title: '线性渐变-下到上',
+								img: ''
+							},
+							{
+								type: 'linear-gradient-trtolb',
+								title: '线性渐变-上右到下左',
+								img: ''
+							},
+							{
+								type: 'cut-lefttoright',
+								title: '强迫症不建议选择',
+								img: ''
 							}
-							// {
-							// 	type: 'image-old',
-							// 	title: '怀旧',
-							// 	img: '../../../../static/masktype/overlay-bg-1.png'
-							// }
 						]
 		}
 	},
