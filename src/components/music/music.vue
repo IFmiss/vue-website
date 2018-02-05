@@ -50,7 +50,7 @@
   				</div>
   				<div class="lrc-content" ref="lrcContent">
   					<div class="lrc-wrapper" ref="lrcWrapper">
-  						<p class="lrc-item" v-if="!getMusicLrcLists" >纯音乐,请欣赏</p>
+  						<p class="lrc-item" v-if="!getMusicLrcLists" ></p>
   						<p class="lrc-item" v-if="getMusicLrcLists" v-for="(item, key, index) in getMusicLrcLists" :class="getCurrentMusicLrcIndex === index + 1 ? `active` : ``">{{item}}</p>
   					</div>
   				</div>

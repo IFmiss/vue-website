@@ -10,7 +10,11 @@
 				<li class="list" v-for="(item, index) in audioInfo" v-if="item.AAcUrl">
 					<img class="singerimg" v-lazy="item.SingerImg" :alt="item.SongName">
 					<span class="name">{{item.SongName}}</span>
-					<a class="download" target="_black" :href="item.AAcUrl"><i class="icon-download"></i></a>
+					<span class="download">
+						<a class="bz" target="_black" :href="item.AAcUrl">标准</a>
+						<a class="hi" target="_black" v-if="item.SongUrl320" :href="`http://www.hcc11.cn/Mp3/Music/DownLoad/${item.SongName}/?url=${item.SongUrl320}`">极高</a>
+						<a class="no" target="_black" v-if="item.SongUrlSq" :href="`http://www.hcc11.cn/Mp3/Music/DownLoad/${item.SongName}/?url=${item.SongUrlSq}`">无损</a>
+					</span>
 				</li>
 			</div>
 		</div>
@@ -98,6 +102,7 @@
 					height:auto
 					font-size:0
 					padding: 5px 0
+					box-sizing: border-box
 					border-bottom:1px solid $border_bottom_color
 					.singerimg
 						width:50px
@@ -108,19 +113,37 @@
 						display:inline-block
 						color:$text_color
 						font-size:14px
-						width:calc(100% - 101px)
+						width:calc(100% - 201px)
 						vertical-align:middle
 						box-sizing:border-box
 						padding:0 10px
 					.download
 						display:inline-block
-						width:50px
+						width:150px
 						height: 50px
 						line-height:50px
 						vertical-align:middle
-						text-align: center
-						font-size:20px
+						font-size: 0
 						cursor:pointer
 						color:$text_color_opacity
+						.bz,.hi,.no
+							display:inline-block
+							height: auto
+							font-size: 12px
+							padding: 2px 5px
+							cursor:pointer
+							margin-right: 10px
+							height:20px
+							vertical-align:middle
+							line-height:20px
+						.bz
+							color: $text_color_opacity
+							border: 1px solid $text_color_opacity
+						.hi
+							color: $text_color_opacity
+							border: 1px solid $text_color_opacity
+						.no
+							color: $text_color_opacity
+							border: 1px solid $text_color_opacity
 				
 </style>
