@@ -98,6 +98,7 @@
 					// console.log('没有versionStorage')
 					window.localStorage.setItem('web_version', this.updateInfo.version)
 					DGlobal.storage.setCookie('update', this.updateInfo.version, 60 * 60 * 2 * 1000)
+					_this.showInfo = true
 				}
 			}, (err) => {
 				alert(err)

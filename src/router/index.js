@@ -48,6 +48,8 @@ const DownloadVideo = r => require.ensure([], () => r(require('@/components/abou
 // import Suggest from '@/components/resources/resources/video.vue'  视频下载
 const News = r => require.ensure([], () => r(require('@/components/about/news/news.vue')), 'news')
 // import News from '@/components/about/news/news.vue' 新闻头条
+const Login = r => require.ensure([], () => r(require('@/components/user/login/login.vue')), 'login')
+
 Vue.use(Router)
 
 export default new Router({
@@ -226,6 +228,17 @@ export default new Router({
     {
       path: '/setting',
       component: Setting
+    },
+    {
+      path: '/user/login',
+      component: Login,
+      children: [
+        {
+          path: '/user',
+          redirect: '/user/login',
+          component: Login
+        }
+      ]
     }
   ]
 })
