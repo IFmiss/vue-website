@@ -4,7 +4,7 @@
       <!-- pc 页面菜单 -->
       <div class="left-menu" v-show="getGlobalInfo.isHigher768">
           <router-link class="logo" tag="a" to="/home">
-            <img width="36" height="36" src="http://www.daiwei.org/new/static/dw.png" title="未曾遗忘的青春 | 萌芽 - web前端_技术分享_戴伟的个人网站" alt="">
+            <img width="36" height="36" src="http://www.daiwei.org/new/dw.png" title="未曾遗忘的青春 | 萌芽 - web前端_技术分享_戴伟的个人网站" alt="">
           </router-link>
           <router-link tag="a" to="/home">
             <li>首页</li>
