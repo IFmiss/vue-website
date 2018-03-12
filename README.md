@@ -78,7 +78,8 @@ vuex  axios swiper vue-router lazyload better-scorll 等
 ## 已知的问题
 
 1. 个人状态页的图片在swiper上预览的时候  第一次打开swiper的时候没有办法显示索引大于0的图片 意思就是swiper第一次打开的时候无论你点的是第几个图片显示的都是第一张图片，之后关闭再打开显示就是正常的效果
-2. 项目打包时候的问题  主要是静态资源获取的问题，配置内容见 https://github.com/IFmiss/vue-website/blob/master/config/index.js#L4  
+
+2. 歌词滚动的问题  滚动的动画做到当前的效果但不使用jquery，现在默认使用的是jqeury的animate方法。。。
 
 如果有人遇到这个问题，而且知道方法，求教。感激不尽
 
