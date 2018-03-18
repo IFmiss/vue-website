@@ -1,7 +1,7 @@
 <template>
   <div class="suggest">
   	<div class="div_back" @click="back"><i class="icon-back"></i></div>
-  	<div class="suggest_content">
+  	<div class="suggest_content" v-show="!showList">
   		<div class="suggest_detail">
   			<p class="title">想说什么尽管说。我改！</p>
 	  		<textarea class="suggest_area" ref="content" name="suggest" id="" cols="30" rows="6"></textarea>
@@ -9,6 +9,13 @@
 	  		<textarea class="suggest_area" ref="contactinfo" name="suggest" id="" cols="30" rows="2"></textarea>
 	  		<span class="submit_suggest" @click.stop="submitSuggest">提交</span>
   		</div>
+  		<p class="read_suggest" @click="showSuggestList()">查看留言列表</p>
+  	</div>
+  	<div class="suggest_lists" v-show="showList" @click="hideSuggestList()">
+  		<ul class="lists_c" v-if="suggestList">
+  			<span class="title">近期留言（只显示最近五条）</span>
+  			<li class="submitSuggest" v-for="item in suggestList"><span class="date">{{/(\w+)-(\w+)-(\w+)/.exec(item.suggestTime)[0]}} : </span> {{item.suggestContent}}</li>
+  		</ul>
   	</div>
   </div>
 </template>
@@ -16,11 +23,19 @@
 // import store from '../../store'
 import fecth from 'utils/fecth.js'
 export default {
-	computed: {
+	data () {
+		return {
+			showList: false,
+			suggestList: []
+		}
 	},
 	methods: {
 		back () {
 			this.$router.go(-1)
+		},
+		showSuggestList () {
+			this.showList = true
+			this.getSuggestInfo()
 		},
 		submitSuggest () {
 			const _this = this
@@ -44,6 +59,9 @@ export default {
 				})
 			}
 		},
+		hideSuggestList () {
+			this.showList = false
+		},
 		getDateNow () {
 			const date = new Date()
 			const year = date.getFullYear()
@@ -53,6 +71,14 @@ export default {
 			const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() + '' : date.getMinutes()
 			const seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() + '' : date.getSeconds()
 			return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
+		},
+		getSuggestInfo () {
+			const fecthUrl = `http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getSuggestInfo`
+			fecth.get(fecthUrl).then((res) => {
+				this.suggestList = res.data
+			}, (err) => {
+				console.log(`数据加载错误${err}`)
+			})
 		}
 	}
 }
@@ -134,4 +160,33 @@ export default {
 				transition:background 0.3s
 				&:hover
 					background: $btn_hover_color
+			.read_suggest
+				color: $text_color
+				cursor: pointer
+				text-align:center
+				&:hover
+					color: $text_color_active
+					text-decoration: underline
+		.suggest_lists
+			position: absolute
+			top:0
+			left:0
+			right:0
+			bottom:0
+			color:$text_color
+			.lists_c
+				width:100%
+				max-width: 400px
+				position: absolute
+				top: 50px
+				left: 50%
+				transform: translate3d(-50%,0,0)
+				.title
+					padding: 25px 0
+					display:inline-block
+				li
+					.date
+						font-size:12px 
+						margin-left 10px
+						color: $active_color
 </style>

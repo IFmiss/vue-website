@@ -34,6 +34,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "cssnano": "^3.10.0",
+    "d-video": "^1.0.1",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^6.2.1",
     "eslint-friendly-formatter": "^3.0.0",

@@ -3,8 +3,8 @@
 		<div class="div_back" @click="back"><i class="icon-back"></i></div>
 		<div class="news_content">
 			<div class="selectNewsType" ref="scrollType">
-				<div class="content_type" @click="getNewsInfoByType(e)">
-					<span v-for="(item, index) in defaultType" class="news_type_list" :activeindex="index" :class="type === item.type ? 'active' : ''" :type="item.type">{{item.name}}</span>
+				<div class="content_type">
+					<span v-for="(item, index) in defaultType" @click="getNewsInfoByType()" class="news_type_list" :activeindex="index" :class="type === item.type ? 'active' : ''" :type="item.type">{{item.name}}</span>
 				</div>
 			</div>
 			<div class="newsLists">
@@ -80,7 +80,6 @@
 				}).then((res) => {
 					if (res.data && res.data.result && res.data.result.stat === '1') {
 						this.newsData = res.data.result.data
-						console.log(this.newsData)
 					}
 				}, (err) => {
 					console.log(`数据加载错误${err}`)
@@ -98,7 +97,8 @@
 			initBscroll () {
 				this.scroll = new Bscroll(this.$refs.scrollType, {
 					scrollX: true,
-					scrollY: false
+					scrollY: false,
+					click: true
 				})
 			}
 		},
