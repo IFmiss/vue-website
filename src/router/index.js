@@ -50,6 +50,9 @@ const News = r => require.ensure([], () => r(require('@/components/about/news/ne
 // import News from '@/components/about/news/news.vue' 新闻头条
 const Login = r => require.ensure([], () => r(require('@/components/user/login/login.vue')), 'login')
 
+// import News from '@/components/about/reward/reward.vue' 新闻头条
+const Reward = r => require.ensure([], () => r(require('@/components/reward/reward.vue')), 'reward')
+
 Vue.use(Router)
 
 export default new Router({
@@ -228,6 +231,10 @@ export default new Router({
     {
       path: '/setting',
       component: Setting
+    },
+    {
+      path: '/reward',
+      component: Reward
     },
     {
       path: '/user/login',
