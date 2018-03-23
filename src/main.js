@@ -13,7 +13,7 @@ Vue.use(Msg, {text: 'Hello world', duration: 3000, background: 'rgba(7,17,27,0.6
 Vue.use(VueAwesomeSwiper)
 
 Vue.use(VueLazyload, {
-  loading: 'http://www.daiwei.org/new/static/dw.png',
+  loading: 'http://www.daiwei.org/new/dw.png',
   error: 'http://www.daiwei.org/vue/bg/657952152722629515.jpg'
 })
 
