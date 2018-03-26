@@ -7,10 +7,10 @@
   		</div>	
   		<div class="content">
   			<div class="reward_list dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-	  			<img src="/static/WechatIMG1.jpeg" alt="支付宝">
+	  			<img src="http://www.daiwei.org/new/WechatIMG1.jpeg" alt="支付宝">
 	  		</div>
 	  		<div class="reward_list dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-	  			<img src="/static/WechatIMG2.jpeg" alt="微信">
+	  			<img src="http://www.daiwei.org/new/WechatIMG2.jpeg" alt="微信">
 	  		</div>
   		</div>
   		<p class="point">希望能够留下您的信息，我会将支持用户保存下来 <a href="http://www.daiwei.org/#/about/contact"> 点击这里加我好友！</a></p>
@@ -189,17 +189,21 @@ export default {
 				width: 280px
 				background: #fff
 				z-index: 3
+				margin:0
 				padding: 40px 0
 				background: rgba(0,0,0,0.7)
 				color: #fff
+				box-sizing: border-box
 				&.slide-left-enter-to,&.slide-left-leave-to
 					transition: all 0.5s ease
 				&.slide-left-enter,&.slide-left-leave-to
 					right: -280px
 				.reward-list
 					width: 100%
-					height: 32px
+					height: 42px
 					padding: 5px
+					box-sizing: border-box
+					display:block
 					&:hover
 						background: rgba(255,233,168,0.2)
 					a
