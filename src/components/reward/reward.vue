@@ -13,7 +13,7 @@
 	  			<img src="/static/WechatIMG2.jpeg" alt="微信">
 	  		</div>
   		</div>
-  		<p class="point">希望能够留下您的信息，我会将支持用户保存下来，点击这里加我好友！</p>
+  		<p class="point">希望能够留下您的信息，我会将支持用户保存下来 <a href="http://www.daiwei.org/#/about/contact"> 点击这里加我好友！</a></p>
   		<span class="showRewardList" @click="showHideRewardListInfo">网站贡献者，点击查看</span>
   	</div>
   	<div class="reward-list-info" v-show="showRewardList" @click="showHideRewardListInfo">
@@ -22,22 +22,10 @@
   		</transition>
   		<transition name="slide-left">
 	  		<ul class="reward-lists">
-	  			<li class="reward-list">
-	  				<a>
-	  					<img src="">
-	  					<span>这是用户信息</span>
-	  				</a>
-	  				<a>
-	  					<img src="">
-	  					<span>这是用户信息</span>
-	  				</a>
-	  				<a>
-	  					<img src="">
-	  					<span>这是用户信息</span>
-	  				</a>
-	  				<a>
-	  					<img src="">
-	  					<span>这是用户信息</span>
+	  			<li class="reward-list" v-for = "(item,index) in rewardLists">
+	  				<a :href="item.link">
+	  					<img v-lazy="item.avatar">
+	  					<span>{{item.name}}</span>
 	  				</a>
 		  		</li>
 	  		</ul>
@@ -46,10 +34,12 @@
   </div>
 </template>
 <script>
+import fecth from 'utils/fecth.js'
 export default {
 	data () {
 		return {
 			showRewardList: false,
+			rewardLists: []
 		}
 	},
 	computed: {
@@ -60,6 +50,17 @@ export default {
 		},
 		showHideRewardListInfo () {
 			this.showRewardList = !this.showRewardList
+			if (!this.rewardLists.length && this.showRewardList) {
+				this.getRewardList()
+			}
+		},
+		getRewardList () {
+			var fecthUrl = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getRewardList'
+			fecth.get(fecthUrl).then((res) => {
+				this.rewardLists = res.data
+			}, (err) => {
+				alert(err)
+			})
 		}
 	},
 	mounted () {
@@ -125,10 +126,19 @@ export default {
 					font-size: 16px
 					font-weight: 600
 					text-indent: 2em
+			.point
+				font-size: 14px
+				a
+					color: #fff
+					padding-left: 4px
+					font-size: 14px
+					color: #e1e1e1
+					// text-decoration: none
+					font-weight:bold
 		.showRewardList
 			cursor: pointer
 			font-size: 18px
-			font-weight: 600
+			font-weight: 500
 			display:inline-block
 			background: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0%, red), color-stop(100%, #d169d2));
 			background: -moz-linear-gradient(top, red, #d169d2);
@@ -179,11 +189,39 @@ export default {
 				width: 280px
 				background: #fff
 				z-index: 3
-				padding: 40px 10px
-				background: rgba(0,0,0,0.8)
+				padding: 40px 0
+				background: rgba(0,0,0,0.7)
 				color: #fff
 				&.slide-left-enter-to,&.slide-left-leave-to
 					transition: all 0.5s ease
 				&.slide-left-enter,&.slide-left-leave-to
 					right: -280px
+				.reward-list
+					width: 100%
+					height: 32px
+					padding: 5px
+					&:hover
+						background: rgba(255,233,168,0.2)
+					a
+						display:flex
+						width: 100%
+						height: 100%
+						color: #fff
+						text-decoration:none
+						font-size: 14px
+						img
+							flex: 0 0 32px
+							width: 32px
+							margin-right: 10px
+							border-radius: 50%
+							vertical-align: middle
+						span
+							flex: 1 1 auto
+							overflow: hidden
+							display: inline-block
+							line-height: 32px
+							vertical-align: middle
+							text-overflow: ellipsis
+							white-space: nowrap
+
 </style>
