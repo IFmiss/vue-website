@@ -18,11 +18,11 @@
   	</div>
   	<div class="reward-list-info" v-show="showRewardList" @click="showHideRewardListInfo">
   		<transition name="fade">
-  			<div class="reward-list-bg"></div>
+  			<div class="reward-list-bg" v-show="showRewardList"></div>
   		</transition>
   		<transition name="slide-left">
-	  		<ul class="reward-lists">
-	  			<li class="reward-list" v-for = "(item,index) in rewardLists">
+	  		<ul class="reward-lists" v-show="showRewardList">
+	  			<li class="reward-list border-1px" v-for = "(item,index) in rewardLists">
 	  				<a :href="item.link">
 	  					<img v-lazy="item.avatar">
 	  					<span>{{item.name}}</span>
@@ -69,6 +69,7 @@ export default {
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   @import '~common/stylus/global.styl'
+  @import '~common/stylus/border-1px/index.styl'
 	.reward
 		position:fixed
 		top:0
@@ -200,10 +201,12 @@ export default {
 					right: -280px
 				.reward-list
 					width: 100%
-					height: 42px
-					padding: 5px
+					height: 52px
+					padding: 10px
 					box-sizing: border-box
 					display:block
+					&.border-1px
+	  					border-1px($border_bottom_color_deep, bottom)
 					&:hover
 						background: rgba(255,233,168,0.2)
 					a
