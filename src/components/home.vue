@@ -26,7 +26,7 @@
             <i :class="isFullScreen ? 'icon-canclefullscreen' : 'icon-fullscreen'" :title="isFullScreen ? '取消全屏' : '全屏'"></i>
           </div>
         </div>
-        <span class="tips" :title="bingImageDisc">{{bingImageDisc}}
+        <span class="tips" :title="bingImageDisc">每日一图由 {{bingImageDisc}} 提供 | Copyright © 2016~{{new Date().getFullYear()}} DAIWEI.ORG
           <span v-if="globalInfo.isHigher768">
             <router-link tag="a" to="/about/suggest" title="请提出你的意见">
               <span>意见建议</span>
@@ -60,7 +60,7 @@ export default {
   },
   computed: {
     bingImageDisc () {
-      return store.getters.getGlobalInfo.showBingImage ? '每日一图由 bing 提供 | Copyright © 2016~2017 DAIWEI.ORG' : '每日一图由 未曾遗忘的青春 提供 | Copyright © 2016~2018 DAIWEI.ORG'
+      return store.getters.getGlobalInfo.showBingImage ? 'bing' : '未曾遗忘的青春'
     },
     imageInfo () {
       return store.getters.getFixedImageInfo

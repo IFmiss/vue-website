@@ -13,7 +13,7 @@
 	  			<img src="http://www.daiwei.org/new/WechatIMG2.jpeg" alt="微信">
 	  		</div>
   		</div>
-  		<p class="point">希望能够留下您的信息，我会将支持用户保存下来 <a href="http://www.daiwei.org/#/about/contact"> 点击这里加我好友！</a></p>
+  		<p class="point">希望能够留下您的信息，我会将支持用户保存下来 <router-link to="/about/contact"> 点击这里加我好友！</router-link></p>
   		<span class="showRewardList" @click="showHideRewardListInfo">网站贡献者，点击查看</span>
   	</div>
   	<div class="reward-list-info" v-show="showRewardList" @click="showHideRewardListInfo">

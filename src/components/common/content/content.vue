@@ -60,10 +60,13 @@
       </div>
       <!-- pc 移动端设置按钮 -->
       <div class="right-menu">
-        <span class="place" v-show="getPlace.region" :data-place="getPlace.region" @mouseover="showWeatherInfo" @mouseleave="hideWeatherInfo">
+        <span class="place listmenu" v-show="getPlace.region" :data-place="getPlace.region" @mouseover="showWeatherInfo" @mouseleave="hideWeatherInfo">
           {{getPlace.city}}
           <weather :isShow="showWeatherList"></weather>
         </span>
+        <router-link class="listmenu" tag="a" to="/user/login">
+          登陆
+        </router-link>
         <a href="https://www.github.com/ifmiss/vue-website" target="_black">
           <li class="li-icon" title="github"><i class="icon-github"></i></li>
         </a>
@@ -178,22 +181,25 @@ export default {
         height:40px
         top:0
         font-size:0
-        .place
+        .listmenu
           display:inline-block
           font-size: 14px
-          padding:0 8px
+          margin:0 8px
           height:100%
           vertical-align: middle
           color:$text_color
           vertical-align:top
           cursor:pointer
           position:relative
+          font-weight: 200
+          &.router-link-active
+            color:$text_color_active
+            border-bottom:1px solid $border_color
         a
           list-style:none
           display:inline-block
           font-size:14px
-          padding:0 8px
-          margin:0
+          margin:0 8px
           color:$text_color
           cursor:pointer
           font-family:"Segoe UI",Segoe,Tahoma,Arial,Verdana,sans-serif
