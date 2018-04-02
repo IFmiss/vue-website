@@ -8,11 +8,15 @@
 			<div class="singin">
 				<div class="block_area">
 					<label for="userName">username</label>
-					<input type="text" id="userName" v-model="username" placeholder="请输入用户名">
+					<input type="text" id="userName" v-model="username" placeholder="用户名">
+				</div>
+				<div class="block_area" v-show="status">
+					<label for="userEmail" >email</label>
+					<input type="email" id="userEmail" v-model="email" placeholder="邮箱">
 				</div>
 				<div class="block_area">
 					<label for="userPwd" >password</label>
-					<input type="password" id="userPwd" v-model="password" placeholder="请输入密码">
+					<input type="password" id="userPwd" v-model="password" placeholder="密码">
 				</div>
 				<input type="button" value="登录" @click="subInfo">
 			</div>
@@ -27,7 +31,8 @@
 				// 0 是登录  1是注册
 				status: 0,
 				username: '',
-				password: ''
+				password: '',
+				email: ''
 			}
 		},
 		methods: {
@@ -60,7 +65,16 @@
 				})
 			},
 			singin () {
-				alert('singin')
+				var fecthUrl = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=singin'
+				fecth.post(fecthUrl, {
+					username: this.username,
+					password: this.password,
+					email: this.email
+				}).then((res) => {
+					console.log(res)
+				}, (err) => {
+					alert(`数据请求错误: ${JSON.stringfy(err)}`)
+				})
 			}
 		}
 	}
@@ -120,7 +134,7 @@
 				label
 					color: #aaa
 					font-size:14px
-				input[type='text'],input[type='password']
+				input[type='text'],input[type='password'],input[type='email']
 					background: transparent
 					// border: 1px solid #eee
 					outline:none
