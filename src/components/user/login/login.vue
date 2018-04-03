@@ -9,28 +9,45 @@
 				<div class="login_div" v-show="!status">
 					<div class="block_area">
 						<label for="userName">username</label>
-						<input type="text" id="userName" v-model="username" placeholder="用户名">
+						<input type="text" id="userName" v-model="username" placeholder="登陆用户名">
 					</div>
 					<div class="block_area">
 						<label for="userPwd" >password</label>
-						<input type="password" id="userPwd" v-model="password" placeholder="密码">
+						<input type="password" id="userPwd" v-model="password" placeholder="登陆密码">
 					</div>
 					<input type="button" value="登录" @click="subInfo">
 				</div>
 				<div class="singin_div" v-show="status">
 					<div class="block_area">
 						<label for="suserName">username</label>
-						<input type="text" id="suserName" v-model="username" placeholder="用户名">
+						<input type="text" id="suserName" v-model="susername" placeholder="注册用户名">
 					</div>
-<!-- 					<div class="block_area">
-						<label for="suserEmail" >email</label>
-						<input type="email" id="suserEmail" v-model="email" placeholder="邮箱">
-					</div> -->
 					<div class="block_area">
 						<label for="suserPwd" >password</label>
-						<input type="password" id="suserPwd" v-model="password" placeholder="密码">
+						<input type="password" id="suserPwd" v-model="spassword" placeholder="注册密码">
 					</div>
 					<input type="button" value="注册" @click="singin">
+				</div>
+			</div>
+		</div>
+		<div class="singin_then">
+			<div class="then_content">
+				<h3 class="title">请完善以下流程</h3>
+				<div class="select_menu">
+					<div class="menu_list">完善信息</div>
+					<div class="menu_list">个人设置</div>
+					<div class="menu_list">完成注册</div>
+				</div>
+				<div class="select_content">
+					<div class="content_list">
+						完善信息
+					</div>
+					<div class="content_list">
+						个人信息的设置
+					</div>
+					<div class="content_list">
+						完成注册
+					</div>
 				</div>
 			</div>
 		</div>
@@ -46,7 +63,8 @@
 				status: 0,
 				username: '',
 				password: '',
-				email: ''
+				susername: '',
+				spassword: ''
 			}
 		},
 		methods: {
@@ -69,23 +87,32 @@
 					username: this.username,
 					password: this.password
 				}).then((res) => {
-					if (res.data.code === '1') {
-						alert('登陆成功')
-					} else {
-						this.$msg(res.data.msg)
-					}
+					// if (res.data.code === '1') {
+					// 	alert('登陆成功')
+					// } else {
+					// 	this.$msg(res.data.msg)
+					// }res
+					console.log(res)
 				}, (err) => {
 					alert(`数据请求错误: ${JSON.stringfy(err)}`)
 				})
 			},
+			// 显示注册之后的后续信息填充
+			singinThen () {
+
+			},
 			singin () {
 				var fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=singin'
 				fecth.post(fecthUrl, {
-					username: this.username,
-					password: this.password,
+					username: this.susername,
+					password: this.spassword,
 					regtime: Utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
 				}).then((res) => {
-					console.log(res)
+					this.$msg(res.data.msg)
+					if (res.data.code === '1') {
+						// 显示后续的操作
+						this.singinThen()
+					}
 				}, (err) => {
 					alert(`数据请求错误: ${JSON.stringfy(err)}`)
 				})
@@ -94,6 +121,7 @@
 		mounted () {
 			// console.log(Utils.formatDate(new Date(), 'MM-dd hh:mm:ss'))
 			// console.log()
+			console.log(this.router)
 		}
 	}
 </script>
