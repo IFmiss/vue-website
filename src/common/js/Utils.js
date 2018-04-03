@@ -40,6 +40,7 @@ export const Utils = {
 	// 格式化日期工具
 	formatDate (data, fmt) {
 		var o = {
+			// 'y+': data.getFullYear() + 1,                 // 月份
 			'M+': data.getMonth() + 1,                 // 月份
 			'd+': data.getDate(),                    // 日
 			'h+': data.getHours(),                   // 小时

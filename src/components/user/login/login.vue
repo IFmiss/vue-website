@@ -5,26 +5,40 @@
 				<span class="s_singin" :class="{ active: status === 0 }" @click="loginMode">登录</span>
 				<span class="s_register" :class="{ active: status !== 0 }" @click="registerMode">注册</span>
 			</div>
-			<div class="singin">
-				<div class="block_area">
-					<label for="userName">username</label>
-					<input type="text" id="userName" v-model="username" placeholder="用户名">
+			<div class="content_info">
+				<div class="login_div" v-show="!status">
+					<div class="block_area">
+						<label for="userName">username</label>
+						<input type="text" id="userName" v-model="username" placeholder="用户名">
+					</div>
+					<div class="block_area">
+						<label for="userPwd" >password</label>
+						<input type="password" id="userPwd" v-model="password" placeholder="密码">
+					</div>
+					<input type="button" value="登录" @click="subInfo">
 				</div>
-				<div class="block_area" v-show="status">
-					<label for="userEmail" >email</label>
-					<input type="email" id="userEmail" v-model="email" placeholder="邮箱">
+				<div class="singin_div" v-show="status">
+					<div class="block_area">
+						<label for="suserName">username</label>
+						<input type="text" id="suserName" v-model="username" placeholder="用户名">
+					</div>
+<!-- 					<div class="block_area">
+						<label for="suserEmail" >email</label>
+						<input type="email" id="suserEmail" v-model="email" placeholder="邮箱">
+					</div> -->
+					<div class="block_area">
+						<label for="suserPwd" >password</label>
+						<input type="password" id="suserPwd" v-model="password" placeholder="密码">
+					</div>
+					<input type="button" value="注册" @click="singin">
 				</div>
-				<div class="block_area">
-					<label for="userPwd" >password</label>
-					<input type="password" id="userPwd" v-model="password" placeholder="密码">
-				</div>
-				<input type="button" value="登录" @click="subInfo">
 			</div>
 		</div>
 	</div>
 </template>
 <script>
 	import fecth from 'utils/fecth.js'
+	import {Utils} from 'common/js/Utils.js'
 	export default{
 		data () {
 			return {
@@ -50,7 +64,7 @@
 				this.singin()
 			},
 			login () {
-				var fecthUrl = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=login'
+				var fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=login'
 				fecth.post(fecthUrl, {
 					username: this.username,
 					password: this.password
@@ -65,17 +79,21 @@
 				})
 			},
 			singin () {
-				var fecthUrl = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=singin'
+				var fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=singin'
 				fecth.post(fecthUrl, {
 					username: this.username,
 					password: this.password,
-					email: this.email
+					regtime: Utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
 				}).then((res) => {
 					console.log(res)
 				}, (err) => {
 					alert(`数据请求错误: ${JSON.stringfy(err)}`)
 				})
 			}
+		},
+		mounted () {
+			// console.log(Utils.formatDate(new Date(), 'MM-dd hh:mm:ss'))
+			// console.log()
 		}
 	}
 </script>
@@ -124,44 +142,51 @@
 							bottom: 0
 							left: 50%
 							transform: translate3d(-50%,0,0)
-			.singin
+			.content_info
+				position:relative
 				box-sizing: border-box
 				padding: 20px 20px
-				.block_area
-					margin: 10px 0 20px 0
-				label,input
-					display: block
-				label
-					color: #aaa
-					font-size:14px
-				input[type='text'],input[type='password'],input[type='email']
-					background: transparent
-					// border: 1px solid #eee
-					outline:none
-					height: 32px
-					width: 100%
-					border-radius: 2px
-					color: #fff
-					text-indent: 4px
-					font-size:14px
-					border: none
-					border-bottom: 1px solid #aaa
-					&:focus
-						border-bottom: 1px solid #fff
-				input[type='button']
-					background: $com_button_color
-					border: 1px solid $com_button_color
-					height: 32px
-					width: 100%
-					border-radius: 2px
-					color: #fff
-					height: 36px
-					line-height: 36px
-					margin-top: 30px
-					margin-bottom: 10px
-					outline:none
-					cursor: pointer
-					&:hover
-						background: $com_button_active_color
-					
+				.singin_div,.login_div
+					.block_area
+						margin: 10px 0 20px 0
+					label,input
+						display: block
+					label
+						color: #aaa
+						font-size:14px
+					input[type='text'],input[type='password'],input[type='email']
+						background: transparent
+						// border: 1px solid #eee
+						outline:none
+						height: 36px
+						width: 100%
+						color: #fff
+						text-indent: 4px
+						font-size:14px
+						border: none
+						border-bottom: 1px solid #aaa
+						box-sizing: border-box;
+						&:focus
+							border-bottom: 1px solid #fff
+					input[type='button']
+						background: $com_button_color
+						border: 1px solid $com_button_color
+						height: 32px
+						width: 100%
+						border-radius: 2px
+						color: #fff
+						height: 36px
+						line-height: 36px
+						margin-top: 30px
+						margin-bottom: 10px
+						outline:none
+						cursor: pointer
+						&:hover
+							background: $com_button_active_color
+	input:-webkit-autofill
+		-webkit-box-shadow: 0 0 0px 1000px black inset;
+		border: 1px solid #CCC!important;
+		height: 36px!important;
+		border-radius: 2px;
+		-webkit-text-fill-color: #fff;
 </style>
