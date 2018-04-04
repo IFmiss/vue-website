@@ -4,7 +4,7 @@
   	<div class="contact_content">
   		<div class="contact_list dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
   			<img src="http://www.daiwei.org/new/818741753301018324.jpg" alt="未曾遗忘的青春">
-  			<p class="disc">Q Q</p>
+  			<p class="disc">Q Q (<a class="chat" href="http://wpa.qq.com/msgrd?v=3&uin=185098535&site=qq&menu=yes" target="_black">点击直接聊天</a>)</p>
   		</div>
   		<div class="contact_list dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
   			<img src="http://www.daiwei.org/new/101920356445396365.jpg" alt="未曾遗忘的青春">
@@ -83,6 +83,10 @@ export default {
 				text-align:center
 				color:#fff
 				font-weight:600
+				.chat
+					color: $active_color
+					font-size: 14px
+					text-decoration: underline
 				
 
 </style>
