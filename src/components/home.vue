@@ -12,6 +12,7 @@
           </h1>
           <p class="disc" key="disc">{{imageInfo.disc}}</p>
         </div>
+        <tips v-if="globalInfo.isHigher768"></tips>
         <div class="home_set">
           <div class="set_list" v-if="imageInfo.type === 'home'" :class="index === 4 ? 'disabled' : ''" title="上一张壁纸" @click="defaultData(2)">
             <i class="icon-left"></i>
@@ -44,6 +45,7 @@
 
 <script>
 import store from 'store'
+import tips from 'components/common/tips/tips.vue'
 // import advertisement from 'components/common/advertisement/advertisement'
 
 // 引入背景请求的api  getBingInfo
@@ -253,6 +255,9 @@ export default {
           })
         }
     }
+  },
+  components: {
+    tips
   },
   watch: {
     '$route': 'getRoutePath'
