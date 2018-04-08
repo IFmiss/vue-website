@@ -1,6 +1,6 @@
 <template>
 	<div class="login">
-		<div class="login_content">
+		<div class="login_content" v-if="!showSinginThen">
 			<div class="login_select">
 				<span class="s_singin" :class="{ active: status === 0 }" @click="loginMode">登录</span>
 				<span class="s_register" :class="{ active: status !== 0 }" @click="registerMode">注册</span>
@@ -30,24 +30,40 @@
 				</div>
 			</div>
 		</div>
-		<div class="singin_then">
+		<div class="singin_then" v-if="showSinginThen">
 			<div class="then_content">
 				<h3 class="title">请完善以下流程</h3>
 				<div class="select_menu">
-					<div class="menu_list active">完善信息</div>
-					<div class="menu_list">个人设置</div>
-					<div class="menu_list">完成注册</div>
+					<div class="menu_list" data-index="0" :class="singinThenStatus === 0 ? 'active': ''">基本信息</div>
+					<div class="menu_list" data-index="1" :class="singinThenStatus === 1 ? 'active': ''">个人描述</div>
+					<div class="menu_list" data-index="2" :class="singinThenStatus === 2 ? 'active': ''">完成注册</div>
 				</div>
 				<div class="select_content">
-					<div class="content_list">
-						完善信息
+					<div class="content_list" v-show="singinThenStatus === 0">
+						<div class="block_area">
+							<label for="nickname">起个昵称吧！</label>
+							<input type="text" id="nickname" v-model="nickname" placeholder="少年，来一个有故事的名字吧">
+						</div>
+						<div class="block_area">
+							<label>你是GG还是MM？</label>
+							<div class="div_check">
+								<input class="custom_input" type="radio" value="0" v-model="usersex" name="usersex" id="boy"> <label class="inline custom_input" for="boy">男</label>
+							</div> 
+							<div class="div_check">
+								<input class="custom_input" type="radio" value="1" v-model="usersex" name="usersex" id="girl"> <label class="inline custom_input" for="girl">女</label> 
+							</div> 
+						</div>
 					</div>
-					<div class="content_list">
-						个人信息的设置
+					<div class="content_list" v-show="singinThenStatus === 1">
+						<textarea id="userdesc" v-model="userdesc" placeholder="给自己一个简单的描述吧" rows="5"></textarea>
 					</div>
-					<div class="content_list">
-						完成注册
+					<div class="content_list" v-show="singinThenStatus === 2">
+						<div class="tips">
+							<i class="icon-smile"></i>
+							<p class="desc">注册成功，去登陆吧</p>
+						</div>
 					</div>
+					<input type="button" ref="nextBtn" :value="singinThenStatus === 2 ? '去登陆':'下一步'" @click="nextSub">
 				</div>
 			</div>
 		</div>
@@ -61,10 +77,17 @@
 			return {
 				// 0 是登录  1是注册
 				status: 0,
+				showSinginThen: false,
+				// 0 是第一步。1 是第二步。2 是第三步
+				singinThenStatus: 0,
 				username: '',
 				password: '',
 				susername: '',
-				spassword: ''
+				spassword: '',
+				nickname: '',
+				usersex: '',
+				userdesc: '',
+				rightSigninName: ''
 			}
 		},
 		methods: {
@@ -87,11 +110,11 @@
 					username: this.username,
 					password: this.password
 				}).then((res) => {
-					// if (res.data.code === '1') {
-					// 	alert('登陆成功')
-					// } else {
-					// 	this.$msg(res.data.msg)
-					// }res
+					if (res.data.code === '1') {
+						this.$msg({text: '登录成功', background: '#00d032'})
+					} else {
+						this.$msg(res.data.msg)
+					}
 					console.log(res)
 				}, (err) => {
 					alert(`数据请求错误: ${JSON.stringfy(err)}`)
@@ -99,9 +122,14 @@
 			},
 			// 显示注册之后的后续信息填充
 			singinThen () {
-
+				this.singinThenStatus = 0
+				this.showSinginThen = true
 			},
 			singin () {
+				if (!this.testPassword(this.spassword)) {
+					this.$msg({text: '密码最少6位，包括至少1个大写字母，1个小写字母，1个数字', background: 'red'})
+					return
+				}
 				var fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=singin'
 				fecth.post(fecthUrl, {
 					username: this.susername,
@@ -110,23 +138,72 @@
 				}).then((res) => {
 					this.$msg(res.data.msg)
 					if (res.data.code === '1') {
+						this.rightSigninName = res.data.username
 						// 显示后续的操作
 						this.singinThen()
 					}
 				}, (err) => {
 					alert(`数据请求错误: ${JSON.stringfy(err)}`)
 				})
+			},
+			nextSub () {
+				if (this.singinThenStatus === 0) {
+					this.updateUserSigninInfo()
+					return
+				}
+				if (this.singinThenStatus === 1) {
+					this.updateUserDesc()
+					return
+				}
+				if (this.singinThenStatus === 2) {
+					this.showSinginThen = false
+					this.status = 0
+					return
+				}
+			},
+			updateUserSigninInfo () {
+				let reslutNickName = this.nickname.replace(/(^\s*)|(\s*$)/g, '')
+				if (reslutNickName === '' || reslutNickName.includes(' ')) {
+					this.$msg({text: '昵称中间不能为空', background: 'red'})
+					return
+				}
+				if (this.usersex === '') return
+				this.singinThenStatus = this.singinThenStatus + 1
+			},
+			updateUserDesc () {
+				if (this.userdesc.length < 10) {
+					this.$msg({text: '描述不能少于10个字', background: 'red'})
+				} else {
+					let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=updateSigninInfo'
+					fecth.post(fecthUrl, {
+						username: this.rightSigninName,
+						nickname: this.nickname,
+						usersex: this.usersex,
+						userdesc: this.userdesc
+					}).then((res) => {
+						console.log(res.data)
+						if (res.data.code === '1') {
+							this.$msg({text: '恭喜，已激活注册的账号，可直接登录', background: '#00d032'})
+							this.singinThenStatus ++
+						}
+					}, (err) => {
+						alert(`数据请求错误: ${JSON.stringfy(err)}`)
+					})
+				}
+			},
+			testPassword (password) {
+				// 密码强度正则，最少6位，包括至少1个大写字母，1个小写字母，1个数字
+				let pPattern = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).*$/
+				return pPattern.test(password)
 			}
 		},
 		mounted () {
-			// console.log(Utils.formatDate(new Date(), 'MM-dd hh:mm:ss'))
-			// console.log()
-			console.log(this.router)
 		}
 	}
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '~common/stylus/global.styl'
+@import '~common/stylus/custom_input.styl'
 	.login
 		position: fixed
 		top: 0
@@ -212,58 +289,119 @@
 						&:hover
 							background: $com_button_active_color
 		.singin_then
-			position: fixed
-			top: 0
-			left: 0
-			bottom: 0
-			right: 0
-			background: rgba(143,155,167,0.6)
-			z-index:3
-			.then_content
-				position:absolute
-				top: 50%
-				left:50%
-				width: 90%
-				min-height: 300px
-				max-width: 340px
-				padding: 5px 0px
-				transform: translate3d(-50%,-50%,0)
-				z-index: 3
-				background: rgba(0,0,0,0.8)
-				color: #fff
-				.title
+			position:absolute
+			top: 50%
+			left:50%
+			width: 90%
+			min-height: 300px
+			max-width: 340px
+			padding: 5px 0px
+			transform: translate3d(-50%,-50%,0)
+			z-index: 3
+			background: rgba(0,0,0,0.4)
+			color: #fff
+			.title
+				text-align:center
+				font-size: 16px
+				margin:0 auto;
+				padding: 5px 0;
+			.select_menu
+				width: 100%
+				height: 48px
+				line-height: 48px
+				font-size: 0
+				padding: 0 5px
+				box-sizing: border-box
+				.menu_list
+					display:inline-block
+					font-size: 16px
+					color: #fff
+					width: 33.33333%
 					text-align:center
-				.select_menu
-					width: 100%
-					height: 48px
-					line-height: 48px
-					font-size: 0
-					padding: 0 5px
-					box-sizing: border-box
-					.menu_list
-						display:inline-block
-						font-size: 16px
+					vertical-align:middle
+					position:relative
+					cursor: pointer
+					font-size: 14px
+					&.active
+						&:before
+							content: ''
+							width: 30%
+							height: 2px 
+							background: $border_color
+							position: absolute
+							bottom: 0
+							left: 50%
+							transform: translate3d(-50%,0,0)
+			.select_content
+				position:relative
+				box-sizing: border-box
+				padding: 0 20px
+				.content_list
+					.block_area
+						margin: 10px 0 20px 0
+						.div_check
+							display:inline-block
+					input[type='button']
+						margin-top:0
+					textarea
+						width: 100%
 						color: #fff
-						width: 33.33333%
-						text-align:center
-						vertical-align:middle
-						position:relative
-						cursor: pointer
-						font-size: 14px
-						&.active
-							&:before
-								content: ''
-								width: 30%
-								height: 2px 
-								background: $border_color
-								position: absolute
-								bottom: 0
-								left: 50%
-								transform: translate3d(-50%,0,0)
+						background:transparent
+						border: 1px solid $text_active
+						outline:none 0
+						resize: none
+						padding: 4px
+						box-sizing:border-box
+						margin-top: 20px
+					.tips
+						display:flex
+						align-items:center
+						justify-content:center
+						padding: 30px 0 10px 0
+						font-size:14px
+						i
+							margin-right: 10px
+							font-size: 20px
 	input:-webkit-autofill
 		-webkit-box-shadow: 0 0 0px 1000px black inset;
 		border: 1px solid #CCC!important;
 		height: 36px!important;
 		border-radius: 2px;
 		-webkit-text-fill-color: #fff;
+	label
+		color: #aaa
+		font-size:14px
+		display: block
+		&.inline
+			display:inline
+	input[type='text'],input[type='password'],input[type='email']
+		background: transparent
+		// border: 1px solid #eee
+		outline:none
+		height: 36px
+		width: 100%
+		color: #fff
+		text-indent: 4px
+		font-size:14px
+		border: none
+		border-bottom: 1px solid #aaa
+		box-sizing: border-box;
+		display: block
+		&:focus
+			border-bottom: 1px solid #fff
+	input[type='button']
+		background: $com_button_color
+		border: 1px solid $com_button_color
+		height: 32px
+		width: 100%
+		border-radius: 2px
+		color: #fff
+		height: 36px
+		line-height: 36px
+		margin-top: 30px
+		margin-bottom: 10px
+		outline:none
+		cursor: pointer
+		&:hover
+			background: $com_button_active_color
 </style>
