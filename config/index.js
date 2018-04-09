@@ -11,7 +11,7 @@ module.exports = {
     // productionSourceMap: true,
     assetsRoot: path.resolve(__dirname, '../demo'),
     assetsSubDirectory: '',
-    assetsPublicPath: 'https://ifmiss.github.io/vue-website/',
+    assetsPublicPath: 'https://ifmiss.github.io/vue-website/demo/',
     productionSourceMap: true,
 
     // Gzip off by default as many popular static hosts such as
