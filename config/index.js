@@ -10,7 +10,7 @@ module.exports = {
     // assetsPublicPath: 'new/',
     // productionSourceMap: true,
     assetsRoot: path.resolve(__dirname, '../demo'),
-    assetsSubDirectory: '',
+    assetsSubDirectory: 'vue-website/demo',
     assetsPublicPath: '/',
     productionSourceMap: true,
 
