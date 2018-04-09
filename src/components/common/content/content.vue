@@ -64,9 +64,9 @@
           {{getPlace.city}}
           <weather :isShow="showWeatherList"></weather>
         </span>
-        <router-link class="listmenu" tag="a" to="/user/login">
+        <!-- <router-link class="listmenu" tag="a" to="/user/login">
           登陆
-        </router-link>
+        </router-link> -->
         <a href="https://www.github.com/ifmiss/vue-website" target="_black">
           <li class="li-icon" title="github"><i class="icon-github"></i></li>
         </a>
