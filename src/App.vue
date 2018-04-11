@@ -168,12 +168,21 @@ export default {
         type: 'setAudioEle',
         data: this.$refs.myAudio
       })
+    },
+    updateLoginInfo () {
+      store.dispatch({
+        type: 'set_UserInfo',
+        data: JSON.parse(unescape(DGlobal.storage.getCookie('c_user_info')))
+      })
     }
   },
   watch: {
     getIsBingBg (nowval, oldval) {
       this.fetchData()
       localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
+    },
+    '$route': function () {
+      this.updateLoginInfo()
     }
   },
   computed: {
@@ -197,6 +206,9 @@ export default {
     },
     getVersionList () {
       return store.getters.getVersionList
+    },
+    isLogin () {
+      return store.getters.getUserInfo === null
     }
   },
   mounted () {

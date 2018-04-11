@@ -1,6 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
 import store from './../store'
+import DGlobal from 'common/js/global.js'
+
 // request拦截器
 axios.interceptors.request.use(
   config => {
@@ -35,6 +37,15 @@ function checkStatus (response) {
     type: 'set_ShowLoading',
     data: false
   })
+
+  if (!store.getters.isLogin) {
+    const isLogin = DGlobal.storage.getCookie('c_user_info') === null
+    store.dispatch({
+      type: 'set_IsLogin',
+      data: isLogin
+    })
+  }
+
   // 异常状态下，把错误信息返回去
   return {
     status: -404,

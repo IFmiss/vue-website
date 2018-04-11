@@ -14,14 +14,16 @@ const globalStore = {
 		weather: {},
 		showloading: true,
 		musicRouter: '/music/sheet/124995419',
-		host: 'http://www.daiwei.org'
+		host: 'http://www.daiwei.org',
+		userInfo: null
 	},
 	getters: {
 		getGlobalInfo: state => state.globalInfo,
 		getPlace: state => state.place,
 		getShowLoading: state => state.showloading,
 		getWeatherInfo: state => state.weather,
-		getMusicRouter: state => state.musicRouter
+		getMusicRouter: state => state.musicRouter,
+		getUserInfo: state => state.userInfo
 	},
 	mutations: {
 		setGlobalInfo (state, obj) {
@@ -53,6 +55,9 @@ const globalStore = {
 		},
 		setMusicRouter (state, obj) {
 			state.musicRouter = obj.data
+		},
+		setUserInfo (state, obj) {
+			state.userInfo = obj.data
 		}
 	},
 	actions: {
@@ -82,6 +87,9 @@ const globalStore = {
 		},
 		set_MusicRouter ({commit}, obj) {
 			commit('setMusicRouter', obj)
+		},
+		set_UserInfo ({commit}, obj) {
+			commit('setUserInfo', obj)
 		}
 	}
 }

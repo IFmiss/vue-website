@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div class="home" v-if="imageInfo">
       <!-- <advertisement></advertisement> -->
       <div class="home_center">
         <div class="home_content">
@@ -163,7 +163,6 @@ export default {
       getBingInfo(getbingApi, 0).then((res) => {
         var globalData = store.getters.getGlobalInfo
           globalData.showBingImage = true
-          // alert(JSON.stringify(globalData))
           store.dispatch({
             type: 'set_GlobalInfo',
             data: globalData
