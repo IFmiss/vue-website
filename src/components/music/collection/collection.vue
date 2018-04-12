@@ -10,24 +10,24 @@
 		</div>
 		<div class="music_list_content">
 			<span class="list_empty" v-if="!musicList.length">暂无收藏的音乐哦 !</span>
-			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.name, list.al.picUrl, list.ar[0].name, getMusicDurationType(list.dt),index), musicList">
+			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.music_id" :data-musicid="list.music_id" :data-pic="list.music_picurl" @click="clickPlayList(list.music_id, list.music_name, list.music_picurl, list.singer_name, getMusicDurationType(list.music_dur),index), musicList">
 				<span class="music_index">
-					<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
-					<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
+					<span v-show="getCurrentMusic.id !== list.music_id">{{index + 1}}</span>
+					<img v-show="getCurrentMusic.id === list.music_id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
 				</span>
 				<div class="music_name">
-					<span class="span_name">{{list.name}}</span>
+					<span class="span_name">{{list.music_name}}</span>
 					<div class="hover_menu">
-						<i class="icon-delete" @click.stop="deleteMusic(list.id)"></i>
+						<i class="icon-delete" @click.stop="deleteMusic(list.music_id)"></i>
 					</div>
 				</div>
-				<span class="music_singer" v-if="list.ar">
-					<span @click.stop="searchMusic($event)">{{list.ar[0].name}}</span>
+				<span class="music_singer" v-if="list.singer_name">
+					<span @click.stop="searchMusic($event)">{{list.singer_name}}</span>
 				</span>
-				<span class="music_zhuanji" v-if="list.al">
-					<span @click.stop="getAlbum(list.al.id)">{{list.al.name}}</span>
+				<span class="music_zhuanji" v-if="list.album_name">
+					<span @click.stop="getAlbum(list.album_id)">{{list.album_name}}</span>
 				</span>
-				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
+				<span class="music_duration">{{getMusicDurationType(list.music_dur)}}</span>
 			</div>
 		</div>
 	</div>
@@ -45,31 +45,7 @@
   			// musicInfo: {},
   			currentMusic: {},
   			params: this.$route.params,
-  			currentMusicLrcIndex: 0,
-  			top_list_all: {
-				0: ['云音乐新歌榜', '/discover/toplist?id=3779629'],
-				1: ['云音乐热歌榜', '/discover/toplist?id=3778678'],
-				2: ['网易原创歌曲榜', '/discover/toplist?id=2884035'],
-				3: ['云音乐飙升榜', '/discover/toplist?id=19723756'],
-				4: ['云音乐电音榜', '/discover/toplist?id=10520166'],
-				5: ['UK排行榜周榜', '/discover/toplist?id=180106'],
-				6: ['美国Billboard周榜', '/discover/toplist?id=60198'],
-				7: ['KTV嗨榜', '/discover/toplist?id=21845217'],
-				8: ['iTunes榜', '/discover/toplist?id=11641012'],
-				9: ['Hit FM Top榜', '/discover/toplist?id=120001'],
-				10: ['日本Oricon周榜', '/discover/toplist?id=60131'],
-				11: ['韩国Melon排行榜周榜', '/discover/toplist?id=3733003'],
-				12: ['韩国Mnet排行榜周榜', '/discover/toplist?id=60255'],
-				13: ['韩国Melon原声周榜', '/discover/toplist?id=46772709'],
-				14: ['中国TOP排行榜(港台榜)', '/discover/toplist?id=112504'],
-				15: ['中国TOP排行榜(内地榜)', '/discover/toplist?id=64016'],
-				16: ['香港电台中文歌曲龙虎榜', '/discover/toplist?id=10169002'],
-				17: ['华语金曲榜', '/discover/toplist?id=4395559'],
-				18: ['中国嘻哈榜', '/discover/toplist?id=1899724'],
-				19: ['法国 NRJ EuroHot 30周榜', '/discover/toplist?id=27135204'],
-				20: ['台湾Hito排行榜', '/discover/toplist?id=112463'],
-				21: ['Beatport全球电子舞曲榜', '/discover/toplist?id=3812895']
-			}
+  			currentMusicLrcIndex: 0
   		}
   	},
   	props: {
@@ -117,6 +93,7 @@
   			return store.getters.getMusicCollectList
   		},
   		getCurrentMusic () {
+  			console.log(store.getters.getCurrentAudio)
   			return store.getters.getCurrentAudio
   		}
   	},

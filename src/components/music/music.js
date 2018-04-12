@@ -1,6 +1,7 @@
 import store from 'store'
 import fecth from 'utils/fecth.js'
 import $ from 'jquery'
+import {collectMusic, getCollectMusic} from 'common/api/user.js'
 const musicApi = {
     lastLyric: 0,
     typeType: localStorage.getItem('audioPlayType') || store.getters.getAudioPlayType,
@@ -197,7 +198,8 @@ const musicApi = {
 
     // 点击播放歌曲
     clickIndex (data, that) {
-        const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${data.id}`
+        var reqId = data.music_id ? data.music_id : data.id
+        const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${reqId}`
         fecth.get(apiUrl).then((res) => {
             // 如果代码不允许被播放（付费音乐）
             if (res.data.data[0].url === null) {
@@ -215,7 +217,7 @@ const musicApi = {
                 return
             }
             const newData = {
-                id: data.id,
+                id: reqId,
                 name: data.name,
                 url: musicApi.replaceUrl(res.data.data[0].url),
                 singer: data.singer,
@@ -272,32 +274,71 @@ const musicApi = {
 
     // 添加到我喜欢的音乐 使用本地存储的方法
     collectMusic (opt) {
+        let loginInfo = store.getters.getUserInfo
         // set_MusicCollectList
-        let collectlist = store.getters.getMusicCollectList === null ? [] : store.getters.getMusicCollectList
-        let insertMusic = true
-        if (collectlist) {
-            collectlist.forEach((v, i, a) => {
-                if (opt.id === v.id) {
-                    insertMusic = false
-                    return
-                }
-            })
-        }
+        // let collectlist = store.getters.getMusicCollectList === null ? [] : store.getters.getMusicCollectList
+        // let insertMusic = true
+        // if (collectlist) {
+        //     collectlist.forEach((v, i, a) => {
+        //         if (opt.id === v.id) {
+        //             insertMusic = false
+        //             return
+        //         }
+        //     })
+        // }
 
-        if (insertMusic) {
-            collectlist.unshift(opt)
-            localStorage.setItem('musicCollectList', JSON.stringify(collectlist))
-            this.$msg('收藏音乐成功 ^ O ^')
+        // if (insertMusic) {
+        //     collectlist.unshift(opt)
+        //     localStorage.setItem('musicCollectList', JSON.stringify(collectlist))
+        //     this.$msg('收藏音乐成功 ^ O ^')
+        // }
+        if (loginInfo === null) {
+            this.$router.push({ path: '/user/login' })
+        } else {
+            console.log(opt.al)
+            let options = {
+                userid: loginInfo.id,
+                music_id: opt.id,
+                music_name: opt.name,
+                singer_id: opt.ar[0].id,
+                singer_name: opt.ar[0].name,
+                album_id: opt.al.id,
+                album_name: opt.al.name,
+                music_dur: opt.dt,
+                music_picurl: opt.al.picUrl
+            }
+            let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=collectMusic'
+            collectMusic(fecthUrl, options).then((res) => {
+                this.$msg(res.data.msg)
+            }, (err) => {
+                this.$msg(err)
+            })
         }
     },
 
     // 获取本地的音乐
     getLocalMusic () {
-        const localmusic = localStorage.getItem('musicCollectList')
-        store.commit({
-            type: 'setMusicCollectList',
-            data: JSON.parse(localmusic)
-        })
+        // const localmusic = localStorage.getItem('musicCollectList')
+        // store.commit({
+        //     type: 'setMusicCollectList',
+        //     data: JSON.parse(localmusic)
+        // })
+        let loginInfo = store.getters.getUserInfo
+        if (loginInfo === null) {
+            this.$router.push({ path: '/user/login' })
+        } else {
+            let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=getCollectMusic'
+            getCollectMusic(fecthUrl, {
+                userid: loginInfo.id
+            }).then((res) => {
+                store.commit({
+                    type: 'setMusicCollectList',
+                    data: res.data
+                })
+            }, (err) => {
+                this.$msg(err)
+            })
+        }
     },
 
     // 删除收藏的音乐
@@ -360,7 +401,9 @@ const musicApi = {
         if (musicplaylist[index] === undefined) {
             return
         }
-        const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${musicplaylist[index].id}`
+
+        var reqId = musicplaylist[index].music_id ? musicplaylist[index].music_id : musicplaylist[index].id
+        const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${reqId}`
         fecth.get(apiUrl).then((res) => {
             if (res.data.data[0].url === null) {
                 let initIndex = 0
@@ -375,12 +418,12 @@ const musicApi = {
                 return
             }
             const newData = {
-                id: musicplaylist[index].id,
-                name: musicplaylist[index].name,
+                id: reqId,
+                name: musicplaylist[index].name ? musicplaylist[index].name : musicplaylist[index].music_name,
                 url: musicApi.replaceUrl(res.data.data[0].url),
-                singer: musicplaylist[index].ar[0].name,
-                duration: musicApi.getMusicDurantionType(musicplaylist[index].dt),
-                picurl: musicplaylist[index].al.picUrl,
+                singer: musicplaylist[index].ar ? musicplaylist[index].ar[0].name : musicplaylist[index].singer_name,
+                duration: musicApi.getMusicDurantionType(musicplaylist[index].dt ? musicplaylist[index].dt : musicplaylist[index].music_dur),
+                picurl: musicplaylist[index].al ? musicplaylist[index].al.picUrl : musicplaylist[index].music_picurl,
                 musicndex: index,
                 list: store.getters.getMusicList,
                 type: 'unupdate'

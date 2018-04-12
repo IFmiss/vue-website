@@ -46,13 +46,15 @@
 				singinThenStatus: 0,
 				nickname: '',
 				usersex: '',
-				userdesc: '',
-				// 显示的正确内容
-				rightSigninName: ''
+				userdesc: ''
 			}
 		},
 		props: {
-
+			// 显示的正确内容
+			username: {
+				type: String,
+				default: ''
+			}
 		},
 		methods: {
 			nextSub () {
@@ -86,7 +88,7 @@
 				} else {
 					let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=updateSigninInfo'
 					fecth.post(fecthUrl, {
-						username: this.rightSigninName,
+						username: this.username,
 						nickname: this.nickname,
 						usersex: this.usersex,
 						userdesc: this.userdesc

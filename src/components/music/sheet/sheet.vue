@@ -88,7 +88,7 @@
   		clickPlayList (id, name, pic, singer, duration, index, list) {
   			// alert(JSON.stringify(this.$route.params))
   			const data = {
-  				id: id,
+  				music_id: id,
   				name: name,
   				pic: pic,
   				singer: singer,

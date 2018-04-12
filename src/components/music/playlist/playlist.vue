@@ -8,8 +8,9 @@
 			<span class="music_zhuanji">专辑</span>
 			<span class="music_duration">时长</span>
 		</div>
-		<div class="music_list_content">
-			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.name, list.al.picUrl, list.ar[0].name, getMusicDurationType(list.dt),index), musicList">
+		<div class="music_list_content" v-if="musicList && musicList[0].al">
+			<span class="list_empty" v-if="!musicList.length">暂无播放音乐哦 !</span>
+			<div class="music_list border-1px" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.name, list.al.picUrl, list.ar[0].name, getMusicDurationType(list.dt),index), musicList">
 				<span class="music_index">
 					<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
 					<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
@@ -28,6 +29,28 @@
 					<span @click.stop="getAlbum(list.al.id)">{{list.al.name}}</span>
 				</span>
 				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
+			</div>
+		</div>
+		<div class="music_list_content" v-if="!(musicList && musicList[0].al)">
+			<span class="list_empty" v-if="!musicList.length">暂无播放音乐哦 !</span>
+			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.music_id" :data-musicid="list.music_id" :data-pic="list.music_picurl" @click="clickPlayList(list.music_id, list.music_name, list.music_picurl, list.singer_name, getMusicDurationType(list.music_dur),index), musicList">
+				<span class="music_index">
+					<span v-show="getCurrentMusic.id !== list.music_id">{{index + 1}}</span>
+					<img v-show="getCurrentMusic.id === list.music_id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
+				</span>
+				<div class="music_name">
+					<span class="span_name">{{list.music_name}}</span>
+					<div class="hover_menu">
+						<i class="icon-delete" @click.stop="deleteMusic(list.music_id)"></i>
+					</div>
+				</div>
+				<span class="music_singer" v-if="list.singer_name">
+					<span @click.stop="searchMusic($event)">{{list.singer_name}}</span>
+				</span>
+				<span class="music_zhuanji" v-if="list.album_name">
+					<span @click.stop="getAlbum(list.album_id)">{{list.album_name}}</span>
+				</span>
+				<span class="music_duration">{{getMusicDurationType(list.music_dur)}}</span>
 			</div>
 		</div>
 	</div>
@@ -134,6 +157,7 @@
   	},
   	computed: {
   		musicList () {
+  			console.log(store.getters.getMusicPlayList)
   			return store.getters.getMusicPlayList
   		},
   		getCurrentMusic () {
@@ -244,6 +268,13 @@
 				.music_name
 					.hover_menu
 						display:block
+			.list_empty
+				width:100%
+				display:block
+				padding:10px 0
+				text-align:center
+				color:$text_before_color
+				font-size:14px
 	video
 		display:none	
 </style>

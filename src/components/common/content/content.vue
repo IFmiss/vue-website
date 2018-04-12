@@ -65,7 +65,7 @@
           <weather :isShow="showWeatherList"></weather>
         </span>
         <router-link v-if="getUserInfo !== null" class="listmenu" tag="a" to="/user/info">
-          {{getUserInfo.nickname === '' ? getUserInfo.username : '去给自己起个名吧'}}
+          {{getUserInfo.nickname === '' ? (getUserInfo.username === '' ? '点击设置用户名' : getUserInfo.username) : getUserInfo.nickname}}
         </router-link>
         <router-link v-else class="listmenu" tag="a" to="/user/login">
           登陆
