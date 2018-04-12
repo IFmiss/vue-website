@@ -1,7 +1,7 @@
 import store from 'store'
 import fecth from 'utils/fecth.js'
 import $ from 'jquery'
-import {collectMusic, getCollectMusic} from 'common/api/user.js'
+import {fecthPromise} from 'common/api/user.js'
 const musicApi = {
     lastLyric: 0,
     typeType: localStorage.getItem('audioPlayType') || store.getters.getAudioPlayType,
@@ -308,7 +308,7 @@ const musicApi = {
                 music_picurl: opt.al.picUrl
             }
             let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=collectMusic'
-            collectMusic(fecthUrl, options).then((res) => {
+            fecthPromise(fecthUrl, options).then((res) => {
                 this.$msg(res.data.msg)
             }, (err) => {
                 this.$msg(err)
@@ -328,7 +328,7 @@ const musicApi = {
             this.$router.push({ path: '/user/login' })
         } else {
             let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=getCollectMusic'
-            getCollectMusic(fecthUrl, {
+            fecthPromise(fecthUrl, {
                 userid: loginInfo.id
             }).then((res) => {
                 store.commit({
@@ -343,19 +343,31 @@ const musicApi = {
 
     // 删除收藏的音乐
     deleteMusic (id) {
-        let collectlist = store.getters.getMusicCollectList
-        collectlist.forEach((v, i, a) => {
-            if (id === v.id) {
-                collectlist.splice(i, 1)
-                return
-            }
-        })
-        store.commit({
-            type: 'setMusicCollectList',
-            data: collectlist
-        })
-        localStorage.setItem('musicCollectList', JSON.stringify(collectlist))
-        this.$msg('删除音乐成功')
+        let loginInfo = store.getters.getUserInfo
+        if (loginInfo === null) {
+            this.$router.push({ path: '/user/login' })
+        } else {
+            let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=delCollectMusic'
+            fecthPromise(fecthUrl, {
+                userid: loginInfo.id,
+                music_id: id
+            }).then((res) => {
+                let collectlist = store.getters.getMusicCollectList
+                collectlist.forEach((v, i, a) => {
+                    if (id === v.music_id) {
+                        collectlist.splice(i, 1)
+                        return
+                    }
+                })
+                store.commit({
+                    type: 'setMusicCollectList',
+                    data: collectlist
+                })
+                this.$msg(res.data.msg)
+            }, (err) => {
+                this.$msg(err)
+            })
+        }
     },
 
     // 播放暂停
