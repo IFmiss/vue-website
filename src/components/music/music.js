@@ -240,21 +240,18 @@ const musicApi = {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then((res) => {
-            try {
-                res.data.result.songs.forEach((value, index, array) => {
-                    that.searchMusicList.push(value)
-                })
-                store.dispatch({
-                    type: 'set_MusicSearchList',
-                    data: that.searchMusicList
-                })
-                store.dispatch({
-                    type: 'set_MusicList',
-                    data: that.searchMusicList
-                })
-            } catch (e) {
-                return
-            }
+            res.data.result.songs.forEach((value, index, array) => {
+                that.searchMusicList.push(value)
+            })
+
+            store.dispatch({
+                type: 'set_MusicSearchList',
+                data: that.searchMusicList
+            })
+            store.dispatch({
+                type: 'set_MusicList',
+                data: that.searchMusicList
+            })
         }, (err) => {
             console.log(err)
         })

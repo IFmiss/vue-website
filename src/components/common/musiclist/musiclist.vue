@@ -105,9 +105,7 @@ export default {
 
 		// 初始化音乐播放器
 		initMusic () {
-			// 获取本地音乐
-			// musicApi.getAlbum(this.params.id)
-			musicApi.getLocalMusic()
+			this.$emit('init')
 		},
 		// list.id, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt)
 		collectMusic (index) {
