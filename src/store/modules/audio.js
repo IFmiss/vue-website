@@ -23,7 +23,7 @@ const audio = {
 		// 音乐显示列表  其他列表都要把内容赋值给他 才能可以显示内容
 		musicList: {},
 		// 搜索列表
-		musicSearchList: {},
+		musicSearchList: [],
 		// 歌单列表
 		musicSheetList: {},
 		// 播放列表

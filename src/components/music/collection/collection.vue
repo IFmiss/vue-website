@@ -30,7 +30,7 @@
 				<span class="music_duration">{{getMusicDurationType(list.music_dur)}}</span>
 			</div>
 		</div> -->
-		<musiclist v-if="musicList" :musiclist = "musicList" showdelicon="false"></musiclist>
+		<musiclist v-if="musicList" :musiclist = "musicList" showdelicon="false" @init = "initMusic"></musiclist>
 	</div>
   </div>
 </template>
