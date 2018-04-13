@@ -50,6 +50,11 @@
 				<img src="http://www.daiwei.org/vue/bg/657952152722629515.jpg" alt="日本Oricon周榜">
 			</div>
 		</div>
+		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="2179377798" title="程序员必备，带上耳机代码就是全世界">
+				<img src="http://p3.music.126.net/IRqeexYedmfzxkaXdL0sFQ==/109951163241741763.jpg?param=200y200" alt="程序员必备，带上耳机代码就是全世界">
+			</div>
+		</div>
 		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4" v-for="(item,index) in top_list_hot">
 			<div class="toplist_detail" @click.stop="openTopList($event)" :data-id="item.id" :title="item.name">
 				<img v-lazy="(item.coverImgUrl).replace('.jpg','?param=250y250')" alt="日本Oricon周榜">

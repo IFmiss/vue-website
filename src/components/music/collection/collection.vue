@@ -8,7 +8,7 @@
 			<span class="music_zhuanji">专辑</span>
 			<span class="music_duration">时长</span>
 		</div>
-		<div class="music_list_content">
+		<!-- <div class="music_list_content">
 			<span class="list_empty" v-if="!musicList.length">暂无收藏的音乐哦 !</span>
 			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.music_id" :data-musicid="list.music_id" :data-pic="list.music_picurl" @click="clickPlayList(list.music_id, list.music_name, list.music_picurl, list.singer_name, getMusicDurationType(list.music_dur),index), musicList">
 				<span class="music_index">
@@ -29,7 +29,8 @@
 				</span>
 				<span class="music_duration">{{getMusicDurationType(list.music_dur)}}</span>
 			</div>
-		</div>
+		</div> -->
+		<musiclist v-if="musicList" :musiclist = "musicList" showdelicon="false"></musiclist>
 	</div>
   </div>
 </template>
@@ -39,6 +40,7 @@
   import musicApi from 'components/music/music.js'
   // import axios from 'axios'
   // import qs from 'qs'
+  import musiclist from 'components/common/musiclist/musiclist.vue'
   export default {
   	data () {
   		return {
@@ -104,6 +106,9 @@
   		'$route' (to, from) {
   			this.params = this.$route.params
   		}
+  	},
+  	components: {
+  		musiclist
   	},
   	mounted () {
   		this.$nextTick(() => {

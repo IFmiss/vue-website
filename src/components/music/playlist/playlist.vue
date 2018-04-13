@@ -8,51 +8,7 @@
 			<span class="music_zhuanji">专辑</span>
 			<span class="music_duration">时长</span>
 		</div>
-		<div class="music_list_content" v-if="musicList && musicList[0].al">
-			<span class="list_empty" v-if="!musicList.length">暂无播放音乐哦 !</span>
-			<div class="music_list border-1px" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.name, list.al.picUrl, list.ar[0].name, getMusicDurationType(list.dt),index), musicList">
-				<span class="music_index">
-					<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
-					<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
-				</span>
-				<div class="music_name">
-					<span class="span_name">{{list.name}}</span>
-					<div class="hover_menu">
-						<!-- <i class="icon-add" @click.stop="collectMusic(list.id, list.name, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt))"></i> -->
-						<i class="icon-add" @click.stop="collectMusic(index)"></i>
-					</div>
-				</div>
-				<span class="music_singer" v-if="list.ar">
-					<span @click.stop="searchMusic($event)">{{list.ar[0].name}}</span>
-				</span>
-				<span class="music_zhuanji" v-if="list.al">
-					<span @click.stop="getAlbum(list.al.id)">{{list.al.name}}</span>
-				</span>
-				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
-			</div>
-		</div>
-		<div class="music_list_content" v-if="!(musicList && musicList[0].al)">
-			<span class="list_empty" v-if="!musicList.length">暂无播放音乐哦 !</span>
-			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.music_id" :data-musicid="list.music_id" :data-pic="list.music_picurl" @click="clickPlayList(list.music_id, list.music_name, list.music_picurl, list.singer_name, getMusicDurationType(list.music_dur),index), musicList">
-				<span class="music_index">
-					<span v-show="getCurrentMusic.id !== list.music_id">{{index + 1}}</span>
-					<img v-show="getCurrentMusic.id === list.music_id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
-				</span>
-				<div class="music_name">
-					<span class="span_name">{{list.music_name}}</span>
-					<div class="hover_menu">
-						<i class="icon-delete" @click.stop="deleteMusic(list.music_id)"></i>
-					</div>
-				</div>
-				<span class="music_singer" v-if="list.singer_name">
-					<span @click.stop="searchMusic($event)">{{list.singer_name}}</span>
-				</span>
-				<span class="music_zhuanji" v-if="list.album_name">
-					<span @click.stop="getAlbum(list.album_id)">{{list.album_name}}</span>
-				</span>
-				<span class="music_duration">{{getMusicDurationType(list.music_dur)}}</span>
-			</div>
-		</div>
+		<musiclist v-if="musicList" :musiclist = "musicList"></musiclist>
 	</div>
   </div>
 </template>
@@ -60,6 +16,7 @@
   // import fecth from './../../utils/fecth.js'
   import store from 'store'
   import musicApi from 'components/music/music.js'
+  import musiclist from 'components/common/musiclist/musiclist.vue'
   // import axios from 'axios'
   // import qs from 'qs'
   export default {
@@ -99,75 +56,14 @@
   		lrccontent: {}
   	},
   	methods: {
-  		searchMusic (e) {
-  			this.$router.push({name: 'searchlist', params: { w: e.target.innerHTML }})
-  		},
-  		getAlbum (id) {
-  			this.$router.push({name: 'albumlist', params: { id: id }})
-  		},
-  		// 点击播放音乐
-  		clickPlayList (id, name, pic, singer, duration, index, list) {
-  			const data = {
-  				id: id,
-  				name: name,
-  				pic: pic,
-  				singer: singer,
-  				duration: duration,
-  				index: index,
-  				lrcContent: this.lrccontent,
-  				list: list,
-  				type: 'unupdate'
-  			}
-  			musicApi.clickIndex(data, this)
-  		},
-
-  		// 获取歌词
-  		getMusicLrc (id) {
-  			musicApi.getMusicLrc(id, this)
-  		},
-
-  		// 音乐时长格式
-  		getMusicDurationType (time) {
-  			return musicApi.getMusicDurantionType(time, this)
-  		},
   		// 初始化音乐播放器
 		initMusic () {
 			musicApi.getMusicSheet(this.params.id, this)
-  		},
-  		AudiEle () {
-  			return store.getters.getAudioEle
-		},
-		// list.id, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt)
-  		// collectMusic (...items) {
-  		// 	const musiccollect = {
-  		// 		id: items[0],
-  		// 		name: items[1],
-  		// 		pic: items[2],
-  		// 		singer: items[3],
-  		// 		albumid: items[4],
-  		// 		albumname: items[5],
-  		// 		dt: items[6]
-  		// 	}
-  		// 	musicApi.collectMusic(musiccollect)
-  		// }
-  		collectMusic (index) {
-  			const musiccollect = store.getters.getMusicPlayList[index]
-  			musicApi.collectMusic.call(this, musiccollect)
   		}
   	},
   	computed: {
   		musicList () {
-  			console.log(store.getters.getMusicPlayList)
   			return store.getters.getMusicPlayList
-  		},
-  		getCurrentMusic () {
-  			return store.getters.getCurrentAudio
-  		},
-  		getMusicLrcLists () {
-  			return store.getters.getCurrentAudio.lyric
-  		},
-  		getCurrentMusicLrcIndex () {
-			return this.currentMusicLrcIndex
   		}
   	},
   	watch: {
@@ -177,6 +73,9 @@
   		'$route' (to, from) {
   			this.params = this.$route.params
   		}
+  	},
+  	components: {
+  		musiclist
   	},
   	mounted () {
   		this.$nextTick(() => {

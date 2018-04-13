@@ -109,8 +109,7 @@ const musicApi = {
                 data: currentMusic
             })
 
-            if (data.type !== 'unupdate' && data.type === undefined) {
-                // alert(1)
+            if (data.type !== 'unupdate' && data.type === '') {
                 store.dispatch({
                     type: 'set_MusicPlayList',
                     data: data.list
@@ -204,11 +203,9 @@ const musicApi = {
             // 如果代码不允许被播放（付费音乐）
             if (res.data.data[0].url === null) {
                 that.$msg('音乐无法播放,请播放其他音频...')
-                console.log(store.getters.getCurrentAudio.index)
                 const currentMusic = {
                     index: store.getters.getCurrentAudio.index
                 }
-                console.log(currentMusic.index)
                 store.commit({
                     type: 'setCurrentAudio',
                     data: currentMusic
@@ -515,8 +512,8 @@ const musicApi = {
                 let thisX = e.clientX
                 _this.dragProgressTo = Math.min(_this.maxProgressWidth, Math.max(0, l + (thisX - x)))
                 _this.updateDragProgress(that, _this.maxProgressWidth, _this.dragProgressTo)
-                console.log(_this.dragProgressTo)
-                console.log(_this.maxProgressWidth)
+                // console.log(_this.dragProgressTo)
+                // console.log(_this.maxProgressWidth)
             }
         }
         moveProgress.onmouseup = function (event) {
@@ -583,7 +580,7 @@ const musicApi = {
         const e = event || window.event
         const l = e.offsetX
         const w = document.getElementById('music_progressD').offsetWidth
-        console.log(l + '------------' + w)
+        // console.log(l + '------------' + w)
         ele.currentTime = Math.floor(l / w * durationT)
     },
 

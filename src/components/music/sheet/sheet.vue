@@ -8,27 +8,7 @@
 			<span class="music_zhuanji">专辑</span>
 			<span class="music_duration">时长</span>
 		</div>
-		<div class="music_list_content">
-			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.name, list.al.picUrl, list.ar[0].name, getMusicDurationType(list.dt),index), musicList">
-				<span class="music_index">
-					<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
-					<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
-				</span>
-				<div class="music_name">
-					<span class="span_name">{{list.name}}</span>
-					<div class="hover_menu">
-						<i class="icon-add" @click.stop="collectMusic(index)"></i>
-					</div>
-				</div>
-				<span class="music_singer" v-if="list.ar">
-					<span @click.stop="searchMusic($event)">{{list.ar[0].name}}</span>
-				</span>
-				<span class="music_zhuanji" v-if="list.al">
-					<span @click.stop="getAlbum(list.al.id)">{{list.al.name}}</span>
-				</span>
-				<span class="music_duration">{{getMusicDurationType(list.dt)}}</span>
-			</div>
-		</div>
+		<musiclist v-if="musicList" :musiclist = "musicList"></musiclist>
 	</div>
   </div>
 </template>
@@ -36,6 +16,7 @@
   // import fecth from './../../utils/fecth.js'
   import store from 'store'
   import musicApi from 'components/music/music.js'
+  import musiclist from 'components/common/musiclist/musiclist.vue'
   // import axios from 'axios'
   // import qs from 'qs'
   // import $ from 'jquery'
@@ -47,92 +28,21 @@
   			// musicInfo: {},
   			currentMusic: {},
   			params: this.$route.params,
-  			currentMusicLrcIndex: 0,
-  			top_list_all: {
-				0: ['云音乐新歌榜', '/discover/toplist?id=3779629'],
-				1: ['云音乐热歌榜', '/discover/toplist?id=3778678'],
-				2: ['网易原创歌曲榜', '/discover/toplist?id=2884035'],
-				3: ['云音乐飙升榜', '/discover/toplist?id=19723756'],
-				4: ['云音乐电音榜', '/discover/toplist?id=10520166'],
-				5: ['UK排行榜周榜', '/discover/toplist?id=180106'],
-				6: ['美国Billboard周榜', '/discover/toplist?id=60198'],
-				7: ['KTV嗨榜', '/discover/toplist?id=21845217'],
-				8: ['iTunes榜', '/discover/toplist?id=11641012'],
-				9: ['Hit FM Top榜', '/discover/toplist?id=120001'],
-				10: ['日本Oricon周榜', '/discover/toplist?id=60131'],
-				11: ['韩国Melon排行榜周榜', '/discover/toplist?id=3733003'],
-				12: ['韩国Mnet排行榜周榜', '/discover/toplist?id=60255'],
-				13: ['韩国Melon原声周榜', '/discover/toplist?id=46772709'],
-				14: ['中国TOP排行榜(港台榜)', '/discover/toplist?id=112504'],
-				15: ['中国TOP排行榜(内地榜)', '/discover/toplist?id=64016'],
-				16: ['香港电台中文歌曲龙虎榜', '/discover/toplist?id=10169002'],
-				17: ['华语金曲榜', '/discover/toplist?id=4395559'],
-				18: ['中国嘻哈榜', '/discover/toplist?id=1899724'],
-				19: ['法国 NRJ EuroHot 30周榜', '/discover/toplist?id=27135204'],
-				20: ['台湾Hito排行榜', '/discover/toplist?id=112463'],
-				21: ['Beatport全球电子舞曲榜', '/discover/toplist?id=3812895']
-			}
+  			currentMusicLrcIndex: 0
   		}
   	},
   	props: {
   		lrccontent: {}
   	},
   	methods: {
-  		searchMusic (e) {
-  			this.$router.push({name: 'searchlist', params: { w: e.target.innerHTML }})
-  		},
-  		getAlbum (id) {
-  			this.$router.push({name: 'albumlist', params: { id: id }})
-  		},
-  		// 点击播放音乐
-  		clickPlayList (id, name, pic, singer, duration, index, list) {
-  			// alert(JSON.stringify(this.$route.params))
-  			const data = {
-  				music_id: id,
-  				name: name,
-  				pic: pic,
-  				singer: singer,
-  				duration: duration,
-  				index: index,
-  				list: store.getters.getMusicList
-  			}
-  			musicApi.clickIndex(data, this)
-  		},
-
-  		// 获取歌词
-  		getMusicLrc (id) {
-  			musicApi.getMusicLrc(id, this)
-  		},
-
-  		// 音乐时长格式
-  		getMusicDurationType (time) {
-  			return musicApi.getMusicDurantionType(time)
-  		},
   		// 初始化音乐播放器
 		initMusic () {
 			musicApi.getMusicSheet(this.params.id, this)
-  		},
-  		AudiEle () {
-  			return store.getters.getAudioEle
-		},
-		// list.id, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt)
-  		collectMusic (index) {
-  			const musiccollect = store.getters.getMusicList[index]
-  			musicApi.collectMusic.call(this, musiccollect)
   		}
   	},
   	computed: {
   		musicList () {
   			return store.getters.getMusicList
-  		},
-  		getCurrentMusic () {
-  			return store.getters.getCurrentAudio
-  		},
-  		getMusicLrcLists () {
-  			return store.getters.getCurrentAudio.lyric
-  		},
-  		getCurrentMusicLrcIndex () {
-			return this.currentMusicLrcIndex
   		}
   	},
   	watch: {
@@ -142,6 +52,9 @@
   		'$route' (to, from) {
   			this.params = this.$route.params
   		}
+  	},
+  	components: {
+  		musiclist
   	},
   	mounted () {
   		this.$nextTick(() => {
