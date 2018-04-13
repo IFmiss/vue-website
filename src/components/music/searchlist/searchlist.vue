@@ -66,7 +66,6 @@
   		},
   		searchMusic (e) {
   			this.searchMusicIndex = 1
-  			this.searchMusicList = []
   			musicApi.searchMusic(e.target.innerHTML, this.searchMusicIndex, this)
   		},
   		searchMoreMusic (e) {
@@ -214,17 +213,6 @@
 					display:none
 			&.border-1px
 				border-1px($border_bottom_color,bottom)
-		.music_list_content
-			height:calc(100% - 50px)
-			position:relative
-			overflow:auto
-			.music_list
-				position:relative
-				// &:hover
-				// 	background:$list_hover
-				.music_name
-					.hover_menu
-						display:block
 	video
 		display:none	
 </style>

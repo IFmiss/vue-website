@@ -241,6 +241,7 @@ const musicApi = {
             }
         }).then((res) => {
             try {
+                console.log(that.searchMusicList)
                 res.data.result.songs.forEach((value, index, array) => {
                     that.searchMusicList.push(value)
                 })

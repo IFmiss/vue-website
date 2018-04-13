@@ -384,9 +384,10 @@
 									border:1px solid $text_before_color						
 						.list_content
 							height:calc(100% - 60px)
-							padding:10px
+							padding:0 10px
 							box-sizing:border-box
-							overflow:auto
+							overflow:hidden
+							position:relative
 							.music_list_title,.music_list
 								height:50px
 								line-height:50px
