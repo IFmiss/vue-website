@@ -38,11 +38,11 @@ function checkStatus (response) {
     data: false
   })
 
-  if (!store.getters.isLogin) {
-    const isLogin = DGlobal.storage.getCookie('c_user_info') === null
+  if (!store.getters.userInfo) {
+    const userInfo = DGlobal.storage.getCookie('c_user_info')
     store.dispatch({
-      type: 'set_IsLogin',
-      data: isLogin
+      type: 'set_UserInfo',
+      data: userInfo
     })
   }
 
