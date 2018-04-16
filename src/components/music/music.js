@@ -1,7 +1,7 @@
 import store from 'store'
 import fecth from 'utils/fecth.js'
 import $ from 'jquery'
-import {fecthPromise} from 'common/api/user.js'
+import {fecthPromise, todoUserInfo} from 'common/api/user.js'
 const musicApi = {
     lastLyric: 0,
     typeType: localStorage.getItem('audioPlayType') || store.getters.getAudioPlayType,
@@ -271,30 +271,9 @@ const musicApi = {
 
     // 添加到我喜欢的音乐 使用本地存储的方法
     collectMusic (opt) {
-        let loginInfo = store.getters.getUserInfo
-        // set_MusicCollectList
-        // let collectlist = store.getters.getMusicCollectList === null ? [] : store.getters.getMusicCollectList
-        // let insertMusic = true
-        // if (collectlist) {
-        //     collectlist.forEach((v, i, a) => {
-        //         if (opt.id === v.id) {
-        //             insertMusic = false
-        //             return
-        //         }
-        //     })
-        // }
-
-        // if (insertMusic) {
-        //     collectlist.unshift(opt)
-        //     localStorage.setItem('musicCollectList', JSON.stringify(collectlist))
-        //     this.$msg('收藏音乐成功 ^ O ^')
-        // }
-        if (loginInfo === null) {
-            this.$router.push({ path: '/user/login' })
-        } else {
-            console.log(opt.al)
+        todoUserInfo().then((res) => {
             let options = {
-                userid: loginInfo.id,
+                userid: res.id,
                 music_id: opt.id,
                 music_name: opt.name,
                 singer_id: opt.ar[0].id,
@@ -310,23 +289,19 @@ const musicApi = {
             }, (err) => {
                 this.$msg(err)
             })
-        }
+        }, (err) => {
+            this.$msg(err.msg)
+            this.$router.push({ path: '/user/login' })
+        })
     },
 
     // 获取本地的音乐
     getLocalMusic () {
-        // const localmusic = localStorage.getItem('musicCollectList')
-        // store.commit({
-        //     type: 'setMusicCollectList',
-        //     data: JSON.parse(localmusic)
-        // })
-        let loginInfo = store.getters.getUserInfo
-        if (loginInfo === null) {
-            this.$router.push({ path: '/user/login' })
-        } else {
+        console.log(this)
+        todoUserInfo().then((res) => {
             let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=getCollectMusic'
             fecthPromise(fecthUrl, {
-                userid: loginInfo.id
+                userid: res.id
             }).then((res) => {
                 store.commit({
                     type: 'setMusicCollectList',
@@ -335,18 +310,18 @@ const musicApi = {
             }, (err) => {
                 this.$msg(err)
             })
-        }
+        }, (err) => {
+            this.$msg(err.msg)
+            this.$router.push({ path: '/user/login' })
+        })
     },
 
     // 删除收藏的音乐
     deleteMusic (id) {
-        let loginInfo = store.getters.getUserInfo
-        if (loginInfo === null) {
-            this.$router.push({ path: '/user/login' })
-        } else {
+        todoUserInfo().then((res) => {
             let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=delCollectMusic'
             fecthPromise(fecthUrl, {
-                userid: loginInfo.id,
+                userid: res.id,
                 music_id: id
             }).then((res) => {
                 let collectlist = store.getters.getMusicCollectList
@@ -364,7 +339,10 @@ const musicApi = {
             }, (err) => {
                 this.$msg(err)
             })
-        }
+        }, (err) => {
+            this.$msg(err.msg)
+            this.$router.push({ path: '/user/login' })
+        })
     },
 
     // 播放暂停
@@ -450,7 +428,7 @@ const musicApi = {
         const ele = store.getters.getAudioEle
         // const _this = this
         // 本地音乐初始化  （收藏的歌曲）
-        this.getLocalMusic()
+        // this.getLocalMusic.call(that)
 
         ele.onloadedmetadata = () => {
         }

@@ -14,13 +14,13 @@
   	<div class="suggest_lists" v-show="showList" @click="hideSuggestList()">
   		<ul class="lists_c" v-if="suggestList">
   			<span class="title">近期留言（只显示最近五条）</span>
-  			<li class="submitSuggest" v-for="item in suggestList"><span class="date">{{/(\w+)-(\w+)-(\w+)/.exec(item.suggestTime)[0]}} : </span> {{item.suggestContent}}</li>
+  			<li class="submitSuggest" v-for="item in suggestList"><span class="name">{{item.user_name || '匿名用户'}} </span> {{item.suggestContent}}</li>
   		</ul>
   	</div>
   </div>
 </template>
 <script>
-// import store from '../../store'
+import store from 'store'
 import fecth from 'utils/fecth.js'
 export default {
 	data () {
@@ -38,22 +38,25 @@ export default {
 			this.getSuggestInfo()
 		},
 		submitSuggest () {
-			const _this = this
 			const fecthUrl = `http://www.daiwei.org/vue/server/home.php?inAjax=1&do=submitSuggestInfo`
 			const suggestInfo = this.$refs.content.value
 			const contactInfo = this.$refs.contactinfo.value
 			const suggestT = this.getDateNow()
+			const userId = store.getters.getUserInfo.id || null
+			const userName = store.getters.getUserInfo.username || null
 			if (suggestInfo === '') {
-				_this.$msg('建议内容不能为空')
+				this.$msg('建议内容不能为空')
 			} else if (suggestInfo.length < 10) {
-				_this.$msg('内容不能少于10个字符哦！多说点真心话吧')
+				this.$msg('内容不能少于10个字符哦！多说点真心话吧')
 			} else {
-				fecth.post(fecthUrl, {suggestContent: suggestInfo, contact: contactInfo, getDate: suggestT}).then((res) => {
-					if (res.data.trim() === 'success') {
-						_this.$msg('提交成功!')
-					} else {
-						_this.$msg('请一个小时之后再进行提交哦！！！')
-					}
+				fecth.post(fecthUrl, {
+						suggestContent: suggestInfo,
+						contact: contactInfo,
+						getDate: suggestT,
+						user_id: userId,
+						user_name: userName
+					}).then((res) => {
+						this.$msg(res.data.msg)
 				}, (err) => {
 					console.log(`数据加载错误${err}`)
 				})
@@ -80,6 +83,9 @@ export default {
 				console.log(`数据加载错误${err}`)
 			})
 		}
+	},
+	mounted () {
+		console.log(store.getters.getUserInfo)
 	}
 }
 </script>
@@ -180,13 +186,16 @@ export default {
 				position: absolute
 				top: 50px
 				left: 50%
+				padding:0
 				transform: translate3d(-50%,0,0)
 				.title
 					padding: 25px 0
 					display:inline-block
 				li
-					.date
-						font-size:12px 
-						margin-left 10px
+					list-style: none
+					.name
+						font-size:16px 
+						margin-right 10px
 						color: $active_color
+						font-weight: 500
 </style>

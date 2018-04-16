@@ -103,12 +103,6 @@ export default {
 			musicApi.deleteMusic.call(this, id)
 		},
 
-		// 初始化音乐播放器
-		initMusic () {
-			// 获取本地音乐
-			// musicApi.getAlbum(this.params.id)
-			musicApi.getLocalMusic()
-		},
 		// list.id, list.al.picUrl, list.ar[0].name, list.al.id, list.al.name, getMusicDurationType(list.dt)
 		collectMusic (index) {
 			const musiccollect = store.getters.getMusicList[index]
@@ -146,11 +140,6 @@ export default {
 		'$route' (to, from) {
 			this.params = this.$route.params
 		}
-	},
-	mounted () {
-		this.$nextTick(() => {
-			this.initMusic()
-		})
 	}
 }
 </script>
