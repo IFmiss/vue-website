@@ -42,15 +42,15 @@ export default {
 			const suggestInfo = this.$refs.content.value
 			const contactInfo = this.$refs.contactinfo.value
 			const suggestT = this.getDateNow()
-			const userId = store.getters.getUserInfo.id || null
-			const userName = store.getters.getUserInfo.username || null
+			const userId = store.getters.getUserInfo === null ? null : store.getters.getUserInfo.id
+			const userName = store.getters.getUserInfo === null ? null : store.getters.getUserInfo.username
 			if (suggestInfo === '') {
 				this.$msg('建议内容不能为空')
 			} else if (suggestInfo.length < 10) {
 				this.$msg('内容不能少于10个字符哦！多说点真心话吧')
 			} else {
 				fecth.post(fecthUrl, {
-						suggestContent: suggestInfo,
+						suggestContent: suggestInfo.replace(/\n|\r\n/g, '<br>'),
 						contact: contactInfo,
 						getDate: suggestT,
 						user_id: userId,

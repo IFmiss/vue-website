@@ -20,7 +20,6 @@ import pic from 'components/pic/pic.vue'
 import loader from 'components/common/loader/loader.vue'
 import updatetips from 'components/common/updatetips/updatetips.vue'
 import DGlobal from 'common/js/global.js'
-import Dvideo from 'd-video'
 
 // 引入背景请求的api
 import {getBingInfo, getMineBgByIndex} from 'common/api/background.js'
@@ -233,9 +232,6 @@ export default {
       this.isApp()
     }
     localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
-
-    let dvideo = new Dvideo()
-    dvideo.play()
     // })
   }
 }
