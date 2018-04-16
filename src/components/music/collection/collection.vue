@@ -87,7 +87,7 @@
 		initMusic () {
 			// 获取本地音乐
 			// musicApi.getAlbum(this.params.id)
-			musicApi.getLocalMusic()
+			musicApi.getLocalMusic.call(this)
   		}
   	},
   	computed: {

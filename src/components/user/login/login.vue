@@ -103,7 +103,6 @@
 				}).then((res) => {
 					this.$msg(res.data.msg)
 					if (res.data.code === '1') {
-						alert(res.data.username)
 						this.rightSigninName = res.data.username
 						// 显示后续的操作
 						this.singinThen()

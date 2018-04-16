@@ -159,11 +159,6 @@ export default {
 		'$route' (to, from) {
 			this.params = this.$route.params
 		}
-	},
-	mounted () {
-		this.$nextTick(() => {
-			this.initMusic()
-		})
 	}
 }
 </script>
