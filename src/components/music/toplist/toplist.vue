@@ -137,13 +137,15 @@
 	@import '~common/stylus/border-1px/index.styl'
 	.music_toplist
 		// background:red
+		overflow:auto@important
 		.toplist_title
 			font-size:18px
 			color:$text_color
 		.toplist_content
 			position:relative
-			box-sizing: border-box;
-			display: table;
+			box-sizing: border-box
+			display: table
+			overflow: scroll
 			.toplist_l
 				padding: 30px
 				box-sizing:border-box

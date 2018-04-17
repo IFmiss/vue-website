@@ -790,6 +790,8 @@
 									width:calc(100% - 50px)				
 							.music_list_title
 								display:none
+							.music_list_container
+								top:0
 						.music_list_content
 							height:100%!important
 				.music_ctrl

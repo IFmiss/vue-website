@@ -1,6 +1,6 @@
 <template>
 	<div class="musiclist music_list_container">
-		<scroll :data ="musiclist" class="music_l_content" @pullingUp="pullingUp">
+		<scroll :data ="musiclist" class="music_l_content" :needPullUp="needpullup" @pullingUp="pullingUp">
 			<div class="content">
 				<span class="list_empty" v-if="!musiclist.length">暂无音乐列表哦 !</span>
 				<div class="music_list border-1px" v-if="musiclist && musiclist[0].music_id" v-for="(list, index) in musiclist" :key="list.music_id" :data-musicid="list.music_id" :data-pic="list.music_picurl" @click="clickPlayList(list.music_id, list.music_name, list.music_picurl, list.singer_name, getMusicDurationType(list.music_dur),index), musiclist">
@@ -60,7 +60,8 @@ export default {
 			params: this.$route.params,
 			currentMusicLrcIndex: 0,
 			searchMusicIndex: 1,
-			searchMusicList: []
+			searchMusicList: [],
+			needpullup: false
 		}
 	},
 	methods: {
@@ -159,6 +160,9 @@ export default {
 		'$route' (to, from) {
 			this.params = this.$route.params
 		}
+	},
+	mounted () {
+		this.needPullUp = !this.$route.path.includes('/music/sheet')
 	}
 }
 </script>

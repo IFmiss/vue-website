@@ -66,6 +66,10 @@
 				this.singin()
 			},
 			login () {
+				if (this.username === '') {
+					this.$msg('请输入用户名')
+					return
+				}
 				var fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=login'
 				fecth.post(fecthUrl, {
 					username: this.username,
@@ -91,6 +95,10 @@
 				this.showSinginThen = false
 			},
 			singin () {
+				if (this.susername === '') {
+					this.$msg('请输入用户名')
+					return
+				}
 				if (!this.testPassword(this.spassword)) {
 					this.$msg({text: '密码最少6位，包括至少1个大写字母，1个小写字母，1个数字', background: 'red'})
 					return

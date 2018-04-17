@@ -55,10 +55,12 @@
 				this.scroll && this.scroll.finishPullUp()
 			},
 			_initPullUpLoad () {
-				this.scroll.on('pullingUp', () => {
-					// this.isPullUpLoad = true
-					this.$emit('pullingUp', this)
-				})
+				if (this.needPullUp) {
+					this.scroll.on('pullingUp', () => {
+						// this.isPullUpLoad = true
+						this.$emit('pullingUp', this)
+					})
+				}
 			}
 		},
 		mounted () {
