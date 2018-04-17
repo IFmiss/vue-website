@@ -15,7 +15,11 @@
 				type: Boolean,
 				default: true
 			},
-			data: null
+			data: null,
+			needPullUp: {
+				type: Boolean || Object,
+				default: false
+			}
 		},
 		methods: {
 			_initScroll () {
@@ -33,9 +37,7 @@
 						fade: true,
 						interactive: false // 1.8.0 新增
 					},
-					pullUpLoad: {
-						threshold: 0
-					}
+					pullUpLoad: this.needPullUp
 				})
 				this._initPullUpLoad()
 				this.finishPullUp()
