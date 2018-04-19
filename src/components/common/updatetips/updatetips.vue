@@ -237,6 +237,7 @@
 					&.go_update
 						border-radius:0 0 4px 0
 						color: $com_text_color 
+						margin: 0 auto
 						// background:$update_primary_color
 					&:hover{
 						color: $com_text_color_active

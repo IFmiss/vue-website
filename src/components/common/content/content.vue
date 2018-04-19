@@ -60,10 +60,10 @@
       </div>
       <!-- pc 移动端设置按钮 -->
       <div class="right-menu">
-        <span class="place listmenu" v-show="getPlace.region" :data-place="getPlace.region" @mouseover="showWeatherInfo" @mouseleave="hideWeatherInfo">
+        <!-- <span class="place listmenu" v-show="getPlace.region" :data-place="getPlace.region" @mouseover="showWeatherInfo" @mouseleave="hideWeatherInfo">
           {{getPlace.city}}
           <weather :isShow="showWeatherList"></weather>
-        </span>
+        </span> -->
         <router-link v-if="getUserInfo !== null" class="listmenu" tag="a" to="/user/info">
           {{getUserInfo.nickname === '' ? (getUserInfo.username === '' ? '点击设置用户名' : getUserInfo.username) : getUserInfo.nickname}}
         </router-link>

@@ -330,6 +330,8 @@
 				// font-size:0
 				display:flex
 				position: relative
+				padding: 10px 0
+				box-sizing: border-box
 				.left_list
 					width:100%
 					height:100%
@@ -450,7 +452,7 @@
 										right:0
 										top:0
 										// background:red
-										display:none
+										// display:none
 										i
 											font-size:18px
 											display:inline-block

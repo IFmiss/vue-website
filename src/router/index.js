@@ -47,10 +47,15 @@ const DownloadAudio = r => require.ensure([], () => r(require('@/components/abou
 const DownloadVideo = r => require.ensure([], () => r(require('@/components/about/resources/video/video.vue')), 'video')
 // import Suggest from '@/components/resources/resources/video.vue'  视频下载
 const News = r => require.ensure([], () => r(require('@/components/about/news/news.vue')), 'news')
-// import News from '@/components/about/news/news.vue' 新闻头条
+
 const Login = r => require.ensure([], () => r(require('@/components/user/login/login.vue')), 'login')
 
-// import News from '@/components/about/reward/reward.vue' 新闻头条
+// userInfo
+const UserInfo = r => require.ensure([], () => r(require('@/components/user/info/info.vue')), 'info')
+
+// user
+const User = r => require.ensure([], () => r(require('@/components/user/user.vue')), 'user')
+
 const Reward = r => require.ensure([], () => r(require('@/components/reward/reward.vue')), 'reward')
 
 Vue.use(Router)
@@ -237,13 +242,21 @@ export default new Router({
       component: Reward
     },
     {
-      path: '/user/login',
-      component: Login,
+      path: '/user',
+      component: User,
       children: [
         {
-          path: '/user',
+          path: '/',
           redirect: '/user/login',
+          component: UserInfo
+        },
+        {
+          path: '/user/login',
           component: Login
+        },
+        {
+          path: '/user/info',
+          component: UserInfo
         }
       ]
     }

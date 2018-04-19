@@ -1,9 +1,9 @@
 <template>
 	<div class="musiclist music_list_container">
-		<scroll :data ="musiclist" class="music_l_content" :needPullUp="needpullup" @pullingUp="pullingUp">
+		<scroll :data ="musiclist" class="music_l_content" :needPullUp="isNeedPull" @pullingUp="pullingUp">
 			<div class="content">
 				<span class="list_empty" v-if="!musiclist.length">暂无音乐列表哦 !</span>
-				<div class="music_list border-1px" v-if="musiclist && musiclist[0].music_id" v-for="(list, index) in musiclist" :key="list.music_id" :data-musicid="list.music_id" :data-pic="list.music_picurl" @click="clickPlayList(list.music_id, list.music_name, list.music_picurl, list.singer_name, getMusicDurationType(list.music_dur),index), musiclist">
+				<div class="music_list border-1px" @mouseenter="showIcon" @mouseout="hideIcon" v-if="musiclist && musiclist[0].music_id" v-for="(list, index) in musiclist" :key="list.music_id" :data-musicid="list.music_id" :data-pic="list.music_picurl" @click="clickPlayList(list.music_id, list.music_name, list.music_picurl, list.singer_name, getMusicDurationType(list.music_dur),index), musiclist">
 					<span class="music_index">
 						<span v-show="getCurrentMusic.id !== list.music_id">{{index + 1}}</span>
 						<img v-show="getCurrentMusic.id === list.music_id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
@@ -23,7 +23,7 @@
 					</span>
 					<span class="music_duration">{{getMusicDurationType(list.music_dur)}}</span>
 				</div>
-				<div class="music_list border-1px" v-if="musiclist && musiclist[0].al"v-for="(list, index) in musiclist" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.name, list.al.picUrl, list.ar[0].name, getMusicDurationType(list.dt),index), musiclist">
+				<div class="music_list border-1px" @mouseenter="showIcon" @mouseout="hideIcon" v-if="musiclist && musiclist[0].al"v-for="(list, index) in musiclist" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.name, list.al.picUrl, list.ar[0].name, getMusicDurationType(list.dt),index), musiclist">
 					<span class="music_index">
 						<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
 						<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
@@ -52,6 +52,7 @@
 import store from 'store'
 import musicApi from 'components/music/music.js'
 import Scroll from 'components/common/bscroll/bscroll.vue'
+import {addClass, removeClass} from 'common/js/Dom.js'
 export default {
 	data () {
 		return {
@@ -60,8 +61,7 @@ export default {
 			params: this.$route.params,
 			currentMusicLrcIndex: 0,
 			searchMusicIndex: 1,
-			searchMusicList: [],
-			needpullup: false
+			searchMusicList: []
 		}
 	},
 	methods: {
@@ -84,7 +84,6 @@ export default {
 			}
 		},
 		pullingUp (that) {
-			console.log(that)
 			this.searchMusicIndex ++
 			musicApi.searchMusic(this.params.w, this.searchMusicIndex, this)
 		},
@@ -108,6 +107,14 @@ export default {
 				type: this.musictype
 			}
 			musicApi.clickIndex(data, this)
+		},
+
+		showIcon (e) {
+			addClass(e.target, 'visible')
+		},
+
+		hideIcon (e) {
+			removeClass(e.target, 'visible')
 		},
 
 		// 删除收藏的音乐
@@ -151,6 +158,10 @@ export default {
 		// },
 		getCurrentMusic () {
 			return store.getters.getCurrentAudio
+		},
+
+		isNeedPull () {
+			return this.$route.path.includes('/music/searchlist')
 		}
 	},
 	watch: {
@@ -160,9 +171,6 @@ export default {
 		'$route' (to, from) {
 			this.params = this.$route.params
 		}
-	},
-	mounted () {
-		this.needPullUp = !this.$route.path.includes('/music/sheet')
 	}
 }
 </script>
@@ -194,7 +202,11 @@ export default {
 			// 	background:$list_hover
 			.music_name
 				.hover_menu
-					display:block
+					display:none
+			&.visible
+				.music_name
+					.hover_menu
+						display:block
 	video
 		display:none	
 </style>

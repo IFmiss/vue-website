@@ -234,7 +234,7 @@ const musicApi = {
 
     // 搜索音乐
     searchMusic (word, pages, that) {
-        const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=search&count=20&pages=${pages}&name=${word}`
+        const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=search&count=30&pages=${pages}&name=${word}`
         fecth.get(apiUrl, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -298,7 +298,6 @@ const musicApi = {
 
     // 获取本地的音乐
     getLocalMusic () {
-        console.log(this)
         todoUserInfo().then((res) => {
             let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=getCollectMusic'
             fecthPromise(fecthUrl, {

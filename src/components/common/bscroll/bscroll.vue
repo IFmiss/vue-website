@@ -16,9 +16,10 @@
 				default: true
 			},
 			data: null,
-			needPullUp: {
-				type: Boolean || Object,
-				default: false
+			needPullUp: false,
+			needMouseWheel: {
+				speed: 20,
+				invert: false
 			}
 		},
 		methods: {
@@ -29,15 +30,12 @@
 				this.scroll = new BScroll(this.$refs.wrapper, {
 					probeType: this.probeType,
 					click: this.click,
-					mouseWheel: {
-						speed: 20,
-						invert: false
-					},
 					scrollbar: {
 						fade: true,
 						interactive: false // 1.8.0 新增
 					},
-					pullUpLoad: this.needPullUp
+					pullUpLoad: this.needPullUp,
+					mouseWheel: this.needMouseWheel
 				})
 				this._initPullUpLoad()
 				this.finishPullUp()

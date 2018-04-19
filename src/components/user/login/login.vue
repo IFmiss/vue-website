@@ -5,7 +5,7 @@
 				<span class="s_singin" :class="{ active: status === 0 }" @click="loginMode">登录</span>
 				<span class="s_register" :class="{ active: status !== 0 }" @click="registerMode">注册</span>
 			</div>
-			<div class="content_info">
+			<div class="content_info" @keyup.enter="enterSingin">
 				<div class="login_div" v-show="!status">
 					<div class="block_area">
 						<label for="userName">username</label>
@@ -13,7 +13,7 @@
 					</div>
 					<div class="block_area">
 						<label for="userPwd" >password</label>
-						<input type="password" id="userPwd" v-model="password" placeholder="登陆密码">
+						<input type="password" id="userPwd" ref="usePwd" v-model="password" placeholder="登陆密码">
 					</div>
 					<input type="button" value="登录" @click="subInfo">
 				</div>
@@ -24,7 +24,7 @@
 					</div>
 					<div class="block_area">
 						<label for="suserPwd" >password</label>
-						<input type="password" id="suserPwd" v-model="spassword" placeholder="注册密码">
+						<input type="password" id="suserPwd" ref="susePwd" v-model="spassword" placeholder="注册密码">
 					</div>
 					<input type="button" value="注册" @click="singin">
 				</div>
@@ -76,8 +76,8 @@
 					password: this.password
 				}).then((res) => {
 					if (res.data.code === '1') {
-						this.$msg({text: '登录成功', background: '#00d032'})
 						Storage.setCookie('c_user_info', JSON.stringify(res.data), 60 * 60 * 1000 * 48)
+						this.$router.go(-1)
 					} else {
 						this.$msg(res.data.msg)
 					}
@@ -93,6 +93,15 @@
 			hideSingIn () {
 				this.status = 0
 				this.showSinginThen = false
+			},
+			enterSingin () {
+				if (this.$refs.usePwd === document.activeElement || this.$refs.suserPwd === document.activeElement) {
+					if (this.status) {
+						this.singin()
+					} else {
+						this.login()
+					}
+				}
 			},
 			singin () {
 				if (this.susername === '') {
@@ -218,6 +227,7 @@
 						margin-bottom: 10px
 						outline:none
 						cursor: pointer
+						-webkit-appearance:none
 						&:hover
 							background: $com_button_active_color
 		.singin_then
@@ -275,6 +285,7 @@
 							display:inline-block
 					input[type='button']
 						margin-top:0
+						-webkit-appearance:none
 					textarea
 						width: 100%
 						color: #fff
@@ -284,6 +295,7 @@
 						resize: none
 						padding: 4px
 						box-sizing:border-box
+						-webkit-appearance:none
 						margin-top: 20px
 					.tips
 						display:flex
