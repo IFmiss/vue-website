@@ -137,7 +137,7 @@
 	@import '~common/stylus/border-1px/index.styl'
 	.music_toplist
 		// background:red
-		overflow:auto@important
+		overflow:auto
 		.toplist_title
 			font-size:18px
 			color:$text_color

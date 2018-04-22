@@ -16,11 +16,7 @@
 				default: true
 			},
 			data: null,
-			needPullUp: false,
-			needMouseWheel: {
-				speed: 20,
-				invert: false
-			}
+			needPullUp: false
 		},
 		methods: {
 			_initScroll () {
@@ -35,7 +31,10 @@
 						interactive: false // 1.8.0 新增
 					},
 					pullUpLoad: this.needPullUp,
-					mouseWheel: this.needMouseWheel
+					mouseWheel: {
+						speed: 20,
+						invert: false
+					}
 				})
 				this._initPullUpLoad()
 				this.finishPullUp()

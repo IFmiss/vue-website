@@ -390,6 +390,7 @@
 							box-sizing:border-box
 							overflow:hidden
 							position:relative
+							overflow:auto
 							.music_list_title,.music_list
 								height:50px
 								line-height:50px

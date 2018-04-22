@@ -21,6 +21,6 @@ export function removeClass (el, className) {
 				newClass.splice(index, 1)
 			}
 		})
-		el.className = newClass
+		el.className = newClass.join(' ')
 	}
 }
