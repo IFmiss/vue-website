@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?9b77dn');
-  src:  url('fonts/icomoon.eot?9b77dn#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?9b77dn') format('truetype'),
-    url('fonts/icomoon.woff?9b77dn') format('woff'),
-    url('fonts/icomoon.svg?9b77dn#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?43z8q8');
+  src:  url('fonts/icomoon.eot?43z8q8#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?43z8q8') format('truetype'),
+    url('fonts/icomoon.woff?43z8q8') format('woff'),
+    url('fonts/icomoon.svg?43z8q8#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,94 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-money .path1:before {
+.icon-reward:before {
   content: "\e93b";
-  color: rgb(255, 106, 72);
-}
-.icon-money .path2:before {
-  content: "\e93c";
-  margin-left: -1em;
-  color: rgb(127, 5, 24);
-}
-.icon-money .path3:before {
-  content: "\e93d";
-  margin-left: -1em;
-  color: rgb(255, 200, 49);
-}
-.icon-money .path4:before {
-  content: "\e93e";
-  margin-left: -1em;
-  color: rgb(127, 5, 24);
-}
-.icon-money .path5:before {
-  content: "\e93f";
-  margin-left: -1em;
-  color: rgb(255, 200, 49);
-}
-.icon-money .path6:before {
-  content: "\e941";
-  margin-left: -1em;
-  color: rgb(127, 5, 24);
-}
-.icon-money .path7:before {
-  content: "\e942";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.icon-money .path8:before {
-  content: "\e943";
-  margin-left: -1em;
-  color: rgb(127, 5, 24);
-}
-.icon-money .path9:before {
-  content: "\e944";
-  margin-left: -1em;
-  color: rgb(255, 200, 49);
-}
-.icon-money .path10:before {
-  content: "\e945";
-  margin-left: -1em;
-  color: rgb(127, 5, 24);
-}
-.icon-money .path11:before {
-  content: "\e946";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.icon-money .path12:before {
-  content: "\e947";
-  margin-left: -1em;
-  color: rgb(127, 5, 24);
-}
-.icon-money .path13:before {
-  content: "\e948";
-  margin-left: -1em;
-  color: rgb(255, 106, 72);
-}
-.icon-money .path14:before {
-  content: "\e949";
-  margin-left: -1em;
-  color: rgb(127, 5, 24);
-}
-.icon-money .path15:before {
-  content: "\e94c";
-  margin-left: -1em;
-  color: rgb(238, 62, 43);
-}
-.icon-money .path16:before {
-  content: "\e94d";
-  margin-left: -1em;
-  color: rgb(127, 5, 24);
-}
-.icon-money .path17:before {
-  content: "\e94e";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.icon-money .path18:before {
-  content: "\e94f";
-  margin-left: -1em;
-  color: rgb(127, 5, 24);
+  color: #f34d37;
 }
 .icon-bing:before {
   content: "\e93a";

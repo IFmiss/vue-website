@@ -22,9 +22,10 @@
             <li>关于</li>
           </router-link>
           <router-link tag="a" to="/reward">
-            <li><span class="icon-money" style="font-size: 16px;margin-right:2px;vertical-align:middle">
-                <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span><span class="path13"></span><span class="path14"></span><span class="path15"></span><span class="path16"></span><span class="path17"></span><span class="path18"></span>
-                </span>打赏</li>
+            <li>
+              <span class="icon-reward" style="font-size: 16px;vertical-align:middle"></span>
+              打赏
+            </li>
           </router-link>
         </div>
         <!-- 移动端菜单按钮 -->
@@ -47,9 +48,10 @@
                 <li>关于</li>
               </router-link>
               <router-link tag="a" to="/reward">
-                 <li><span class="icon-money" style="font-size: 16px;margin-right:2px;vertical-align:middle">
-                <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span><span class="path13"></span><span class="path14"></span><span class="path15"></span><span class="path16"></span><span class="path17"></span><span class="path18"></span>
-                </span>打赏</li>
+                <li>
+                  <span class="icon-reward" style="font-size: 16px;vertical-align:middle"></span>
+                  打赏
+                </li>
               </router-link>
             </div>
           </div>

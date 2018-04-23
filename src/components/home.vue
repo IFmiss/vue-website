@@ -40,12 +40,14 @@
         </span>
       </div>
       <audio v-if="imageInfo.musicUrl" ref="homeAudio" style="display:none" loop="" :src="imageInfo.musicUrl"></audio>
+      <coverhistory></coverhistory>
     </div>
 </template>
 
 <script>
 import store from 'store'
 import tips from 'components/common/tips/tips.vue'
+import coverhistory from 'components/common/coverhistory/coverhistory'
 // import advertisement from 'components/common/advertisement/advertisement'
 
 // 引入背景请求的api  getBingInfo
@@ -256,7 +258,8 @@ export default {
     }
   },
   components: {
-    tips
+    tips,
+    coverhistory
   },
   watch: {
     '$route': 'getRoutePath'

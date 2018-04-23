@@ -4,11 +4,11 @@ const globalStore = {
 			// 路由的背景色 全屏状态下
 			contentInfo: {
 				opacity: '0.9',
-				bgcolor: 'rgb(0, 0, 0)',
+				bgcolor: 'rgb(7, 17, 27)',
 				type: 'radial-gradient-ellipse'
 			},
 			isHigher768: false,
-			showBingImage: false
+			showBingImage: true
 		},
 		place: {},
 		weather: {},
