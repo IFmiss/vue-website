@@ -35,12 +35,13 @@
             <router-link tag="a" to="/about/friendship" title="希望能互换友链">
               <span>友情链接</span>
             </router-link>
+            <a href="#" title="历史壁纸" @click="showAllList"><span>历史壁纸</span></a>
             <a href="http://www.miitbeian.gov.cn/" target="_black" title="皖ICP备16011217号" style="width:100%;height:auto">皖ICP备16011217号</a>
           </span>
         </span>
       </div>
       <audio v-if="imageInfo.musicUrl" ref="homeAudio" style="display:none" loop="" :src="imageInfo.musicUrl"></audio>
-      <coverhistory></coverhistory>
+      <coverhistory v-if="isShowAllList" @setStatus="hideAllList"></coverhistory>
     </div>
 </template>
 
@@ -59,7 +60,8 @@ export default {
       showHomeContent: false,
       isFullScreen: false,
       isPlay: false,
-      index: 0
+      index: 0,
+      isShowAllList: false
     }
   },
   computed: {
@@ -89,6 +91,14 @@ export default {
       } else {
         this.fullScreen()
       }
+    },
+
+    hideAllList () {
+      this.isShowAllList = false
+    },
+
+    showAllList () {
+      this.isShowAllList = true
     },
 
     playpause () {

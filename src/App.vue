@@ -20,11 +20,9 @@ import pic from 'components/pic/pic.vue'
 import loader from 'components/common/loader/loader.vue'
 import updatetips from 'components/common/updatetips/updatetips.vue'
 import DGlobal from 'common/js/global.js'
-
 // 引入背景请求的api
 import {getBingInfo, getMineBgByIndex} from 'common/api/background.js'
 // import $ from 'jquery'
-
 export default {
   data () {
     return {
@@ -170,6 +168,10 @@ export default {
       })
     },
     updateLoginInfo () {
+      if (DGlobal.storage.getCookie('c_user_info')) {
+        DGlobal.storage.setCookie('c_user_info', unescape(DGlobal.storage.getCookie('c_user_info')), 60 * 60 * 1000 * 24)
+      }
+
       store.dispatch({
         type: 'set_UserInfo',
         data: JSON.parse(unescape(DGlobal.storage.getCookie('c_user_info')))
@@ -239,7 +241,6 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus">
 @import '~common/stylus/border-1px/index.styl'
-@import '/static/font-icon/style.css'
   audio
     display:none
   body,html

@@ -76,12 +76,11 @@
 					password: this.password
 				}).then((res) => {
 					if (res.data.code === '1') {
-						Storage.setCookie('c_user_info', JSON.stringify(res.data), 60 * 60 * 1000 * 48)
+						Storage.setCookie('c_user_info', JSON.stringify(res.data), 60 * 60 * 1000 * 24)
 						this.$router.go(-1)
 					} else {
 						this.$msg(res.data.msg)
 					}
-					console.log(res)
 				}, (err) => {
 					alert(`数据请求错误: ${JSON.stringify(err)}`)
 				})
