@@ -23,6 +23,9 @@
           <div class="set_list" v-if="imageInfo.type === 'home'" :class="index === 0 ? 'disabled' : ''" title="下一张壁纸" @click="defaultData(1)">
             <i class="icon-right"></i>
           </div>
+          <div class="set_list" v-if="imageInfo.type === 'home'" @click="showAllList">
+            <i class="text">图</i>
+          </div>
           <div class="set_list" v-if="globalInfo.isHigher768" @click="toggleFullScreen">
             <i :class="isFullScreen ? 'icon-canclefullscreen' : 'icon-fullscreen'" :title="isFullScreen ? '取消全屏' : '全屏'"></i>
           </div>
@@ -362,6 +365,13 @@ export default {
           i
             color:#fff
             vertical-align:baseline
+            &.text
+              display: flex
+              align-items:center
+              justify-content:center
+              font-style:normal
+              width: 100%
+              height: 100%
           &.disabled
             cursor:default
             border:2px solid rgba(233,233,233,0.46)

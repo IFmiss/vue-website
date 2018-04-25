@@ -36,13 +36,13 @@
 				fecth.post(fecthUrl, {
 					index: this.imageIndex
 				}).then((res) => {
+					this.imageIndex = this.imageIndex + 8
 					this.imageList = this.imageList.concat(res.data)
 				}, (err) => {
 					console.log(`数据请求错误${err}`)
 				})
 			},
 			pullingUp () {
-				this.imageIndex = this.imageIndex + 8
 				this.initImageList()
 			},
 			hideAllList () {

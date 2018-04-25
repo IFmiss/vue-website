@@ -42,7 +42,11 @@
 						interactive: false // 1.8.0 新增
 					},
 					pullUpLoad: this.needPullUp,
-					mouseWheel: this.needMouseWheel
+					mouseWheel: {
+						speed: 20,
+						invert: false,
+						easeTime: 300
+					}
 				})
 				this._initPullUpLoad()
 				this.finishPullUp()
