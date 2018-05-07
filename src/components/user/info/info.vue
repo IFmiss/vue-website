@@ -5,8 +5,8 @@
 		<div class="info-content">
 			<div class="user-basic-info">
 				<div class="user-avatar">
-					<img src="" alt="user-name">
-					<span class="change-avatar">更换图片</span>
+					<div class="image-avatar" style="background-image: url('http://daiwei.org/vue/bg/avatar1.jpg')"></div>
+					<span class="change-avatar"></span>
 				</div>
 				<div class="user-basic">
 					<h3 class="user-nickname">这是用户的nickname</h3>
@@ -49,24 +49,86 @@
 <style lang="stylus" rel="stylesheet/stylus">
 @import '~common/stylus/global.styl'
 @import '~common/stylus/custom_input.styl'
+$avatar_w = 160px
+// .user-info
+// 	width: 100%
+// 	height: 100%
+// 	display: flex
+// 	align-items: center
+// 	justify-content:center
+// 	background: black
+// 	flex-direction: column
+// 	p
+// 		text-algin:center
+// 		font-weight: 400
+// 		font-size: 24px
+// 		color: $text_color
+// 		letter-spacing: 10px
 .user-info
-	width: 100%
-	height: 100%
-	display: flex
-	align-items: center
-	justify-content:center
-	background: black
-	flex-direction: column
-	p
-		text-algin:center
-		font-weight: 400
-		font-size: 24px
-		color: $text_color
-		letter-spacing: 10px
+	position: fixed
+	top: 0
+	left: 0
+	right:0
+	bottom: 0
 	.loginout
 		font-size: 14px
 		margin-top: 2px
 		color: #fff
 		text-decoration: underline
 		cursor:pointer
+	.info-content
+		max-width: 1200px
+		width: 100%
+		position: absolute
+		top: calc(50% + 50px)
+		left: calc(50% - 50px)
+		transform: translate(-50%, -50%)
+		height: calc(100% - 100px)
+		.user-basic-info
+			display:flex
+			align-items: flex-start
+			.user-avatar
+				flex: 0 0 $avatar_w
+				width: $avatar_w
+				height:$avatar_w
+				border-radius: 50%
+				overflow: hidden
+				position: relative
+				border: 5px solid $mask_color_opacity
+				.image-avatar
+					width: 100%
+					height: 100%
+				.change-avatar
+					position: absolute
+					top: 0
+					left:0
+					right:0
+					bottom:0
+					opacity: 0
+					visibility: hidden
+					transition: all 0.3s ease
+					display: flex
+					align-items:center
+					justify-content:center
+					background: $mask_color_opacity
+					&:before
+						content: '更换图片'
+						color: $text_color
+						position:relative
+				&:hover
+					.change-avatar
+						opacity: 1
+						visibility: visible
+			.user-basic
+				flex: 1 1 auto
+				overflow: hidden
+				padding: 10px
+				box-sizing:border-box
+				color: $text_color
+				.user-nickname
+					// color: $text_color
+					margin:0 auto
+				.user-disc
+					// color: $text_color
+					margin:0 auto
 </style>
