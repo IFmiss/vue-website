@@ -13,7 +13,8 @@
   		<div class="set_list border-1px">
   			<span class="name">背景色</span>
 			<div class="switch_bg switch-right">
-  				<div class="colorArea" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor}" @click="setBgColorPicker"></div>
+  				<!-- <div class="colorArea" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor}" @click="setBgColorPicker"></div> -->
+				<el-color-picker v-model="colorBg"></el-color-picker>
 			</div>
   		</div>
   		<div class="set_list border-1px">
@@ -57,7 +58,8 @@
 				rangebg: '#aaa',
 				rangeactivebg: '#F2301A',
 				contentbg: '#fff',
-				ref: 'bg'
+				ref: 'bg',
+				colorBg: '#409EFF'
 			},
 			showSetBgColorPicker: false,
 			showOpacityInput: false,
@@ -173,6 +175,14 @@
 			localStorage.setItem('globalInfo', JSON.stringify(this.getGlobalInfo))
 			this.maskIsShow = false
 			this.$msg('设置成功 ^ O ^')
+		},
+		changeBg (e) {
+			store.dispatch({
+				type: 'set_GlobaBglColor',
+				data: this.colorBg
+			})
+			localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
+			this.$emit('isclose')
 		}
 	},
 	computed: {
@@ -207,7 +217,10 @@
   		'selectmask': SelectMask
   	},
   	watch: {
-		'$route': 'getRoutePath'
+		'$route': 'getRoutePath',
+		colorBg (newVal, oldVal) {
+			alert(newVal)
+		}
 	},
   	mounted () {
   		this.getIsActive()

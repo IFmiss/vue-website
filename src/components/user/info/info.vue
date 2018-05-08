@@ -1,25 +1,39 @@
-<template lang='pug'>
-	div(class='user-info')
-		.info-content
-			el-select(v-model='value' placeholder='请选择')
-				el-option(v-for='item in options', :key='item.value', :label='item.label', :value='item.value')
-			.user-basic-info
-				.user-avatar
-					div(class='image-avatar', style='background-image: url(http://daiwei.org/vue/bg/avatar1.jpg)')
-					span(class='change-avatar')
-				.user-basic
-					h3(class='user-nickname') 这是用户的nickname
-					p(class='user-disc') 这是用户的描述描述描述
-			.mode-music
-			.user-detail-info
-				ul.detail-title
-					li(class='title-list') 音乐收藏
-					li(class='title-list') 我的建议
-					p
-						= '这个代码被 <转义> 了！'
-				.detail-content
-					div(class='content-info music-list')
-					div(class='content-info suggest-info')
+<template>
+	<div class="user-info">
+		<!-- <p class="desc">敬请期待...</p>
+		<span class="loginout" @click="loginout">退出登录</span> -->
+		<div class="info-content">
+			<div class="user-basic-info">
+				<div class="user-avatar">
+					<div class="image-avatar" style="background-image: url('http://daiwei.org/vue/bg/avatar1.jpg')"></div>
+					<span class="change-avatar"></span>
+				</div>
+				<div class="user-basic">
+					<h3 class="user-nickname">这是用户的nickname</h3>
+					<p class="user-disc">这是用户的描述描述描述</p>
+					<!-- <div class=""></div> -->
+				</div>
+			</div>
+			<div class="mode-music">
+				
+			</div>
+			<div class="user-detail-info">
+				<!-- 用户的具体信息。音乐收藏。评价 点赞 互相评论的功能 -->
+				<ul class="detail-title">
+					<li class="title-list">音乐收藏</li>
+					<li class="title-list">我的建议</li>
+				</ul>
+				<div class="detail-content">
+					<div class="content-info music-list">
+						
+					</div>
+					<div class="content-info suggest-info">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 <script>
 	import {Storage} from 'common/js/Storage.js'
@@ -29,28 +43,7 @@
 				Storage.deleteCookie('c_user_info')
 				this.$router.push('/home')
 			}
-		},
-		data () {
-	      return {
-	        options: [{
-	          value: '选项1',
-	          label: '黄金糕'
-	        }, {
-	          value: '选项2',
-	          label: '双皮奶'
-	        }, {
-	          value: '选项3',
-	          label: '蚵仔煎'
-	        }, {
-	          value: '选项4',
-	          label: '龙须面'
-	        }, {
-	          value: '选项5',
-	          label: '北京烤鸭'
-	        }],
-	        value: ''
-	      }
-	    }
+		}
 	}
 </script>
 <style lang="stylus" rel="stylesheet/stylus">

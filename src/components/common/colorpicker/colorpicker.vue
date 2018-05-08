@@ -1,7 +1,11 @@
 <template>
   <div class="colorpicker">
     <div class="colorlist" v-for="(item, index) in getColor">
-      <div class="color-detail" v-for="(detail, index) in item" :style="{backgroundColor:'#' + detail}" :data-color="'#' + detail" @click="changeBg($event)">
+      <!-- <div class="color-detail" v-for="(detail, index) in item" :style="{backgroundColor:'#' + detail}" :data-color="'#' + detail" @click="changeBg($event)">
+      </div> -->
+      <div class="block">
+        <span class="demonstration">有默认值</span>
+        <el-color-picker v-model="color1"></el-color-picker>
       </div>
     </div>
   </div>
@@ -25,7 +29,8 @@ export default {
           // ['a58800', 'cccc00', 'ffff00', 'ffcc00', 'ff9933', 'ff6600', 'ff0033', 'cc0066', '660033'],
           // ['996633', 'cc9900', 'ff9900', 'cc6600', 'ff3300', 'ff0000', 'cc0000', '990033'],
           // ['663300', '996600', 'cc3300', '993300', '990000', '800000', '993333']
-      }
+      },
+      color1: '#409EFF'
     }
   },
   methods: {
