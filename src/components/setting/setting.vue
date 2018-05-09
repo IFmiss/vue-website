@@ -14,7 +14,7 @@
   			<span class="name">背景色</span>
 			<div class="switch_bg switch-right">
   				<!-- <div class="colorArea" :style="{backgroundColor:getGlobalInfo.contentInfo.bgcolor}" @click="setBgColorPicker"></div> -->
-				<el-color-picker v-model="colorBg"></el-color-picker>
+				<el-color-picker v-model="colorBg" @change="changeBg"></el-color-picker>
 			</div>
   		</div>
   		<div class="set_list border-1px">
@@ -37,7 +37,7 @@
   	<!-- 遮罩层颜色设置 -->
   	<transition name="fade">
   		<div class="selectBg" v-show="showSetBgColorPicker">
-			<colorpicker @isclose="closeColorPicker"></colorpicker>
+			<el-color-picker v-model="colorBg" @change="changeBg"></el-color-picker>
 		</div>
   	</transition>
 	<!-- 遮罩层类型设置 -->
@@ -53,13 +53,13 @@
   export default {
   	data () {
   		return {
+  			colorBg: '#222',
   			options: {
 				isactive: false,
 				rangebg: '#aaa',
 				rangeactivebg: '#F2301A',
 				contentbg: '#fff',
-				ref: 'bg',
-				colorBg: '#409EFF'
+				ref: 'bg'
 			},
 			showSetBgColorPicker: false,
 			showOpacityInput: false,
@@ -117,12 +117,6 @@
 				this.options.isactive = store.getters.getGlobalInfo.showBingImage
 			}
 		},
-		setBgColorPicker () {
-			this.showSetBgColorPicker = true
-		},
-		closeColorPicker () {
-			this.showSetBgColorPicker = false
-		},
 		showInputOpacity () {
 			this.showOpacityInput = true
 			this.$nextTick(() => {
@@ -176,7 +170,7 @@
 			this.maskIsShow = false
 			this.$msg('设置成功 ^ O ^')
 		},
-		changeBg (e) {
+		changeBg () {
 			store.dispatch({
 				type: 'set_GlobaBglColor',
 				data: this.colorBg
@@ -217,10 +211,7 @@
   		'selectmask': SelectMask
   	},
   	watch: {
-		'$route': 'getRoutePath',
-		colorBg (newVal, oldVal) {
-			alert(newVal)
-		}
+		'$route': 'getRoutePath'
 	},
   	mounted () {
   		this.getIsActive()

@@ -1,8 +1,8 @@
 <template>
 	<div class="user-info">
-		<!-- <p class="desc">敬请期待...</p>
-		<span class="loginout" @click="loginout">退出登录</span> -->
-		<div class="info-content">
+		<p class="desc">敬请期待...</p>
+		<span class="loginout" @click="loginout">退出登录</span>
+		<!-- <div class="info-content">
 			<div class="user-basic-info">
 				<div class="user-avatar">
 					<div class="image-avatar" style="background-image: url('http://daiwei.org/vue/bg/avatar1.jpg')"></div>
@@ -11,15 +11,14 @@
 				<div class="user-basic">
 					<h3 class="user-nickname">这是用户的nickname</h3>
 					<p class="user-disc">这是用户的描述描述描述</p>
-					<!-- <div class=""></div> -->
 				</div>
 			</div>
 			<div class="mode-music">
 				
 			</div>
-			<div class="user-detail-info">
+			<div class="user-detail-info"> -->
 				<!-- 用户的具体信息。音乐收藏。评价 点赞 互相评论的功能 -->
-				<ul class="detail-title">
+				<!-- <ul class="detail-title">
 					<li class="title-list">音乐收藏</li>
 					<li class="title-list">我的建议</li>
 				</ul>
@@ -32,7 +31,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 <script>
@@ -50,20 +49,20 @@
 @import '~common/stylus/global.styl'
 @import '~common/stylus/custom_input.styl'
 $avatar_w = 160px
-// .user-info
-// 	width: 100%
-// 	height: 100%
-// 	display: flex
-// 	align-items: center
-// 	justify-content:center
-// 	background: black
-// 	flex-direction: column
-// 	p
-// 		text-algin:center
-// 		font-weight: 400
-// 		font-size: 24px
-// 		color: $text_color
-// 		letter-spacing: 10px
+.user-info
+	width: 100%
+	height: 100%
+	display: flex
+	align-items: center
+	justify-content:center
+	background: black
+	flex-direction: column
+	p
+		text-algin:center
+		font-weight: 400
+		font-size: 24px
+		color: $text_color
+		letter-spacing: 10px
 .user-info
 	position: fixed
 	top: 0
