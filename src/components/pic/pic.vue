@@ -1,9 +1,10 @@
 <template>
   <div class="pic" v-if="picinfo.length">
-    <!-- <div class="pic_bg" v-if="globalInfo.contentInfo" :style="{backgroundColor:globalInfo.contentInfo.bgcolor, opacity : globalInfo.contentInfo.opacity}"></div> -->
-    <div class="pic_content g-content" @scroll="getNewData">
-      <picList @showswiper= "showSwiper" v-for="(item, index) in picinfo" :key="item.id" :data-index="index" :data-info="item"></picList>
-    </div>
+    <scroll class="pic_content g-content" :data ="picinfo" needPullUp='true' @pullingUp="getNewData">
+      <div class="content">
+        <picList @showswiper= "showSwiper" v-for="(item, index) in picinfo" :key="item.id" :data-index="index" :data-info="item"></picList>
+      </div>
+    </scroll>
     <transition name="fade-scale">
       <div class="image_detail" v-show="showImageDetail">
         <swiper :options="swiperOption" ref="mySwiper" v-if="picListInfo.detail && globalInfo.contentInfo">  
@@ -36,13 +37,7 @@
   import picList from 'components/pic/picList/picList.vue'
   import fecth from 'utils/fecth.js'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  // import $ from 'jquery'
-  // import 'jquery-mousewheel'
-  // import 'malihu-custom-scrollbar-plugin'
-  // require('jquery-mousewheel')
-  // require('malihu-custom-scrollbar-plugin')
-  // require('malihu-custom-scrollbar-plugin')($)
-
+  import scroll from 'components/common/bscroll/bscroll'
   export default {
     data () {
       return {
@@ -105,22 +100,14 @@
           })
           if (JSON.stringify(res.data).length < 3) {
             this.$msg('状态已完全加载.')
-            this.getPicDataIndex ++
           }
         }, (err) => {
           alert(err)
         })
       },
       getNewData () {
-        const pContent = document.querySelector('.pic_content')
-        // 滚动的高加可视化的高 的 和   应该等于 元素的scrollHeight  才加载数据
-        const pContentSH = pContent.scrollTop + pContent.offsetHeight
-        if (pContent.scrollHeight === pContentSH) {
-          this.getPicDataIndex = this.getPicDataIndex + 1
-          this.fetchData()
-        } else {
-          return
-        }
+        this.getPicDataIndex ++
+        this.fetchData()
       },
       showSwiper (index) {
         this.showImageDetail = true
@@ -166,33 +153,16 @@
           this.overflowType = `initial`
         }
       }
-      // swiper (newval, oldval) {
-      //   alert(newval)
-      // }
-      // picListInfo (val, oldval) {
-      //   alert(JSON.stringify(val))
-      // }
     },
     components: {
       'v-line': line,
       picList,
       swiper,
-      swiperSlide
+      swiperSlide,
+      scroll
     },
     mounted () {
       this.fetchData()
-      // setTimeout(() => {
-      //   $('.pic_content').mCustomScrollbar({
-      //     theme: 'dark'
-      //   })
-      // }, 100)
-      // $('.pic_content').mCustomScrollbar({
-      //   theme: 'dark'
-      // })
-      // this.$nextTick(() => { $('.pic_content').mCustomScrollbar() })
-      // alert(this.$refs.abc)
-      // alert(store.getters.getGlobalInfo)
-      // this.swiper.slideTo(3, 1000, false)
     }
   }
 </script>
@@ -223,9 +193,9 @@
       width:100%
       transform:translate3d(-50%,0,0)
       margin:0 auto
-      overflow-y:auto
+      overflow-y:hidden
       box-sizing:border-box
-      -webkit-overflow-scrolling: touch
+      // -webkit-overflow-scrolling: touch
       padding:15px;
       box-sizing:border-box
     .image_detail

@@ -53,7 +53,7 @@
   export default {
   	data () {
   		return {
-  			colorBg: '#222',
+  			colorBg: store.getters.getGlobalInfo.contentInfo.bgcolor,
   			options: {
 				isactive: false,
 				rangebg: '#aaa',
@@ -215,6 +215,9 @@
 	},
   	mounted () {
   		this.getIsActive()
+  	},
+  	created () {
+  		this.colorBg = JSON.parse(localStorage.getItem('globalInfo')).contentInfo.bgcolor
   	}
   }
 </script>

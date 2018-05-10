@@ -8,28 +8,6 @@
 			<span class="music_zhuanji">专辑</span>
 			<span class="music_duration">时长</span>
 		</div>
-		<!-- <div class="music_list_content">
-			<span class="list_empty" v-if="!musicList.length">暂无收藏的音乐哦 !</span>
-			<div class="music_list border-1px" v-if="musicList" v-for="(list, index) in musicList" :key="list.music_id" :data-musicid="list.music_id" :data-pic="list.music_picurl" @click="clickPlayList(list.music_id, list.music_name, list.music_picurl, list.singer_name, getMusicDurationType(list.music_dur),index), musicList">
-				<span class="music_index">
-					<span v-show="getCurrentMusic.id !== list.music_id">{{index + 1}}</span>
-					<img v-show="getCurrentMusic.id === list.music_id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
-				</span>
-				<div class="music_name">
-					<span class="span_name">{{list.music_name}}</span>
-					<div class="hover_menu">
-						<i class="icon-delete" @click.stop="deleteMusic(list.music_id)"></i>
-					</div>
-				</div>
-				<span class="music_singer" v-if="list.singer_name">
-					<span @click.stop="searchMusic($event)">{{list.singer_name}}</span>
-				</span>
-				<span class="music_zhuanji" v-if="list.album_name">
-					<span @click.stop="getAlbum(list.album_id)">{{list.album_name}}</span>
-				</span>
-				<span class="music_duration">{{getMusicDurationType(list.music_dur)}}</span>
-			</div>
-		</div> -->
 		<musiclist v-if="musicList" :musiclist = "musicList" showdelicon="false" @init = "initMusic"></musiclist>
 	</div>
   </div>
