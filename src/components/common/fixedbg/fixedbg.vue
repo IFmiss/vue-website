@@ -92,6 +92,7 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
+      this.loadimgTrans()
       this.initMoveBg()
     })
   }

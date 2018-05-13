@@ -73,7 +73,6 @@
   			return store.getters.getMusicCollectList
   		},
   		getCurrentMusic () {
-  			console.log(store.getters.getCurrentAudio)
   			return store.getters.getCurrentAudio
   		}
   	},
