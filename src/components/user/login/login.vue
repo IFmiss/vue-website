@@ -73,7 +73,8 @@
 				var fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=login'
 				fecth.post(fecthUrl, {
 					username: this.username,
-					password: this.password
+					password: this.password,
+					lastlogin: Utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
 				}).then((res) => {
 					if (res.data.code === '1') {
 						Storage.setCookie('c_user_info', JSON.stringify(res.data), 60 * 60 * 1000 * 24)

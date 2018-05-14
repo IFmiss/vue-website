@@ -435,6 +435,7 @@ const musicApi = {
 
         // 音乐播放结束事件
         ele.onended = () => {
+            // 判断用户有没有登陆  登陆了存储用户播放音乐数据
             this.playNextPrev(that, true)
         }
         ele.ontimeupdate = function () {

@@ -23,9 +23,13 @@
 						<i class="icon-setting"></i>
 						<span class="count">个人设置</span>
 					</div>
+					<div class="icon-setinfo need-click" @click="loginout" title="退出登录">
+						<i class="icon-setting"></i>
+						<span class="count">退出登录</span>
+					</div>
 				</div>
 			</div>
-			<div class="mode-music">
+			<div class="mode-info">
 				
 			</div>
 			<div class="user-detail-info">
@@ -35,11 +39,18 @@
 					<li class="title-list" @click="selectSettingIndex" data-index="1" :class="selectIndex === 1 ? 'active': ''">我的建议</li>
 				</ul>
 				<div class="detail-content">
-					<div class="content-info music-list" :class="selectIndex === 0 ? 'active': ''">
+					<div class="content-info list_content_info music-list" :class="selectIndex === 0 ? 'active': ''">
+						<div class="music_list_title border-1px">
+							<span class="music_index"></span>
+							<span class="music_name">歌曲</span>
+							<span class="music_singer">歌手</span>
+							<span class="music_zhuanji">专辑</span>
+							<span class="music_duration">时长</span>
+						</div>
 						<musiclist v-if="musicList" :musiclist = "musicList" showdelicon="false" @init = "initMusic"></musiclist>
 					</div>
 					<div class="content-info suggest-info" :class="selectIndex === 1 ? 'active': ''">
-						
+						<li>你在 2018年3月20日 给作者留言 #你的网站做的真好#</li>
 					</div>
 				</div>
 			</div>
@@ -104,6 +115,7 @@ $c_max_w = 1040px
 // 		font-size: 24px
 // 		color: $text_color
 // 		letter-spacing: 10px
+
 .user-info
 	position: fixed
 	top: 0
@@ -117,10 +129,12 @@ $c_max_w = 1040px
 		text-decoration: underline
 		cursor:pointer
 	.info-content
+		overflow:auto
 		position: absolute
 		top: 80px
-		left: 50px
-		right: 50px
+		left: 30px
+		right: 30px
+		padding: 0 20px
 		bottom:50px
 		.user-basic-info
 			display:flex
@@ -179,7 +193,7 @@ $c_max_w = 1040px
 						line-height: 1.5
 						margin:0 auto
 			.user-basic-r
-				flex: 0 0 200px
+				flex: 0 0 300px
 				display: flex
 				padding: 5px
 				box-sizing:border-box
@@ -241,7 +255,15 @@ $c_max_w = 1040px
 				position:relative
 				height: 400px
 				.content-info
+					color: $text_color
 					display:none
+					&.suggest-info
+						padding: 15px 10px
+					.music-list
+						height:calc(100% - 60px)
+						box-sizing:border-box
 					&.active
 						display:block
+		.mode-info
+			height:200px
 </style>

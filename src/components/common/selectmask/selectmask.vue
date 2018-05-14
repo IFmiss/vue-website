@@ -58,7 +58,6 @@
         return this.maskglobainfo
       },
       getFixImageInfo () {
-        // alert(this.maskoption.fixedImageBg)
         return this.maskimage
       }
     },

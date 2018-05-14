@@ -714,7 +714,7 @@
 						.list_content
 							.music_list
 								.music_name
-									width:calc(60% - 50px)
+									width:calc(50% - 50px)
 								.music_zhuanji
 									display:none!important
 								.music_singer
@@ -725,7 +725,7 @@
 								span
 									&.music_name
 										font-size:14px
-										width:calc(60% - 50px)
+										width:calc(50% - 50px)
 									&.music_zhuanji
 										display:none
 									&.music_singer
@@ -735,25 +735,6 @@
 		@media screen and (max-width: 922px)
 			.music_content
 				.music_body
-					.left_list
-						
-						// .list_content
-						// 	.music_list
-						// 		.music_name
-						// 			width:calc(60% - 50px)
-						// 		.music_zhuanji
-						// 			display:none
-						// 		.music_singer
-						// 			width:30%!important
-						// 	.music_list_title
-						// 		span
-						// 			&.music_name
-						// 				font-size:14px
-						// 				width:calc(60% - 50px)
-						// 			&.music_zhuanji
-						// 				display:none
-						// 			&.music_singer
-						// 				width:30%										
 					.right_info
 						position:absolute
 						top:0
@@ -761,7 +742,6 @@
 						right:0
 						bottom:0
 						width:100%
-						background:red
 						display:none
 		@media screen and (max-width: 525px)
 			.music_content
