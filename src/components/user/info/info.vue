@@ -3,21 +3,21 @@
 <!-- 		<p class="desc">敬请期待...</p>
 		<span class="loginout" @click="loginout">退出登录</span> -->
 		<div class="info-content">
-			<div class="user-basic-info">
+			<div class="user-basic-info" v-if='personalCenter && personalCenter[0]'>
 				<div class="user-basic-l">
 					<div class="user-avatar">
 						<div class="image-avatar" style="background-image: url('http://daiwei.org/vue/bg/avatar1.jpg');background-size:cover;background-position:center"></div>
 						<span class="change-avatar"></span>
 					</div>
 					<div class="user-basic">
-						<h3 class="user-nickname">这是用户的nickname</h3>
-						<p class="user-disc">这是用户的描述描述描述</p>
+						<h3 class="user-nickname">{{personalCenter[0].nickname == '' ? personalCenter[0].username : ''}}</h3>
+						<p class="user-disc">{{personalCenter[0].desc === '' ? personalCenter[0].desc : '暂无描述'}}</p>
 					</div>
 				</div>
 				<div class="user-basic-r">
 					<div class="icon-setinfo" title="累计听歌数量">
 						<i class="icon-music"></i>
-						<span class="count">120</span>
+						<span class="count">{{personalCenter[0].musicCount || 0}}</span>
 					</div>
 					<div class="icon-setinfo need-click" title="个人设置">
 						<i class="icon-setting"></i>
@@ -62,10 +62,12 @@
 	import musiclist from 'components/common/musiclist/musiclist.vue'
 	import store from 'store'
 	import musicApi from 'components/music/music.js'
+	import {fecthPromise, todoUserInfo} from 'common/api/user.js'
 	export default {
 		data () {
 			return {
-				selectIndex: 0
+				selectIndex: 0,
+				personalCenter: []
 			}
 		},
 		components: {
@@ -83,6 +85,21 @@
 				// 获取本地音乐
 				// musicApi.getAlbum(this.params.id)
 				musicApi.getLocalMusic.call(this)
+			},
+			initData () {
+				todoUserInfo().then((res) => {
+					const fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=personalCenter'
+					fecthPromise(fecthUrl, {
+						userid: store.getters.getUserInfo.id || 0
+					}).then((res) => {
+						this.personalCenter = res.data
+						console.log(this.personalCenter)
+					}, (err) => {
+						this.$msg(err)
+					})
+				}, (err) => {
+					this.$msg(err)
+				})
 			}
 		},
 		computed: {
@@ -93,6 +110,7 @@
 		mounted () {
 			this.$nextTick(() => {
 				this.initMusic()
+				this.initData()
 			})
 		}
 	}

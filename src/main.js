@@ -26,9 +26,11 @@ Vue.use(VueLazyload, {
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({
+const vueExp = new Vue({
   el: '#app',
   router,
   template: '<App/>',
   render: h => h(App)
 })
+
+export default vueExp

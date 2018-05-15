@@ -1,7 +1,9 @@
 import store from 'store'
 import fecth from 'utils/fecth.js'
+import {Utils} from 'common/js/Utils.js'
 import $ from 'jquery'
 import {fecthPromise, todoUserInfo} from 'common/api/user.js'
+import vueExp from '@/main.js'
 const musicApi = {
     lastLyric: 0,
     typeType: localStorage.getItem('audioPlayType') || store.getters.getAudioPlayType,
@@ -435,6 +437,7 @@ const musicApi = {
 
         // 音乐播放结束事件
         ele.onended = () => {
+            this.insetMusicListen()
             // 判断用户有没有登陆  登陆了存储用户播放音乐数据
             this.playNextPrev(that, true)
         }
@@ -566,6 +569,35 @@ const musicApi = {
     // 由于网易云地址有添加防盗链  m8c,m7c 的地址替换成m8,m7 就可以正常播放
     replaceUrl (url) {
         return url.indexOf('//m7c') < 0 ? (url.indexOf('//m8c') ? url.replace('//m8c', '//m8') : url) : url.replace('//m7c', '//m7')
+    },
+
+    insetMusicListen () {
+        todoUserInfo().then((res) => {
+            let index = store.getters.getCurrentAudio.index
+            let musicplaylist = store.getters.getMusicPlayList
+            let options = {
+                userid: res.id,
+                username: res.username,
+                music_id: musicplaylist[index].music_id || musicplaylist[index].id,
+                music_name: musicplaylist[index].music_name || musicplaylist[index].name,
+                singer_id: musicplaylist[index].singer_id || musicplaylist[index].ar[0].id,
+                singer_name: musicplaylist[index].singer_name || musicplaylist[index].ar[0].name,
+                album_id: musicplaylist[index].album_id || musicplaylist[index].al.id,
+                album_name: musicplaylist[index].album_name || musicplaylist[index].al.name,
+                music_dur: musicplaylist[index].music_dur || musicplaylist[index].dt,
+                music_picurl: musicplaylist[index].music_picurl || musicplaylist[index].al.picUrl,
+                listen_time: Utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
+            }
+            let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=userMusicListen'
+            fecthPromise(fecthUrl, options).then((res) => {
+                console.log(options.music_name + '播放完成')
+            }, (err) => {
+                vueExp.$msg(err)
+            })
+        }, (err) => {
+            vueExp.$msg(err.msg)
+            vueExp.$router.push({ path: '/user/login' })
+        })
     },
 
     setPlayType (type) {
