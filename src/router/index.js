@@ -58,6 +58,8 @@ const User = r => require.ensure([], () => r(require('@/components/user/user.vue
 
 const Reward = r => require.ensure([], () => r(require('@/components/reward/reward.vue')), 'reward')
 
+const Test = r => require.ensure([], () => r(require('@/components/user/test.vue')), 'test')
+
 Vue.use(Router)
 
 export default new Router({
@@ -257,6 +259,10 @@ export default new Router({
         {
           path: '/user/info',
           component: UserInfo
+        },
+        {
+          path: '/user/test',
+          component: Test
         }
       ]
     }

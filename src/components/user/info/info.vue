@@ -3,21 +3,21 @@
 <!-- 		<p class="desc">敬请期待...</p>
 		<span class="loginout" @click="loginout">退出登录</span> -->
 		<div class="info-content">
-			<div class="user-basic-info" v-if='personalCenter && personalCenter[0]'>
+			<div class="user-basic-info" v-if='personalCenter && personalCenter'>
 				<div class="user-basic-l">
 					<div class="user-avatar">
 						<div class="image-avatar" style="background-image: url('http://daiwei.org/vue/bg/avatar1.jpg');background-size:cover;background-position:center"></div>
 						<span class="change-avatar"></span>
 					</div>
 					<div class="user-basic">
-						<h3 class="user-nickname">{{personalCenter[0].nickname == '' ? personalCenter[0].username : ''}}</h3>
-						<p class="user-disc">{{personalCenter[0].desc === '' ? personalCenter[0].desc : '暂无描述'}}</p>
+						<h3 class="user-nickname">{{personalCenter.nickname == '' ? personalCenter.username : ''}}</h3>
+						<p class="user-disc">{{personalCenter.desc !== '' ? personalCenter.desc : '暂无描述'}}</p>
 					</div>
 				</div>
 				<div class="user-basic-r">
 					<div class="icon-setinfo" title="累计听歌数量">
 						<i class="icon-music"></i>
-						<span class="count">{{personalCenter[0].musicCount || 0}}</span>
+						<span class="count">{{personalCenter.musicCount || 0}}</span>
 					</div>
 					<div class="icon-setinfo need-click" title="个人设置">
 						<i class="icon-setting"></i>
@@ -50,7 +50,7 @@
 						<musiclist v-if="musicList" :musiclist = "musicList" showdelicon="false" @init = "initMusic"></musiclist>
 					</div>
 					<div class="content-info suggest-info" :class="selectIndex === 1 ? 'active': ''">
-						<li>你在 2018年3月20日 给作者留言 #你的网站做的真好#</li>
+						<li v-if="suggestList" v-for="item in suggestList">你在 {{item.suggestTime.split(' ')[0]}}日 给作者留言 # {{item.suggestContent}} #</li>
 					</div>
 				</div>
 			</div>
@@ -67,7 +67,8 @@
 		data () {
 			return {
 				selectIndex: 0,
-				personalCenter: []
+				personalCenter: [],
+				suggestList: []
 			}
 		},
 		components: {
@@ -92,7 +93,8 @@
 					fecthPromise(fecthUrl, {
 						userid: store.getters.getUserInfo.id || 0
 					}).then((res) => {
-						this.personalCenter = res.data
+						this.personalCenter = res.data.data
+						this.suggestList = res.data.suggestList
 						console.log(this.personalCenter)
 					}, (err) => {
 						this.$msg(err)
