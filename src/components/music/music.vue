@@ -51,7 +51,7 @@
   				<div class="lrc-content" ref="lrcContent">
   					<div class="lrc-wrapper" ref="lrcWrapper">
   						<p class="lrc-item" v-if="!getMusicLrcLists" ></p>
-  						<p class="lrc-item" v-if="getMusicLrcLists" v-for="(item, key, index) in getMusicLrcLists" :class="getCurrentMusicLrcIndex === index + 1 ? `active` : ``">{{item}}</p>
+  						<p class="lrc-item" v-if="getMusicLrcLists" v-for="(item, index) in getMusicLrcLists" :class="getCurrentMusicLrcIndex === index + 1 ? `active` : ``">{{item}}</p>
   					</div>
   				</div>
   			</div>
@@ -263,7 +263,7 @@
   	}
   }
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
 	@import '~common/stylus/global.styl'
 	@import '~common/stylus/border-1px/index.styl'
 	.music
