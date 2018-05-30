@@ -6,8 +6,15 @@
 			<div class="user-basic-info" v-if='personalCenter && personalCenter'>
 				<div class="user-basic-l">
 					<div class="user-avatar">
-						<div class="image-avatar" style="background-image: url('http://daiwei.org/vue/bg/avatar1.jpg');background-size:cover;background-position:center"></div>
-						<span class="change-avatar"></span>
+						<div class="image-avatar" :style="{backgroundImage : 'url(' + personalCenter.avatar || 'http://daiwei.org/vue/bg/avatar1.jpg' + ')', backgroundSize:imagesize, backgroundPosition:imageposition}"></div>
+						<span class="change-avatar">
+							<form :action=`http://www.daiwei.org/vue/server/upload.php?userId=${personalCenter.id}` method="post" enctype="multipart/form-data" target="rfFrame">
+								<input type="text" name="id" value="111" />
+								<input type="file" name="file" id="file"><br>
+								<input type="submit" name="submit" value="提交">
+							</form>
+							<iframe id="rfFrame" name="rfFrame" src="about:blank" style="display:none;"></iframe>
+						</span>
 					</div>
 					<div class="user-basic">
 						<h3 class="user-nickname">{{personalCenter.nickname == '' ? personalCenter.username : ''}}</h3>
