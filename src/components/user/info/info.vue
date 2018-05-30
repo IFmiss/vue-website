@@ -51,6 +51,7 @@
 					</div>
 					<div class="content-info suggest-info" :class="selectIndex === 1 ? 'active': ''">
 						<li v-if="suggestList" v-for="item in suggestList">你在 {{item.suggestTime.split(' ')[0]}}日 给作者留言 # {{item.suggestContent}} #</li>
+						<li v-if="!suggestList">暂无留言哦，您可以在<router-link to="/about/suggest">留言板</router-link>中给作者留言，提出您的宝贵意见和建议</li>
 					</div>
 				</div>
 			</div>
@@ -142,6 +143,7 @@ $c_max_w = 1040px
 	left: 0
 	right:0
 	bottom: 0
+	background: rgba(0,0,0,0.3)
 	.loginout
 		font-size: 14px
 		margin-top: 2px
@@ -282,6 +284,10 @@ $c_max_w = 1040px
 					.music-list
 						height:calc(100% - 60px)
 						box-sizing:border-box
+					a
+						color: $active_color
+						font-size: 16px
+						padding: 0 5px
 					&.active
 						display:block
 		.mode-info
