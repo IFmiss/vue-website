@@ -69,7 +69,7 @@
     "url-loader": "^0.5.8",
     "vue": "^2.5.16",
     "vue-loader": "^12.1.0",
-    "vue-message": "^1.3.0",
+    "vue-message": "^1.4.1",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.16",
     "vuex": "^2.4.1",

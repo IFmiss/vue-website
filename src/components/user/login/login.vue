@@ -74,7 +74,8 @@
 				fecth.post(fecthUrl, {
 					username: this.username,
 					password: this.password,
-					lastlogin: Utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
+					lastlogin: Utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss'),
+					path: process.env.NODE_ENV
 				}).then((res) => {
 					if (res.data.code === '1') {
 						Storage.setCookie('c_user_info', JSON.stringify(res.data), 60 * 60 * 1000 * 24)
@@ -116,7 +117,8 @@
 				fecth.post(fecthUrl, {
 					username: this.susername,
 					password: this.spassword,
-					regtime: Utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
+					regtime: Utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss'),
+					path: process.env.NODE_ENV
 				}).then((res) => {
 					this.$msg(res.data.msg)
 					if (res.data.code === '1') {
