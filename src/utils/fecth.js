@@ -91,6 +91,28 @@ export default {
       }
     )
   },
+
+  upload (url, file) {
+    return axios({
+      method: 'post',
+      baseURL: process.env.BASE_API,
+      url,
+      timeout: 15000,
+      headers: {
+        // 'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(
+      (response) => {
+        return checkStatus(response)
+      }
+    ).then(
+      (res) => {
+        return checkCode(res)
+      }
+    )
+  },
+
   get (url, params) {
     return axios({
       method: 'get',
