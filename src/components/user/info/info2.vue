@@ -1,6 +1,5 @@
 <template>
 	<div class="user-info">
-    <userSetting :userSetting="userSetting" @colseSetting="colseSetting"></userSetting>
 <!-- 		<p class="desc">敬请期待...</p>
 		<span class="loginout" @click="loginout">退出登录</span> -->
 		<div class="info-content">
@@ -8,6 +7,15 @@
 				<div class="user-basic-l">
 					<div class="user-avatar">
 						<div class="image-avatar" :style="{backgroundImage : 'url(' + personalCenter.avatar || 'http://daiwei.org/vue/bg/avatar1.jpg' + ')', backgroundSize:'cover', backgroundPosition:'center'}"></div>
+						<span class="change-avatar">
+							<form :action="'http://www.daiwei.org/vue/server/upload.php?id=' + personalCenter.id" method="post" enctype="multipart/form-data" target="rfFrame">
+								<input class="info" type="text" name="id" :value="personalCenter.id" />
+								<input class="upload-btn info" type="file" ref="selectimgbtn" @change="showSubBtn" name="file" id="file"><br>
+								<div class="select-img" @click="selectImage">更换图片</div>
+								<input type="submit" name="submit" v-if="needUpdate" value="提交">
+							</form>
+							<iframe id="rfFrame" name="rfFrame" src="about:blank" style="display:none;"></iframe>
+						</span>
 					</div>
 					<div class="user-basic">
 						<h3 class="user-nickname">{{personalCenter.nickname == '' ? personalCenter.username : ''}}</h3>
@@ -19,7 +27,7 @@
 						<i class="icon-music"></i>
 						<span class="count">{{personalCenter.musicCount || 0}}</span>
 					</div>
-					<div class="icon-setinfo need-click" @click="showSetting" title="个人设置">
+					<div class="icon-setinfo need-click" title="个人设置">
 						<i class="icon-setting"></i>
 						<span class="count">个人设置</span>
 					</div>
@@ -63,23 +71,18 @@
 	import musiclist from 'components/common/musiclist/musiclist.vue'
 	import store from 'store'
 	import musicApi from 'components/music/music.js'
-  import {fecthPromise, todoUserInfo} from 'common/api/user.js'
-  import userSetting from 'components/common/userSetting/userSetting'
+	import {fecthPromise, todoUserInfo} from 'common/api/user.js'
 	export default {
 		data () {
 			return {
 				selectIndex: 0,
 				personalCenter: [],
 				suggestList: [],
-        needUpdate: false,
-        userSetting: {
-          isShow: true
-        }
+				needUpdate: false
 			}
 		},
 		components: {
-      musiclist,
-      userSetting
+			musiclist
 		},
 		methods: {
 			loginout () {
@@ -119,16 +122,7 @@
 					text: '再次移动头像区域以上传图片, 点击提交之后请刷新页面, form提交表单的方法有点挫。。。',
 					duration: 6000
 				})
-      },
-      colseSetting (info) {
-        this.userSetting.isShow = false
-        // this.userSetting = {
-        //   ...info
-        // }
-      },
-      showSetting () {
-        this.userSetting.isShow = true
-      }
+			}
 		},
 		computed: {
 			musicList () {

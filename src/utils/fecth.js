@@ -92,11 +92,12 @@ export default {
     )
   },
 
-  upload (url, file) {
+  upload (url, data) {
     return axios({
       method: 'post',
       baseURL: process.env.BASE_API,
       url,
+      data,
       timeout: 15000,
       headers: {
         // 'X-Requested-With': 'XMLHttpRequest',

@@ -1,5 +1,6 @@
 <template>
 	<div class="user-info">
+    <userSetting :userSetting="userSetting" @exit="saveInfo" @save="saveInfo"></userSetting>
 <!-- 		<p class="desc">敬请期待...</p>
 		<span class="loginout" @click="loginout">退出登录</span> -->
 		<div class="info-content">
@@ -7,18 +8,9 @@
 				<div class="user-basic-l">
 					<div class="user-avatar">
 						<div class="image-avatar" :style="{backgroundImage : 'url(' + personalCenter.avatar || 'http://daiwei.org/vue/bg/avatar1.jpg' + ')', backgroundSize:'cover', backgroundPosition:'center'}"></div>
-						<span class="change-avatar">
-							<form :action="'http://www.daiwei.org/vue/server/upload.php?id=' + personalCenter.id" method="post" enctype="multipart/form-data" target="rfFrame">
-								<input class="info" type="text" name="id" :value="personalCenter.id" />
-								<input class="upload-btn info" type="file" ref="selectimgbtn" @change="showSubBtn" name="file" id="file"><br>
-								<div class="select-img" @click="selectImage">更换图片</div>
-								<input type="submit" name="submit" v-if="needUpdate" value="提交">
-							</form>
-							<iframe id="rfFrame" name="rfFrame" src="about:blank" style="display:none;"></iframe>
-						</span>
 					</div>
 					<div class="user-basic">
-						<h3 class="user-nickname">{{personalCenter.nickname == '' ? personalCenter.username : ''}}</h3>
+						<h3 class="user-nickname">{{personalCenter.nickname == '' ? personalCenter.username : personalCenter.nickname}}</h3>
 						<p class="user-disc">{{personalCenter.desc !== '' ? personalCenter.desc : '暂无描述'}}</p>
 					</div>
 				</div>
@@ -27,7 +19,7 @@
 						<i class="icon-music"></i>
 						<span class="count">{{personalCenter.musicCount || 0}}</span>
 					</div>
-					<div class="icon-setinfo need-click" title="个人设置">
+					<div class="icon-setinfo need-click" @click="showSetting" title="个人设置">
 						<i class="icon-setting"></i>
 						<span class="count">个人设置</span>
 					</div>
@@ -71,18 +63,23 @@
 	import musiclist from 'components/common/musiclist/musiclist.vue'
 	import store from 'store'
 	import musicApi from 'components/music/music.js'
-	import {fecthPromise, todoUserInfo} from 'common/api/user.js'
+  import {fecthPromise, todoUserInfo} from 'common/api/user.js'
+  import userSetting from 'components/common/userSetting/userSetting'
 	export default {
 		data () {
 			return {
 				selectIndex: 0,
 				personalCenter: [],
 				suggestList: [],
-				needUpdate: false
+        needUpdate: false,
+        userSetting: {
+          isShow: false
+        }
 			}
 		},
 		components: {
-			musiclist
+      musiclist,
+      userSetting
 		},
 		methods: {
 			loginout () {
@@ -105,7 +102,7 @@
 					}).then((res) => {
 						this.personalCenter = res.data.data
 						this.suggestList = res.data.suggestList
-						console.log(this.personalCenter)
+						this.userSetting = {...this.userSetting, ...res.data.data}
 					}, (err) => {
 						this.$msg(err)
 					})
@@ -121,6 +118,20 @@
 				this.$msg({
 					text: '再次移动头像区域以上传图片, 点击提交之后请刷新页面, form提交表单的方法有点挫。。。',
 					duration: 6000
+				})
+      },
+      showSetting (data) {
+				this.userSetting.isShow = true
+			},
+			saveInfo (data) {
+				this.userSetting.isShow = false
+				this.personalCenter = {
+					...this.personalCenter,
+					...data
+				}
+				store.dispatch({
+					type: 'set_UserInfo',
+					data: this.personalCenter
 				})
 			}
 		},
@@ -343,5 +354,5 @@ $c_max_w = 1040px
 					&.active
 						display:block
 		.mode-info
-			height:200px
+			height:40px
 </style>

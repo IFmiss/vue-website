@@ -79,7 +79,7 @@
 				}).then((res) => {
 					if (res.data.code === '1') {
 						Storage.setCookie('c_user_info', JSON.stringify(res.data), 60 * 60 * 1000 * 24)
-						this.$router.go(-1)
+						this.$router.push('/home')
 					} else {
 						this.$msg(res.data.msg)
 					}

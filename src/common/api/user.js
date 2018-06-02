@@ -1,5 +1,6 @@
 import fecth from 'utils/fecth.js'
 import store from 'store'
+import router from 'router'
 const LOGIN_INFO = {
 	code: 0,
 	msg: '用户未登录'
@@ -15,14 +16,15 @@ export function fecthPromise (url, options) {
 	})
 }
 
-// 用户验证
+// 用户验证  有信息则返回信息  否则跳到login
 export function todoUserInfo () {
 	let loginInfo = store.getters.getUserInfo
 	return new Promise((resolve, reject) => {
 		if (loginInfo === null) {
+			router.push('/user/login')
 			reject(LOGIN_INFO)
-        } else {
+    } else {
 			resolve(loginInfo)
-        }
+    }
 	})
 }

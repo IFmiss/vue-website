@@ -51,7 +51,7 @@ const News = r => require.ensure([], () => r(require('@/components/about/news/ne
 const Login = r => require.ensure([], () => r(require('@/components/user/login/login.vue')), 'login')
 
 // userInfo
-const UserInfo = r => require.ensure([], () => r(require('@/components/user/info/info1.vue')), 'info1')
+const UserInfo = r => require.ensure([], () => r(require('@/components/user/info/info.vue')), 'info')
 
 // user
 const User = r => require.ensure([], () => r(require('@/components/user/user.vue')), 'user')
@@ -255,7 +255,7 @@ export default new Router({
           component: Login
         },
         {
-          path: '/user/info1',
+          path: '/user/info',
           component: UserInfo
         }
       ]
