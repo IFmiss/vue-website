@@ -93,19 +93,7 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      },
-      { test: '/jquery-mousewheel/', loader: 'imports?define=>false&this=>window' },
-      { test: '/malihu-custom-scrollbar-plugin/', loader: 'imports?define=>false&this=>window' }
+      }
     ]
-    // loaders: [
-    //   { test: '/jquery-mousewheel/', loader: 'imports?define=>false&this=>window' },
-    //   { test: '/malihu-custom-scrollbar-plugin/', loader: 'imports?define=>false&this=>window' }
-    // ]
   }
- //  plugins: [
- //    new webpack.ProvidePlugin({
- //        $: 'jquery',
- //        jQuery: 'jquery'
- //    })
- // ]
 }

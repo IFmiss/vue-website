@@ -1,7 +1,6 @@
 import store from 'store'
 import fecth from 'utils/fecth.js'
 import {Utils} from 'common/js/Utils.js'
-import $ from 'jquery'
 import {fecthPromise, todoUserInfo} from 'common/api/user.js'
 import vueExp from '@/main.js'
 const musicApi = {
@@ -90,7 +89,7 @@ const musicApi = {
                 parseLrc = {'0': '纯音乐,请欣赏'}
             } else {
                 parseLrc = this.parseLrc(res.data.lrc.lyric)
-                this.lyric = this.parseLrc(res.data.lrc.lyric)
+                this.lyric = parseLrc
             }
 
             // 初始化最後一個lrc
@@ -129,7 +128,7 @@ const musicApi = {
                     type: 'setAudiolrcIndex',
                     data: 0
                 })
-                $('.lrc-content').stop().animate({scrollTop: 0}, 1000)
+                this.scrollAnimate(document.getElementsByClassName('lrc-wrapper')[0], 0)
                 // 设置播放状态
                 store.commit('setAudioIsPlay', !ele.paused)
             })
@@ -142,18 +141,6 @@ const musicApi = {
         const minT = Math.floor(time / 1000 / 60) >= 10 ? Math.floor(time / 1000 / 60) : '0' + Math.floor(time / 1000 / 60)
         const minS = Math.floor(time / 1000 % 60) >= 10 ? Math.floor(time / 1000 % 60) : '0' + Math.floor(time / 1000 % 60)
         return minT + ':' + minS
-    },
-
-    // 刷新進度的歌詞
-    refreshLyric (time, that) {
-        if (this.lyric === '') return false
-        time = parseInt(time)  // 时间取整
-        var i = 0
-        for (var k in this.lyric) {
-            if (k >= time) break
-            i = k      // 记录上一句的
-        }
-        this.scrollLyric(i, that)
     },
 
     // 滚动歌词到指定句
@@ -190,8 +177,7 @@ const musicApi = {
         })
 
         try {
-            var scroll = (document.getElementsByClassName('lrc-item')[0].offsetHeight * i) - store.getters.getAudioLrcContent.offsetHeight / 2
-            $('.lrc-content').stop().animate({scrollTop: scroll}, 1000)
+            this.scrollAnimate(that.$refs.lrcWrapper, i * document.getElementsByClassName('lrc-item')[0].offsetHeight)
         } catch (e) {
             return
         }
@@ -264,12 +250,8 @@ const musicApi = {
     },
 
     scrollAnimate (ele, position) {
-        var t = setInterval(function () {
-            ele.scrollTop = ele.scrollTop + 2
-            if (ele.scrollTop >= position) {
-                clearInterval(t)
-            }
-        }, 1)
+        ele.style.WebkitTransform = `translate3d(-50%, -${position}px, 0)`
+        ele.style.transform = `transform: translate3d(-50%, -${position}px, 0)`
     },
 
     // 添加到我喜欢的音乐 使用本地存储的方法

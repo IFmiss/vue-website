@@ -10,8 +10,6 @@ import Msg from 'vue-message'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
-// import './../babel-polyfill'
-// import scrollbar from 'malihu-custom-scrollbar-plugin'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(Msg, {text: 'Hello world', duration: 3000, background: 'rgba(7,17,27,0.6)'})
 

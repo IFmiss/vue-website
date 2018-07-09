@@ -51,7 +51,7 @@
   				<div class="lrc-content" ref="lrcContent">
   					<div class="lrc-wrapper" ref="lrcWrapper">
   						<p class="lrc-item" v-if="!getMusicLrcLists" ></p>
-  						<p class="lrc-item" v-if="getMusicLrcLists" v-for="(item, index) in getMusicLrcLists" :class="getCurrentMusicLrcIndex === index + 1 ? `active` : ``">{{item}}</p>
+  						<p class="lrc-item" v-if="getMusicLrcLists" v-for="(item, index) in getMusicLrcLists" :class="getCurrentMusicLrcIndex === Number(index) + 1 ? `active` : ``">{{item}}</p>
   					</div>
   				</div>
   			</div>
@@ -214,7 +214,13 @@
   			return store.getters.getCurrentAudio
   		},
   		getMusicLrcLists () {
-  			return store.getters.getCurrentAudio.lyric
+				// console.log(store.getters.getCurrentAudio.lyric)
+				let obj = store.getters.getCurrentAudio.lyric
+				let arr = []
+				for (let i in obj) {
+					arr.push(obj[i])
+				}
+  			return arr
   		},
   		getCurrentMusicLrcIndex () {
 			return store.getters.getAudiolrcIndex
@@ -443,17 +449,24 @@
 						overflow:hidden
 						padding:20px 0
 						box-sizing:border-box
-						.lrc-item
-							width:100%
-							height:auto
-							min-height:26px
-							line-height:26px
-							text-align:center
-							margin:0
-							color:$text_before_color
-							font-size:12px
-							&.active
-								color:#A7EEBE
+						.lrc-wrapper
+							position:absolute
+							left:50%
+							top:50%
+							transform:translate3d(-50%,0,0)
+							transition:all 0.3s
+							.lrc-item
+								width:100%
+								height:auto
+								min-height:26px
+								line-height:26px
+								text-align:center
+								margin:0
+								color:$text_before_color
+								font-size:12px
+								&.active
+									color:#A7EEBE
+									font-weight: 400
 			.music_ctrl
 				width:100%;
 				height:80px

@@ -16,10 +16,6 @@
 </template>
 <script>
   import store from 'store'
-  // import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  // var $ = require('jquery')
-  // require('jquery-mousewheel')($)
-  // require('malihu-custom-scrollbar-plugin')($)
   export default {
   	props: {
   		dataIndex: 0,
