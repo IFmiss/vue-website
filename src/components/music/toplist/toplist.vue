@@ -1,66 +1,74 @@
 <template>
   <div class="music_toplist container">
+		<p class="toplist_title">收藏的歌单</p>
+		<div class="toplist_content dw-boot-col-lg-12">
+			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="124995419" title="未曾遗忘的青春的歌单">
+					<img src="http://www.daiwei.org/vue/bg/657952152722629515.jpg" alt="日本Oricon周榜">
+				</div>
+			</div>
+			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="2179377798" title="程序员必备，带上耳机代码就是全世界">
+					<img src="http://p3.music.126.net/IRqeexYedmfzxkaXdL0sFQ==/109951163241741763.jpg?param=200y200" alt="程序员必备，带上耳机代码就是全世界">
+				</div>
+			</div>
+			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="737139074" title="时光在说谎_喜欢的音乐">
+						<img src="http://p1.music.126.net/eVPBfxtDgsY0xUu8gH0OZw==/19085322835088643.jpg?param=200y200" alt="时光在说谎_喜欢的音乐">
+				</div>
+			</div>
+		</div>
+		<p class="toplist_title">热门歌单</p>
+		<div class="toplist_content dw-boot-col-lg-12" v-if="top_list_hot">
+			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4" v-for="(item,index) in top_list_hot">
+				<div class="toplist_detail" @click.stop="openTopList($event)" :data-id="item.id" :title="item.name">
+					<img v-lazy="(item.coverImgUrl).replace('.jpg','?param=250y250')" alt="日本Oricon周榜">
+				</div>
+			</div>
+		</div>
   	<p class="toplist_title">网易音乐排行榜</p>
   	<div class="toplist_content dw-boot-col-lg-12">
-		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
-			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="3779629" title="云音乐新歌榜，每天更新">
-				<img src="https://p3.music.126.net//N2HO5xfYEqyQ8q6oxCw8IQ==//18713687906568048.jpg?param=250y250" alt="云音乐新歌榜">
+			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="3779629" title="云音乐新歌榜，每天更新">
+					<img src="https://p3.music.126.net//N2HO5xfYEqyQ8q6oxCw8IQ==//18713687906568048.jpg?param=250y250" alt="云音乐新歌榜">
+				</div>
+			</div>
+			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="19723756" title="云音乐飙升榜，每天更新">
+					<img src="http://p1.music.126.net/DrRIg6CrgDfVLEph9SNh7w==/18696095720518497.jpg?param=250y250" alt="云音乐飙升榜">
+				</div>
+			</div>
+			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="3778678" title="云音乐热歌榜，每周四更新">
+					<img src="https:\/\/p3.music.126.net\/GhhuF6Ep5Tq9IEvLsyCN7w==\/18708190348409091.jpg?param=250y250" alt="云音乐热歌榜">
+				</div>
+			</div>
+			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="10520166" title="云音乐电音榜，每周五更新">
+					<img src="http://p1.music.126.net/4mh2HWH-bd5sRufQb-61bg==/3302932937414659.jpg?param=250y250" alt="云音乐电音榜">
+				</div>
+			</div>
+			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="180106" title="UK排行榜">
+					<img src="https:\/\/p3.music.126.net\/VQOMRRix9_omZbg4t-pVpw==\/18930291695438269.jpg?param=250y250" alt="UK排行榜周榜">
+				</div>
+			</div>
+			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="71385702" title="云音乐ACG音乐榜，每周四更新">
+					<img src="http://p1.music.126.net/vttjtRjL75Q4DEnjRsO8-A==/18752170813539664.jpg?param=250y250" alt="云音乐ACG音乐榜">
+				</div>
+			</div>
+			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="60198" title="云音乐ACG音乐榜，每周三更新">
+					<img src="http://p1.music.126.net/EBRqPmY8k8qyVHyF8AyjdQ==/18641120139148117.jpg?param=250y250" alt="美国Billboard周榜">
+				</div>
+			</div>
+			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
+				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="60131" title="日本Oricon周榜，每周三更新">
+					<img src="http://p1.music.126.net/Rgqbqsf4b3gNOzZKxOMxuw==/19029247741938160.jpg?param=250y250" alt="日本Oricon周榜">
+				</div>
 			</div>
 		</div>
-		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
-			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="19723756" title="云音乐飙升榜，每天更新">
-				<img src="http://p1.music.126.net/DrRIg6CrgDfVLEph9SNh7w==/18696095720518497.jpg?param=250y250" alt="云音乐飙升榜">
-			</div>
-		</div>
-		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
-			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="3778678" title="云音乐热歌榜，每周四更新">
-				<img src="https:\/\/p3.music.126.net\/GhhuF6Ep5Tq9IEvLsyCN7w==\/18708190348409091.jpg?param=250y250" alt="云音乐热歌榜">
-			</div>
-		</div>
-		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
-			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="10520166" title="云音乐电音榜，每周五更新">
-				<img src="http://p1.music.126.net/4mh2HWH-bd5sRufQb-61bg==/3302932937414659.jpg?param=250y250" alt="云音乐电音榜">
-			</div>
-		</div>
-		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
-			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="180106" title="UK排行榜">
-				<img src="https:\/\/p3.music.126.net\/VQOMRRix9_omZbg4t-pVpw==\/18930291695438269.jpg?param=250y250" alt="UK排行榜周榜">
-			</div>
-		</div>
-		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
-			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="71385702" title="云音乐ACG音乐榜，每周四更新">
-				<img src="http://p1.music.126.net/vttjtRjL75Q4DEnjRsO8-A==/18752170813539664.jpg?param=250y250" alt="云音乐ACG音乐榜">
-			</div>
-		</div>
-		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
-			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="60198" title="云音乐ACG音乐榜，每周三更新">
-				<img src="http://p1.music.126.net/EBRqPmY8k8qyVHyF8AyjdQ==/18641120139148117.jpg?param=250y250" alt="美国Billboard周榜">
-			</div>
-		</div>
-		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
-			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="60131" title="日本Oricon周榜，每周三更新">
-				<img src="http://p1.music.126.net/Rgqbqsf4b3gNOzZKxOMxuw==/19029247741938160.jpg?param=250y250" alt="日本Oricon周榜">
-			</div>
-		</div>
-	</div>
-	<p class="toplist_title">热门歌单</p>
-	<div class="toplist_content dw-boot-col-lg-12" v-if="top_list_hot">
-		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
-			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="124995419" title="未曾遗忘的青春的歌单">
-				<img src="http://www.daiwei.org/vue/bg/657952152722629515.jpg" alt="日本Oricon周榜">
-			</div>
-		</div>
-		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
-			<div class="toplist_detail" @click.stop="openTopList($event)" data-id="2179377798" title="程序员必备，带上耳机代码就是全世界">
-				<img src="http://p3.music.126.net/IRqeexYedmfzxkaXdL0sFQ==/109951163241741763.jpg?param=200y200" alt="程序员必备，带上耳机代码就是全世界">
-			</div>
-		</div>
-		<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4" v-for="(item,index) in top_list_hot">
-			<div class="toplist_detail" @click.stop="openTopList($event)" :data-id="item.id" :title="item.name">
-				<img v-lazy="(item.coverImgUrl).replace('.jpg','?param=250y250')" alt="日本Oricon周榜">
-			</div>
-		</div>
-	</div>
   </div>
 </template>
 <script>
