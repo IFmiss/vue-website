@@ -7,7 +7,7 @@
     </scroll>
     <transition name="fade-scale">
       <div class="image_detail" v-show="showImageDetail">
-        <swiper :options="swiperOption" ref="mySwiper" v-if="picListInfo.detail && globalInfo.contentInfo">  
+        <swiper :options="swiperOption" ref="mySwiper" v-show="picListInfo.detail && globalInfo.contentInfo">  
                 <!-- 这部分放你要渲染的那些内容 -->  
                 <swiper-slide v-for="(item, index) in picListInfo.detail" :key="item.id">
                   <!-- <div class="swiper-lazy-preloader"></div> -->
