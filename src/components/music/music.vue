@@ -87,7 +87,8 @@
 <script>
   // import fecth from './../../utils/fecth.js'
   import store from 'store'
-  import musicApi from 'components/music/music.js'
+	import musicApi from 'components/music/music.js'
+	import { todoUserInfo } from 'common/api/user.js'
   // import axios from 'axios'
   // import qs from 'qs'
   export default {
@@ -254,19 +255,23 @@
         }
   	},
   	mounted () {
-  		store.commit({
-  			type: 'setAudioLrcContent',
-  			data: this.$refs.lrcContent
-  		})
-  		this.selectAudioType() // 初始化音频模式
-  		// this.searchMusic()
-  		// this.initAudioEvent()
-  		// this.keypress()
-  		this.$nextTick(() => {
-  			this.initAudioEvent()
-  			this.keypress()
-  		})
-  	}
+		},
+		activated () {
+			todoUserInfo().then(res => {
+				store.commit({
+					type: 'setAudioLrcContent',
+					data: this.$refs.lrcContent
+				})
+				this.selectAudioType() // 初始化音频模式
+				// this.searchMusic()
+				// this.initAudioEvent()
+				// this.keypress()
+				this.$nextTick(() => {
+					this.initAudioEvent()
+					this.keypress()
+				})
+			})
+		}
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>

@@ -346,8 +346,6 @@ const musicApi = {
     },
     // 播放下一曲  可调用clickPlayindex  更换index 即可 (第2个参数为 true 或者 false  true表示下一首  false 表示上一首     第3个参数是判断是不是正在播放的音乐触发更新音乐列表    如果是正在播放的音乐点击播放index 的歌曲  和 自动播放 手动播放下一首 则不触发重新填充数据的操作)
     playNextPrev (that, isNext) {
-        // alert(store.getters.getCurrentAudio.index)
-        // alert(store.getters.getMusicPlayList.length)
         let index = store.getters.getCurrentAudio.index || 0
         const length = store.getters.getMusicPlayList.length || 0
         const musicplaylist = store.getters.getMusicPlayList || []
@@ -578,7 +576,6 @@ const musicApi = {
             })
         }, (err) => {
             vueExp.$msg(err.msg)
-            vueExp.$router.push({ path: '/user/login' })
         })
     },
 

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from './../store'
 import Home from '@/components/home'
-const Pic = r => require.ensure([], () => r(require('@/components/pic/pic.vue')), 'pic')
+// const Pic = r => require.ensure([], () => r(require('@/components/pic/pic.vue')), 'pic')
 // import Pic from '@/components/pic/pic.vue'
 const Music = r => require.ensure([], () => r(require('@/components/music/music.vue')), 'music')
 // import Music from '@/components/music/music.vue'
@@ -75,11 +75,11 @@ export default new Router({
       path: '/home',
       component: Home
     },
-    {
-      // 图片
-      path: '/pic',
-      component: Pic
-    },
+    // {
+    //   // 图片
+    //   path: '/pic',
+    //   component: Pic
+    // },
     {
       // 音乐
       path: '/music',
