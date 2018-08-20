@@ -14,13 +14,13 @@
 				        </router-link>
 			  			<router-link tag="span" to="/music/collection" class="todo_btn collect_btn">
 				        	我的收藏
-				        </router-link>
-				        <router-link tag="span" to="/music/toplist" class="todo_btn top_btn">
+				      </router-link>
+				      <router-link tag="span" to="/music/toplist" class="todo_btn top_btn">
 				        	排行榜/歌单
-				        </router-link>
+				      </router-link>
 			  			<router-link tag="span" to="/music/search" class="todo_btn search_btn">
 				        	搜索音乐
-				        </router-link>
+				      </router-link>
 			  		</div>
 			  		<div v-if="!getIsAPP.isHigher768" class="select_m_button">
 			  			<router-link tag="span" to="/music/playlist" class="todo_btn playing_btn">

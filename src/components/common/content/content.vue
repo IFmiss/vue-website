@@ -18,6 +18,9 @@
           <router-link tag="a" to="/about">
             <li>关于</li>
           </router-link>
+          <a href="https://ifmiss.github.io/d-js-utils/" target="_black">
+            <li>通用js</li>
+          </a>
           <router-link tag="a" to="/reward">
             <li>
               <span class="icon-reward" style="font-size: 16px;vertical-align:middle"></span>
@@ -41,6 +44,9 @@
               <router-link tag="a" to="/about">
                 <li>关于</li>
               </router-link>
+              <a href="https://ifmiss.github.io/d-js-utils/" target="_black">
+                <li>通用js</li>
+              </a>
               <router-link tag="a" to="/reward">
                 <li>
                   <span class="icon-reward" style="font-size: 16px;vertical-align:middle"></span>
