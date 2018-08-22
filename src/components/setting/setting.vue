@@ -55,12 +55,12 @@
   		return {
   			colorBg: store.getters.getGlobalInfo.contentInfo.bgcolor,
   			options: {
-				isactive: false,
-				rangebg: '#aaa',
-				rangeactivebg: '#F2301A',
-				contentbg: '#fff',
-				ref: 'bg'
-			},
+					isactive: false,
+					rangebg: '#A8C1EE',
+					rangeactivebg: '#F4C2EC',
+					contentbg: '#fff',
+					ref: 'bg'
+				},
 			showSetBgColorPicker: false,
 			showOpacityInput: false,
 			version: window.localStorage.getItem('web_version') || false,

@@ -117,9 +117,6 @@ export default {
           _that.showWeatherList = false
       }, 800)
     }
-    // getRightWendu (l, h) {
-    //   return l.split(' ')[l.split(' ').length - 1] + ' ~ ' + h.split(' ')[l.split(' ').length - 1]
-    // }
   },
   computed: {
     getGlobalInfo () {
@@ -296,4 +293,7 @@ export default {
       &.fade-enter,&.fade-leave-to
         opacity:0
         transform:translate3d(0,50px,0)
+  .icon-reward
+    &:before
+      color: $active_color
 </style>

@@ -12,11 +12,6 @@
 					<img src="http://p3.music.126.net/IRqeexYedmfzxkaXdL0sFQ==/109951163241741763.jpg?param=200y200" alt="程序员必备，带上耳机代码就是全世界">
 				</div>
 			</div>
-			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
-				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="737139074" title="时光在说谎_喜欢的音乐">
-						<img src="http://p1.music.126.net/eVPBfxtDgsY0xUu8gH0OZw==/19085322835088643.jpg?param=200y200" alt="时光在说谎_喜欢的音乐">
-				</div>
-			</div>
 		</div>
 		<p class="toplist_title">热门歌单</p>
 		<div class="toplist_content dw-boot-col-lg-12" v-if="top_list_hot">

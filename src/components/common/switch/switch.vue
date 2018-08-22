@@ -1,6 +1,6 @@
 <template>
-  <div class="switch" @click.stop="toggle()" :style="{backgroundColor:this.switchOpt.contentbg}">
-  	<span class="range" ref="switch_range" :style="{backgroundColor:rangeStyleInfo.backgroundColor,transform:rangeStyleInfo.transform }"></span>
+  <div class="switch" @click.stop="toggle()" :style="{backgroundColor:this.options.contentbg}">
+  	<span class="range" ref="switch_range" :style="rangeStyleInfo"></span>
   </div>
 </template>
 <script>
@@ -13,7 +13,6 @@
   			// 	rangeactivebg: this.rangeActiveBg,
   			// 	contentbg: this.contentBg
   			// }
-  			switchOpt: this.options
   		}
   	},
   	props: {
@@ -34,18 +33,11 @@
   	},
   	methods: {
   		toggle () {
-  			const ref = this.switchOpt.ref
-  			this.switchOpt.isactive = !this.switchOpt.isactive
+  			const ref = this.options.ref
+  			this.options.isactive = !this.options.isactive
   			const callback = {
   				ref: ref,
-  				active: this.switchOpt.isactive
-  			}
-  			if (this.switchOpt.isactive) {
-  				this.$refs.switch_range.style.backgroundColor = this.switchOpt.rangeactivebg
-  				this.$refs.switch_range.style.transform = `translate(100%,0)`
-  			} else {
-  				this.$refs.switch_range.style.backgroundColor = this.switchOpt.rangebg
-  				this.$refs.switch_range.style.transform = `translate(0,0)`
+  				active: this.options.isactive
   			}
   			this.$emit('selectBgType', callback)
   		}
@@ -53,13 +45,14 @@
   	computed: {
   		rangeStyleInfo () {
   			let styleInfo = {}
-  			if (this.switchOpt.isactive) {
-  				styleInfo.backgroundColor = this.switchOpt.rangeactivebg
+  			if (this.options.isactive) {
+  				styleInfo.backgroundColor = this.options.rangeactivebg
   				styleInfo.transform = `translate(100%,0)`
   			} else {
-  				styleInfo.backgroundColor = this.switchOpt.rangebg
+  				styleInfo.backgroundColor = this.options.rangebg
   				styleInfo.transform = `translate(0,0)`
-  			}
+				}
+				console.log(this.options)
   			return styleInfo
   		}
   	}

@@ -470,7 +470,7 @@
 								color:$text_before_color
 								font-size:12px
 								&.active
-									color:#A7EEBE
+									color: $active_color
 									font-weight: 400
 			.music_ctrl
 				width:100%;
@@ -583,7 +583,7 @@
 								margin-top: -3px
 								margin-left: 0
 								border-radius: 50%
-								background-color: #f00
+								background-color: $active_color
 								position: absolute
 								left: 0
 								top: 50%
