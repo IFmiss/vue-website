@@ -51,6 +51,7 @@
 import store from 'store'
 import tips from 'components/common/tips/tips.vue'
 import coverhistory from 'components/common/coverhistory/coverhistory'
+import API from 'config/api'
 // import advertisement from 'components/common/advertisement/advertisement'
 
 // 引入背景请求的api  getBingInfo
@@ -156,8 +157,7 @@ export default {
 
       var index = this.index
 
-      const url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
-      getMineBgByIndex(url, index).then((res) => {
+      getMineBgByIndex(API.GET_MINE_IMAGE, index).then((res) => {
         var globalData = store.getters.getGlobalInfo
         globalData.showBingImage = false
         // 全局设置
@@ -173,8 +173,7 @@ export default {
     },
 
     getBingImageInfo () {
-      var getbingApi = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageByBingJson'
-      getBingInfo(getbingApi, 0).then((res) => {
+      getBingInfo(API.GET_BING_IMAGE, 0).then((res) => {
         var globalData = store.getters.getGlobalInfo
           globalData.showBingImage = true
           store.dispatch({

@@ -19,6 +19,7 @@
 <script>
 	import fecth from 'utils/fecth.js'
 	import Scroll from 'components/common/bscroll/bscroll.vue'
+	import API from 'config/api'
 	export default {
 		data () {
 			return {
@@ -32,8 +33,7 @@
 		},
 		methods: {
 			initImageList () {
-				let fecthUrl = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getAllImage'
-				fecth.post(fecthUrl, {
+				fecth.post(API.GET_ALL_MINE_IMAGE, {
 					index: this.imageIndex
 				}).then((res) => {
 					this.imageIndex = this.imageIndex + 8

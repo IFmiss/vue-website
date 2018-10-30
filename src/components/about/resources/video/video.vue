@@ -21,6 +21,7 @@
 
 <script>
 	import fecth from 'utils/fecth.js'
+	import API from 'config/api'
 	export default {
 		data () {
 			return {
@@ -44,8 +45,7 @@
 				if (this.keyword !== '') {
 					this.searching = true
 					this.tips = '数据查询中，请稍候...'
-					let url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getResourceVideo'
-					fecth.get(url, {'keyword': this.keyword}).then((res) => {
+					fecth.get(API.GET_RESOURCE_VIDEO, {'keyword': this.keyword}).then((res) => {
 						if (res.data && res.data.ResultData) {
 							this.videoInfo = res.data.ResultData
 							this.searching = false

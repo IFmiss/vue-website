@@ -21,6 +21,7 @@
 </template>
 <script>
 import store from 'store'
+import API from 'config/api'
 import fecth from 'utils/fecth.js'
 export default {
 	data () {
@@ -38,7 +39,6 @@ export default {
 			this.getSuggestInfo()
 		},
 		submitSuggest () {
-			const fecthUrl = `http://www.daiwei.org/vue/server/home.php?inAjax=1&do=submitSuggestInfo`
 			const suggestInfo = this.$refs.content.value
 			const contactInfo = this.$refs.contactinfo.value
 			const suggestT = this.getDateNow()
@@ -49,7 +49,7 @@ export default {
 			} else if (suggestInfo.length < 10) {
 				this.$msg('内容不能少于10个字符哦！多说点真心话吧')
 			} else {
-				fecth.post(fecthUrl, {
+				fecth.post(API.SUB_SUGGEST_INFO, {
 						suggestContent: suggestInfo.replace(/\n|\r\n/g, '<br>'),
 						contact: contactInfo,
 						getDate: suggestT,
@@ -76,8 +76,7 @@ export default {
 			return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
 		},
 		getSuggestInfo () {
-			const fecthUrl = `http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getSuggestInfo`
-			fecth.get(fecthUrl).then((res) => {
+			fecth.get(API.GET_SUGGEST_INFO).then((res) => {
 				this.suggestList = res.data
 			}, (err) => {
 				console.log(`数据加载错误${err}`)

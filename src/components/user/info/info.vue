@@ -62,6 +62,7 @@
 	import {Storage} from 'common/js/Storage.js'
 	import musiclist from 'components/common/musiclist/musiclist.vue'
 	import store from 'store'
+	import API from 'config/api'
 	import musicApi from 'components/music/music.js'
   import {fecthPromise, todoUserInfo} from 'common/api/user.js'
   import userSetting from 'components/common/userSetting/userSetting'
@@ -96,8 +97,7 @@
 			},
 			initData () {
 				todoUserInfo().then((res) => {
-					const fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=personalCenter'
-					fecthPromise(fecthUrl, {
+					fecthPromise(API.GET_PERSONAL_INFO, {
 						userid: store.getters.getUserInfo.id || 0
 					}).then((res) => {
 						this.personalCenter = res.data.data

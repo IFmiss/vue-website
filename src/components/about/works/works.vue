@@ -12,6 +12,7 @@
 <script>
 import fecth from 'utils/fecth.js'
 // import store from '../../store'
+import API from 'config/api'
 import workList from 'components/about/works/workList/workList.vue'
 export default {
 	data () {
@@ -26,8 +27,7 @@ export default {
 			this.$router.go(-1)
 		},
 		initData () {
-			var url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getWorksList'
-			fecth.get(url).then((res) => {
+			fecth.get(API.GET_WORKS_LIST).then((res) => {
 				this.works_list = res.data
 			}, (err) => {
 				alert(err)

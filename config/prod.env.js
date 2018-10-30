@@ -1,3 +1,4 @@
 module.exports = {
-  NODE_ENV: '"production"'
+  NODE_ENV: '"production"',
+  HOST: '"https://www.daiwei.org"'
 }

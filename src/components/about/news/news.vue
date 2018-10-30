@@ -25,6 +25,7 @@
 <script>
 	import fecth from 'utils/fecth.js'
 	import Bscroll from 'better-scroll'
+	import API from 'config/api'
 	export default {
 		data () {
 			// top(头条，默认),shehui(社会),guonei(国内),guoji(国际),yule(娱乐),tiyu(体育)junshi(军事),keji(科技),caijing(财经),shishang(时尚)
@@ -74,8 +75,7 @@
 		},
 		methods: {
 			getNewsInfo () {
-				const url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getNewsInfo'
-				fecth.post(url, {
+				fecth.post(API.GET_NEWS_INFO, {
 					type: this.type
 				}).then((res) => {
 					if (res.data && res.data.result && res.data.result.stat === '1') {

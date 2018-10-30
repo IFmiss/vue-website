@@ -35,6 +35,7 @@
   import line from 'components/common/line/line.vue'
   import picList from 'components/pic/picList/picList.vue'
   import fecth from 'utils/fecth.js'
+  import API from 'config/api'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import scroll from 'components/common/bscroll/bscroll'
   export default {
@@ -92,8 +93,7 @@
     },
     methods: {
       fetchData () {
-        const getImageConditions = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageCondition'
-        fecth.post(getImageConditions, {index: this.getPicDataIndex, count: 5}).then((res) => {
+        fecth.post(API.GET_PIC_IMAGE, {index: this.getPicDataIndex, count: 5}).then((res) => {
           res.data.forEach((value, index, array) => {
             this.picinfo.push(value)
           })

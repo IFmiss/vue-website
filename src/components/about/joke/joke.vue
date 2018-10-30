@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-// import store from '../../store'
+import API from 'config/api'
 import fecth from 'utils/fecth.js'
 import jokeList from 'components/about/joke/jokeList/jokeList.vue'
 // import axios from 'axios'
@@ -25,7 +25,7 @@ export default {
 			this.$router.go(-1)
 		},
 		getJokeData () {
-			const apiUrl = `http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getJokeInfo`
+			const apiUrl = API.GET_JOKE
 			fecth.get(apiUrl).then((res) => {
 				this.jokeInfo = res.data
 			})

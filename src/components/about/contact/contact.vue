@@ -3,11 +3,11 @@
   	<div class="div_back" @click="back"><i class="icon-back"></i></div>
   	<div class="contact_content">
   		<div class="contact_list dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-  			<img src="http://www.daiwei.org/new/818741753301018324.jpg" alt="未曾遗忘的青春">
+  			<img :src="qq" alt="未曾遗忘的青春">
   			<p class="disc">Q Q (<a class="chat" href="http://wpa.qq.com/msgrd?v=3&uin=185098535&site=qq&menu=yes" target="_black">点击直接聊天</a>)</p>
   		</div>
   		<div class="contact_list dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-  			<img src="http://www.daiwei.org/new/101920356445396365.jpg" alt="未曾遗忘的青春">
+  			<img :src="wx" alt="未曾遗忘的青春">
   			<p class="disc">微 信</p>
   		</div>
   	</div>
@@ -16,11 +16,13 @@
 <script>
 // import store from '../../../store'
 // import axios from 'axios'
+import API from 'config/api'
 export default {
-	computed: {
-		// getGlobalInfo () {
-		// 	return store.getters.getGlobalInfo
-		// }
+	data () {
+		return {
+			qq: `${API.HOST}/new/818741753301018324.jpg`,
+			wx: `${API.HOST}/new/101920356445396365.jpg`
+		}
 	},
 	methods: {
 		back () {

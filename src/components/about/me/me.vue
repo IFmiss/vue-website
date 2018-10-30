@@ -26,7 +26,7 @@
 <script>
 import store from 'store'
 import fecth from 'utils/fecth.js'
-// import axios from 'axios'
+import API from 'config/api'
 export default {
 	data () {
 		return {
@@ -45,8 +45,7 @@ export default {
 		},
 		getTipsInfo () {
 			const _this = this
-			const getTipsInfoApi = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getTipsInfo'
-			fecth.get(getTipsInfoApi).then((res) => {
+			fecth.get(API.GET_TIPS_INFO).then((res) => {
 				let arrPersonal = []
 				let arrTechnology = []
 				for (let i = 0; i < res.data.length; i++) {
@@ -65,8 +64,7 @@ export default {
 		},
 		clickTips (name) {
 			const _this = this
-			const updateTipsInfoApi = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=updataTipsInfo'
-			fecth.post(updateTipsInfoApi, {tipsName: name}).then((res) => {
+			fecth.post(API.UPDATE_TIPS_INFO, {tipsName: name}).then((res) => {
 				_this.getTipsInfo()
 			}, (err) => {
 				console.log(`数据加载错误${err}`)

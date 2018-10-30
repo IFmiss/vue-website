@@ -15,6 +15,7 @@
 <script>
 	import fecth from 'utils/fecth.js'
 	import store from 'store'
+	import API from 'config/api'
 	export default {
 		data () {
 			return {
@@ -23,8 +24,7 @@
 		},
 		methods: {
 			getUpdateInfo () {
-				let url = 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getUpdateInfo'
-				fecth.get(url).then((res) => {
+				fecth.get(API.GET_WEB_UPDATE_INFO).then((res) => {
 					this.updateInfo = res.data
 				}, (err) => {
 					alert(JSON.stringify(err))

@@ -37,6 +37,7 @@
 	import fecth from 'utils/fecth.js'
 	import {Utils} from 'common/js/Utils.js'
 	import {Storage} from 'common/js/Storage.js'
+	import API from 'config/api'
 	import usercompletion from 'components/common/usercompletion/usercompletion.vue'
 	export default{
 		data () {
@@ -70,8 +71,7 @@
 					this.$msg('请输入用户名')
 					return
 				}
-				var fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=login'
-				fecth.post(fecthUrl, {
+				fecth.post(API.LOGIN, {
 					username: this.username,
 					password: this.password,
 					lastlogin: Utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss'),
@@ -113,8 +113,7 @@
 					this.$msg({text: '密码最少6位，包括至少1个大写字母，1个小写字母，1个数字', background: 'red'})
 					return
 				}
-				var fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=singin'
-				fecth.post(fecthUrl, {
+				fecth.post(API.SINGIN, {
 					username: this.susername,
 					password: this.spassword,
 					regtime: Utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss'),

@@ -20,6 +20,7 @@ import pic from 'components/pic/pic.vue'
 import loader from 'components/common/loader/loader.vue'
 import updatetips from 'components/common/updatetips/updatetips.vue'
 import DGlobal from 'common/js/global.js'
+import API from 'config/api'
 // 引入背景请求的api
 import {getBingInfo, getMineBgByIndex} from 'common/api/background.js'
 // import $ from 'jquery'
@@ -43,7 +44,7 @@ export default {
       // 是否需要获取壁纸信息
       const isShowBingImage = store.getters.getGlobalInfo.showBingImage
       // api地址
-      let api = isShowBingImage ? 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getImageByBingJson' : 'http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getHomeImage'
+      let api = isShowBingImage ? API.GET_BING_IMAGE : API.GET_MINE_IMAGE
       // 判断本地是否有背景设置的数据信息
       const hasFixedImageBg = localStorage.getItem('fixedImageBg')
       // bing 的每日一图
@@ -95,7 +96,7 @@ export default {
       }
     },
     getPlace () {
-      fecth.get('http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getAdress').then((res) => {
+      fecth.get(API.GET_ADRESS).then((res) => {
         if (res.data) {
           store.dispatch({
             type: 'set_Place',
@@ -109,7 +110,7 @@ export default {
     },
     // 获取天气信息
     getWeather (city) {
-      fecth.post(`http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getWeather`, {place: city}).then((res) => {
+      fecth.post(API.GET_WEATHER, {place: city}).then((res) => {
         try {
           store.dispatch({
             type: 'set_Weather',
@@ -222,7 +223,7 @@ export default {
     // 是否在线加载壁纸
     this.shouldLoadingBg()
     // 获取用户地址
-    this.getPlace()
+    // this.getPlace()
     // 是否小于768
     this.isApp()
     // 加载数据

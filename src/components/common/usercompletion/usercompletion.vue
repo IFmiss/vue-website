@@ -39,6 +39,7 @@
 </template>
 <script>
 	import fecth from 'utils/fecth.js'
+	import API from 'config/api'
 	export default {
 		data () {
 			return {
@@ -86,8 +87,7 @@
 				if (this.userdesc.length < 10) {
 					this.$msg({text: '描述不能少于10个字', background: 'red'})
 				} else {
-					let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=updateSigninInfo'
-					fecth.post(fecthUrl, {
+					fecth.post(API.UPDATE_SINGIN_INFO, {
 						username: this.username,
 						nickname: this.nickname,
 						usersex: this.usersex,

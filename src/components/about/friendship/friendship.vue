@@ -11,8 +11,7 @@
   </div>
 </template>
 <script>
-// import store from '../../../store'
-// import axios from 'axios'
+import API from 'config/api'
 import fecth from 'utils/fecth.js'
 export default {
 	data () {
@@ -31,7 +30,7 @@ export default {
 		},
 		initData () {
 			const _this = this
-			const apiUrl = `http://www.daiwei.org/vue/server/home.php?inAjax=1&do=getLinksInfo`
+			const apiUrl = API.GET_LINKS
 			fecth.get(apiUrl).then((res) => {
 				this.friendShipList = res.data
 				_this.$msg('想互换友链的朋友可以给我留言哦!')

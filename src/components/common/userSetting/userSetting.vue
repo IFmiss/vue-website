@@ -21,6 +21,7 @@
 </template>
 <script>
 import fecth from 'utils/fecth.js'
+import API from 'config/api'
 export default {
   data () {
     return {
@@ -50,8 +51,7 @@ export default {
       let formdata = new FormData()
       formdata.append('file', file)
       formdata.append('userId', this.userSetting.id)
-      const url = 'http://www.daiwei.org/vue/server/upload.php'
-      fecth.upload(url, formdata).then((res) => {
+      fecth.upload(API.UPLOAD, formdata).then((res) => {
         if (res.data.code === '1') {
           this.newUserInfo.avatar = res.data.imageUrl + '?data=' + Math.random()
           this.newavatar = res.data.imageUrl + '?data=' + Math.random()
@@ -69,8 +69,7 @@ export default {
       this.$emit('exit', this.newUserInfo)
     },
     save () {
-      const url = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=updateUserInfo'
-      fecth.post(url, {
+      fecth.post(API.UPDATE_USER_INFO, {
         userid: this.userSetting.id,
         nickname: this.userSetting.nickname,
         desc: this.userSetting.desc
