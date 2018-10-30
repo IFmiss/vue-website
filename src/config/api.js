@@ -1,4 +1,4 @@
-const HOST = process.env.HOST || 'https://www.daiwei.org'
+const HOST = process.env.HOST || 'http://www.daiwei.org'
 const api = {
   // 设置的请求host地址
   HOST,

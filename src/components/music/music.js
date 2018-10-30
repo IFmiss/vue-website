@@ -35,7 +35,7 @@ const musicApi = {
     // 获取对应的表单歌曲
     getMusicSheet (id) {
         // const id = 3778678  // 云音乐热歌榜
-        const apiUrl = `https://www.daiwei.org/vue/server/music.php?inAjax=1&do=playlist&id=${id}`
+        const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=playlist&id=${id}`
         fecth.get(apiUrl, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -58,7 +58,7 @@ const musicApi = {
 
     // 获取专辑信息
     getAlbum (id) {
-        const apiUrl = `https://www.daiwei.org/vue/server/music.php?inAjax=1&do=album&id=${id}`
+        const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=album&id=${id}`
         fecth.get(apiUrl, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -82,7 +82,7 @@ const musicApi = {
     getMusicLrc (data, that) {
         const ele = store.getters.getAudioEle
         // alert(data.id)
-        const apiLyric = `https://www.daiwei.org/vue/server/music.php?inAjax=1&do=lyric&id=${data.id}`
+        const apiLyric = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=lyric&id=${data.id}`
         fecth.get(apiLyric).then((res) => {
             let parseLrc = {}
             if (res.data.lrc === undefined) {
@@ -186,7 +186,7 @@ const musicApi = {
     // 点击播放歌曲
     clickIndex (data, that) {
         var reqId = data.music_id ? data.music_id : data.id
-        const apiUrl = `https://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${reqId}`
+        const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${reqId}`
         fecth.get(apiUrl).then((res) => {
             // 如果代码不允许被播放（付费音乐）
             if (res.data.data[0].url === null) {
@@ -222,7 +222,7 @@ const musicApi = {
 
     // 搜索音乐
     searchMusic (word, pages, that) {
-        const apiUrl = `https://www.daiwei.org/vue/server/music.php?inAjax=1&do=search&count=30&pages=${pages}&name=${word}`
+        const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=search&count=30&pages=${pages}&name=${word}`
         fecth.get(apiUrl, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -268,7 +268,7 @@ const musicApi = {
                 music_dur: opt.dt,
                 music_picurl: opt.al.picUrl
             }
-            let fecthUrl = 'https://www.daiwei.org/vue/server/user.php?inAjax=1&do=collectMusic'
+            let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=collectMusic'
             fecthPromise(fecthUrl, options).then((res) => {
                 this.$msg(res.data.msg)
             }, (err) => {
@@ -283,7 +283,7 @@ const musicApi = {
     // 获取本地的音乐
     getLocalMusic () {
         todoUserInfo().then((res) => {
-            let fecthUrl = 'https://www.daiwei.org/vue/server/user.php?inAjax=1&do=getCollectMusic'
+            let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=getCollectMusic'
             fecthPromise(fecthUrl, {
                 userid: res.id
             }).then((res) => {
@@ -303,7 +303,7 @@ const musicApi = {
     // 删除收藏的音乐
     deleteMusic (id) {
         todoUserInfo().then((res) => {
-            let fecthUrl = 'https://www.daiwei.org/vue/server/user.php?inAjax=1&do=delCollectMusic'
+            let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=delCollectMusic'
             fecthPromise(fecthUrl, {
                 userid: res.id,
                 music_id: id
@@ -372,7 +372,7 @@ const musicApi = {
         }
 
         var reqId = musicplaylist[index].music_id ? musicplaylist[index].music_id : musicplaylist[index].id
-        const apiUrl = `https://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${reqId}`
+        const apiUrl = `http://www.daiwei.org/vue/server/music.php?inAjax=1&do=musicInfo&id=${reqId}`
         fecth.get(apiUrl).then((res) => {
             if (res.data.data[0].url === null) {
                 let initIndex = 0
@@ -568,7 +568,7 @@ const musicApi = {
                 music_picurl: musicplaylist[index].music_picurl || musicplaylist[index].al.picUrl,
                 listen_time: Utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
             }
-            let fecthUrl = 'https://www.daiwei.org/vue/server/user.php?inAjax=1&do=userMusicListen'
+            let fecthUrl = 'http://www.daiwei.org/vue/server/user.php?inAjax=1&do=userMusicListen'
             fecthPromise(fecthUrl, options).then((res) => {
                 console.log(options.music_name + '播放完成')
             }, (err) => {

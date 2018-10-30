@@ -46,7 +46,7 @@
 			</transition>
   			<div class="right_info">
   				<div class="bg-info">
-  					<img class="music-bg" :src="getCurrentMusic.picurl ? getCurrentMusic.picurl : 'https://www.daiwei.org/vue/bg/657952152722629515.jpg'">
+  					<img class="music-bg" :src="getCurrentMusic.picurl ? getCurrentMusic.picurl : 'http://www.daiwei.org/vue/bg/657952152722629515.jpg'">
   				</div>
   				<div class="lrc-content" ref="lrcContent">
   					<div class="lrc-wrapper" ref="lrcWrapper">

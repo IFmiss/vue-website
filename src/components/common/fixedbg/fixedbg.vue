@@ -22,7 +22,7 @@ export default {
   props: {
     imagepath: {
       type: String,
-      default: 'https://www.daiwei.org/global/image/img1.jpg'
+      default: 'http://www.daiwei.org/global/image/img1.jpg'
     },
     maskcolor: {
       type: String,

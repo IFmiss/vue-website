@@ -6,7 +6,7 @@
 				<div class="music_list border-1px" @mouseenter="showIcon" @mouseleave="hideIcon" v-if="musiclist && musiclist[0].music_id" v-for="(list, index) in musiclist" :key="list.music_id" :data-musicid="list.music_id" :data-pic="list.music_picurl" @click="clickPlayList(list.music_id, list.music_name, list.music_picurl, list.singer_name, getMusicDurationType(list.music_dur),index), musiclist">
 					<span class="music_index">
 						<span v-show="getCurrentMusic.id !== list.music_id">{{index + 1}}</span>
-						<img v-show="getCurrentMusic.id === list.music_id" src="https://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
+						<img v-show="getCurrentMusic.id === list.music_id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
 					</span>
 					<div class="music_name">
 						<span class="span_name">{{list.music_name}}</span>
@@ -26,7 +26,7 @@
 				<div class="music_list border-1px" @mouseenter="showIcon" @mouseleave="hideIcon" v-if="musiclist && musiclist[0].al"v-for="(list, index) in musiclist" :key="list.id" :data-musicid="list.id" :data-pic="list.al.picUrl" @click="clickPlayList(list.id, list.name, list.al.picUrl, list.ar[0].name, getMusicDurationType(list.dt),index), musiclist">
 					<span class="music_index">
 						<span v-show="getCurrentMusic.id !== list.id">{{index + 1}}</span>
-						<img v-show="getCurrentMusic.id === list.id" src="https://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
+						<img v-show="getCurrentMusic.id === list.id" src="http://www.daiwei.org/vue/bg/wave.gif" alt="未曾遗忘的青春">
 					</span>
 					<div class="music_name">
 						<span class="span_name">{{list.name}}</span>
