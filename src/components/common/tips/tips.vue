@@ -1,6 +1,6 @@
 <template>
 	<div class="tips_info">
-		<a href="//shang.qq.com/wpa/qunwpa?idkey=221f0b1b4c54bc2197a11f994a77e6333dd97377a748c40cf600013e131cf739" target="_black">QQ群: 424418160</a>
+		<!-- <a href="//shang.qq.com/wpa/qunwpa?idkey=221f0b1b4c54bc2197a11f994a77e6333dd97377a748c40cf600013e131cf739" target="_black"></a> -->
 	</div>
 </template>
 <script>
