@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import VueLazyload from 'vue-lazyload'
 import './../static/font-icon/style.css'
+import store from '@/store'
 import Msg from 'vue-message'
 
 import ElementUI from 'element-ui'
@@ -27,6 +28,7 @@ Vue.config.productionTip = false
 const vueExp = new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   render: h => h(App)
 })

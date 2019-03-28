@@ -183,9 +183,6 @@ export default {
     getIsBingBg (nowval, oldval) {
       this.fetchData()
       localStorage.setItem('globalInfo', JSON.stringify(store.getters.getGlobalInfo))
-    },
-    '$route': function () {
-      this.updateLoginInfo()
     }
   },
   computed: {
@@ -228,8 +225,6 @@ export default {
     this.isApp()
     // 加载数据
     this.fetchData()
-    // 判断是否登录
-    this.updateLoginInfo()
     // 挂载 onresize事件
     window.onresize = () => {
       this.isApp()

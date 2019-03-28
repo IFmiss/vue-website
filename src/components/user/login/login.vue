@@ -79,7 +79,13 @@
 				}).then((res) => {
 					if (res.data.code === '1') {
 						Storage.setCookie('c_user_info', JSON.stringify(res.data), 60 * 60 * 1000 * 24)
-						this.$router.push('/home')
+						this.$store.dispatch('set_UserInfo', res.data)
+						const url = decodeURIComponent(this.$route.query['redirect_url'])
+						if (url) {
+							this.$router.push(url)
+						} else {
+							this.$router.push('/home')
+						}
 					} else {
 						this.$msg(res.data.msg)
 					}
@@ -137,9 +143,6 @@
 		},
 		components: {
 			usercompletion
-		},
-		mounted () {
-			// console.log(Utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss'))
 		}
 	}
 </script>

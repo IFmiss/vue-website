@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from './../store'
 import Home from '@/components/home'
+import DGlobal from 'common/js/global.js'
 // const Pic = r => require.ensure([], () => r(require('@/components/pic/pic.vue')), 'pic')
 // import Pic from '@/components/pic/pic.vue'
 const Music = r => require.ensure([], () => r(require('@/components/music/music.vue')), 'music')
@@ -60,7 +61,7 @@ const Reward = r => require.ensure([], () => r(require('@/components/reward/rewa
 
 Vue.use(Router)
 
-export default new Router({
+const myRouter = new Router({
   // mode: 'history',
   hashbang: true,
   history: false, // 这个参数改为false就可以了
@@ -88,18 +89,27 @@ export default new Router({
         {
           path: '/',
           redirect: store.getters.getMusicRouter,
+          meta: {
+            auth: true
+          },
           components: {
             listinfo: MusicSheet
           }
         },
         {
           path: '/music/search',
+          meta: {
+            auth: true
+          },
           components: {
             fullscreen: MusicSearch
           }
         },
         {
           path: '/music/albumlist/:id',
+          meta: {
+            auth: true
+          },
           name: 'albumlist',
           components: {
             listinfo: MusicAlbumList
@@ -109,6 +119,9 @@ export default new Router({
         {
           path: '/music/collection',
           name: 'collection',
+          meta: {
+            auth: true
+          },
           components: {
             listinfo: MusicCollection
           }
@@ -116,6 +129,9 @@ export default new Router({
         {
           path: '/music/sheet/:id',
           name: 'musicindex',
+          meta: {
+            auth: true
+          },
           components: {
             listinfo: MusicSheet
           }
@@ -123,18 +139,27 @@ export default new Router({
         {
           path: '/music/sheet/',
           redirect: store.getters.getMusicRouter,
+          meta: {
+            auth: true
+          },
           components: {
             listinfo: MusicSheet
           }
         },
         {
           path: '/music/playlist/',
+          meta: {
+            auth: true
+          },
           components: {
             listinfo: MusicPlayList
           }
         },
         {
           path: '/music/toplist/',
+          meta: {
+            auth: true
+          },
           components: {
             listinfo: MusicToplist
           }
@@ -142,6 +167,9 @@ export default new Router({
         {
           path: '/music/searchlist/:w',
           name: 'searchlist',
+          meta: {
+            auth: true
+          },
           components: {
             listinfo: MusicSearchList
           }
@@ -256,9 +284,35 @@ export default new Router({
         },
         {
           path: '/user/info',
+          meta: {
+            auth: true
+          },
           component: UserInfo
         }
       ]
     }
   ]
 })
+
+myRouter.beforeEach((to, from, next) => {
+  if (DGlobal.storage.getCookie('c_user_info') && !store.getters.getUserInfo) {
+    DGlobal.storage.setCookie('c_user_info', unescape(DGlobal.storage.getCookie('c_user_info')), 60 * 60 * 1000 * 24)
+    store.dispatch({
+      type: 'set_UserInfo',
+      data: JSON.parse(unescape(DGlobal.storage.getCookie('c_user_info')))
+    })
+  }
+
+  if (to.meta && to.meta.auth) {
+    if (store.getters.getUserInfo) {
+      next()
+    } else {
+      const url = encodeURIComponent(to.fullPath)
+      next(`/user/login?redirect_url=${url}`)
+    }
+  } else {
+    next()
+  }
+})
+
+export default myRouter
