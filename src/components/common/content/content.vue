@@ -18,7 +18,7 @@
           <router-link tag="a" to="/about">
             <li>关于</li>
           </router-link>
-          <a href="https://ifmiss.github.io/d-js-utils/" target="_black">
+          <a href="https://ifmiss.github.io/d-utils/" target="_black">
             <li>通用js</li>
           </a>
           <router-link tag="a" to="/reward">
@@ -44,7 +44,7 @@
               <router-link tag="a" to="/about">
                 <li>关于</li>
               </router-link>
-              <a href="https://ifmiss.github.io/d-js-utils/" target="_black">
+              <a href="https://ifmiss.github.io/d-utils/" target="_black">
                 <li>通用js</li>
               </a>
               <router-link tag="a" to="/reward">
