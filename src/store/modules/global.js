@@ -14,7 +14,7 @@ const globalStore = {
 		weather: {},
 		showloading: true,
 		musicRouter: '/music/sheet/124995419',
-		host: process.env.HOST || 'http://www.daiwei.org',
+		host: process.env.HOST || 'https://www.daiwei.site',
 		userInfo: null
 	},
 	getters: {

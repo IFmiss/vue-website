@@ -7,7 +7,7 @@
 			<div class="user-basic-info" v-if='personalCenter && personalCenter'>
 				<div class="user-basic-l">
 					<div class="user-avatar">
-						<div class="image-avatar" :style="{backgroundImage : 'url(' + personalCenter.avatar || 'http://daiwei.org/vue/bg/avatar1.jpg' + ')', backgroundSize:'cover', backgroundPosition:'center'}"></div>
+						<div class="image-avatar" :style="{backgroundImage : 'url(' + personalCenter.avatar || 'https://www.daiwei.site/web_v2/bg/avatar1.jpg' + ')', backgroundSize:'cover', backgroundPosition:'center'}"></div>
 					</div>
 					<div class="user-basic">
 						<h3 class="user-nickname">{{personalCenter.nickname == '' ? personalCenter.username : personalCenter.nickname}}</h3>

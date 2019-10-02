@@ -62,7 +62,8 @@ const Reward = r => require.ensure([], () => r(require('@/components/reward/rewa
 Vue.use(Router)
 
 const myRouter = new Router({
-  // mode: 'history',
+  mode: 'history',
+  base: 'web_v2',
   hashbang: true,
   history: false, // 这个参数改为false就可以了
   saveScrollPosition: true,

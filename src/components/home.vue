@@ -30,7 +30,7 @@
             <i :class="isFullScreen ? 'icon-canclefullscreen' : 'icon-fullscreen'" :title="isFullScreen ? '取消全屏' : '全屏'"></i>
           </div>
         </div>
-        <span class="tips" :title="bingImageDisc">每日一图由 {{bingImageDisc}} 提供 | Copyright © 2016~{{new Date().getFullYear()}} DAIWEI.ORG
+        <span class="tips" :title="bingImageDisc">每日一图由 {{bingImageDisc}} 提供 | Copyright © 2016~{{new Date().getFullYear()}} DAIWEI.SITE
           <span v-if="globalInfo.isHigher768">
             <router-link tag="a" to="/about/suggest" title="请提出你的意见">
               <span>意见建议</span>

@@ -5,14 +5,15 @@
   			<p class="desc">本网站所有的素材和源码都是由本人提供，目的不仅是为了给自己一个学习锻炼的实践方式，也是互相学习交流的桥梁。网站开发的所有费用都是由本人承担 (域名，服务器，cdn存储) ，如果您觉得这个网站能够给到您帮助和服务，您可以扫描下面任意二维码，设置任意金额来支持我继续把它做下去。</p>
 				<p class="desc">希望未来能提供更多更好的免费服务和分享给大家。我也会将支持我的人给记录下来，您也是这个网站贡献者的一部分，谢谢您的支持和鼓励</p>
 				<p class="desc">另外承接各种微信公众号h5开发，小程序开发，网站开发，有需求可以邮箱我 185098535@qq.com</p>
-  			<p class="point">再次感谢🙏大家</p>
+				<!-- <p class="desc">也可以支持一下我的淘宝店铺 => <a href="https://ifmiss.taobao.com/" target="_black"> 店铺地址</a></p> -->
+  			<p class="point">再次感谢大家</p>
   		</div>	
   		<div class="content">
   			<div class="reward_list dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-	  			<img src="http://www.daiwei.org/new/WechatIMG1.jpeg" alt="支付宝">
+	  			<img src="https://www.daiwei.site/web_v2/WechatIMG1.jpeg" alt="支付宝">
 	  		</div>
 	  		<div class="reward_list dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-	  			<img src="http://www.daiwei.org/new/WechatIMG2.jpeg" alt="微信">
+	  			<img src="https://www.daiwei.site/web_v2/WechatIMG2.jpeg" alt="微信">
 	  		</div>
   		</div>
   		<p class="point">希望能够留下您的信息，我会将支持用户保存下来 <router-link to="/about/contact"> 点击这里加我好友！</router-link></p>
@@ -125,6 +126,11 @@ export default {
 					font-size: 14px
 					margin: 0 auto
 					text-indent: 2em
+					a {
+						color $primary_c
+						font-size 16px
+						font-weight bold
+					}
 				.point
 					font-size: 16px
 					font-weight: 600

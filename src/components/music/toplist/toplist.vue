@@ -4,12 +4,12 @@
 		<div class="toplist_content dw-boot-col-lg-12">
 			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
 				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="124995419" title="未曾遗忘的青春的歌单">
-					<img src="http://www.daiwei.org/vue/bg/657952152722629515.jpg" alt="日本Oricon周榜">
+					<img src="https://www.daiwei.site/web_v2/bg/657952152722629515.jpg" alt="日本Oricon周榜">
 				</div>
 			</div>
 			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
 				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="2179377798" title="程序员必备，带上耳机代码就是全世界">
-					<img src="http://p3.music.126.net/IRqeexYedmfzxkaXdL0sFQ==/109951163241741763.jpg?param=200y200" alt="程序员必备，带上耳机代码就是全世界">
+					<img src="https://p3.music.126.net/IRqeexYedmfzxkaXdL0sFQ==/109951163241741763.jpg?param=200y200" alt="程序员必备，带上耳机代码就是全世界">
 				</div>
 			</div>
 		</div>
@@ -30,7 +30,7 @@
 			</div>
 			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
 				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="19723756" title="云音乐飙升榜，每天更新">
-					<img src="http://p1.music.126.net/DrRIg6CrgDfVLEph9SNh7w==/18696095720518497.jpg?param=250y250" alt="云音乐飙升榜">
+					<img src="https://p1.music.126.net/DrRIg6CrgDfVLEph9SNh7w==/18696095720518497.jpg?param=250y250" alt="云音乐飙升榜">
 				</div>
 			</div>
 			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
@@ -40,7 +40,7 @@
 			</div>
 			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
 				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="10520166" title="云音乐电音榜，每周五更新">
-					<img src="http://p1.music.126.net/4mh2HWH-bd5sRufQb-61bg==/3302932937414659.jpg?param=250y250" alt="云音乐电音榜">
+					<img src="https://p1.music.126.net/4mh2HWH-bd5sRufQb-61bg==/3302932937414659.jpg?param=250y250" alt="云音乐电音榜">
 				</div>
 			</div>
 			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
@@ -50,17 +50,17 @@
 			</div>
 			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
 				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="71385702" title="云音乐ACG音乐榜，每周四更新">
-					<img src="http://p1.music.126.net/vttjtRjL75Q4DEnjRsO8-A==/18752170813539664.jpg?param=250y250" alt="云音乐ACG音乐榜">
+					<img src="https://p1.music.126.net/vttjtRjL75Q4DEnjRsO8-A==/18752170813539664.jpg?param=250y250" alt="云音乐ACG音乐榜">
 				</div>
 			</div>
 			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
 				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="60198" title="云音乐ACG音乐榜，每周三更新">
-					<img src="http://p1.music.126.net/EBRqPmY8k8qyVHyF8AyjdQ==/18641120139148117.jpg?param=250y250" alt="美国Billboard周榜">
+					<img src="https://p1.music.126.net/EBRqPmY8k8qyVHyF8AyjdQ==/18641120139148117.jpg?param=250y250" alt="美国Billboard周榜">
 				</div>
 			</div>
 			<div class="toplist_l dw-boot-col-lg-2 dw-boot-col-md-3 dw-boot-col-sm-4 dw-boot-col-xs-4">
 				<div class="toplist_detail" @click.stop="openTopList($event)" data-id="60131" title="日本Oricon周榜，每周三更新">
-					<img src="http://p1.music.126.net/Rgqbqsf4b3gNOzZKxOMxuw==/19029247741938160.jpg?param=250y250" alt="日本Oricon周榜">
+					<img src="https://p1.music.126.net/Rgqbqsf4b3gNOzZKxOMxuw==/19029247741938160.jpg?param=250y250" alt="日本Oricon周榜">
 				</div>
 			</div>
 		</div>
@@ -115,7 +115,7 @@
   			this.$router.push({name: 'musicindex', params: {id: id}})
   		},
   		getTopList () {
-  			var url = 'http://www.daiwei.org/vue/server/music.php?inAjax=1&do=albums'
+  			var url = 'https://www.daiwei.site/web_v2/server/music.php?inAjax=1&do=albums'
   			fecth.get(url).then((res) => {
   				this.top_list_hot = res.data.playlists
   			}, (err) => {

@@ -6,7 +6,7 @@ export function getBingInfo (url, index = 0) {
 		fecth.get(url).then((res) => {
 			let imageInfo = {
 				type: 'bing',
-				url: 'http://www.bing.com' + res.data.url,
+				url: 'https://www.bing.com' + res.data.url,
 				title: res.data.title,
 				disc: res.data.disc,
 				date: Global.utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss'),

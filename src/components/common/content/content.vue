@@ -9,7 +9,7 @@
           <router-link tag="a" to="/home">
             <li>首页</li>
           </router-link>
-          <a href="http://www.daiwei.org/hexo-blog" target="_black">
+          <a href="https://www.daiwei.site/blog" target="_black">
             <li>博客</li>
           </a>
           <router-link tag="a" to="/music">
@@ -35,7 +35,7 @@
               <router-link tag="a" to="/home">
               <li>首页</li>
               </router-link>
-              <a href="http://www.daiwei.org/hexo-blog" target="_black">
+              <a href="https://www.daiwei.site/blog" target="_black">
                 <li>博客</li>
               </a>
               <router-link tag="a" to="/music">
@@ -97,7 +97,7 @@ export default {
     return {
       showLeftMenu: false,
       showWeatherList: false,
-      home: `${API.HOST}/new/dw.png`
+      home: `${API.HOST}/static/logo/dw.png`
     }
   },
   methods: {
