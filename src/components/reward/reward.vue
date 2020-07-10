@@ -10,10 +10,10 @@
   		</div>	
   		<div class="content">
   			<div class="reward_list dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-	  			<img src="https://www.daiwei.site/web_v2/WechatIMG1.jpeg" alt="支付宝">
+	  			<img src="https://w1.daiwei.site/web_v2/WechatIMG1.jpeg" alt="支付宝">
 	  		</div>
 	  		<div class="reward_list dw-boot-col-lg-3 dw-boot-col-md-4 dw-boot-col-sm-6">
-	  			<img src="https://www.daiwei.site/web_v2/WechatIMG2.jpeg" alt="微信">
+	  			<img src="https://w1.daiwei.site/web_v2/WechatIMG2.jpeg" alt="微信">
 	  		</div>
   		</div>
   		<p class="point">希望能够留下您的信息，我会将支持用户保存下来 <router-link to="/about/contact"> 点击这里加我好友！</router-link></p>
